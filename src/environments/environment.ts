@@ -2,8 +2,28 @@
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { EnvironementModel } from './environment.model';
+
 export const environment = {
   production: false
+};
+
+
+export const config: EnvironementModel = {
+  'environmentName': 'Local Environment',
+  'ionicEnvName': 'dev',
+  'classAPIEndpoint': 'http://localhost:8080/class/',
+  'studentAPIEndpoint': 'http://localhost:8080/student/',
+  'getClassTime': 15000,
+  'firebase': 'AIzaSyDejeeCDRpDwDi3gCqHUDqjeIF-8dbJKFo',
+  'firebasedomain': 'hapkido-signin.firebaseapp.com',
+  'aws_cognito_region': 'ap-southeast-2',
+  'aws_user_pools_id': 'ap-southeast-2_xwJzu6o5o',
+  'aws_user_pools_web_client_id': '1kjv0a3rm18od63enl28q9smj2',
+  'feature_toggle': {
+    'cognito_login': true,
+    'download_graphs': true
+  }
 };
 
 /*
