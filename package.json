@@ -11,8 +11,9 @@
     "test-ci": "npm run test -- --no-watch --no-progress --browsers=ChromeHeadlessCI",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "cy:run:local": "cypress open",
     "serve": "../node_modules/ionic/bin/ionic serve",
-    "cypress:run:ci": " $(npm bin)/cypress run --record",
+    "cypress:run:ci": " $(npm bin)/cypress run --record --key 8e6e9972-e3f4-407e-a618-a228d3dcb8dc",
     "cypress:ci": "ng build --prod && run-p --race start:ci cypress:run:ci",
     "start:ci": "http-server ./www -a localhost -p 8000 -c-1"
   },
