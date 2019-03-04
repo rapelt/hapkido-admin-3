@@ -12,8 +12,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "serve": "../node_modules/ionic/bin/ionic serve",
-    "cypress:run": "cypress run",
-    "cypress:ci": "ng build --prod && run-p --race start:ci cypress:run",
+    "cypress:run:ci": " $(npm bin)/cypress run --record",
+    "cypress:ci": "ng build --prod && run-p --race start:ci cypress:run:ci",
     "start:ci": "http-server ./www -a localhost -p 8000 -c-1"
   },
   "private": true,
@@ -51,6 +51,7 @@
     "codelyzer": "~4.5.0",
     "cypress": "^3.1.5",
     "eslint-plugin-cypress": "^2.2.1",
+    "http-server": "^0.11.1",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "^3.1.4",
