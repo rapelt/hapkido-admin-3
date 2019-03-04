@@ -8,7 +8,7 @@ describe('My First Test', function() {
 
 describe('My Home Test', function() {
   it('Vist home', function() {
-    cy.visit('/');
+    cy.visit('http://localhost:8000');
     cy.contains('List').click();
     cy.pause();
     cy.url().should('include', '/list');
