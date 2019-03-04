@@ -29,8 +29,6 @@ defaults: &defaults
     # after all tests finish running we need
     # to kill all background jobs (like "npm start &")
     - kill $(jobs -p) || true
-
-
 jobs:
   include:
     # we have multiple jobs to execute using just a single stage
