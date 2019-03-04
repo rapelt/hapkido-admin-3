@@ -19,9 +19,6 @@ cache:
     - ~/.cache
 defaults: &defaults
   script:
-    - npm run lint
-    - npm run test-ci
-    -
     #   ## print all Travis environment variables for debugging
     - $(npm bin)/print-env TRAVIS
     - npm start -- --silent &
@@ -36,6 +33,12 @@ jobs:
     - stage: e2e-test
     env:
       - STAGE_NAME=1x-electron
+    - stage: "Tests"                # naming the Tests stage
+        name: "Unit Tests"            # names the first Tests stage job
+        script: "npm run test-ci"
+    - stage: "Lint"                # naming the Lint stage
+        name: "Linting"            # names the first Lint stage job
+        script: "npm run lint"
     <<: *defaults
       # run tests in parallel by including several test jobs with same name variable
       - stage: e2e-test
