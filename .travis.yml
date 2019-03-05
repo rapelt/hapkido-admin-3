@@ -10,4 +10,4 @@ before_script:
 script:
   - npm run lint
   - npm run test:ci
-  - npm run cypress:ci
+  - npm run cy:ci
