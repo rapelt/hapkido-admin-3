@@ -1,6 +1,8 @@
 {
   "name": "hapkido-admin-3",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular",
   "id": "02913aed"
 }

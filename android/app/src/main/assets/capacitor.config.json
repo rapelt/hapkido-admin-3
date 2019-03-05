@@ -1,0 +1,6 @@
+{
+  "appId": "io.ionic.starter",
+  "appName": "hapkido-admin-3",
+  "bundledWebRuntime": false,
+  "webDir": "www"
+}
