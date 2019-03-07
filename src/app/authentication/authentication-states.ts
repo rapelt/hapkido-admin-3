@@ -1,0 +1,5 @@
+export enum AuthenticationStates {
+  LOGGEDOUT = 'LOGGEDOUT',
+  LOGGEDIN = 'LOGGEDIN',
+  RESETPASSWORD = 'RESETPASSWORD'
+}

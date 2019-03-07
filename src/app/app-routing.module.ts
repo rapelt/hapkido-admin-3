@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'authentication',
     pathMatch: 'full'
   },
   {
@@ -14,6 +14,14 @@ const routes: Routes = [
   {
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
+  },
+  {
+    path: 'authentication',
+    loadChildren: './authentication/authentication.module#AuthenticationPageModule'
+  },
+  {
+    path: 'settings',
+    loadChildren: './settings/settings.module#SettingsPageModule'
   }
 ];
 
