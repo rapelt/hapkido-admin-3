@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { AuthenticationPage } from './authentication.page';
 
 export const routes: Routes = [
   { path: '',

@@ -4,12 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { routes } from './authentication-routing.module';
-import { AuthenticationPage } from './authentication.page';
-import { ForcePasswordChangePageModule } from './force-password-change/force-password-change.module';
 
 
 @NgModule({
-  declarations: [AuthenticationPage],
   imports: [
     CommonModule,
     FormsModule,
