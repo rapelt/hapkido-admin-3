@@ -47,7 +47,7 @@ export function authenticationReducer(state = initialState, action: AuthActions)
         ...state,
         userAttributes: action.payload.attributes,
         session: action.payload.session
-      }
+      };
     default:
       return state;
   }

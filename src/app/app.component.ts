@@ -13,7 +13,7 @@ import { AppState } from './state/app.reducers';
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit {
   public appPages = [
     {
       title: 'Home',
