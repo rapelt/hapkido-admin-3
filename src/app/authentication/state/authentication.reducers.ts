@@ -1,4 +1,3 @@
-import { Action } from '@ngrx/store';
 import { AuthenticationStates } from '../authentication-states';
 import { AuthenticationUser } from '../authentication.model';
 import { ActionTypes, AuthActions } from './authentication.actions';
@@ -10,6 +9,7 @@ export interface AuthenticationState {
   authenticationState: string;
   userAttributes: Array<any>;
   username: string;
+  session: any;
 }
 
 const initialState: AuthenticationState = {
@@ -17,6 +17,8 @@ const initialState: AuthenticationState = {
   authenticationState: AuthenticationStates.LOGGEDOUT,
   userAttributes: [],
   username: null,
+  session: null
+
 };
 
 export function authenticationReducer(state = initialState, action: AuthActions) {
@@ -40,6 +42,12 @@ export function authenticationReducer(state = initialState, action: AuthActions)
         ...state,
         authenticationState: AuthenticationStates.RESETPASSWORD,
       };
+    case ActionTypes.Set_user_attributes:
+      return {
+        ...state,
+        userAttributes: action.payload.attributes,
+        session: action.payload.session
+      }
     default:
       return state;
   }

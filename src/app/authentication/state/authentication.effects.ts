@@ -4,9 +4,9 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import {
-  ActionTypes, ForceResetPassword,
+  ActionTypes, ForceResetPassword, ResetPassword, SendEmailVerificationCode, SendForgotPasswordCode,
   SignIn,
-  SignOut
+  SignOut, VerifyEmail
 } from './authentication.actions';
 import { AuthenticationServices } from './authentication.services';
 
@@ -55,6 +55,54 @@ export class AuthenticationEffects {
       ofType(ActionTypes.Force_reset_password),
       tap((action: ForceResetPassword) => {
         this.authServices.passwordChallenge(action.payload.username, action.payload.password);
+      }),
+      map(() => {
+        return ({ type: 'nothing' });
+      })
+    );
+
+  @Effect()
+  resetPassword = this.actions
+    .pipe(
+      ofType(ActionTypes.Reset_password),
+      tap((action: ResetPassword) => {
+        this.authServices.forgotPassword(action.payload.username, action.payload.verification_code, action.payload.password);
+      }),
+      map(() => {
+        return ({ type: 'nothing' });
+      })
+    );
+
+  @Effect()
+  sendForgotPasswordCode = this.actions
+    .pipe(
+      ofType(ActionTypes.Forgot_password_code),
+      tap((action: SendForgotPasswordCode) => {
+        this.authServices.sendForgotPasswordCode(action.payload.username);
+      }),
+      map(() => {
+        return ({ type: 'nothing' });
+      })
+    );
+
+  @Effect()
+  sendEmailVerificationCode = this.actions
+    .pipe(
+      ofType(ActionTypes.Email_verification_code),
+      tap((action: SendEmailVerificationCode) => {
+        this.authServices.sendEmailVerificationCode();
+      }),
+      map(() => {
+        return ({ type: 'nothing' });
+      })
+    );
+
+  @Effect()
+  verifyEmail = this.actions
+    .pipe(
+      ofType(ActionTypes.Verify_email),
+      tap((action: VerifyEmail) => {
+        this.authServices.verifyEmail(action.payload);
       }),
       map(() => {
         return ({ type: 'nothing' });

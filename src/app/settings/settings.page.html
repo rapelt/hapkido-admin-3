@@ -1,9 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>settings</ion-title>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Settings
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content padding>
+  <p>Username: {{username}}</p>
+  <p>Email: {{email}}</p>
+  <p>Is email verified: {{isEmailVerified}}</p>
+
+  <div *ngIf="isEmailVerified === 'false'">
+    <div *ngIf="!codeSent">
+      <p><b>To make sure you can reset your password if you forget it we need to make sure your email is verified.</b></p>
+      <ion-button expand="block" (click)="sendCode()">Send Code</ion-button>
+    </div>
+    <div *ngIf="codeSent">
+      <p><b>Please check your email for the verification code.</b></p>
+
+      <form [formGroup]="verifyEmailForm" (ngSubmit)="verifyEmailSubmit()">
+        <ion-list>
+          <ion-item>
+            <ion-label position="stacked">Verification Code</ion-label>
+            <ion-input type="text" formControlName="code"></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-button type="submit" expand="block" [disabled]="verifyEmailForm.invalid">Verify Email</ion-button>
+      </form>    </div>
+  </div>
 
 </ion-content>

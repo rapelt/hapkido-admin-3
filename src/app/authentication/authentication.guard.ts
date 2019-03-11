@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map, take, tap } from 'rxjs/operators';
 import { AppState } from '../state/app.reducers';
 import { AuthenticationStates } from './authentication-states';
-import { selectAuthenticationState } from './state/authentication.selectors';
+import { getAuthenticationState, selectAuthenticationState } from './state/authentication.selectors';
 
 @Injectable({
   providedIn: 'root'
@@ -18,10 +18,10 @@ export class AuthenticationGuard implements CanLoad {
     segments: UrlSegment[]
   ): Observable<boolean> | Promise<boolean> | boolean {
     return this.store.pipe(
-      select(selectAuthenticationState),
+      select(getAuthenticationState),
       take(1),
-      map((authState) => {
-        return authState === AuthenticationStates.LOGGEDIN;
+      map((auth) => {
+        return auth.authenticationState === AuthenticationStates.LOGGEDIN;
       }),
       tap(isAuthenticated => {
         if (!isAuthenticated) {

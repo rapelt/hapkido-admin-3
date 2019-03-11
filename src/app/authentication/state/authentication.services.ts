@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { AppState } from '@capacitor/core';
 import { Store } from '@ngrx/store';
 import {
@@ -13,10 +14,8 @@ import { from } from 'rxjs';
 import { config } from '../../../environments/environment';
 import * as AWS from 'aws-sdk';
 import { MessagesService } from '../../messages/messages.service';
-import { ResetPasswordRequired, SignInSuccess } from './authentication.actions';
+import { ResetPasswordRequired, SetUserAttributes, SignInSuccess } from './authentication.actions';
 import * as jwt from 'jsonwebtoken';
-import * as _ from 'underscore';
-
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +28,7 @@ export class AuthenticationServices {
   private userAttributes;
   private config;
 
-  constructor(private store: Store<AppState>, private messagesService: MessagesService) {
+  constructor(private store: Store<AppState>, private messagesService: MessagesService, private router: Router) {
     this.config = config;
     if (this.config.feature_toggle.cognito_login) {
       AWS.config.region = this.config.aws_cognito_region;
@@ -77,13 +76,13 @@ export class AuthenticationServices {
   successfulSignIn(session) {
     this.session = session;
     console.log(`Signed in user ${this.cognitoUser.getUsername()}. Session valid?: `, session.isValid());
-    if (session.isValid() && this.isAdmin()) {
+    if (session.isValid() && this.isAdmin(session)) {
       this.store.dispatch(new SignInSuccess(this.cognitoUser));
       this.getAttribute();
       return;
     }
 
-    if (session.isValid() && !this.isAdmin()) {
+    if (session.isValid() && !this.isAdmin(session)) {
       this.messagesService.updateError.next('This application is for Administrators');
       this.signout();
     }
@@ -104,7 +103,7 @@ export class AuthenticationServices {
   getAttribute() {
     if (this.session && this.session.isValid()) {
       this.cognitoUser.getUserAttributes((err, results) => {
-        // this.store.dispatch(new SetUserAttributes(results));
+        this.store.dispatch(new SetUserAttributes({attributes: results, session: this.session}));
       });
 
       // this.store.dispatch(new SetUserName(this.cognitoUser.getUsername()))
@@ -127,8 +126,12 @@ export class AuthenticationServices {
     return new Promise ((resolve, reject) => {
       self.cognitoUser.getSession((err, session) => {
         if (err) { console.log('Error refreshing user session', err); return reject(err); }
-        console.log(`${new Date()} - Refreshed session for ${self.cognitoUser.getUsername()}. Valid?: `, session.isValid());
-        if (session.isValid() && this.isAdmin()) {
+
+        console.log(
+          `${new Date()} - Refreshed session for ${self.cognitoUser.getUsername()}. Valid?: `, session.isValid(),
+          ' Admin?:' +  this.isAdmin(session));
+
+        if (session.isValid() && this.isAdmin(session)) {
           this.session = session;
           this.store.dispatch(new SignInSuccess(this.cognitoUser));
           this.getAttribute();
@@ -143,11 +146,11 @@ export class AuthenticationServices {
     this.cognitoUser = null;
   }
 
-  isAdmin() {
-    if (this.session) {
-      const accesstoken = this.session.getAccessToken();
+  isAdmin(session) {
+    if (session) {
+      const accesstoken = session.getAccessToken();
       const jwtToken = jwt.decode(accesstoken.getJwtToken());
-      return _.contains(jwtToken['cognito:groups'], 'admin');
+      return !!jwtToken['cognito:groups'].find((option) => option === 'admin');
     }
     return false;
   }
@@ -173,10 +176,54 @@ export class AuthenticationServices {
     this.cognitoUser.confirmPassword(verificationCode, newPassword, {
       onSuccess: () => {
         console.log('successfully changed password');
+        this.router.navigateByUrl('/home');
       },
       onFailure:  (error) => {
-        this.messagesService.updateError.next(error);
+        this.messagesService.updateError.next(error.message);
         console.log(error);
+      }
+    });
+  }
+
+  sendForgotPasswordCode(username) {
+    this.cognitoUser = this.getNewCognitoUser(username);
+    this.cognitoUser.forgotPassword({
+      onSuccess: (success) => {
+        console.log('successfully send password code');
+      },
+      onFailure:  (error) => {
+        this.router.navigateByUrl('/home');
+        this.messagesService.updateError.next(error.message);
+        console.log(error);
+      },
+      inputVerificationCode: () => {
+      }
+    });
+  }
+
+  sendEmailVerificationCode() {
+    this.cognitoUser.getAttributeVerificationCode('email', {
+      onSuccess: () => {
+        console.log('successfully send verification code');
+      },
+      onFailure: (err) => {
+        this.messagesService.updateError.next(err.message);
+        console.log(err);
+      },
+      inputVerificationCode: () => {
+        console.log('blarg');
+      }
+    });
+  }
+
+  verifyEmail(verificationCode) {
+    this.cognitoUser.verifyAttribute('email', verificationCode, {
+      onSuccess: () => {
+        this.getAttribute();
+      },
+      onFailure: (err) => {
+        this.messagesService.updateError.next(err.message);
+        console.log(err);
       }
     });
   }
