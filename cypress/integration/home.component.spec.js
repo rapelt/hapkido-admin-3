@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 describe('My Home Test', function () {
-    it('Vist home', function () {
+    it('Visit home', function () {
         cy.visit('/');
-        cy.contains('List').click();
-        cy.url().should('include', '/list');
+        cy.contains('sign-in').click();
+        cy.url().should('include', '/sign-in');
     });
 });
