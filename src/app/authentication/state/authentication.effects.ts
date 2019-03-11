@@ -2,8 +2,12 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
-import { catchError, map, mergeMap } from 'rxjs/operators';
-import { ActionTypes, SignIn, SignInSuccess, SignOut } from './authentication.actions';
+import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import {
+  ActionTypes, ForceResetPassword,
+  SignIn,
+  SignOut
+} from './authentication.actions';
 import { AuthenticationServices } from './authentication.services';
 
 @Injectable()
@@ -24,24 +28,38 @@ export class AuthenticationEffects {
   signOut = this.actions
     .pipe(
       ofType(ActionTypes.Sign_out),
-      map((action: SignOut) => {
+      tap(() => {
         this.authServices.signout();
-        this.router.navigateByUrl('/authentication/sign-in');
         location.reload();
+      }),
+      map((action: SignOut) => {
         return ({ type: ActionTypes.Sign_out_success });
       }
     ));
 
+  @Effect()
+  resetPasswordRequired = this.actions
+    .pipe(
+      ofType(ActionTypes.Reset_password_required),
+      tap(() => {
+        this.router.navigateByUrl('authentication/force-password-change');
+      }),
+      map(() => {
+        return ({ type: 'nothing' });
+      })
+    );
 
   @Effect()
-  signInSuccess = this.actions
+  forceResetPassword = this.actions
     .pipe(
-      ofType(ActionTypes.Sign_in_success),
-      map((action: SignInSuccess) => {
-        return ({ type: 'Routing Successful' });
-      }
-    )
-  );
+      ofType(ActionTypes.Force_reset_password),
+      tap((action: ForceResetPassword) => {
+        this.authServices.passwordChallenge(action.payload.username, action.payload.password);
+      }),
+      map(() => {
+        return ({ type: 'nothing' });
+      })
+    );
 
   constructor(
     private actions: Actions,

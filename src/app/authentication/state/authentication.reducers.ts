@@ -10,8 +10,6 @@ export interface AuthenticationState {
   authenticationState: string;
   userAttributes: Array<any>;
   username: string;
-  isAdmin: boolean;
-
 }
 
 const initialState: AuthenticationState = {
@@ -19,7 +17,6 @@ const initialState: AuthenticationState = {
   authenticationState: AuthenticationStates.LOGGEDOUT,
   userAttributes: [],
   username: null,
-  isAdmin: false
 };
 
 export function authenticationReducer(state = initialState, action: AuthActions) {
@@ -34,13 +31,14 @@ export function authenticationReducer(state = initialState, action: AuthActions)
       // refresh
       return {
         ...state,
-        isAdmin: false
+        authenticationState: AuthenticationStates.LOGGEDOUT,
+
       };
-    case ActionTypes.Set_as_admin:
+    case ActionTypes.Reset_password_required:
       // refresh
       return {
         ...state,
-        isAdmin: action.payload.isAdmin
+        authenticationState: AuthenticationStates.RESETPASSWORD,
       };
     default:
       return state;

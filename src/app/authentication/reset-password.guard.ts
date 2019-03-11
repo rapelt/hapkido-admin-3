@@ -10,7 +10,7 @@ import { selectAuthenticationState } from './state/authentication.selectors';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthenticationGuard implements CanLoad {
+export class ResetPasswordGuard implements CanLoad {
   constructor(private router: Router, private store: Store<AppState>) {}
 
   canLoad(
@@ -21,7 +21,7 @@ export class AuthenticationGuard implements CanLoad {
       select(selectAuthenticationState),
       take(1),
       map((authState) => {
-        return authState === AuthenticationStates.LOGGEDIN;
+        return authState === AuthenticationStates.RESETPASSWORD;
       }),
       tap(isAuthenticated => {
         if (!isAuthenticated) {

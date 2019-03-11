@@ -12,7 +12,8 @@ import {
 import { from } from 'rxjs';
 import { config } from '../../../environments/environment';
 import * as AWS from 'aws-sdk';
-import { SignInSuccess } from './authentication.actions';
+import { MessagesService } from '../../messages/messages.service';
+import { ResetPasswordRequired, SignInSuccess } from './authentication.actions';
 import * as jwt from 'jsonwebtoken';
 import * as _ from 'underscore';
 
@@ -21,8 +22,6 @@ import * as _ from 'underscore';
   providedIn: 'root'
 })
 export class AuthenticationServices {
-  userUrl = 'http://localhost:8080/user/';
-
   private poolData: ICognitoUserPoolData;
   private userPool: CognitoUserPool;
   private cognitoUser: CognitoUser;
@@ -30,7 +29,7 @@ export class AuthenticationServices {
   private userAttributes;
   private config;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private messagesService: MessagesService) {
     this.config = config;
     if (this.config.feature_toggle.cognito_login) {
       AWS.config.region = this.config.aws_cognito_region;
@@ -69,7 +68,7 @@ export class AuthenticationServices {
       newPasswordRequired: this.newPasswordIsRequired.bind(this),
       mfaRequired: null,
       onFailure: (error) => {
-        // this.errorEvents.updateError.next(error);
+        this.messagesService.updateError.next(error.message);
         console.log(error);
       },
     };
@@ -78,16 +77,24 @@ export class AuthenticationServices {
   successfulSignIn(session) {
     this.session = session;
     console.log(`Signed in user ${this.cognitoUser.getUsername()}. Session valid?: `, session.isValid());
-    if (session.isValid()) {
+    if (session.isValid() && this.isAdmin()) {
       this.store.dispatch(new SignInSuccess(this.cognitoUser));
       this.getAttribute();
+      return;
     }
+
+    if (session.isValid() && !this.isAdmin()) {
+      this.messagesService.updateError.next('This application is for Administrators');
+      this.signout();
+    }
+
+    // Emit error if not admin
   }
 
   newPasswordIsRequired(userAttributes, requiredAttributes) {
     // this.userAttributes = userAttributes;
-    // this.store.dispatch(new ResetPassword());
-    // console.log("new Password required")
+    this.store.dispatch(new ResetPasswordRequired());
+    console.log('new Password required');
   }
 
   private authDetails (username, password): AuthenticationDetails {
@@ -121,7 +128,7 @@ export class AuthenticationServices {
       self.cognitoUser.getSession((err, session) => {
         if (err) { console.log('Error refreshing user session', err); return reject(err); }
         console.log(`${new Date()} - Refreshed session for ${self.cognitoUser.getUsername()}. Valid?: `, session.isValid());
-        if (session.isValid()) {
+        if (session.isValid() && this.isAdmin()) {
           this.session = session;
           this.store.dispatch(new SignInSuccess(this.cognitoUser));
           this.getAttribute();
@@ -148,8 +155,29 @@ export class AuthenticationServices {
   signout () {
     if (this.cognitoUser) {
       this.cognitoUser.signOut();
-      this.resetCreds(true)
+      this.resetCreds(true);
       this.session = null;
     }
+  }
+
+  passwordChallenge(username, password) {
+    return new Promise((resolve, reject) => {
+      try {
+        this.cognitoUser.completeNewPasswordChallenge(password, this.userAttributes, this.awsCallBackFunctions());
+      } catch (e) { reject(e); }
+    });
+  }
+
+  forgotPassword(username, verificationCode, newPassword) {
+    this.cognitoUser = this.getNewCognitoUser(username);
+    this.cognitoUser.confirmPassword(verificationCode, newPassword, {
+      onSuccess: () => {
+        console.log('successfully changed password');
+      },
+      onFailure:  (error) => {
+        this.messagesService.updateError.next(error);
+        console.log(error);
+      }
+    });
   }
 }

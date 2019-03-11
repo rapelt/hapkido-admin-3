@@ -15,8 +15,3 @@ export const selectAuthenticationState = createSelector(
   getAuthenticationState,
   state => state.authenticationState
 );
-
-export const selectIsAdmin = createSelector(
-  getAuthenticationState,
-  state => state.isAdmin
-);

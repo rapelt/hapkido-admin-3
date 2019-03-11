@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
+import { MessagesModule } from '../../messages/messages.module';
 
 import { SignInPage } from './sign-in.page';
 
@@ -21,7 +22,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    MessagesModule
   ],
   declarations: [SignInPage]
 })

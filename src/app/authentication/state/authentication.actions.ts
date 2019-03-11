@@ -1,16 +1,21 @@
 import {Action} from '@ngrx/store';
 
 export enum ActionTypes {
-  Reset_password = '[Authentication] Reset Password',
+  Force_reset_password = '[Authentication] Force Reset Password',
+  Reset_password_required = '[Authentication] Reset Password Required',
   Sign_in = '[Authentication] Sign In',
   Sign_out = '[Authentication] Sign Out',
   Sign_out_success = '[Authentication] Sign Out Success',
   Sign_in_success = '[Authentication] Sign In Success',
-  Set_as_admin = '[Authentication] Set As Admin'
 }
 
-export class ResetPassword implements Action {
-  readonly type = ActionTypes.Reset_password;
+export class ResetPasswordRequired implements Action {
+  readonly type = ActionTypes.Reset_password_required;
+}
+
+export class ForceResetPassword implements Action {
+  readonly type = ActionTypes.Force_reset_password;
+  constructor(public payload) { }
 }
 
 export class SignIn implements Action {
@@ -32,16 +37,11 @@ export class SignInSuccess implements Action {
   constructor(public payload) { }
 }
 
-export class SetAsAdmin implements Action {
-  readonly type = ActionTypes.Set_as_admin;
-  constructor(public payload) { }
-}
-
 
 export type AuthActions =
-  ResetPassword |
+  ResetPasswordRequired |
   SignIn |
   SignOut |
   SignInSuccess |
   SignOutSuccess |
-  SetAsAdmin;
+  ForceResetPassword;

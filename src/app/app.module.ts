@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -13,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationEffects } from './authentication/state/authentication.effects';
 import { AuthenticationServices } from './authentication/state/authentication.services';
+import { MessagesModule } from './messages/messages.module';
 import { reducers } from './state/app.reducers';
 
 @NgModule({
@@ -24,7 +24,8 @@ import { reducers } from './state/app.reducers';
     AppRoutingModule,
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthenticationEffects]),
-    StoreDevtoolsModule.instrument()
+    StoreDevtoolsModule.instrument(),
+    MessagesModule
   ],
   providers: [
     StatusBar,

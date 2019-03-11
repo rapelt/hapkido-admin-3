@@ -34,9 +34,19 @@ export class SignInPage implements OnInit {
 
   onSubmit() {
     // TODO Validate form
-    this.store.dispatch(new SignIn({password: 'Maelgwn3', username: 'rhig' }));
+    const payload = {
+      username: this.signInForm.get('instructor').value,
+      password: this.signInForm.get('password').value
+    };
+
+    this.store.dispatch(new SignIn(payload));
 
     console.log('submit');
+  }
+
+  forgotPasswordButton() {
+    this.router.navigate(['/authentication/forgot-password']);
+
   }
 
 }
