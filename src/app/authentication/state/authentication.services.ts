@@ -29,6 +29,8 @@ export class AuthenticationServices {
   private config;
 
   constructor(private store: Store<AppState>, private messagesService: MessagesService, private router: Router) {
+    console.log('using real Cognito');
+
     this.config = config;
     if (this.config.feature_toggle.cognito_login) {
       AWS.config.region = this.config.aws_cognito_region;

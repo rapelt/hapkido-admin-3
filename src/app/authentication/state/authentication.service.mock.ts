@@ -19,6 +19,7 @@ import { ResetPasswordRequired, SetUserAttributes, SignInSuccess } from './authe
 export class AuthSeviceMock {
 
   constructor(private store: Store<AppState>, private messagesService: MessagesService, private router: Router) {
+    console.log('using Mock Cognito');
     const isLoggedIn = localStorage.getItem('login');
     this.refreshOrResetCreds(isLoggedIn);
   }
