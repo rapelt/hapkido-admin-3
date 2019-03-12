@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
 
 
-describe('Authentication', function() {
-  it('Sign In', function() {
+describe('Sign In', function() {
+  it('should allow a user to sign in', function() {
     cy.visit('/');
     cy.contains('Sign in').click();
     cy.url().should('include', '/sign-in');
@@ -12,7 +12,7 @@ describe('Authentication', function() {
     cy.url().should('include', '/home');
   });
 
-  it('Auto Sign in', function() {
+  it('should auto sign in on refresh', function() {
     cy.visit('/');
     cy.contains('Sign in').click();
     cy.url().should('include', '/sign-in');
@@ -24,10 +24,11 @@ describe('Authentication', function() {
     cy.url().should('include', '/home');
   });
 
-  it('Auto Sign in with session storage', function() {
+  it('should auto sign in within a month', function() {
     window.localStorage.setItem('login', true);
     cy.visit('/');
     cy.url().should('include', '/home');
   });
+
 
 });

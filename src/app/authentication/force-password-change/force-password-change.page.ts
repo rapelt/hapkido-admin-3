@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
+import { MessagesService } from '../../messages/messages.service';
 import { AppState } from '../../state/app.reducers';
 import { ActionTypes, ForceResetPassword } from '../state/authentication.actions';
 
@@ -12,7 +13,7 @@ import { ActionTypes, ForceResetPassword } from '../state/authentication.actions
 export class ForcePasswordChangePage implements OnInit {
   resetPasswordForm: FormGroup;
 
-  constructor(private store: Store<AppState>) {
+  constructor(private store: Store<AppState>, private messageService: MessagesService) {
     console.log('Hello ForcedChangePasswordComponent Component');
   }
 
@@ -20,7 +21,11 @@ export class ForcePasswordChangePage implements OnInit {
     this.resetPasswordForm = new FormGroup({
       'username' : new FormControl('', [Validators.required]),
       'password1' : new FormControl('', [Validators.required]),
-      'password2' : new FormControl('', Validators.required)
+      'password2' :
+        new FormControl(
+          '',
+          [Validators.required]
+        )
     });
   }
 
@@ -33,6 +38,8 @@ export class ForcePasswordChangePage implements OnInit {
 
       this.store.dispatch(new ForceResetPassword(payload));
 
+    } else {
+      this.messageService.updateError.next('Your passwords didn\'t match. Please try again.');
     }
   }
 }

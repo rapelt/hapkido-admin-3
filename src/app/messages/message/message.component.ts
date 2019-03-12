@@ -32,7 +32,7 @@ export class MessageComponent {
   async presentErrorToast(message) {
     const toast = await this.toastCtrl.create({
       message: message,
-      duration: 3000,
+      duration: 100000,
       position: 'top',
       color: 'danger'
     });
