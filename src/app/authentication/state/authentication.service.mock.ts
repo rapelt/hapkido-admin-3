@@ -2,13 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '@capacitor/core';
 import { Store } from '@ngrx/store';
-import {
-  AuthenticationDetails,
-  CognitoUser,
-  CognitoUserPool,
-  CognitoUserSession,
-  ICognitoUserPoolData
-} from 'amazon-cognito-identity-js';
 import { from } from 'rxjs';
 import { MessagesService } from '../../messages/messages.service';
 import { ResetPasswordRequired, SetUserAttributes, SignInSuccess } from './authentication.actions';
@@ -53,7 +46,7 @@ export class AuthSeviceMock {
   }
 
 
-  private authDetails (username, password): AuthenticationDetails {
+  private authDetails (username, password) {
     // return new AuthenticationDetails({Username: username, Password: password});
     return null;
 

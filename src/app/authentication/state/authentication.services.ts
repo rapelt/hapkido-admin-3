@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppState } from '@capacitor/core';
@@ -12,7 +11,6 @@ import {
 } from 'amazon-cognito-identity-js';
 import { from } from 'rxjs';
 import { config } from '../../../environments/environment';
-import * as AWS from 'aws-sdk';
 import { MessagesService } from '../../messages/messages.service';
 import { ResetPasswordRequired, SetUserAttributes, SignInSuccess } from './authentication.actions';
 import * as jwt from 'jsonwebtoken';
@@ -33,7 +31,6 @@ export class AuthenticationServices {
 
     this.config = config;
     if (this.config.feature_toggle.cognito_login) {
-      AWS.config.region = this.config.aws_cognito_region;
       this.poolData = {
         UserPoolId: this.config.aws_user_pools_id,
         ClientId: this.config.aws_user_pools_web_client_id

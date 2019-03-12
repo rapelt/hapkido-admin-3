@@ -16,6 +16,7 @@
     "build": "ng run app:build",
     "build:staging": "ng run app:build:staging",
     "build:prod": "ng run app:build:prod",
+    "build:test": "ng run app:build:test --stats-json",
     "test:unit": "ng test --code-coverage --browsers=ChromeHeadlessCI",
     "test:ci:all": "npm run test:ci && npm run cy:ci",
     "test:ci": "ng test --no-watch --no-progress --browsers=ChromeHeadlessCI",
@@ -28,7 +29,8 @@
     "device:local": "npm run build && npm run copy:capacitor && npm run open:capacitor",
     "device:staging": "npm run build:staging && npm run copy:capacitor && npm run open:capacitor",
     "device:prod": "npm run build:prod && npm run copy:capacitor && npm run open:capacitor",
-    "postinstall": "node patch.js"
+    "postinstall": "node patch.js",
+    "analyse-package-size": "webpack-bundle-analyzer ./www/stats.json"
   },
   "private": true,
   "dependencies": {
@@ -93,7 +95,8 @@
     "start-server-and-test": "^1.7.11",
     "ts-node": "~8.0.0",
     "tslint": "~5.12.0",
-    "typescript": "~3.1.6"
+    "typescript": "~3.1.6",
+    "webpack-bundle-analyzer": "^3.1.0"
   },
   "description": "An Ionic project"
 }
