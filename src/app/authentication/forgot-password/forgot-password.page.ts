@@ -49,4 +49,8 @@ export class ForgotPasswordPage implements OnInit {
       username: this.username,
     }));
   }
+
+  backToUserName() {
+    this.username = null;
+  }
 }

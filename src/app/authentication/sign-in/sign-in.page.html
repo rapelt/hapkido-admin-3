@@ -1,6 +1,8 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>sign-in</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+    </ion-buttons>
+    <ion-title>Sign in</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -9,16 +11,16 @@
     <ion-list>
       <ion-item>
         <ion-label position="stacked">Instructor</ion-label>
-        <ion-input formControlName="instructor" type="text"></ion-input>
+        <ion-input class="cy-username" name="username" formControlName="instructor" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Password</ion-label>
-        <ion-input type="password" formControlName="password"></ion-input>
+        <ion-input class="cy-password" name="password" type="password" formControlName="password"></ion-input>
       </ion-item>
     </ion-list>
-    <ion-button type="submit" color="primary" expand="block" [disabled]="signInForm.invalid">Sign In</ion-button>
-    <ion-button type="button" color="secondary" fill="clear" (click)="forgotPasswordButton()">Forgot Password</ion-button>
+    <ion-button type="submit" class="cy-sign-in-btn" color="primary" expand="block" [disabled]="signInForm.invalid">Sign In</ion-button>
+    <ion-button type="button" class="cy-forgot-btn" color="tertiary" fill="clear" (click)="forgotPasswordButton()">Forgot Password</ion-button>
 
   </form>
 

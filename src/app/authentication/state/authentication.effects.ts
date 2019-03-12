@@ -19,9 +19,13 @@ export class AuthenticationEffects {
       ofType(ActionTypes.Sign_in),
       mergeMap((action: SignIn) => this.authServices.signIn(action.payload.username, action.payload.password)
       .pipe(
-        map(() => EMPTY),
-        catchError(() => EMPTY)
-        ))
+        map(() => {
+          return ({ type: 'nothing' });
+        }),
+        catchError(() => {
+          return null;
+        })
+      ))
     );
 
   @Effect()

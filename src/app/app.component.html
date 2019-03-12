@@ -1,25 +1,25 @@
 <ion-app>
   <app-message></app-message>
   <ion-split-pane>
-    <ion-menu>
+    <ion-menu *ngIf="shouldShowSignOut">
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar color="primary">
           <ion-title>Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle auto-hide="false" >
+          <ion-menu-toggle auto-hide="false">
             <div *ngFor="let p of appPages">
               <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
-                <ion-icon slot="start" [name]="p.icon"></ion-icon>
+                <ion-icon slot="start" color="tertiary" [name]="p.icon"></ion-icon>
                 <ion-label>
                   {{p.title}}
                 </ion-label>
               </ion-item>
             </div>
-            <ion-item *ngIf="shouldShowSignOut" button (click)="signout()">
-              <ion-icon slot="start" name="log-out"></ion-icon>
+            <ion-item button (click)="signout()">
+              <ion-icon slot="start" color="tertiary" name="log-out"></ion-icon>
               <ion-label>
                 Sign Out
               </ion-label>

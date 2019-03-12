@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
@@ -11,9 +11,29 @@
 
 
 <ion-content padding>
-  <p>Username: {{username}}</p>
-  <p>Email: {{email}}</p>
-  <p>Is email verified: {{isEmailVerified}}</p>
+
+  <ion-item>
+    <ion-label text-wrap>
+      <ion-text color="primary">
+        <h3>Username</h3>
+      </ion-text>
+      <ion-text>
+        <p>{{username}}</p>
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label text-wrap>
+      <ion-text color="primary">
+        <h3>Email</h3>
+      </ion-text>
+      <ion-text>
+        <p>{{email}} <span *ngIf="!isEmailVerified">(Not Verified)</span></p>
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
 
   <div *ngIf="isEmailVerified === 'false'">
     <div *ngIf="!codeSent">

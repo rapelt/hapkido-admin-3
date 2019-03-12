@@ -8,7 +8,7 @@
     "start": "ng serve",
     "local": "ng serve",
     "staging": "ng serve",
-    "prod": "ng serve",
+    "prod": "ng run app:serve:production",
     "start:staging": "ng run app:serve:staging",
     "start:test": "ng run app:serve:test",
     "serve": "../node_modules/ionic/bin/ionic serve",

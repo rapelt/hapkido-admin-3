@@ -11,9 +11,11 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationEffects } from './authentication/state/authentication.effects';
-import { AuthenticationServices } from './authentication/state/authentication.services';
+import { AuthSeviceMock } from './authentication/state/authentication.service.mock';
 import { MessagesModule } from './messages/messages.module';
 import { reducers } from './state/app.reducers';
+import { config } from '../environments/environment';
+import { AuthenticationServices } from './authentication/state/authentication.services';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,7 +33,8 @@ import { reducers } from './state/app.reducers';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    AuthenticationServices
+    config.ionicEnvName === 'prod' ? AuthenticationServices : { provide: AuthenticationServices, useClass: AuthSeviceMock },
+    // AuthenticationServices
   ],
   bootstrap: [AppComponent]
 })

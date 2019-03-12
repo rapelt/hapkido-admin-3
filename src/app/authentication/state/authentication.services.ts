@@ -150,7 +150,11 @@ export class AuthenticationServices {
     if (session) {
       const accesstoken = session.getAccessToken();
       const jwtToken = jwt.decode(accesstoken.getJwtToken());
-      return !!jwtToken['cognito:groups'].find((option) => option === 'admin');
+      if (jwtToken['cognito:groups']) {
+        return !!jwtToken['cognito:groups'].find((option) => option === 'admin');
+      } else {
+        return false;
+      }
     }
     return false;
   }
