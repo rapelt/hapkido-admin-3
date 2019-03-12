@@ -42,7 +42,7 @@ describe('Force Password Change', function() {
         cy.get('input[name=password1]').type('test01');
         cy.get('input[name=password2]').type('test02');
         cy.get('.cy-force-password-submit').click();
-        cy.wait(20);
+        cy.wait(100);
         cy.get('#ion-overlay-1').then((el) => {
             expect(el).to.be.visible;
         });
