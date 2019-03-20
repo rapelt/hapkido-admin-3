@@ -3,10 +3,10 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   { path: '',
     pathMatch: 'full',
-    redirectTo: 'students'
+    redirectTo: 'list'
   },
   {
-    path: 'students',
-    loadChildren: './students/student-list/student-list.module#StudentListPageModule'
+    path: 'list',
+    loadChildren: './student-list/student-list.module#StudentListPageModule'
   }
 ];

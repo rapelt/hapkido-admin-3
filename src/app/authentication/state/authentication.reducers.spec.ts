@@ -8,7 +8,7 @@ import {
 } from './authentication.actions';
 import * as reducer from './authentication.reducers';
 
-describe('My Selectors', () => {
+describe('Authentication reducers', () => {
   it('should sign out user', () => {
     const authentication = {
       user: null,

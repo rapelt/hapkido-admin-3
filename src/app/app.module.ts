@@ -16,6 +16,7 @@ import { MessagesModule } from './messages/messages.module';
 import { reducers } from './state/app.reducers';
 import { config } from '../environments/environment';
 import { AuthenticationServices } from './authentication/state/authentication.services';
+import { StudentsModule } from './students/students.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,7 +28,8 @@ import { AuthenticationServices } from './authentication/state/authentication.se
     StoreModule.forRoot(reducers),
     EffectsModule.forRoot([AuthenticationEffects]),
     StoreDevtoolsModule.instrument(),
-    MessagesModule
+    MessagesModule,
+    StudentsModule
   ],
   providers: [
     StatusBar,

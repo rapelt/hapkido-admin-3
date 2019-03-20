@@ -1,8 +1,7 @@
 import { AuthenticationStates } from '../authentication-states';
-import { AuthenticationUser } from '../authentication.model';
 import * as selectors from './authentication.selectors';
 
-describe('My Selectors', () => {
+describe('Authentication Selectors', () => {
   const state = {
     authentication: {
       user: null,
