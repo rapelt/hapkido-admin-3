@@ -1,13 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { store } from '@angular/core/src/render3';
 import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule, ToastController } from '@ionic/angular';
-import { Store } from '@ngrx/store';
 import { Subject } from 'rxjs';
-import { MockAlertController, MockToastController } from '../../../ionic.mocks';
-import { MessagesService } from '../messages.service';
+import { MockToastController } from '../../../ionic.mocks';
 
 import { MessageComponent } from './message.component';
 
