@@ -35,8 +35,8 @@ export class SignInPage implements OnInit {
   onSubmit() {
     // TODO Validate form
     const payload = {
-      username: this.signInForm.get('instructor').value,
-      password: this.signInForm.get('password').value
+      username: this.signInForm.get('instructor').value.toString().trim(),
+      password: this.signInForm.get('password').value.toString().trim()
     };
 
     this.store.dispatch(new SignIn(payload));

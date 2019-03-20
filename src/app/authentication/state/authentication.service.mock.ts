@@ -11,6 +11,13 @@ import { ResetPasswordRequired, SetUserAttributes, SignInSuccess } from './authe
 })
 export class AuthSeviceMock {
 
+  user_attri = [
+    {Name: 'sub', Value: '4a4eb79c-5898-4de7-8540-153515c25f80'},
+    {Name: 'email', Value: 'rebekahapelt@gmail.com'},
+    {Name: 'email_verified', Value: 'false'}
+
+  ];
+
   constructor(private store: Store<AppState>, private messagesService: MessagesService, private router: Router) {
     console.log('using Mock Cognito');
     const isLoggedIn = localStorage.getItem('login');
@@ -53,13 +60,7 @@ export class AuthSeviceMock {
   }
 
   getAttribute() {
-    const user_attri = [
-      {Name: 'sub', Value: '4a4eb79c-5898-4de7-8540-153515c25f80'},
-      {Name: 'email', Value: 'rebekahapelt@gmail.com'},
-      {Name: 'email_verified', Value: 'true'}
-
-    ];
-    this.store.dispatch(new SetUserAttributes({attributes: user_attri, session: null}));
+    this.store.dispatch(new SetUserAttributes({attributes: this.user_attri, session: null}));
   }
 
 
@@ -82,23 +83,41 @@ export class AuthSeviceMock {
   }
 
   forgotPassword(username, verificationCode, newPassword) {
+    if (verificationCode === '1') {
+      this.messagesService.updateError.next('Invalid verification code');
+      return;
+    }
+
     if (newPassword !== 'e') {
       localStorage.setItem('login', 'true');
       this.successfulSignIn(username);
+      return;
     }
 
     if (newPassword === 'e') {
       this.messagesService.updateError.next('An error occurred');
+      return;
     }
   }
 
   sendForgotPasswordCode(username) {
+    if (username === 'not_a_user') {
+      this.messagesService.updateError.next('Not a user');
+      this.router.navigateByUrl('/home');
+    }
   }
 
   sendEmailVerificationCode() {
   }
 
   verifyEmail(verificationCode) {
+
+    this.user_attri = [
+      {Name: 'sub', Value: '4a4eb79c-5898-4de7-8540-153515c25f80'},
+      {Name: 'email', Value: 'rebekahapelt@gmail.com'},
+      {Name: 'email_verified', Value: 'true'}
+
+    ];
     this.getAttribute();
   }
 }

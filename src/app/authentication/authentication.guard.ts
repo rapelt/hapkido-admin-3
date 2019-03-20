@@ -16,7 +16,7 @@ export class AuthenticationGuard implements CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]
-  ): Observable<boolean> | Promise<boolean> | boolean {
+  ): Observable<boolean> {
     return this.store.pipe(
       select(getAuthenticationState),
       take(1),

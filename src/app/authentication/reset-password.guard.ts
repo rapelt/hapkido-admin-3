@@ -16,7 +16,7 @@ export class ResetPasswordGuard implements CanLoad {
   canLoad(
     route: Route,
     segments: UrlSegment[]
-  ): Observable<boolean> | Promise<boolean> | boolean {
+  ): Observable<boolean> {
     return this.store.pipe(
       select(selectAuthenticationState),
       take(1),

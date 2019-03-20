@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, forwardRef, OnInit } from '@angular/core';
+import { FormControl, FormGroup, NG_VALUE_ACCESSOR, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { MessagesService } from '../../messages/messages.service';
 import { AppState } from '../../state/app.reducers';
@@ -13,9 +13,7 @@ import { ActionTypes, ForceResetPassword } from '../state/authentication.actions
 export class ForcePasswordChangePage implements OnInit {
   resetPasswordForm: FormGroup;
 
-  constructor(private store: Store<AppState>, private messageService: MessagesService) {
-    console.log('Hello ForcedChangePasswordComponent Component');
-  }
+  constructor(public store: Store<AppState>, public messageService: MessagesService) {}
 
   ngOnInit() {
     this.resetPasswordForm = new FormGroup({
@@ -30,10 +28,15 @@ export class ForcePasswordChangePage implements OnInit {
   }
 
   onResetPassword() {
+    if (this.resetPasswordForm.invalid) {
+      this.messageService.updateError.next('You must enter a username and password');
+      return;
+    }
+
     if (this.resetPasswordForm.get('password1').value === this.resetPasswordForm.get('password2').value) {
       const payload = {
-        username: this.resetPasswordForm.get('username').value,
-        password: this.resetPasswordForm.get('password1').value
+        username: this.resetPasswordForm.get('username').value.toString().trim(),
+        password: this.resetPasswordForm.get('password1').value.toString().trim()
       };
 
       this.store.dispatch(new ForceResetPassword(payload));

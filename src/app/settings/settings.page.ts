@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { select, Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 import { SendEmailVerificationCode, VerifyEmail } from '../authentication/state/authentication.actions';
 import { AppState } from '../state/app.reducers';
-import { selectUserSettings } from './settings.selectors';
+import { selectUserAttributes, selectUsername } from './settings.selectors';
 
 @Component({
   selector: 'app-settings',
@@ -12,10 +13,8 @@ import { selectUserSettings } from './settings.selectors';
 })
 export class SettingsPage implements OnInit {
 
-  username = null;
-  email = null;
-  isEmailVerified = 'false';
-  userAttributes = [];
+  username: Observable<string> = null;
+  userAttributes: Observable<{email: string, emailVerified: string}> = null;
   codeSent = false;
   verifyEmailForm: FormGroup;
 
@@ -27,22 +26,8 @@ export class SettingsPage implements OnInit {
       'code' : new FormControl('', [Validators.required])
     });
 
-    this.store.pipe(select(selectUserSettings))
-      .subscribe((userSetttings) => {
-            console.log(userSetttings);
-            this.username = userSetttings.username;
-            this.userAttributes =  userSetttings.userAttributes;
-
-        for (const attribute of this.userAttributes) {
-          if (attribute.Name === 'email_verified') {
-            this.isEmailVerified = attribute.Value;
-          }
-
-          if (attribute.Name === 'email') {
-            this.email = attribute.Value;
-          }
-        }
-    });
+    this.username = this.store.select(selectUsername);
+    this.userAttributes = this.store.select(selectUserAttributes);
   }
 
   sendCode() {

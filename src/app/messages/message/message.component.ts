@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { MessagesService } from '../messages.service';
 
@@ -7,23 +7,26 @@ import { MessagesService } from '../messages.service';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })
-export class MessageComponent {
+export class MessageComponent implements OnInit {
 
-  constructor(public toastCtrl: ToastController, private messagesService: MessagesService) {
+  constructor(public toastCtrl: ToastController, public messagesService: MessagesService) {
+  }
+
+  ngOnInit(): void {
     if (this.messagesService.updateError.observers.length === 0) {
-      messagesService.updateError.subscribe((error: string) => {
+      this.messagesService.updateError.subscribe((error: string) => {
         this.presentErrorToast(error);
       });
     }
 
     if (this.messagesService.updateInfo.observers.length === 0) {
-      messagesService.updateInfo.subscribe((message: string) => {
+      this.messagesService.updateInfo.subscribe((message: string) => {
         this.presentInfoToast(message);
       });
     }
 
     if (this.messagesService.updateSuccess.observers.length === 0) {
-      messagesService.updateSuccess.subscribe((message: string) => {
+      this.messagesService.updateSuccess.subscribe((message: string) => {
         this.presentSuccessToast(message);
       });
     }
@@ -32,7 +35,7 @@ export class MessageComponent {
   async presentErrorToast(message) {
     const toast = await this.toastCtrl.create({
       message: message,
-      duration: 100000,
+      duration: 3000,
       position: 'top',
       color: 'danger'
     });
@@ -58,5 +61,6 @@ export class MessageComponent {
     });
     toast.present();
   }
+
 
 }

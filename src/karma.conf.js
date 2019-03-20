@@ -32,6 +32,9 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     browsers: ['ChromeHeadless', 'Chrome'],
     autoWatch: true,
+    files: [
+      { pattern: "app/**/*.spec.js", watched: false, served: true, included: true }
+    ],
     concurrency: Infinity,
     singleRun: false
   });
