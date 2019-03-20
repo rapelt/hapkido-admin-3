@@ -29,7 +29,7 @@ describe('Forgot password', function() {
         cy.get('input[name=fp-password1]').type('test01');
         cy.get('input[name=fp-password2]').type('test02');
         cy.get('.cy-forgot-password-submit').click();
-        cy.wait(100);
+        cy.wait(500);
         cy.get('#ion-overlay-1').then((el) => {
             expect(el).to.be.visible;
         });
@@ -52,7 +52,7 @@ describe('Forgot password', function() {
         cy.get('input[name=fp-password1]').type('test01');
         cy.get('input[name=fp-password2]').type('test01');
         cy.get('.cy-forgot-password-submit').click();
-        cy.wait(100);
+        cy.wait(500);
         cy.get('#ion-overlay-1').then((el) => {
 
             expect(el).to.be.visible;
@@ -67,7 +67,7 @@ describe('Forgot password', function() {
         cy.get('.cy-forgot-btn').click();
         cy.get('input[name=fp-username]').type('not_a_user');
         cy.get('.cy-fp-username-submit').click();
-        cy.wait(100);
+        cy.wait(500);
         cy.get('#ion-overlay-1').then((el) => {
             expect(el).to.be.visible;
             expect(el['0'].shadowRoot.innerHTML).to.contain('Not a user');

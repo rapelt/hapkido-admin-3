@@ -25,7 +25,6 @@ const routes: Routes = [
     loadChildren: './settings/settings.module#SettingsPageModule',
     canLoad: [AuthenticationGuard],
     runGuardsAndResolvers: 'always'
-
   },
   {
     path: '',

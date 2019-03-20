@@ -21,9 +21,9 @@ export class AppComponent implements OnInit {
       icon: 'home'
     },
     {
-      title: 'List',
-      url: '/list',
-      icon: 'list'
+      title: 'Students',
+      url: '/students',
+      icon: 'people'
     },
     {
       title: 'Settings',
