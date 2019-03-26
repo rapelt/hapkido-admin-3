@@ -22,7 +22,7 @@ import { StudentsEffects } from './students/state/students.effects';
 import { StudentsModule } from './students/students.module';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MockComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
