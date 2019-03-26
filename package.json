@@ -14,7 +14,7 @@
     "serve": "../node_modules/ionic/bin/ionic serve",
     "serve:ci": "angular-http-server --path www -a localhost -p 8000",
     "build": "ng run app:build",
-    "build:staging": "ng run app:build:staging",
+    "build:staging": "ng run app:build:staging --stats-json",
     "build:prod": "ng run app:build:prod",
     "build:test": "ng run app:build:test --stats-json",
     "test:unit:local": "ng test --code-coverage",

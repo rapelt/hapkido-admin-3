@@ -25,4 +25,6 @@ export interface StudentModel {
     gradingDates?: GradingDatesModel [];
     isActive: boolean;
     preferredClass: classType;
+    familyName?: string;
+    familyId?: number;
 }

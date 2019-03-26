@@ -1,4 +1,4 @@
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -12,6 +12,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MockComponent } from '../testing-helpers/mock.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
+import { AuthInterceptor } from './authentication/auth-interceptor/auth-interceptor';
 import { AuthenticationEffects } from './authentication/state/authentication.effects';
 import { AuthSeviceMock } from './authentication/state/authentication.service.mock';
 import { MessagesModule } from './messages/messages.module';
@@ -39,7 +40,12 @@ import { StudentsModule } from './students/students.module';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    config.ionicEnvName === 'prod' ? AuthenticationServices : { provide: AuthenticationServices, useClass: AuthSeviceMock },
+    config.ionicEnvName === 'prod' || 'staging' ? AuthenticationServices : { provide: AuthenticationServices, useClass: AuthSeviceMock },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
     // AuthenticationServices
   ],
   bootstrap: [AppComponent]
