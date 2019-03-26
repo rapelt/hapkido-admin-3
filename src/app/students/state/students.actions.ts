@@ -1,13 +1,22 @@
 import {Action} from '@ngrx/store';
+import { StudentModel } from '../models/student';
 
 export enum ActionTypes {
-  Reset_password_required = '[Students] Force Reset Password',
+  Get_all_students = '[Students] Get All Students',
+  Get_all_students_success = '[Students] Set All Students Success',
+
 }
 
-export class ResetPasswordRequired implements Action {
-  readonly type = ActionTypes.Reset_password_required;
+export class GetAllStudents implements Action {
+  readonly type = ActionTypes.Get_all_students;
 }
 
+export class GetAllStudentsSuccess implements Action {
+  readonly type = ActionTypes.Get_all_students_success;
+
+  constructor(public payload: Array<StudentModel>) { }
+}
 
 export type StudentsActions =
-  ResetPasswordRequired;
+  GetAllStudents |
+  GetAllStudentsSuccess;

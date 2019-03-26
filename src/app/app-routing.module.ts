@@ -30,7 +30,7 @@ const routes: Routes = [
     path: 'students',
     loadChildren: './students/students.module#StudentsModule',
     canLoad: [AuthenticationGuard],
-    runGuardsAndResolvers: 'always'
+    runGuardsAndResolvers: 'always',
   },
   {
     path: '',

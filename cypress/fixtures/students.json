@@ -1,0 +1,122 @@
+[
+  {
+    "preferredClass": "Adults",
+    "isKumdoStudent": true,
+    "isActive": true,
+    "isAdmin": false,
+    "grade": 0,
+    "pinNumber": null,
+    "email": "test@user.com",
+    "hbId": "hb001",
+    "gradingDates": [
+      {
+        "date": "2004-08-01T05:23:29.000Z",
+        "grade": 12
+      }
+    ],
+    "name": {
+      "lastname": "lastname0",
+      "firstname": "firstname0"
+    }
+  },
+  {
+    "preferredClass": "Adults",
+    "isKumdoStudent": true,
+    "isActive": true,
+    "isAdmin": false,
+    "grade": 2,
+    "pinNumber": null,
+    "email": "test@user.com",
+    "hbId": "hb065",
+    "gradingDates": [
+      {
+        "date": "2009-01-29T05:24:58.000Z",
+        "grade": 13
+      }
+    ],
+    "name": {
+      "lastname": "lastname1",
+      "firstname": "firstname1"
+    }
+  },
+  {
+    "preferredClass": "Family",
+    "isKumdoStudent": false,
+    "isActive": true,
+    "isAdmin": true,
+    "grade": 7,
+    "pinNumber": null,
+    "email": "test@user.com",
+    "hbId": "hb088",
+    "gradingDates": [
+      {
+        "date": "2010-02-18T05:20:02.000Z",
+        "grade": 14
+      }
+    ],
+    "name": {
+      "lastname": "lastname2",
+      "firstname": "firstname2"
+    }
+  },
+  {
+    "preferredClass": "Family",
+    "isKumdoStudent": false,
+    "isActive": true,
+    "isAdmin": false,
+    "grade": 14,
+    "pinNumber": null,
+    "email": "test@user.com",
+    "hbId": "hb128",
+    "gradingDates": [
+      {
+        "date": "2013-02-05T05:29:35.000Z",
+        "grade": 10
+      }
+    ],
+    "name": {
+      "lastname": "lastname5",
+      "firstname": "firstname5"
+    }
+  },
+  {
+    "preferredClass": "Adults",
+    "isKumdoStudent": true,
+    "isActive": false,
+    "isAdmin": false,
+    "grade": 9,
+    "pinNumber": null,
+    "email": "test@user.com",
+    "hbId": "hb099",
+    "gradingDates": [
+      {
+        "date": "2011-02-01T05:26:31.000Z",
+        "grade": 13
+      }
+    ],
+    "name": {
+      "lastname": "lastname4",
+      "firstname": "firstname4"
+    }
+  },
+  {
+    "preferredClass": "Adults",
+    "isKumdoStudent": false,
+    "isActive": true,
+    "isAdmin": false,
+    "grade": 10,
+    "pinNumber": null,
+    "email": "test@user.com",
+    "hbId": "hb108",
+    "gradingDates": [
+      {
+        "date": "2011-06-30T05:28:04.000Z",
+        "grade": 10
+      }
+    ],
+    "name": {
+      "lastname": "lastname3",
+      "firstname": "firstname3"
+    }
+  }
+]

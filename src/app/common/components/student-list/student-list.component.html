@@ -1,0 +1,12 @@
+<div>
+  <ion-list class="cy-student-list" *ngFor="let student of filteredStudents | async | alphabeticalstudents; let i = index;">
+    <ion-item class="cy-student-list-item" button="true" type="button" [lines]="full" (click)="selectStudent(student, i)">
+      <ion-label>
+        {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
+      </ion-label>
+      <ion-note slot="end">
+        <app-grade-badge [grade]="student.grade"></app-grade-badge>
+      </ion-note>
+    </ion-item>
+  </ion-list>
+</div>

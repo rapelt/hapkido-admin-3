@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
@@ -8,6 +9,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MockComponent } from '../testing-helpers/mock.component';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthenticationEffects } from './authentication/state/authentication.effects';
@@ -16,6 +18,7 @@ import { MessagesModule } from './messages/messages.module';
 import { reducers } from './state/app.reducers';
 import { config } from '../environments/environment';
 import { AuthenticationServices } from './authentication/state/authentication.services';
+import { StudentsEffects } from './students/state/students.effects';
 import { StudentsModule } from './students/students.module';
 
 @NgModule({
@@ -26,10 +29,11 @@ import { StudentsModule } from './students/students.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthenticationEffects]),
+    EffectsModule.forRoot([AuthenticationEffects, StudentsEffects]),
     StoreDevtoolsModule.instrument(),
     MessagesModule,
-    StudentsModule
+    StudentsModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,

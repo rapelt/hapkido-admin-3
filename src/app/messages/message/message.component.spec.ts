@@ -3,7 +3,7 @@ import { async, ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule, ToastController } from '@ionic/angular';
 import { Subject } from 'rxjs';
-import { MockToastController } from '../../../ionic.mocks';
+import { MockToastController } from '../../../testing-helpers/ionic.mocks';
 
 import { MessageComponent } from './message.component';
 

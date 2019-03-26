@@ -14,6 +14,12 @@ const initialState: StudentsState = {
 
 export function studentsReducer(state = initialState, action: StudentsActions) {
   switch (action.type) {
+    case ActionTypes.Get_all_students_success:
+      const newState = {
+        ...state,
+        students: action.payload
+      };
+      return newState;
     default:
       return state;
   }

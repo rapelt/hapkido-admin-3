@@ -4,9 +4,10 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['jasmine', '@angular-devkit/build-angular', "karma-typescript"],
     plugins: [
       require('karma-jasmine'),
+      require('karma-typescript'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage-istanbul-reporter'),
@@ -26,16 +27,19 @@ module.exports = function (config) {
         flags: ['--no-sandbox']
       }
     },
-    reporters: ['progress', 'kjhtml'],
+    reporters: ['progress', 'kjhtml', "karma-typescript"],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
     browsers: ['ChromeHeadless', 'Chrome'],
     autoWatch: true,
-    files: [
-      { pattern: "app/**/*.spec.js", watched: false, served: true, included: true }
-    ],
     concurrency: Infinity,
-    singleRun: false
+    singleRun: false,
+    preprocessors: {
+      "**/*.ts": "karma-typescript"
+    },
   });
+
+
+
 };

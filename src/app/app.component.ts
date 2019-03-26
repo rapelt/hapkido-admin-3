@@ -8,6 +8,7 @@ import { AuthenticationStates } from './authentication/authentication-states';
 import { SignOut } from './authentication/state/authentication.actions';
 import { selectAuthenticationState } from './authentication/state/authentication.selectors';
 import { AppState } from './state/app.reducers';
+import { GetAllStudents } from './students/state/students.actions';
 
 @Component({
   selector: 'app-root',
@@ -41,11 +42,16 @@ export class AppComponent implements OnInit {
     private store: Store<AppState>
   ) {
     this.initializeApp();
+
   }
 
   ngOnInit(): void {
     this.store.select(selectAuthenticationState).subscribe((state) => {
       this.shouldShowSignOut = state === AuthenticationStates.LOGGEDIN;
+      if (this.shouldShowSignOut) {
+        this.store.dispatch(new GetAllStudents);
+      }
+
     });
   }
 
@@ -54,6 +60,7 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+
   }
 
   signout() {
