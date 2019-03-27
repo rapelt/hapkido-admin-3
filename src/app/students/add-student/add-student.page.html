@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="newStudentForm.invalid" class="cy-back-button"></ion-back-button>
+
+    </ion-buttons>
+    <ion-title>
+      New Student
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <form [formGroup]="newStudentForm">
+
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>General Information</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label position="stacked">HB ID</ion-label>
+        <ion-input name="hbid" type="text" formControlName="hbId"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Firstname</ion-label>
+        <ion-input name="firstname" type="text" formControlName="firstname"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Lastname</ion-label>
+        <ion-input name="lastname" type="text" formControlName="lastname"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Email</ion-label>
+        <ion-input name="email" type="email" formControlName="email"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">DOB</ion-label>
+        <ion-input name="email" type="email" formControlName="dob"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Hapkido Information</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label position="stacked">Joining Date</ion-label>
+        <ion-input name="joiningDate" type="text" formControlName="joiningDate"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Grade</ion-label>
+        <ion-input name="grade" type="text" formControlName="grade"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Preferred Class</ion-label>
+        <ion-input name="preferredClass" type="text" formControlName="preferredClass"></ion-input>
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-list-header>
+        <ion-label>Family Information</ion-label>
+      </ion-list-header>
+      <ion-item>
+        <ion-label position="stacked">Link to an existing family</ion-label>
+        <ion-input name="family" type="text" formControlName="family"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Payment Type</ion-label>
+        <ion-input name="paymentType" type="text" formControlName="paymentType"></ion-input>
+      </ion-item>
+    </ion-list>
+
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="half-button-size">
+      <ion-button expand="full" color="secondary" (click)="cancel()">Cancel</ion-button>
+      <ion-button class="cy-add-student-submit" type="submit" color="tertiary" expand="full" (click)="save()">Save</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

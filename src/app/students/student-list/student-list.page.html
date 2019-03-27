@@ -18,4 +18,9 @@
 <ion-content padding>
   <ion-searchbar class="cy-student-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
   <app-student-list [listType]="listType" [search]="searchvalue"></app-student-list>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="tertiary" (click)="addStudent()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

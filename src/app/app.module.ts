@@ -1,5 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 
@@ -34,19 +35,21 @@ import { StudentsModule } from './students/students.module';
     StoreDevtoolsModule.instrument(),
     MessagesModule,
     StudentsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    config.ionicEnvName === 'prod' || 'staging' ? AuthenticationServices : { provide: AuthenticationServices, useClass: AuthSeviceMock },
+    config.ionicEnvName === 'prod' || config.ionicEnvName === 'staging'
+      ? AuthenticationServices
+      : { provide: AuthenticationServices, useClass: AuthSeviceMock },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
-    }
-    // AuthenticationServices
+    },
+    FormBuilder
   ],
   bootstrap: [AppComponent]
 })

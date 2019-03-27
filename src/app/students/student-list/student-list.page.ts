@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { StudentListPopoverComponent } from '../components/student-list-popover/student-list-popover.component';
 
@@ -14,6 +14,7 @@ export class StudentListPage implements OnInit {
 
   constructor(
     public popoverController: PopoverController,
+    public router: Router,
     public activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
@@ -38,6 +39,11 @@ export class StudentListPage implements OnInit {
 
   cancelSearch() {
     this.searchvalue = '';
+  }
+
+  addStudent() {
+    console.log('add student');
+    this.router.navigate(['/add-student']);
   }
 
 }
