@@ -88,7 +88,10 @@ describe('AddStudentPage', () => {
 
     component.save();
 
-    expect(messageService.updateError.next).toHaveBeenCalledWith('Looks like you have tried to submit an invalid form. Update the form and try again.');
+    expect(messageService.updateError.next)
+      .toHaveBeenCalledWith(
+        'Looks like you have tried to submit an invalid form. Update the form and try again.'
+      );
   });
 
 });

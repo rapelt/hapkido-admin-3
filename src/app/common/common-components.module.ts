@@ -10,7 +10,13 @@ import { GradeBadgeComponent } from './components/grade-badge/grade-badge.compon
 import { ValidationErrorMessageComponent } from './components/validation-error-message/validation-error-message.component';
 
 @NgModule({
-  declarations: [StudentListComponent, CapitialisePipe, AlphabeticalStudentsPipe, GradeBadgeComponent, AlphabeticalFamilyPipe, ValidationErrorMessageComponent],
+  declarations: [
+    StudentListComponent,
+    CapitialisePipe,
+    AlphabeticalStudentsPipe,
+    GradeBadgeComponent,
+    AlphabeticalFamilyPipe,
+    ValidationErrorMessageComponent],
   imports: [
     CommonModule,
     IonicModule.forRoot()
