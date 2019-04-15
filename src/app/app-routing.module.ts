@@ -27,7 +27,7 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always'
   },
   {
-    path: 'students',
+    path: 'student',
     loadChildren: './students/students.module#StudentsModule',
     canLoad: [AuthenticationGuard],
     runGuardsAndResolvers: 'always',

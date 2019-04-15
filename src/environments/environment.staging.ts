@@ -10,6 +10,7 @@ export const config: EnvironementModel = {
   'ionicEnvName': 'staging',
   'classAPIEndpoint': ' https://bgrgxylj3c.execute-api.ap-southeast-2.amazonaws.com/staging/class/',
   'studentAPIEndpoint': ' https://bgrgxylj3c.execute-api.ap-southeast-2.amazonaws.com/staging/student/',
+  'familyAPIEndpoint': 'https://bgrgxylj3c.execute-api.ap-southeast-2.amazonaws.com/staging/family/',
   'getClassTime': 15000,
   'firebase': 'AIzaSyBe3EhBt9MeBmUfn8O3Pd6rqw190ATp1d8',
   'firebasedomain': 'hapkido-signin-staging.firebaseapp.com',

@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { config } from '../../../environments/environment';
-import { StudentModel } from '../models/student';
+import { StudentModel } from '../../common/models/student';
 
 @Injectable({
   providedIn: 'root'
@@ -10,13 +10,26 @@ import { StudentModel } from '../models/student';
 export class StudentsServices {
 
   studentUrl = 'http://localhost:8080/student/';
+  familiesUrl = 'http://localhost:8080/student/';
+
 
   constructor(private httpClient: HttpClient) {
     this.studentUrl = config['studentAPIEndpoint'];
+    this.familiesUrl = config['familyAPIEndpoint'];
+
   }
 
   getAllStudents() {
     return this.httpClient.get(this.studentUrl + 'all');
+  }
+
+  getAllFamilies() {
+    return this.httpClient.get(this.familiesUrl + 'all');
+
+  }
+
+  addNewStudent(student: StudentModel) {
+    return this.httpClient.post(this.studentUrl + 'create', student);
   }
 
 

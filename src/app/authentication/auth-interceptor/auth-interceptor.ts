@@ -20,7 +20,11 @@ export class AuthInterceptor implements HttpInterceptor {
     this.store.select('authentication').subscribe(
       data => {
         if (data.authenticationState === AuthenticationStates.LOGGEDIN) {
-          this.accessToken = data.user['signInUserSession']['accessToken']['jwtToken'];
+          if (data.user['signInUserSession'] === undefined) {
+            this.accessToken = '';
+          } else {
+            this.accessToken = data.user['signInUserSession']['accessToken']['jwtToken'];
+          }
         }
       }
     );

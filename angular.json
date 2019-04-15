@@ -19,6 +19,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "src/tsconfig.app.json",
+            "poll": 10000,
             "assets": [
               {
                 "glob": "**/*",
@@ -90,6 +91,30 @@
                 }
               ]
             },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.dev.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            },
             "test": {
               "fileReplacements": [
                 {
@@ -133,6 +158,9 @@
             },
             "test": {
               "browserTarget": "app:build:test"
+            },
+            "dev": {
+              "browserTarget": "app:build:dev"
             },
             "ci": {
               "progress": false
@@ -195,6 +223,9 @@
             },
             "test": {
               "browserTarget": "app:build:test"
+            },
+            "dev": {
+              "browserTarget": "app:build:dev"
             }
           }
         },
@@ -216,6 +247,10 @@
             "test": {
               "cordovaBuildTarget": "app:ionic-cordova-build:test",
               "devServerTarget": "app:serve:test"
+            },
+            "dev": {
+              "cordovaBuildTarget": "app:ionic-cordova-build:dev",
+              "devServerTarget": "app:serve:dev"
             }
           }
         }

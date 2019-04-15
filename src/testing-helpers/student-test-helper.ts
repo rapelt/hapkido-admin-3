@@ -1,5 +1,5 @@
-import { ClassTypes } from '../app/students/models/class-types';
-import { StudentModel } from '../app/students/models/student';
+import { ClassTypes } from '../app/common/models/class-types';
+import { StudentModel } from '../app/common/models/student';
 
 export function createStudent(): StudentModel {
   return {

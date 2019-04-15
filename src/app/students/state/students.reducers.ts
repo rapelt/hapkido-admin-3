@@ -1,3 +1,4 @@
+import { FamilyModel } from '../../common/models/family.model';
 import { ActionTypes, StudentsActions } from './students.actions';
 
 export const STUDENTS_FEATURE_NAME = 'students';
@@ -5,11 +6,13 @@ export const STUDENTS_FEATURE_NAME = 'students';
 export interface StudentsState {
   students: Array<any>;
   selectedStudent: any;
+  families: Array<FamilyModel>;
 }
 
 const initialState: StudentsState = {
   students: [],
   selectedStudent: null,
+  families: []
 };
 
 export function studentsReducer(state = initialState, action: StudentsActions) {
@@ -20,6 +23,20 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
         students: action.payload
       };
       return newState;
+    case ActionTypes.Get_all_families_success:
+      const familiesNewState = {
+        ...state,
+        families: action.payload
+      };
+      return familiesNewState;
+    case ActionTypes.Add_new_student_success:
+      return {
+        ...state,
+        students: [
+          ...state.students,
+          action.payload
+        ]
+      };
     default:
       return state;
   }

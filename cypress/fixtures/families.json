@@ -1,0 +1,27 @@
+[
+  {
+    "family_id": 1,
+    "name": "family1",
+    "contact_address_id": null
+  },
+  {
+    "family_id": 2,
+    "name": "family2",
+    "contact_address_id": null
+  },
+  {
+    "family_id": 3,
+    "name": "family3",
+    "contact_address_id": null
+  },
+  {
+    "family_id": 4,
+    "name": "family4",
+    "contact_address_id": null
+  },
+  {
+    "family_id": 5,
+    "name": "family5",
+    "contact_address_id": null
+  }
+]

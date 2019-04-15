@@ -3,7 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { AppState } from '../../../state/app.reducers';
-import { StudentModel } from '../../../students/models/student';
+import { GetAllStudents } from '../../../students/state/students.actions';
+import { StudentModel } from '../../models/student';
 import { selectActiveStudents, selectInactiveStudents } from '../../../students/state/students.selectors';
 
 @Component({
@@ -34,12 +35,13 @@ export class StudentListComponent implements OnInit, OnChanges {
     }
 
     this.filteredStudents = this.students;
+
+    this.store.dispatch(new GetAllStudents());
   }
 
   ngOnChanges() {
     this.filteredStudents = this.students.pipe(
       map(students => students.filter(student => {
-        console.log(student);
         return student.name.firstname.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) ||
           student.name.lastname.toLocaleLowerCase().includes(this.search.toLocaleLowerCase());
       }))

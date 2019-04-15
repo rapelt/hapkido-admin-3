@@ -15,7 +15,7 @@ export class StudentListPopoverComponent implements OnInit {
   }
 
   goToDeactivatedStudents() {
-    this.router.navigateByUrl('/students/list/deactive');
+    this.router.navigateByUrl('/student/list/deactive');
     this.popoverCtrl.dismiss();
   }
 

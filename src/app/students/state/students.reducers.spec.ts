@@ -10,6 +10,7 @@ describe('Student Reducer', () => {
     const students: StudentsState = {
       students: [],
       selectedStudent: null,
+      families: []
     };
 
     const expectedStudents = {
@@ -18,6 +19,7 @@ describe('Student Reducer', () => {
         createStudent()
       ],
       selectedStudent: null,
+      families: []
     };
 
 
@@ -28,6 +30,7 @@ describe('Student Reducer', () => {
     const students: StudentsState = {
       students: [],
       selectedStudent: null,
+      families: []
     };
 
     const expectedStudents = {
@@ -36,6 +39,7 @@ describe('Student Reducer', () => {
         createStudent()
       ],
       selectedStudent: null,
+      families: []
     };
 
 

@@ -116,7 +116,7 @@ describe('AppComponent', () => {
     const menuItems = app.querySelectorAll('ion-item');
     expect(menuItems.length).toEqual(4);
     expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual('/home');
-    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/students');
+    expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual('/student');
     expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual('/settings');
 
   });

@@ -1,5 +1,5 @@
 import { createStudent, createStudentWithName } from '../../../../testing-helpers/student-test-helper';
-import { StudentModel } from '../../../students/models/student';
+import { StudentModel } from '../../models/student';
 import { AlphabeticalStudentsPipe } from './alphabeticalstudents';
 
 describe('Alphabetical Pipe', () => {

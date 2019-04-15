@@ -10,6 +10,7 @@ export const config: EnvironementModel = {
   'ionicEnvName': 'prod',
   'classAPIEndpoint': 'https://cvw4yxgmn1.execute-api.ap-southeast-2.amazonaws.com/prod/class/',
   'studentAPIEndpoint': 'https://cvw4yxgmn1.execute-api.ap-southeast-2.amazonaws.com/prod/student/',
+  'familyAPIEndpoint': 'https://cvw4yxgmn1.execute-api.ap-southeast-2.amazonaws.com/prod/family/',
   'getClassTime': 15000,
   'firebase': 'AIzaSyDtY5L-fGBPiYs4Vxd6C7OFukduCKXM_ac',
   'firebasedomain': 'hapkido-signin-prod.firebaseapp.com',

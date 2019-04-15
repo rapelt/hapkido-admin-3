@@ -1,3 +1,4 @@
+<app-message></app-message>
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
@@ -12,69 +13,81 @@
 <ion-content padding>
   <form [formGroup]="newStudentForm">
 
-
     <ion-list>
-      <ion-list-header>
-        <ion-label>General Information</ion-label>
-      </ion-list-header>
-      <ion-item>
-        <ion-label position="stacked">HB ID</ion-label>
-        <ion-input name="hbid" type="text" formControlName="hbId"></ion-input>
+      <ion-item lines="inset">
+        <ion-icon name="person" color="tertiary" slot="start"></ion-icon>
+        <ion-label position="floating">HB ID</ion-label>
+        <ion-input formControlName="hbId" name="hbid" type="text"></ion-input>
+      </ion-item>
+      <app-validation-error-message [formElement]="newStudentForm.get('hbId')" [validationMessages]="validation_messages.hbid" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+
+      <ion-item  lines="inset">
+        <ion-icon name="none" slot="start"></ion-icon>
+        <ion-label position="floating">Firstname</ion-label>
+        <ion-input formControlName="firstname" name="firstname" type="text"></ion-input>
+      </ion-item>
+      <app-validation-error-message [formElement]="newStudentForm.get('firstname')" [validationMessages]="validation_messages.firstname" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+
+      <ion-item  lines="inset">
+        <ion-icon name="none" slot="start"></ion-icon>
+        <ion-label position="floating">Lastname</ion-label>
+        <ion-input formControlName="lastname" name="lastname" type="text"></ion-input>
+      </ion-item>
+      <app-validation-error-message [formElement]="newStudentForm.get('lastname')" [validationMessages]="validation_messages.lastname" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+
+      <ion-item  lines="inset">
+        <ion-icon name="none" slot="start"></ion-icon>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" name="email" type="email"></ion-input>
+      </ion-item>
+      <app-validation-error-message [formElement]="newStudentForm.get('email')" [validationMessages]="validation_messages.email" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+
+      <ion-item  lines="inset" class="cy-joining-date">
+        <ion-icon name="calendar" color="tertiary" slot="start"></ion-icon>
+        <ion-label position="floating">Joining Date</ion-label>
+        <ion-datetime display-format="DD/MM/YYYY" formControlName="joiningDate" name="joiningDate" type="text"></ion-datetime>
+      </ion-item>
+      <app-validation-error-message [formElement]="newStudentForm.get('joiningDate')" [validationMessages]="validation_messages.joiningDate" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+
+      <ion-item  lines="inset" class="cy-grade">
+        <ion-icon name="none" slot="start"></ion-icon>
+        <ion-label position="floating">Grade</ion-label>
+        <ion-select name="grade" okText="Okay" cancelText="Cancel" formControlName="grade">
+          <ion-select-option [value]="grade" *ngFor="let grade of grades">{{grade.longName}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-validation-error-message [formElement]="newStudentForm.get('grade')" [validationMessages]="validation_messages.grade" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+
+      <ion-item  lines="inset" class="cy-class-type">
+        <ion-icon name="heart" color="tertiary" slot="start"></ion-icon>
+        <ion-label position="floating">Preferred Class</ion-label>
+        <ion-select name="preferredClass" okText="Okay" cancelText="Cancel" formControlName="preferredClass">
+          <ion-select-option [value]="classtype" *ngFor="let classtype of classTypes">{{classtype}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <app-validation-error-message [formElement]="newStudentForm.get('preferredClass')" [validationMessages]="validation_messages.preferredClass" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+
+      <ion-item  lines="inset" class="cy-family">
+        <ion-icon name="people" color="tertiary" slot="start"></ion-icon>
+        <ion-label position="floating">Link to an existing family</ion-label>
+        <ion-select name="family" okText="Okay" cancelText="Cancel" formControlName="family">
+          <ion-select-option [value]="family" *ngFor="let family of families | async | alphabeticalFamily">{{family.name}}</ion-select-option>
+        </ion-select>
       </ion-item>
 
-      <ion-item>
-        <ion-label position="stacked">Firstname</ion-label>
-        <ion-input name="firstname" type="text" formControlName="firstname"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Lastname</ion-label>
-        <ion-input name="lastname" type="text" formControlName="lastname"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Email</ion-label>
-        <ion-input name="email" type="email" formControlName="email"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">DOB</ion-label>
-        <ion-input name="email" type="email" formControlName="dob"></ion-input>
-      </ion-item>
-    </ion-list>
-
-    <ion-list>
-      <ion-list-header>
-        <ion-label>Hapkido Information</ion-label>
-      </ion-list-header>
-      <ion-item>
-        <ion-label position="stacked">Joining Date</ion-label>
-        <ion-input name="joiningDate" type="text" formControlName="joiningDate"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Grade</ion-label>
-        <ion-input name="grade" type="text" formControlName="grade"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Preferred Class</ion-label>
-        <ion-input name="preferredClass" type="text" formControlName="preferredClass"></ion-input>
-      </ion-item>
-    </ion-list>
-
-    <ion-list>
-      <ion-list-header>
-        <ion-label>Family Information</ion-label>
-      </ion-list-header>
-      <ion-item>
-        <ion-label position="stacked">Link to an existing family</ion-label>
-        <ion-input name="family" type="text" formControlName="family"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Payment Type</ion-label>
-        <ion-input name="paymentType" type="text" formControlName="paymentType"></ion-input>
+      <ion-item  lines="inset" class="cy-payment-type">
+        <ion-icon name="card" color="tertiary" slot="start"></ion-icon>
+        <ion-label position="floating">Payment Type</ion-label>
+        <ion-select name="paymentType" okText="Okay" cancelText="Cancel" formControlName="paymentType">
+          <ion-select-option [value]="paymentType" *ngFor="let paymentType of paymentTypes">{{paymentType}}</ion-select-option>
+        </ion-select>
       </ion-item>
     </ion-list>
 
@@ -85,8 +98,9 @@
 <ion-footer>
   <ion-toolbar>
     <div class="half-button-size">
-      <ion-button expand="full" color="secondary" (click)="cancel()">Cancel</ion-button>
-      <ion-button class="cy-add-student-submit" type="submit" color="tertiary" expand="full" (click)="save()">Save</ion-button>
+      <ion-button (click)="cancel()" color="secondary" expand="full">Cancel</ion-button>
+      <ion-button (click)="save()" class="cy-add-student-submit" color="tertiary" expand="full" type="submit">Save
+      </ion-button>
     </div>
   </ion-toolbar>
 </ion-footer>

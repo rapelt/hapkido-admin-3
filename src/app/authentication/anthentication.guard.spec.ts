@@ -51,7 +51,7 @@ describe('AuthGuardService', () => {
     service = agService;
   }));
 
-  it('shout redirect user to sign in screen',  ((done) => {
+  it('should redirect user to sign in screen',  ((done) => {
     const navigateSpy = spyOn(router, 'navigateByUrl');
 
     const route = {
@@ -60,8 +60,6 @@ describe('AuthGuardService', () => {
       };
 
     service.canLoad(route, []).subscribe((something) => {
-
-      console.log(something);
       expect(something).toEqual(false);
       expect(navigateSpy).toHaveBeenCalledWith('/authentication/sign-in');
       done();

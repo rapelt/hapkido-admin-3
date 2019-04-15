@@ -41,7 +41,7 @@ import { StudentsModule } from './students/students.module';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    config.ionicEnvName === 'prod' || config.ionicEnvName === 'staging'
+    config.ionicEnvName !== 'test' && config.ionicEnvName !== 'local'
       ? AuthenticationServices
       : { provide: AuthenticationServices, useClass: AuthSeviceMock },
     {

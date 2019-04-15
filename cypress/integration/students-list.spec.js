@@ -1,11 +1,11 @@
 /// <reference types="cypress" />
 
 
-describe('Students', function() {
+describe('Students List', function() {
     it('should allow a user to navigate to students list', function() {
         window.localStorage.setItem('login', true);
-        cy.visit('/students');
-        cy.url().should('include', '/students/list');
+        cy.visit('/student');
+        cy.url().should('include', '/student/list');
     });
 
     it('should show a list of active students', function() {
@@ -20,9 +20,8 @@ describe('Students', function() {
         });
 
         window.localStorage.setItem('login', true);
-        cy.visit('/students');
+        cy.visit('/student');
         cy.get('.cy-student-list > .cy-student-list-item').then((list) => {
-            console.log(list[0].textContent);
             expect(list.length).to.equal(5);
             expect(list[0].textContent).to.contain('Firstname0 Lastname0');
             expect(list[0].textContent).to.contain('Wh');
@@ -54,7 +53,7 @@ describe('Students', function() {
         });
 
         window.localStorage.setItem('login', true);
-        cy.visit('/students/list/deactive');
+        cy.visit('/student/list/deactive');
         cy.get('.cy-student-list > .cy-student-list-item').then((list) => {
             console.log(list[0].textContent);
             expect(list.length).to.equal(1);
@@ -76,7 +75,7 @@ describe('Students', function() {
         });
 
         window.localStorage.setItem('login', true);
-        cy.visit('/students/list/active');
+        cy.visit('/student/list/active');
 
         cy.get('.searchbar-input').type('lastname3');
 

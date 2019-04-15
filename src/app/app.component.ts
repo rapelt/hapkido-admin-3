@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
     },
     {
       title: 'Students',
-      url: '/students',
+      url: '/student',
       icon: 'people'
     },
     {

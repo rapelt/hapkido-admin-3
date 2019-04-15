@@ -37,7 +37,8 @@ export class MessageComponent implements OnInit {
       message: message,
       duration: 3000,
       position: 'top',
-      color: 'danger'
+      color: 'danger',
+      cssClass: 'cy-error'
     });
     toast.present();
   }
@@ -47,7 +48,9 @@ export class MessageComponent implements OnInit {
       message: message,
       duration: 3000,
       position: 'top',
-      color: 'warning'
+      color: 'warning',
+      cssClass: 'cy-info'
+
     });
     toast.present();
   }
@@ -57,7 +60,8 @@ export class MessageComponent implements OnInit {
       message: message,
       duration: 3000,
       position: 'top',
-      color: 'success'
+      color: 'success',
+      cssClass: 'cy-success'
     });
     toast.present();
   }

@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { StudentModel } from '../models/student';
+import { StudentModel } from '../../common/models/student';
 import { StudentsState } from './students.reducers';
 import * as fromStudents from './students.reducers';
 
@@ -22,5 +22,12 @@ export const selectInactiveStudents = createSelector(
     return studentsState.students.filter((student: StudentModel) => {
       return !student.isActive;
     });
+  }
+);
+
+export const selectFamilies = createSelector(
+  getStudentsState,
+  studentsState => {
+    return studentsState.families;
   }
 );

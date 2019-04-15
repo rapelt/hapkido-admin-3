@@ -30,7 +30,7 @@ describe('Forgot password', function() {
         cy.get('input[name=fp-password2]').type('test02');
         cy.get('.cy-forgot-password-submit').click();
         cy.wait(500);
-        cy.get('#ion-overlay-1').then((el) => {
+        cy.get('.cy-error').then((el) => {
             expect(el).to.be.visible;
         });
         cy.get('input[name=fp-password2]').clear();
@@ -53,8 +53,7 @@ describe('Forgot password', function() {
         cy.get('input[name=fp-password2]').type('test01');
         cy.get('.cy-forgot-password-submit').click();
         cy.wait(500);
-        cy.get('#ion-overlay-1').then((el) => {
-
+        cy.get('.cy-error').then((el) => {
             expect(el).to.be.visible;
             expect(el['0'].shadowRoot.innerHTML).to.contain('Invalid verification code');
         });
@@ -68,7 +67,7 @@ describe('Forgot password', function() {
         cy.get('input[name=fp-username]').type('not_a_user');
         cy.get('.cy-fp-username-submit').click();
         cy.wait(500);
-        cy.get('#ion-overlay-1').then((el) => {
+        cy.get('.cy-error').then((el) => {
             expect(el).to.be.visible;
             expect(el['0'].shadowRoot.innerHTML).to.contain('Not a user');
         });

@@ -1,5 +1,7 @@
+import { GradeModel } from './grade.model';
+
 export class GradeHelper {
-  private grades = [
+  private grades: Array<GradeModel> = [
     {
       id: 0,
       shortName: 'Wh',

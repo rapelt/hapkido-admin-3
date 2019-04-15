@@ -33,7 +33,6 @@ export class StudentListPage implements OnInit {
   }
 
   searchInput(event) {
-    console.log(event);
     this.searchvalue = event.detail.value;
   }
 
@@ -42,8 +41,7 @@ export class StudentListPage implements OnInit {
   }
 
   addStudent() {
-    console.log('add student');
-    this.router.navigate(['/add-student']);
+    this.router.navigate(['student/add']);
   }
 
 }

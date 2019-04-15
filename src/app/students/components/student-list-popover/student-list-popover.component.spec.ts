@@ -16,7 +16,7 @@ describe('StudentListPopoverComponent', () => {
       declarations: [ StudentListPopoverComponent, MockComponent ],
       imports: [
         IonicModule,
-        RouterTestingModule.withRoutes([{ path: 'students/list/:active', component: MockComponent }])
+        RouterTestingModule.withRoutes([{ path: 'student/list/:active', component: MockComponent }])
       ],
       providers: [
         {provide: PopoverController, useValue: new MockPopOverController()},
@@ -54,7 +54,7 @@ describe('StudentListPopoverComponent', () => {
     tick(1000);
 
     expect(mockPopoverController.getLast().visible).toBeFalsy();
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/students/list/deactive');
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/student/list/deactive');
 
   }));
 });
