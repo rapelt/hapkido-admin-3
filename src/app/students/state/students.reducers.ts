@@ -37,6 +37,20 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
           action.payload
         ]
       };
+    case ActionTypes.Set_selected_student:
+
+      const student = state.students.find((s) => {
+        return s.hbId === action.payload ? true : false;
+      });
+      return {
+        ...state,
+        selectedStudent: student
+      };
+    case ActionTypes.Reset_selected_student:
+      return {
+        ...state,
+        selectedStudent: null
+      };
     default:
       return state;
   }

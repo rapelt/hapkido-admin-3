@@ -71,15 +71,15 @@ describe('StudentListPage Active', () => {
     expect(title.textContent).toContain('Active Students');
   }));
 
-  it('should create deactive list', async(() => {
-    activatedRoute.setParamMap({ active: 'deactive' });
+  it('should create inactive list', async(() => {
+    activatedRoute.setParamMap({ active: 'inactive' });
     expect(component).toBeTruthy();
-    expect(component.listType).toEqual('deactive');
+    expect(component.listType).toEqual('inactive');
 
     fixture.detectChanges();
     const app = fixture.nativeElement;
     const title = app.querySelector('ion-title');
-    expect(title.textContent).toContain('Deactive Students');
+    expect(title.textContent).toContain('Inactive Students');
   }));
 
   it('should show popover', fakeAsync(() => {

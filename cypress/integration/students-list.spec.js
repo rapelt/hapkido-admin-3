@@ -53,7 +53,7 @@ describe('Students List', function() {
         });
 
         window.localStorage.setItem('login', true);
-        cy.visit('/student/list/deactive');
+        cy.visit('/student/list/inactive');
         cy.get('.cy-student-list > .cy-student-list-item').then((list) => {
             console.log(list[0].textContent);
             expect(list.length).to.equal(1);

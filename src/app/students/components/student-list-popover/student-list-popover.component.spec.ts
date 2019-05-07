@@ -54,7 +54,7 @@ describe('StudentListPopoverComponent', () => {
     tick(1000);
 
     expect(mockPopoverController.getLast().visible).toBeFalsy();
-    expect(router.navigateByUrl).toHaveBeenCalledWith('/student/list/deactive');
+    expect(router.navigateByUrl).toHaveBeenCalledWith('/student/list/inactive');
 
   }));
 });

@@ -2,13 +2,13 @@
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button *ngIf="listType === 'active'" class="cy-menu-button"></ion-menu-button>
-      <ion-back-button *ngIf="listType === 'deactive'"  [defaultHref]="'/student/list/active'" class="cy-back-button"></ion-back-button>
+      <ion-back-button *ngIf="listType === 'inactive'"  [defaultHref]="'/student/list/active'" class="cy-back-button"></ion-back-button>
     </ion-buttons>
     <ion-title>
       {{listType | capitialise}} Students
     </ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="showMore($event)" *ngIf="listType !== 'deactive'">
+      <ion-button (click)="showMore($event)" *ngIf="listType !== 'inactive'">
         <ion-icon slot="icon-only" name="more" ></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -17,10 +17,10 @@
 
 <ion-content padding>
   <ion-searchbar class="cy-student-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
-  <app-student-list [listType]="listType" [search]="searchvalue"></app-student-list>
+  <app-student-list [listType]="listType" [search]="searchvalue" (studentClickEvent)="studentClicked($event)"></app-student-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button class="cy-add-student-btn" color="tertiary" (click)="addStudent()">
-      <ion-icon name="add"></ion-icon>
+      <ion-icon name="person-add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

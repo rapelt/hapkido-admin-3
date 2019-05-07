@@ -7,8 +7,9 @@ import { Store } from '@ngrx/store';
 import { AuthenticationStates } from './authentication/authentication-states';
 import { SignOut } from './authentication/state/authentication.actions';
 import { selectAuthenticationState } from './authentication/state/authentication.selectors';
+import { GetAllClasses } from './classes/state/classes.actions';
 import { AppState } from './state/app.reducers';
-import { GetAllStudents } from './students/state/students.actions';
+import { GetAllFamilies, GetAllStudents } from './students/state/students.actions';
 
 @Component({
   selector: 'app-root',
@@ -50,6 +51,8 @@ export class AppComponent implements OnInit {
       this.shouldShowSignOut = state === AuthenticationStates.LOGGEDIN;
       if (this.shouldShowSignOut) {
         this.store.dispatch(new GetAllStudents);
+        this.store.dispatch(new GetAllFamilies);
+        this.store.dispatch(new GetAllClasses);
       }
 
     });

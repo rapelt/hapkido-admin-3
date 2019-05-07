@@ -1,6 +1,5 @@
 export interface FamilyModel {
-  id: number;
+  family_id: number;
   name: string;
-  contact_id?: number;
-
+  contact_address_id?: number;
 }

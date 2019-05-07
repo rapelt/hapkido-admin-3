@@ -1,3 +1,11 @@
-<ion-badge [ngClass]="gradeHelper.getCssClass(grade)">
+<ion-badge [ngClass]="gradeHelper.getCssClass(grade)" *ngIf="nameLength === 'short'">
   <span class="ut-short-name">{{gradeHelper.getShortDisplayName(grade)}}</span>
 </ion-badge>
+
+<ion-chip [ngClass]="gradeHelper.getCssClass(grade)" *ngIf="nameLength === 'long'">
+  <span class="ut-short-name">{{gradeHelper.getLongDisplayName(grade)}}</span>
+</ion-chip>
+
+<ion-text [ngClass]="'text-' + gradeHelper.getCssClass(grade)" *ngIf="nameLength === 'text'">
+  <span class="ut-grade-text">{{gradeHelper.getLongDisplayName(grade)}}</span>
+</ion-text>

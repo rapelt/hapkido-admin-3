@@ -81,8 +81,8 @@ describe('Add Students', function() {
             const now = moment();
             const date = moment(xhr.request.body.gradingDates[0].date);
 
-            assert.equal(xhr.request.body.name.firstname, firstname, 'firstname strings are not equal');
-            assert.equal(xhr.request.body.name.lastname, lastname, 'lastname strings are not equal');
+            assert.equal(xhr.request.body.name.firstname, 'Firstname', 'firstname strings are not equal');
+            assert.equal(xhr.request.body.name.lastname, 'Lastname', 'lastname strings are not equal');
             assert.equal(xhr.request.body.email, email, 'email strings are not equal');
             assert.equal(xhr.request.body.hbId, hbid, 'hbid strings are not equal');
 

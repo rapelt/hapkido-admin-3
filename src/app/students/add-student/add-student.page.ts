@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { GradeHelper } from '../../common/helper/grade/grade';
 import { GradeModel } from '../../common/helper/grade/grade.model';
 import { StudentModel } from '../../common/models/student';
+import { CapitialisePipe } from '../../common/pipes/capitialise.pipe';
 import { emptyValidator } from '../../common/validators/empty.validator';
 import { MessagesService } from '../../messages/messages.service';
 import { AppState } from '../../state/app.reducers';
@@ -69,7 +70,8 @@ export class AddStudentPage implements OnInit {
     private gradeHelper: GradeHelper,
     private store: Store<AppState>,
     public navController: NavController,
-    private messages: MessagesService
+    private messages: MessagesService,
+    private capitalise: CapitialisePipe
   ) { }
 
   ngOnInit() {
@@ -103,11 +105,11 @@ export class AddStudentPage implements OnInit {
       const saveValues = this.newStudentForm.value;
       const student: StudentModel = {
         name: {
-          firstname: saveValues.firstname,
-          lastname: saveValues.lastname
+          firstname: this.capitalise.transform(saveValues.firstname.trim()), // TODO unit test capitalisation
+          lastname: this.capitalise.transform(saveValues.lastname.trim()) // TODO unit test capitalisation
         },
-        hbId: saveValues.hbId,
-        email: saveValues.email,
+        hbId: saveValues.hbId.trim(),
+        email: saveValues.email.trim(),
         grade: saveValues.grade.id,
         isAdmin: false,
         isActive: true,

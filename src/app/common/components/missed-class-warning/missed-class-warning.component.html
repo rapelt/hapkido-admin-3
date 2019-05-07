@@ -1,0 +1,2 @@
+<ion-icon *ngIf="shouldShowWarning && !showDays" color="danger" name="warning"></ion-icon>
+<ion-badge slot="end" color="danger" *ngIf="shouldShowWarning && showDays">{{timeSinceLastClass}} days</ion-badge>

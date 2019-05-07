@@ -9,6 +9,7 @@ import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AuthenticationGuard } from '../../authentication/authentication.guard';
 import { CommonComponentsModule } from '../../common/common-components.module';
+import { CapitialisePipe } from '../../common/pipes/capitialise.pipe';
 import { MessagesModule } from '../../messages/messages.module';
 import { MessagesService } from '../../messages/messages.service';
 
@@ -41,15 +42,16 @@ describe('AddStudentPage', () => {
         FormsModule,
         ReactiveFormsModule,
         MessagesModule,
-        CommonComponentsModule,
         BrowserModule,
+        CommonComponentsModule,
         IonicModule.forRoot({
           _testing: true
         }),
         RouterTestingModule.withRoutes([])
       ],
       providers: [
-        provideMockStore({ initialState })
+        provideMockStore({ initialState }),
+        CapitialisePipe
       ]
     })
     .compileComponents();

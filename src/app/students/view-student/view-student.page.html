@@ -1,9 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>view-student</ion-title>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/student/list/active'" class="cy-back-button"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-
+<ion-content>
+  <div class="profile">
+    <ion-avatar>
+      <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg">
+    </ion-avatar>
+    <ion-text color="secondary">
+      <h1>{{(student | async)?.name.firstname | capitialise}} {{(student | async)?.name.lastname | capitialise}}</h1>
+    </ion-text>
+    <app-grade-badge [grade]="(student | async).grade" [nameLength]="'long'"></app-grade-badge>
+  </div>
+  <app-view-student-general *ngIf="segment === 'general'" [studentId]="studentId"> </app-view-student-general>
+  <app-view-student-dates *ngIf="segment === 'dates'" [studentId]="studentId"></app-view-student-dates>
+  <app-view-student-payments *ngIf="segment === 'payments'"></app-view-student-payments>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-segment (ionChange)="segmentChanged($event)" color="secondary">
+      <ion-segment-button value="general" checked>
+        <ion-icon name="person"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="payments">
+        <ion-icon name="card"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="dates">
+        <ion-icon name="calendar"></ion-icon>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+</ion-footer>

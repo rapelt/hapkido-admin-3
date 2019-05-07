@@ -1,4 +1,11 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output
+} from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
@@ -6,16 +13,21 @@ import { AppState } from '../../../state/app.reducers';
 import { GetAllStudents } from '../../../students/state/students.actions';
 import { StudentModel } from '../../models/student';
 import { selectActiveStudents, selectInactiveStudents } from '../../../students/state/students.selectors';
+import {
+  selectSelectedStudentsLastClass
+} from '../../../students/state/students.selectors';
 
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
   styleUrls: ['./student-list.component.scss']
 })
-export class StudentListComponent implements OnInit, OnChanges {
+export class StudentListComponent implements OnChanges, OnInit {
 
   students: Observable<Array<StudentModel>> = of([]);
   filteredStudents: Observable<Array<StudentModel>> = of([]);
+
+  selectSelectedStudentsLastClass = selectSelectedStudentsLastClass;
 
   @Input()
   listType: string;
@@ -23,11 +35,20 @@ export class StudentListComponent implements OnInit, OnChanges {
   @Input()
   search = '';
 
+  @Input()
+  shouldShowWarning = false;
+
+  @Output()
+  studentClickEvent: EventEmitter<string> = new EventEmitter<string>();
+
   constructor(
     public store: Store<AppState>
-  ) { }
+  ) {
+  }
 
   ngOnInit() {
+    this.store.dispatch(new GetAllStudents());
+
     if (this.listType === 'active') {
       this.students = this.store.select(selectActiveStudents);
     } else {
@@ -35,8 +56,6 @@ export class StudentListComponent implements OnInit, OnChanges {
     }
 
     this.filteredStudents = this.students;
-
-    this.store.dispatch(new GetAllStudents());
   }
 
   ngOnChanges() {
@@ -48,8 +67,8 @@ export class StudentListComponent implements OnInit, OnChanges {
     );
   }
 
-  selectStudent(student, i) {
-
+  selectStudent(student: StudentModel) {
+    this.studentClickEvent.emit(student.hbId);
   }
 
 }

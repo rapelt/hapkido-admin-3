@@ -1,0 +1,60 @@
+<div class="general-profile">
+  <ion-item>
+    <ion-label text-wrap>
+      <ion-text class="ut-email-label" color="primary">
+        <h3>Email</h3>
+      </ion-text>
+      <ion-text class="ut-email">
+        {{(student | async)?.email}}
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label text-wrap>
+      <ion-text class="ut-preferred-class-label" color="primary">
+        <h3>Preferred class</h3>
+      </ion-text>
+      <ion-text class="ut-preferred-class">
+        {{(student | async)?.preferredClass}}
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
+  <ion-item>
+    <ion-label text-wrap>
+      <ion-text class="ut-is-active-label" color="primary">
+        <h3>Is active</h3>
+      </ion-text>
+      <ion-text class="ut-is-active">
+        {{(student | async)?.isActive === true? 'Active' : 'Inactive'}}
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="(studentLastClass | async)?.date">
+    <ion-label text-wrap>
+      <ion-text class="ut-is-active-label" color="primary">
+        <h3>Last class</h3>
+      </ion-text>
+      <ion-text class="ut-is-active">
+        {{(studentLastClass | async)?.date | date: 'dd MMM yyyy'}}
+      </ion-text>
+    </ion-label>
+    <app-missed-class-warning [student]="student | async" [showDays]="true"></app-missed-class-warning>
+  </ion-item>
+
+  <ion-item *ngIf="(studentFamily | async)?.length > 0">
+    <ion-label text-wrap>
+      <ion-text class="ut-family-label" color="primary">
+        <h3>Family Members</h3>
+      </ion-text>
+      <ion-text class="ut-family">
+        <div *ngFor="let familyMember of studentFamily | async; let i = index;">
+          {{familyMember.name.firstname | capitialise}} {{familyMember.name.lastname | capitialise}}
+        </div>
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
+</div>

@@ -10,6 +10,10 @@ export enum ActionTypes {
   Add_new_student = '[Students] Add new Student',
   Add_new_student_success = '[Students] Add new student Success',
 
+  Set_selected_student = '[Students] Set selected student',
+  Reset_selected_student = '[Students] Reset selected student',
+
+
 }
 
 export class GetAllStudents implements Action {
@@ -44,10 +48,22 @@ export class AddNewStudentSuccess implements Action {
   constructor(public payload: StudentModel) { }
 }
 
+export class SetSelectedStudent implements Action {
+  readonly type = ActionTypes.Set_selected_student;
+
+  constructor(public payload: string) { }
+}
+
+export class ResetSelectedStudent implements Action {
+  readonly type = ActionTypes.Reset_selected_student;
+}
+
 export type StudentsActions =
   GetAllStudents |
   GetAllStudentsSuccess |
   GetAllFamilies |
   GetAllFamiliesSuccess |
   AddNewStudent |
-  AddNewStudentSuccess;
+  AddNewStudentSuccess |
+  SetSelectedStudent |
+  ResetSelectedStudent;

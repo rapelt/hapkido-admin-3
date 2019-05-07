@@ -11,6 +11,9 @@ export class GradeBadgeComponent implements OnInit {
   @Input()
   grade: number;
 
+  @Input()
+  nameLength: 'short' | 'long' | 'text' = 'short';
+
   constructor(public gradeHelper: GradeHelper) { }
 
   ngOnInit() {

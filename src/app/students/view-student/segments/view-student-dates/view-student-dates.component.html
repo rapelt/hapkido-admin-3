@@ -1,0 +1,26 @@
+<div class="profile-dates">
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Gradings</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let grade of gradingDates | async">
+      <ion-label>
+        <app-grade-badge [grade]="grade.grade" [nameLength]="'text'"></app-grade-badge>
+      </ion-label>
+      <ion-text>{{grade.date | date:'dd MMM yyyy'}}</ion-text>
+    </ion-item>
+  </ion-list>
+
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Classes</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let class of classDates | async | orderDates: 'descending'">
+      <ion-label>
+        {{class.date | date: 'dd MMM yyyy'}}
+      </ion-label>
+      <ion-text>{{class.classType}}</ion-text>
+    </ion-item>
+  </ion-list>
+
+</div>

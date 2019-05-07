@@ -4,14 +4,14 @@ import { AlphabeticalStudentsPipe } from './alphabeticalstudents';
 
 describe('Alphabetical Pipe', () => {
   const studentsArray: Array<StudentModel> = [
-    createStudentWithName('b', 'b'),
+    createStudentWithName('B', 'B'),
     createStudentWithName('c', 'c'),
     createStudentWithName('a', 'a')
   ];
 
   const expectedStudentsArray: Array<StudentModel> = [
     createStudentWithName('a', 'a'),
-    createStudentWithName('b', 'b'),
+    createStudentWithName('B', 'B'),
     createStudentWithName('c', 'c')
   ];
 

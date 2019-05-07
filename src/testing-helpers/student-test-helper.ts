@@ -1,18 +1,20 @@
 import { ClassTypes } from '../app/common/models/class-types';
 import { StudentModel } from '../app/common/models/student';
+import * as moment from 'moment';
 
 export function createStudent(): StudentModel {
   return {
     name: {
-      firstname: '',
-      lastname: ''
+      firstname: 'Rebekah',
+      lastname: 'Higgins'
     },
-    hbId: '',
-    email: '',
+    hbId: 'hb088',
+    email: 'rebekah@gmail.com',
     grade: 1,
     isAdmin: false,
     isActive: true,
-    preferredClass: ClassTypes.Adults
+    preferredClass: ClassTypes.Adults,
+    gradingDates: [{ grade: 1, date: moment('01/02/19')}]
   };
 }
 
@@ -27,7 +29,8 @@ export function createStudentWithName(firstname, lastname): StudentModel {
     grade: 1,
     isAdmin: false,
     isActive: true,
-    preferredClass: ClassTypes.Adults
+    preferredClass: ClassTypes.Adults,
+    gradingDates: [{ grade: 1, date: moment('01/02/19')}]
   };
 }
 
@@ -39,7 +42,10 @@ export function createStudentAll(
   grade = 0,
   isAdmin = false,
   isActive = true,
-  preferredClass = ClassTypes.Adults): StudentModel {
+  preferredClass = ClassTypes.Adults,
+  gradingDates = [{ grade: 1, date: moment('01/02/19')}],
+  familyId = 1
+): StudentModel {
   return {
     name: {
       firstname: firstname,
@@ -50,7 +56,9 @@ export function createStudentAll(
     grade: grade,
     isAdmin: isAdmin,
     isActive: isActive,
-    preferredClass: preferredClass
+    preferredClass: preferredClass,
+    gradingDates: gradingDates,
+    familyId: familyId
   };
 }
 

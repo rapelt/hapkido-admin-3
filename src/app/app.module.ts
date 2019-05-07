@@ -16,6 +16,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthInterceptor } from './authentication/auth-interceptor/auth-interceptor';
 import { AuthenticationEffects } from './authentication/state/authentication.effects';
 import { AuthSeviceMock } from './authentication/state/authentication.service.mock';
+import { ClassesEffects } from './classes/state/classes.effects';
 import { MessagesModule } from './messages/messages.module';
 import { reducers } from './state/app.reducers';
 import { config } from '../environments/environment';
@@ -31,7 +32,7 @@ import { StudentsModule } from './students/students.module';
     IonicModule.forRoot(),
     AppRoutingModule,
     StoreModule.forRoot(reducers),
-    EffectsModule.forRoot([AuthenticationEffects, StudentsEffects]),
+    EffectsModule.forRoot([AuthenticationEffects, StudentsEffects, ClassesEffects]),
     StoreDevtoolsModule.instrument(),
     MessagesModule,
     StudentsModule,

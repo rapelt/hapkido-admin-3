@@ -3,17 +3,17 @@ import { AlphabeticalFamilyPipe } from './alphabetical-family.pipe';
 
 describe('Alphabetical Family Pipe', () => {
   const familyArray: Array<FamilyModel> = [
-    { id: 1, name: 'a'},
-    { id: 3, name: 'c'},
-    { id: 4, name: 'd'},
-    { id: 2, name: 'b'}
+    { family_id: 1, name: 'a'},
+    { family_id: 3, name: 'c'},
+    { family_id: 4, name: 'd'},
+    { family_id: 2, name: 'b'}
   ];
 
   const expectedFamilyArray: Array<FamilyModel> = [
-    { id: 1, name: 'a'},
-    { id: 2, name: 'b'},
-    { id: 3, name: 'c'},
-    { id: 4, name: 'd'}
+    { family_id: 1, name: 'a'},
+    { family_id: 2, name: 'b'},
+    { family_id: 3, name: 'c'},
+    { family_id: 4, name: 'd'}
   ];
 
 

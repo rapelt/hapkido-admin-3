@@ -36,7 +36,8 @@ const routes: Routes = [
     path: '',
     redirectTo: 'authentication',
     pathMatch: 'full'
-  }
+  },
+  { path: 'classes', loadChildren: './classes/classes.module#ClassesPageModule' }
 ];
 
 @NgModule({

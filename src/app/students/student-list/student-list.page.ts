@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../state/app.reducers';
 import { StudentListPopoverComponent } from '../components/student-list-popover/student-list-popover.component';
+import { SetSelectedStudent } from '../state/students.actions';
 
 @Component({
   selector: 'app-student-list-page',
@@ -15,6 +18,7 @@ export class StudentListPage implements OnInit {
   constructor(
     public popoverController: PopoverController,
     public router: Router,
+    public store: Store<AppState>,
     public activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
@@ -42,6 +46,10 @@ export class StudentListPage implements OnInit {
 
   addStudent() {
     this.router.navigate(['student/add']);
+  }
+
+  studentClicked(studentId: string) {
+    this.router.navigate(['student/view/' + studentId]);
   }
 
 }

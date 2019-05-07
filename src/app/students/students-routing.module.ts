@@ -14,5 +14,5 @@ export const routes: Routes = [
     loadChildren: './student-list/student-list.module#StudentListPageModule',
   },
   { path: 'add', loadChildren: './add-student/add-student.module#AddStudentPageModule' },
-  { path: 'view', loadChildren: './view-student/view-student.module#ViewStudentPageModule' },
+  { path: 'view/:studentId', loadChildren: './view-student/view-student.module#ViewStudentPageModule' },
 ];

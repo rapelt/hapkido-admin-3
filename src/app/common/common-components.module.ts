@@ -8,6 +8,8 @@ import { AlphabeticalStudentsPipe } from './pipes/alphabeticalstudents/alphabeti
 import { CapitialisePipe } from './pipes/capitialise.pipe';
 import { GradeBadgeComponent } from './components/grade-badge/grade-badge.component';
 import { ValidationErrorMessageComponent } from './components/validation-error-message/validation-error-message.component';
+import { OrderDatesPipe } from './pipes/order-dates.pipe';
+import { MissedClassWarningComponent } from './components/missed-class-warning/missed-class-warning.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { ValidationErrorMessageComponent } from './components/validation-error-m
     AlphabeticalStudentsPipe,
     GradeBadgeComponent,
     AlphabeticalFamilyPipe,
-    ValidationErrorMessageComponent],
+    ValidationErrorMessageComponent,
+    OrderDatesPipe,
+    MissedClassWarningComponent],
   imports: [
     CommonModule,
     IonicModule.forRoot()
@@ -31,7 +35,9 @@ import { ValidationErrorMessageComponent } from './components/validation-error-m
     AlphabeticalStudentsPipe,
     AlphabeticalFamilyPipe,
     GradeBadgeComponent,
-    ValidationErrorMessageComponent
+    ValidationErrorMessageComponent,
+    OrderDatesPipe,
+    MissedClassWarningComponent
   ]
 })
 export class CommonComponentsModule { }
