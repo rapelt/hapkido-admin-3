@@ -19,7 +19,15 @@ import {
 
 describe('Student Selectors', () => {
   const activeStudent = createStudentAll();
-  const inactiveStudent = createStudentAll(null, null, 'hb002', null, null, null, false)
+  const inactiveStudent =
+    createStudentAll(
+      null,
+      null,
+      'hb002',
+      null,
+      null,
+      null,
+      false);
   const family = createFamilyWithAll();
 
   it('selectActiveStudents should return a list of all the active students', () => {
@@ -192,13 +200,12 @@ describe('Student Selectors', () => {
         null,
         familyId);
 
-
     const studentState: StudentsState = {
       students: [ studentWithFamilyMember, familyMember, notAFamilyMember, anotherFamilyMember ],
       selectedStudent: null,
       families: [familyToSelect]
     };
-    
+
     const state: AppState = {
       students: studentState,
       classes: null,
