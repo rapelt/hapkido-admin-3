@@ -38,6 +38,10 @@ export const selectSelectedStudent = (id: string) => createSelector(
   getStudentsState,
   studentsState => {
 
+      if (studentsState.students.length === 0) {
+          return null;
+      }
+
     return studentsState.students.find((s) => {
       return s.hbId === id;
     });

@@ -10,8 +10,17 @@ export enum ActionTypes {
   Add_new_student = '[Students] Add new Student',
   Add_new_student_success = '[Students] Add new student Success',
 
+  Edit_student = '[Students] Edit Student',
+  Edit_student_success = '[Students] Edit Student Success',
+
   Set_selected_student = '[Students] Set selected student',
   Reset_selected_student = '[Students] Reset selected student',
+
+  Activate_student = '[Students] Activate Student',
+  Activate_student_success = '[Students] Activate Student Success',
+
+  Deactivate_student = '[Students] Deactivate Student',
+  Deactivate_student_success = '[Students] Deactivate Student Success',
 
 
 }
@@ -48,6 +57,18 @@ export class AddNewStudentSuccess implements Action {
   constructor(public payload: StudentModel) { }
 }
 
+export class EditStudent implements Action {
+  readonly type = ActionTypes.Edit_student;
+
+  constructor(public payload: StudentModel) { }
+}
+
+export class EditStudentSuccess implements Action {
+  readonly type = ActionTypes.Edit_student_success;
+
+  constructor(public payload: StudentModel) { }
+}
+
 export class SetSelectedStudent implements Action {
   readonly type = ActionTypes.Set_selected_student;
 
@@ -58,6 +79,32 @@ export class ResetSelectedStudent implements Action {
   readonly type = ActionTypes.Reset_selected_student;
 }
 
+
+export class ActivateStudent implements Action {
+  readonly type = ActionTypes.Activate_student;
+
+  constructor(public payload: string) { }
+}
+
+
+export class ActivateStudentSuccess implements Action {
+  readonly type = ActionTypes.Activate_student_success;
+
+  constructor(public payload: string) { }
+}
+
+export class DeactivateStudent implements Action {
+  readonly type = ActionTypes.Deactivate_student;
+
+  constructor(public payload: string) { }
+}
+
+export class DeactivateStudentSuccess implements Action {
+  readonly type = ActionTypes.Deactivate_student_success;
+
+  constructor(public payload: string) { }
+}
+
 export type StudentsActions =
   GetAllStudents |
   GetAllStudentsSuccess |
@@ -66,4 +113,10 @@ export type StudentsActions =
   AddNewStudent |
   AddNewStudentSuccess |
   SetSelectedStudent |
+  EditStudent |
+  EditStudentSuccess |
+  DeactivateStudent |
+  DeactivateStudentSuccess |
+  ActivateStudent |
+  ActivateStudentSuccess |
   ResetSelectedStudent;

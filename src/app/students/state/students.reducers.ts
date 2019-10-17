@@ -1,5 +1,6 @@
 import { FamilyModel } from '../../common/models/family.model';
 import { ActionTypes, StudentsActions } from './students.actions';
+import {StudentModel} from '../../common/models/student';
 
 export const STUDENTS_FEATURE_NAME = 'students';
 
@@ -37,6 +38,22 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
           action.payload
         ]
       };
+    case ActionTypes.Edit_student_success:
+
+      const editedStudent = {
+        ...action.payload
+      };
+      const editStudentIndex = state.students.findIndex((s) => {
+        return s.hbId === action.payload.hbId ? true : false;
+      });
+
+      const editStudentsList = [...state.students];
+      editStudentsList[editStudentIndex] = editedStudent;
+
+      return {
+        ...state,
+        students: editStudentsList
+      };
     case ActionTypes.Set_selected_student:
 
       const student = state.students.find((s) => {
@@ -50,6 +67,39 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
       return {
         ...state,
         selectedStudent: null
+      };
+    case ActionTypes.Activate_student_success:
+      const activatesStudentId = action.payload;
+      const activatedStudentIndex = state.students.findIndex((s) => {
+        return s.hbId.toLowerCase() === activatesStudentId.toLowerCase();
+      });
+
+      const activatedStudentsList = [...state.students];
+      activatedStudentsList[activatedStudentIndex] = {
+        ...activatedStudentsList[activatedStudentIndex],
+        isActive: true
+      };
+
+      return {
+        ...state,
+        students: activatedStudentsList
+      };
+
+    case ActionTypes.Deactivate_student_success:
+      const deactivatesStudentId: string = action.payload;
+      const deactivatedStudentIndex = state.students.findIndex((s) => {
+        return s.hbId.toLowerCase() === deactivatesStudentId.toLowerCase();
+      });
+
+      const deactivatedStudentsList = [...state.students];
+      deactivatedStudentsList[deactivatedStudentIndex] = {
+        ...deactivatedStudentsList[deactivatedStudentIndex],
+        isActive: false
+      };
+
+      return {
+        ...state,
+        students: deactivatedStudentsList
       };
     default:
       return state;

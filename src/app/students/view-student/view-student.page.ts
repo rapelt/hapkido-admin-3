@@ -26,11 +26,16 @@ export class ViewStudentPage implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-
     this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
       this.studentId = params.get('studentId');
-      this.student = this.store.select(selectSelectedStudent(this.studentId));
+      this.updateStudent();
     });
+
+
+  }
+
+  updateStudent () {
+    this.student = this.store.select(selectSelectedStudent(this.studentId));
   }
 
   ngOnDestroy() {
@@ -39,6 +44,10 @@ export class ViewStudentPage implements OnInit, OnDestroy {
 
   segmentChanged(something) {
     this.segment = something.detail.value;
+  }
+
+  edit() {
+    this.router.navigate(['student/edit/' + this.studentId]);
   }
 
 }

@@ -37,5 +37,4 @@ export class ViewStudentGeneralComponent implements OnInit {
     this.studentFamily = this.store.select(selectSelectedStudentFamilyMembers(this.studentId));
     this.studentLastClass = this.store.select(selectSelectedStudentsLastClass(this.studentId));
   }
-
 }

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { IonicModule } from '@ionic/angular';
+import {IonicModule, IonItemSliding} from '@ionic/angular';
 import { StudentListComponent } from './components/student-list/student-list.component';
 import { GradeHelper } from './helper/grade/grade';
 import { AlphabeticalFamilyPipe } from './pipes/alphabetical-family.pipe';

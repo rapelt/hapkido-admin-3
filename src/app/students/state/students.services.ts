@@ -25,11 +25,22 @@ export class StudentsServices {
 
   getAllFamilies() {
     return this.httpClient.get(this.familiesUrl + 'all');
-
   }
 
   addNewStudent(student: StudentModel) {
     return this.httpClient.post(this.studentUrl + 'create', student);
+  }
+
+  editStudent(student: StudentModel) {
+    return this.httpClient.post(this.studentUrl + 'update/' + student.hbId, student);
+  }
+
+  activateStudent(studentId: string) {
+    return this.httpClient.post(this.studentUrl + 'reactivate/' + studentId, null);
+  }
+
+  deactivateStudent(studentId: string) {
+    return this.httpClient.post(this.studentUrl + 'deactivate/' + studentId, null);
   }
 
 

@@ -3,6 +3,11 @@
     <ion-buttons slot="start">
       <ion-back-button [defaultHref]="'/student/list/active'" class="cy-back-button"></ion-back-button>
     </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="edit()">
+        <ion-icon [icon]="'create'" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -31,8 +36,8 @@
         <ion-icon name="card"></ion-icon>
       </ion-segment-button>
       <ion-segment-button value="dates">
-        <ion-icon name="calendar"></ion-icon>
-      </ion-segment-button>
+      <ion-icon name="calendar"></ion-icon>
+    </ion-segment-button>
     </ion-segment>
   </ion-toolbar>
 </ion-footer>

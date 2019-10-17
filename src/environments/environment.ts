@@ -12,9 +12,9 @@ export const environment = {
 export const config: EnvironementModel = {
   'environmentName': 'Local Environment',
   'ionicEnvName': 'local',
-  'classAPIEndpoint': 'http://localhost:8080/class/',
-  'studentAPIEndpoint': 'http://localhost:8080/student/',
-  'familyAPIEndpoint': 'http://localhost:8080/family/',
+  'classAPIEndpoint': 'http://localhost:8090/class/',
+  'studentAPIEndpoint': 'http://localhost:8090/student/',
+  'familyAPIEndpoint': 'http://localhost:8090/family/',
   'getClassTime': 15000,
   'firebase': 'AIzaSyDejeeCDRpDwDi3gCqHUDqjeIF-8dbJKFo',
   'firebasedomain': 'hapkido-signin.firebaseapp.com',

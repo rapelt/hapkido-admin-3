@@ -1,4 +1,4 @@
-package io.ionic.starter;
+package hapkido.admin.ui.v3;
 
 import android.os.Bundle;
 

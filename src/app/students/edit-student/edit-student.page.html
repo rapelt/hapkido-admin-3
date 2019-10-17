@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Edit {{editStudentForm.value.firstname | capitialise}} {{editStudentForm.value.lastname | capitialise}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="profile">
+    <ion-avatar>
+      <img src="https://ionicframework.com/docs/demos/api/avatar/avatar.svg">
+    </ion-avatar>
+  </div>
+
+
+  <div class="edit-profile">
+    <form [formGroup]="editStudentForm">
+
+      <ion-item>
+        <ion-label position="stacked">Firstname</ion-label>
+        <ion-input formControlName="firstname" name="firstname" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked">Lastname</ion-label>
+        <ion-input formControlName="lastname" name="lastname" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="stacked" class="ut-is-active-label" color="primary">Email</ion-label>
+        <ion-input formControlName="email" name="email" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item  lines="inset" class="cy-class-type">
+        <ion-label position="stacked" class="ut-is-active-label" color="primary">Preferred Class</ion-label>
+        <ion-select name="preferredClass" okText="Okay" cancelText="Cancel" formControlName="preferredClass">
+          <ion-select-option [value]="classtype" *ngFor="let classtype of classTypes">{{classtype}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+<!--      <app-validation-error-message [formElement]="editStudentForm.get('preferredClass')" [validationMessages]="validation_messages.preferredClass" [saveAttempted]="saveAttempted"></app-validation-error-message>-->
+
+
+    </form>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="cancel()">Cancel</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
