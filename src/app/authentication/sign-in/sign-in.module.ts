@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MessagesModule } from '../../messages/messages.module';
 
 import { SignInPage } from './sign-in.page';
+import {AuthLibModule} from 'hapkido-auth-lib';
 
 const routes: Routes = [
   {
@@ -16,15 +17,16 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    FormsModule,
-    MessagesModule
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
+        FormsModule,
+        MessagesModule,
+        AuthLibModule
+    ],
   declarations: [SignInPage]
 })
 export class SignInPageModule {}

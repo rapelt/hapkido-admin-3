@@ -11,9 +11,9 @@ export const routes: Routes = [
   },
   {
     path: 'list/:active',
-    loadChildren: './student-list/student-list.module#StudentListPageModule',
+    loadChildren: () => import('./student-list/student-list.module').then(m => m.StudentListPageModule),
   },
-  { path: 'add', loadChildren: './add-student/add-student.module#AddStudentPageModule' },
-  { path: 'view/:studentId', loadChildren: './view-student/view-student.module#ViewStudentPageModule' },
-  { path: 'edit/:studentId', loadChildren: './edit-student/edit-student.module#EditStudentPageModule' },
+  { path: 'add', loadChildren: () => import('./add-student/add-student.module').then(m => m.AddStudentPageModule) },
+  { path: 'view/:studentId', loadChildren: () => import('./view-student/view-student.module').then(m => m.ViewStudentPageModule) },
+  { path: 'edit/:studentId', loadChildren: () => import('./edit-student/edit-student.module').then(m => m.EditStudentPageModule) },
 ];

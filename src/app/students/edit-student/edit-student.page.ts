@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { AppState } from '../../state/app.reducers';
 import {AddNewStudent, EditStudent, ResetSelectedStudent, SetSelectedStudent} from '../state/students.actions';
 import { selectSelectedStudent } from '../state/students.selectors';
-import {FormBuilder, Validators} from '@angular/forms';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {StudentModel} from '../../common/models/student';
 import {emptyValidator} from '../../common/validators/empty.validator';
 import {classType, ClassTypes} from '../../common/models/class-types';
@@ -50,7 +50,7 @@ export class EditStudentPage implements OnInit, OnDestroy {
 
   segment: string;
 
-  editStudentForm;
+  editStudentForm: FormGroup = null;
 
   saveAttempted = false;
 
@@ -73,6 +73,8 @@ export class EditStudentPage implements OnInit, OnDestroy {
       this.studentId = params.get('studentId');
       this.studentOb = this.store.select(selectSelectedStudent(this.studentId));
     });
+
+    this.initialiseForm();
 
     this.classTypes = [ClassTypes.Adults, ClassTypes.Family];
 
@@ -119,6 +121,15 @@ export class EditStudentPage implements OnInit, OnDestroy {
 
   cancel() {
     this.navController.navigateBack('student/view/' + this.studentId);
+  }
+
+  initialiseForm() {
+    this.editStudentForm = this.fb.group({
+      firstname: ['', [Validators.maxLength(100), emptyValidator()]],
+      lastname: ['', [Validators.maxLength(100), emptyValidator()]],
+      email: ['', [Validators.email, Validators.maxLength(100), emptyValidator()]],
+      preferredClass: ['', [Validators.required]],
+    });
   }
 
 }

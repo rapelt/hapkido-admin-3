@@ -23,6 +23,7 @@ import { config } from '../environments/environment';
 import { AuthenticationServices } from './authentication/state/authentication.services';
 import { StudentsEffects } from './students/state/students.effects';
 import { StudentsModule } from './students/students.module';
+import {AuthLibModule} from 'hapkido-auth-lib';
 
 @NgModule({
   declarations: [AppComponent, MockComponent],
@@ -36,13 +37,13 @@ import { StudentsModule } from './students/students.module';
     StoreDevtoolsModule.instrument(),
     MessagesModule,
     StudentsModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    config.ionicEnvName !== 'test' && config.ionicEnvName !== 'local'
+    config.ionicEnvName !== 'test' && config.ionicEnvName !== 'staging'
       ? AuthenticationServices
       : { provide: AuthenticationServices, useClass: AuthSeviceMock },
     {

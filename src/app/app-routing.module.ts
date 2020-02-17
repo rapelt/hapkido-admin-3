@@ -5,30 +5,30 @@ import { AuthenticationGuard } from './authentication/authentication.guard';
 const routes: Routes = [
   {
     path: 'home',
-    loadChildren: './home/home.module#HomePageModule',
+    loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
     canLoad: [AuthenticationGuard],
     runGuardsAndResolvers: 'always'
 
   },
   {
     path: 'list',
-    loadChildren: './list/list.module#ListPageModule',
+    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule),
     canLoad: [AuthenticationGuard],
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'authentication',
-    loadChildren: './authentication/authentication.module#AuthenticationPageModule'
+    loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationPageModule)
   },
   {
     path: 'settings',
-    loadChildren: './settings/settings.module#SettingsPageModule',
+    loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule),
     canLoad: [AuthenticationGuard],
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'student',
-    loadChildren: './students/students.module#StudentsModule',
+    loadChildren: () => import('./students/students.module').then(m => m.StudentsModule),
     canLoad: [AuthenticationGuard],
     runGuardsAndResolvers: 'always',
   },
@@ -37,7 +37,7 @@ const routes: Routes = [
     redirectTo: 'authentication',
     pathMatch: 'full'
   },
-  { path: 'classes', loadChildren: './classes/classes.module#ClassesPageModule' }
+  { path: 'classes', loadChildren: () => import('./classes/classes.module').then(m => m.ClassesPageModule) }
 ];
 
 @NgModule({

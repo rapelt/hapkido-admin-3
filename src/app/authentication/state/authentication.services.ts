@@ -38,9 +38,6 @@ export class AuthenticationServices {
       this.userPool = new CognitoUserPool(this.poolData);
       this.refreshOrResetCreds();
     }
-
-
-
   }
 
   signIn(username, password) {

@@ -42,7 +42,7 @@ describe('StudentListPage Active', () => {
       imports: [
         CommonComponentsModule,
         IonicModule,
-        RouterTestingModule.withRoutes([{ path: 'students/list/:active', component: StudentListPage }])
+        RouterTestingModule.withRoutes([{ path: 'students/list/:active', component: StudentListPage }]),
       ],
       providers: [
         {provide: PopoverController, useValue: new MockPopOverController()},

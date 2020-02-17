@@ -8,15 +8,15 @@ export const routes: Routes = [
   },
   {
     path: 'sign-in',
-    loadChildren: './sign-in/sign-in.module#SignInPageModule'
+    loadChildren: () => import('./sign-in/sign-in.module').then(m => m.SignInPageModule)
   },
   {
     path: 'force-password-change',
-    loadChildren: './force-password-change/force-password-change.module#ForcePasswordChangePageModule',
+    loadChildren: () => import('./force-password-change/force-password-change.module').then(m => m.ForcePasswordChangePageModule),
     canLoad: [ResetPasswordGuard],
   },
   {
     path: 'forgot-password',
-    loadChildren: './forgot-password/forgot-password.module#ForgotPasswordPageModule'
+    loadChildren: () => import('./forgot-password/forgot-password.module').then(m => m.ForgotPasswordPageModule)
   },
 ];
