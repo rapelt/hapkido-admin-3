@@ -15,7 +15,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
   <ion-searchbar class="cy-student-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
   <app-student-list [listType]="listType" [search]="searchvalue" (studentClickEvent)="studentClicked($event)"></app-student-list>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
