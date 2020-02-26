@@ -2,6 +2,7 @@
   "rulesDirectory": [
     "node_modules/codelyzer"
   ],
+  "extends": ["tslint:latest", "tslint-config-prettier"],
   "rules": {
     "arrow-return-shorthand": true,
     "callable-types": true,
@@ -10,10 +11,14 @@
       true,
       "check-space"
     ],
+    "interface-name": false,
+    "max-classes-per-file": false,
+    "no-submodule-imports": false,
     "curly": true,
     "deprecation": {
       "severity": "warn"
     },
+    "object-literal-shorthand": false,
     "eofline": true,
     "forin": true,
     "import-spacing": true,

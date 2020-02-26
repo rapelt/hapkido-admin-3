@@ -1,4 +1,9 @@
-import {  HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import {
+    HttpEvent,
+    HttpHandler,
+    HttpInterceptor,
+    HttpRequest,
+} from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -13,31 +18,37 @@ import { AuthenticationStates } from '../authentication-states';
 */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+    accessToken = null;
 
-  accessToken = null;
+    constructor(private store: Store<AppState>) {
+        this.store.select('authentication').subscribe(data => {
+            if (data.authenticationState === AuthenticationStates.LOGGEDIN) {
+                if (
+                    !data ||
+                    !data.user ||
+                    data.user['signInUserSession'] === undefined
+                ) {
+                    this.accessToken = '';
+                } else {
+                    this.accessToken =
+                        data.user['signInUserSession']['accessToken'][
+                            'jwtToken'
+                        ];
+                }
+            }
+        });
+    }
 
-  constructor(private store: Store<AppState>) {
-    this.store.select('authentication').subscribe(
-      data => {
-        if (data.authenticationState === AuthenticationStates.LOGGEDIN) {
-          if (data.user['signInUserSession'] === undefined) {
-            this.accessToken = '';
-          } else {
-            this.accessToken = data.user['signInUserSession']['accessToken']['jwtToken'];
-          }
-        }
-      }
-    );
-  }
+    intercept(
+        req: HttpRequest<any>,
+        next: HttpHandler
+    ): Observable<HttpEvent<any>> {
+        req = req.clone({
+            setHeaders: {
+                Authorization: `Bearer ${this.accessToken}`,
+            },
+        });
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    req = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.accessToken}`
-      }
-    });
-
-    return next.handle(req);
-  }
-
+        return next.handle(req);
+    }
 }

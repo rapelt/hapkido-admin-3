@@ -10,6 +10,7 @@ import { GradeBadgeComponent } from './components/grade-badge/grade-badge.compon
 import { ValidationErrorMessageComponent } from './components/validation-error-message/validation-error-message.component';
 import { OrderDatesPipe } from './pipes/order-dates.pipe';
 import { MissedClassWarningComponent } from './components/missed-class-warning/missed-class-warning.component';
+import {IonCalendar} from './components/calendar/calendar';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { MissedClassWarningComponent } from './components/missed-class-warning/m
     AlphabeticalFamilyPipe,
     ValidationErrorMessageComponent,
     OrderDatesPipe,
+    IonCalendar,
     MissedClassWarningComponent],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { MissedClassWarningComponent } from './components/missed-class-warning/m
     GradeBadgeComponent,
     ValidationErrorMessageComponent,
     OrderDatesPipe,
-    MissedClassWarningComponent
+    MissedClassWarningComponent,
+    IonCalendar
   ]
 })
 export class CommonComponentsModule { }

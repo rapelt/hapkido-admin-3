@@ -19,7 +19,7 @@
     <ion-text color="secondary">
       <h1>{{(student | async)?.name.firstname | capitialise}} {{(student | async)?.name.lastname | capitialise}}</h1>
     </ion-text>
-    <app-grade-badge [grade]="(student | async).grade" [nameLength]="'long'"></app-grade-badge>
+    <app-grade-badge *ngIf="(student | async)?.grade" [grade]="(student | async)?.grade" [nameLength]="'long'"></app-grade-badge>
   </div>
   <app-view-student-general *ngIf="segment === 'general'" [studentId]="studentId"> </app-view-student-general>
   <app-view-student-dates *ngIf="segment === 'dates'" [studentId]="studentId"></app-view-student-dates>
@@ -32,9 +32,9 @@
       <ion-segment-button value="general" checked>
         <ion-icon name="person"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="payments">
-        <ion-icon name="card"></ion-icon>
-      </ion-segment-button>
+<!--      <ion-segment-button value="payments">-->
+<!--        <ion-icon name="card"></ion-icon>-->
+<!--      </ion-segment-button>-->
       <ion-segment-button value="dates">
       <ion-icon name="calendar"></ion-icon>
     </ion-segment-button>

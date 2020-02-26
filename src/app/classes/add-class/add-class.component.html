@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button *ngIf="classForm.invalid" class="cy-back-button"></ion-back-button>
+
+    </ion-buttons>
+    <ion-title>
+      New Class
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <div class="calendar-wrapper">
+    <calendar (change)="onPeriodChange($event)" [preselectedValues]="preselectedDates" [minDate]="'06/07/2017'" [selectionType]="'multiple'"></calendar>
+  </div>
+
+  <form [formGroup]="classForm">
+      <div formArrayName="classes" class="classes">
+        <div *ngFor="let aclass of classForm.controls.classes['controls']; let i=index" class="aclass">
+          <ion-card>
+            <ion-item>
+              <b>Class {{i + 1}}</b>
+              <ion-button slot="end" (click)="removeClass(i)" fill="clear">
+                <ion-icon color="danger" name="trash"></ion-icon>
+              </ion-button>
+            </ion-item>
+            <ion-list [formGroupName]="i">
+
+              <ion-item  lines="inset" class="cy-class-type">
+                <ion-label position="floating">Class Type</ion-label>
+                <ion-select name="classType" okText="Okay" cancelText="Cancel" formControlName="classType">
+                  <ion-select-option [value]="classType" *ngFor="let classType of classTypes">{{classType}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <app-validation-error-message [formElement]="getFormElement(i)" [validationMessages]="validation_messages['grade']" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+              <ion-item  lines="inset">
+                <ion-label position="floating">Start Time</ion-label>
+                <ion-datetime displayFormat="h:mm A" pickerFormat="h mm A" formControlName="startTime"></ion-datetime>
+              </ion-item>
+              <app-validation-error-message [formElement]="getFormElement(i)" [validationMessages]="validation_messages['startTime']" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+              <ion-item  lines="inset">
+                <ion-label>Is it a grading?</ion-label>
+                <ion-toggle formControlName="isGrading" slot="end"></ion-toggle>
+              </ion-item>
+              <app-validation-error-message [formElement]="getFormElement(i)" [validationMessages]="validation_messages['isGrading']" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+            </ion-list>
+          </ion-card>
+        </div>
+        <ion-card class="add-another">
+          <ion-button class="add-another-btn" color="light" type="button" (click)="addClass()"><ion-icon name="add"></ion-icon>Add Another Class</ion-button>
+        </ion-card>
+      </div>
+
+
+
+
+  </form>
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="half-button-size">
+      <ion-button (click)="cancel()" color="secondary" expand="full">Cancel</ion-button>
+      <ion-button (click)="save()" class="cy-add-class-submit" color="tertiary" expand="full" type="submit">Save
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -1,0 +1,66 @@
+[
+  {
+    "classId": 2,
+    "classType": "Adults",
+    "attendance": [
+      "HB001",
+      "HB002",
+      "HB003"
+    ],
+    "isGrading": true,
+    "date": "2020-02-19T08:51:28.000Z",
+    "startTime": ""
+  },
+  {
+    "classId": 7,
+    "classType": "Family",
+    "attendance": [
+      "HB001",
+      "HB002",
+      "HB003",
+      "HB004",
+      "HB005"
+    ],
+    "isGrading": false,
+    "date": "2020-02-19T09:51:28.000Z",
+    "startTime": ""
+  },
+  {
+    "classId": 3,
+    "classType": "Adults",
+    "attendance": [
+      "HB001"
+    ],
+    "isGrading": false,
+    "date": "2020-02-14T08:57:45.000Z",
+    "startTime": ""
+  },
+  {
+    "classId": 4,
+    "classType": "Adults",
+    "attendance": [],
+    "isGrading": false,
+    "date": "2020-02-11T08:30:00.000Z",
+    "startTime": ""
+  },
+  {
+    "classId": 5,
+    "classType": "Adults",
+    "attendance": [
+      "HB001"
+    ],
+    "isGrading": false,
+    "date": "2020-02-13T08:30:00.000Z",
+    "startTime": ""
+  },
+  {
+    "classId": 6,
+    "classType": "Adults",
+    "attendance": [
+      "HB001"
+    ],
+    "isGrading": false,
+    "date": "2020-02-18T08:30:00.000Z",
+    "startTime": ""
+  }
+]

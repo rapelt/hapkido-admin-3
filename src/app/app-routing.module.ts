@@ -1,43 +1,47 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthenticationGuard } from './authentication/authentication.guard';
+import { AuthenticationGuard, AuthLibModule} from 'hapkido-auth-lib';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
     path: 'home',
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule),
-    canLoad: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
     runGuardsAndResolvers: 'always'
-
   },
   {
     path: 'list',
     loadChildren: () => import('./list/list.module').then(m => m.ListPageModule),
-    canLoad: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'authentication',
-    loadChildren: () => import('./authentication/authentication.module').then(m => m.AuthenticationPageModule)
+    loadChildren: () => AuthLibModule
   },
   {
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then(m => m.SettingsPageModule),
-    canLoad: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
     runGuardsAndResolvers: 'always'
   },
   {
     path: 'student',
     loadChildren: () => import('./students/students.module').then(m => m.StudentsModule),
-    canLoad: [AuthenticationGuard],
+    canActivate: [AuthenticationGuard],
     runGuardsAndResolvers: 'always',
   },
   {
-    path: '',
-    redirectTo: 'authentication',
-    pathMatch: 'full'
-  },
-  { path: 'classes', loadChildren: () => import('./classes/classes.module').then(m => m.ClassesPageModule) }
+    path: 'class',
+    loadChildren: () => import('./classes/classes.module').then(m => m.ClassesPageModule),
+    canActivate: [AuthenticationGuard],
+    runGuardsAndResolvers: 'always',
+  }
 ];
 
 @NgModule({

@@ -1,95 +1,108 @@
 import {
-  Component,
-  EventEmitter,
-  Input,
-  OnChanges,
-  OnInit,
-  Output
+    Component,
+    EventEmitter,
+    Input,
+    OnChanges,
+    OnInit,
+    Output,
 } from '@angular/core';
-import {ActionsSubject, ReducerManagerDispatcher, Store} from '@ngrx/store';
+import { ActionsSubject, ReducerManagerDispatcher, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
 import { AppState } from '../../../state/app.reducers';
-import {ActionTypes, ActivateStudent, DeactivateStudent, GetAllStudents} from '../../../students/state/students.actions';
-import { StudentModel } from '../../models/student';
-import { selectActiveStudents, selectInactiveStudents } from '../../../students/state/students.selectors';
 import {
-  selectSelectedStudentsLastClass
+    ActionTypes,
+    ActivateStudent,
+    DeactivateStudent,
+    GetAllStudents,
+} from '../../../students/state/students.actions';
+import { StudentModel } from '../../models/student';
+import {
+    selectActiveStudents,
+    selectInactiveStudents,
 } from '../../../students/state/students.selectors';
-import {Validators} from '@angular/forms';
-import {emptyValidator} from '../../validators/empty.validator';
+import { selectSelectedStudentsLastClass } from '../../../students/state/students.selectors';
+import { Validators } from '@angular/forms';
+import { emptyValidator } from '../../validators/empty.validator';
 
 @Component({
-  selector: 'app-student-list',
-  templateUrl: './student-list.component.html',
-  styleUrls: ['./student-list.component.scss']
+    selector: 'app-student-list',
+    templateUrl: './student-list.component.html',
+    styleUrls: ['./student-list.component.scss'],
 })
 export class StudentListComponent implements OnChanges, OnInit {
+    students: Observable<Array<StudentModel>> = of([]);
+    filteredStudents: Observable<Array<StudentModel>> = of([]);
 
-  students: Observable<Array<StudentModel>> = of([]);
-  filteredStudents: Observable<Array<StudentModel>> = of([]);
+    selectSelectedStudentsLastClass = selectSelectedStudentsLastClass;
 
-  selectSelectedStudentsLastClass = selectSelectedStudentsLastClass;
+    subsc;
 
-  subsc;
+    @Input()
+    listType: string;
 
-  @Input()
-  listType: string;
+    @Input()
+    search = '';
 
-  @Input()
-  search = '';
+    @Input()
+    shouldShowWarning = false;
 
-  @Input()
-  shouldShowWarning = false;
+    @Output()
+    studentClickEvent: EventEmitter<string> = new EventEmitter<string>();
 
-  @Output()
-  studentClickEvent: EventEmitter<string> = new EventEmitter<string>();
+    constructor(
+        public store: Store<AppState>,
+        private actionsSubject: ActionsSubject
+    ) {
+        this.subsc = actionsSubject.subscribe(data => {
+            console.log(data.type);
+            if (
+                data.type === ActionTypes.Deactivate_student_success ||
+                data.type === ActionTypes.Activate_student_success ||
+                data.type === ActionTypes.Get_all_students_success
+            ) {
+                this.students =
+                    this.listType === 'active'
+                        ? this.store.select(selectActiveStudents)
+                        : this.store.select(selectInactiveStudents);
 
-  constructor(
-    public store: Store<AppState>,
-    private actionsSubject: ActionsSubject
-  ) {
-    this.subsc = actionsSubject.subscribe(data => {
-      console.log(data.type);
-      if (data.type === ActionTypes.Deactivate_student_success
-          || data.type === ActionTypes.Activate_student_success
-          || data.type === ActionTypes.Get_all_students_success) {
-        if (this.listType === 'active') {
-          this.students = this.store.select(selectActiveStudents);
-        } else {
-          this.students = this.store.select(selectInactiveStudents);
-        }
+                this.filteredStudents = this.students;
+            }
+        });
+    }
 
-        this.filteredStudents = this.students;
-      }
-    });
-  }
+    ngOnInit() {
+        this.store.dispatch(new GetAllStudents());
+    }
 
-  ngOnInit() {
-    this.store.dispatch(new GetAllStudents());
-  }
+    ngOnChanges() {
+        this.filteredStudents = this.students.pipe(
+            map(students =>
+                students.filter(student => {
+                    return (
+                        student.name.firstname
+                            .toLocaleLowerCase()
+                            .includes(this.search.toLocaleLowerCase()) ||
+                        student.name.lastname
+                            .toLocaleLowerCase()
+                            .includes(this.search.toLocaleLowerCase())
+                    );
+                })
+            )
+        );
+    }
 
-  ngOnChanges() {
-    this.filteredStudents = this.students.pipe(
-      map(students => students.filter(student => {
-        return student.name.firstname.toLocaleLowerCase().includes(this.search.toLocaleLowerCase()) ||
-          student.name.lastname.toLocaleLowerCase().includes(this.search.toLocaleLowerCase());
-      }))
-    );
-  }
+    selectStudent(student: StudentModel, index: number) {
+        this.studentClickEvent.emit(student.hbId);
+    }
 
-  selectStudent(student: StudentModel, index: number) {
-    this.studentClickEvent.emit(student.hbId);
-  }
+    deactivate(studentID, index, slide) {
+        this.store.dispatch(new DeactivateStudent(studentID));
+        slide.close();
+    }
 
-  deactivate(studentID, index, slide) {
-    this.store.dispatch(new DeactivateStudent(studentID));
-    slide.close();
-  }
-
-  activate(studentID, index, slide) {
-    this.store.dispatch(new ActivateStudent(studentID));
-    slide.close();
-  }
-
+    activate(studentID, index, slide) {
+        this.store.dispatch(new ActivateStudent(studentID));
+        slide.close();
+    }
 }
