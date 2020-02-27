@@ -90,7 +90,7 @@ describe('ForgotPasswordPage', () => {
         expect(store.dispatch).toHaveBeenCalledWith(action);
     });
 
-    it("should send error message when passwords don't match", () => {
+    it('should send error message when passwords don\'t match', () => {
         const messageService = TestBed.get(MessagesService);
         spyOn(messageService.updateError, 'next').and.callThrough();
 
@@ -102,7 +102,7 @@ describe('ForgotPasswordPage', () => {
         component.forgotPasswordSubmit();
 
         expect(messageService.updateError.next).toHaveBeenCalledWith(
-            "Your passwords didn't match. Please try again."
+            'Your passwords didn\'t match. Please try again.'
         );
     });
 
