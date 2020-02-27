@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-describe('View Class List', function() {
+describe('View Class Details', function() {
 
   beforeEach(function () {
     cy.server();
