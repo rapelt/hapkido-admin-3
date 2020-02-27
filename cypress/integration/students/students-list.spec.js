@@ -14,9 +14,8 @@ describe('Students List', function() {
 
         cy.route({
             method: 'GET',      // Route all GET requests
+            response: '@studentsJSON',
             url: '/student/all',    // that have a URL that matches '/users/*'
-            response: '@studentsJSON'
-
         });
 
         window.localStorage.setItem('login', true);
@@ -47,15 +46,13 @@ describe('Students List', function() {
 
         cy.route({
             method: 'GET',      // Route all GET requests
+            response: '@studentsJSON',
             url: '/student/all',    // that have a URL that matches '/users/*'
-            response: '@studentsJSON'
-
         });
 
         window.localStorage.setItem('login', true);
         cy.visit('/student/list/inactive');
         cy.get('.cy-student-list-item').then((list) => {
-            console.log(list[0].textContent);
             expect(list.length).to.equal(1);
             expect(list[0].textContent).to.contain('Firstname4 Lastname4');
             expect(list[0].textContent).to.contain('R3');
@@ -69,9 +66,8 @@ describe('Students List', function() {
 
         cy.route({
             method: 'GET',      // Route all GET requests
+            response: '@studentsJSON',
             url: '/student/all',    // that have a URL that matches '/users/*'
-            response: '@studentsJSON'
-
         });
 
         window.localStorage.setItem('login', true);
@@ -82,7 +78,6 @@ describe('Students List', function() {
         cy.wait(500);
 
         cy.get('.cy-student-list-item').then((list) => {
-            console.log(list[0].textContent);
             expect(list.length).to.equal(1);
             expect(list[0].textContent).to.contain('Firstname3 Lastname3');
             expect(list[0].textContent).to.contain('1D');

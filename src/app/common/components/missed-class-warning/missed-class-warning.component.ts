@@ -8,39 +8,37 @@ import * as moment from 'moment';
 import { StudentModel } from '../../models/student';
 
 @Component({
-  selector: 'app-missed-class-warning',
-  templateUrl: './missed-class-warning.component.html',
-  styleUrls: ['./missed-class-warning.component.scss']
+    selector: 'app-missed-class-warning',
+    templateUrl: './missed-class-warning.component.html',
+    styleUrls: ['./missed-class-warning.component.scss'],
 })
 export class MissedClassWarningComponent implements OnInit {
+    shouldShowWarning;
 
-  shouldShowWarning;
+    timeSinceLastClass;
 
-  timeSinceLastClass;
+    @Input()
+    student: StudentModel;
 
-  @Input()
-  student: StudentModel;
+    @Input()
+    showDays = false;
 
-  @Input()
-  showDays = false;
+    constructor(public store: Store<AppState>) {}
 
-  constructor(
-    public store: Store<AppState>
-  ) { }
+    ngOnInit() {
+        const studentLastClass = this.store.select(
+            selectSelectedStudentsLastClass(this.student.hbId)
+        );
+        studentLastClass.subscribe(aclass => {
+            if (aclass) {
+                const lastClassDate = aclass.date;
+                const today = moment();
+                this.timeSinceLastClass = Math.round(
+                    moment.duration(today.diff(lastClassDate)).as('days')
+                );
 
-  ngOnInit() {
-    const studentLastClass = this.store.select(selectSelectedStudentsLastClass(this.student.hbId));
-    studentLastClass.subscribe((aclass) => {
-      if (aclass) {
-        const lastClassDate = aclass.date;
-        const today = moment();
-        this.timeSinceLastClass = Math.round(moment.duration(today.diff(lastClassDate)).as('days'));
-
-        if (this.timeSinceLastClass > 60) {
-          this.shouldShowWarning = true;
-        } else {
-          this.shouldShowWarning = false;
-        }
-    }});
-  }
+                this.shouldShowWarning = this.timeSinceLastClass > 60;
+            }
+        });
+    }
 }

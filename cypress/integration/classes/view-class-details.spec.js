@@ -4,11 +4,30 @@ describe('View Class List', function() {
   beforeEach(function () {
     cy.server();
     cy.fixture('classes.json').as('classesJSON');
+    cy.fixture('families.json').as('familiesJSON');
+    cy.fixture('students.json').as('studentsJSON');
 
     cy.route({
       method: 'GET',      // Route all GET requests
+      response: '@classesJSON',
       url: '/class/all',    // that have a URL that matches '/users/*'
-      response: '@classesJSON'
+    });
+
+    cy.route({
+      method: 'POST',      // Route all GET requests
+      url: '/class/create',    // that have a URL that matches '/users/*'
+    }).as('addClassCheck');
+
+    cy.route({
+      method: 'GET',      // Route all GET requests
+      response: '@familiesJSON',
+      url: '/family/all',    // that have a URL that matches '/users/*'
+    });
+
+    cy.route({
+      method: 'GET',      // Route all GET requests
+      response: '@studentsJSON',
+      url: '/student/all',    // that have a URL that matches '/users/*'
     });
   });
 
@@ -52,13 +71,22 @@ describe('View Class List', function() {
   });
 
   it('should be able to set class as a grading', function() {
+    cy.route({
+      method: 'POST',
+      response: {},
+      status: 200,
+      url: '/class/makeclassagrading/*',
+    }).as('makeclassagrading');
+
     window.localStorage.setItem('login', true);
     cy.visit('/class/view/7');
     cy.url().should('include', '/class/view/7');
     cy.get('.cy-grading').contains('False');
     cy.get('.cy-make-class-a-grading-btn').click();
-    cy.wait(100);
-    cy.get('.cy-grading').contains('True');
+
+    cy.wait('@makeclassagrading').then((xhr) => {
+      cy.get('.cy-grading').contains('True');
+    });
 
   });
 });

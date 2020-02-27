@@ -31,8 +31,8 @@ import { emptyValidator } from '../../validators/empty.validator';
     styleUrls: ['./student-list.component.scss'],
 })
 export class StudentListComponent implements OnChanges, OnInit {
-    students: Observable<Array<StudentModel>> = of([]);
-    filteredStudents: Observable<Array<StudentModel>> = of([]);
+    students: Observable<StudentModel[]> = of([]);
+    filteredStudents: Observable<StudentModel[]> = of([]);
 
     selectSelectedStudentsLastClass = selectSelectedStudentsLastClass;
 

@@ -11,6 +11,13 @@
       true,
       "check-space"
     ],
+    "ordered-imports": [
+      true,
+      {
+        "import-sources-order": "any",
+        "named-imports-order": "any"
+      }
+    ],
     "interface-name": false,
     "max-classes-per-file": false,
     "no-submodule-imports": false,
@@ -56,6 +63,7 @@
     ],
     "no-construct": true,
     "no-debugger": true,
+    "no-duplicate-imports": false,
     "no-duplicate-super": true,
     "no-empty": false,
     "no-empty-interface": true,

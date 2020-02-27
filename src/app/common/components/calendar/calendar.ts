@@ -1,4 +1,5 @@
 // Copied from github.com/gnucoop/ionic2-extra
+// tslint:disable:no-use-before-declare
 
 import {
     AfterContentInit,
@@ -19,13 +20,7 @@ import { Observable } from 'rxjs';
 import { Moment } from 'moment';
 
 const momentConstructor: (value?: any) => moment.Moment =
-    (<any>moment).default || moment;
-
-export const ION_CALENDAR_CONTROL_VALUE_ACCESSOR: any = {
-    provide: NG_VALUE_ACCESSOR,
-    useExisting: forwardRef(() => IonCalendar),
-    multi: true,
-};
+    (moment as any).default || moment;
 
 const weekDays: string[] = [
     '',
@@ -59,7 +54,7 @@ export class IonCalendarPeriod {
 
 export class IonCalendarChange {
     source: IonCalendar;
-    selectedValues: Array<Date>;
+    selectedValues: Date[];
     selectedValue: Date;
 }
 
@@ -114,6 +109,12 @@ export class IonCalendarEntry {
     }
 }
 
+export const ION_CALENDAR_CONTROL_VALUE_ACCESSOR: any = {
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => IonCalendar),
+    multi: true,
+};
+
 @Component({
     selector: 'calendar',
     templateUrl: 'calendar.html',
@@ -165,13 +166,13 @@ export class IonCalendar
         this._selectionMode = selectionMode;
     }
     get startOfWeekDay(): IonCalendarWeekDay {
-        return <IonCalendarWeekDay>weekDays[this._startOfWeekDay];
+        return weekDays[this._startOfWeekDay] as IonCalendarWeekDay;
     }
     @Input('start-of-week-day')
     set startOfWeekDay(weekDay: IonCalendarWeekDay) {
         this._startOfWeekDay = weekDays.indexOf(weekDay);
 
-        (<any>moment).updateLocale(moment.locale(), {
+        (moment as any).updateLocale(moment.locale(), {
             week: { dow: this._startOfWeekDay },
         });
 
@@ -213,11 +214,11 @@ export class IonCalendar
     }
 
     @Input()
-    set preselectedValues(preselectedValues: Array<Moment>) {
+    set preselectedValues(preselectedValues: Moment[]) {
         this._preselectedValues = preselectedValues ? preselectedValues : [];
     }
 
-    get preselectedValues(): Array<Moment> {
+    get preselectedValues(): Moment[] {
         return this._preselectedValues;
     }
 
@@ -254,7 +255,7 @@ export class IonCalendar
             period instanceof Object &&
             period !== this._selectedPeriod
         ) {
-            this.selectedPeriod = <IonCalendarPeriod>period;
+            this.selectedPeriod = period as IonCalendarPeriod;
             if (this._init) {
                 this.ionChange.emit(this);
             }
@@ -305,9 +306,9 @@ export class IonCalendar
 
     _selectionType = '';
 
-    _preselectedValues: Array<Moment>;
+    _preselectedValues: Moment[];
 
-    selectedValues: Array<Date> = [];
+    selectedValues: Date[] = [];
 
     private _viewDate: Date = new Date();
     private _viewMoment: moment.Moment = momentConstructor();

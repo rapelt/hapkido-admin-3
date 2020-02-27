@@ -4,5 +4,12 @@
   "viewportWidth": 360,
   "viewportHeight": 640,
   "chromeWebSecurity": false,
-  "videoUploadOnPasses": false
+  "videoUploadOnPasses": false,
+  "fileServerFolder": ".",
+  "supportFile": false,
+  "fixturesFolder": "cypress/fixtures",
+  "integrationFolder": "cypress/integration",
+  "videosFolder": "cypress/videos",
+  "screenshotsFolder": "cypress/screenshots"
 }
+

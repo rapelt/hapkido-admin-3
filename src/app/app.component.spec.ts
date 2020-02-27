@@ -25,7 +25,11 @@ import { Router } from '@angular/router';
 import { AuthenticationServices } from 'hapkido-auth-lib/lib/services/auth.service';
 
 describe('AppComponent', () => {
-    let statusBarSpy, splashScreenSpy, platformReadySpy, platformSpy;
+    let statusBarSpy;
+    let splashScreenSpy;
+    let platformReadySpy;
+    let platformSpy;
+
     let store: MockStore<{
         authentication: {
             authenticationState: string;

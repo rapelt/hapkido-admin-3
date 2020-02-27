@@ -18,6 +18,7 @@
  * BROWSER POLYFILLS
  */
 
+// tslint:disable:jsdoc-format
 /** IE9, IE10, IE11, and older Chrome requires all of the following polyfills. **/
 // import 'core-js/es6/symbol';
 // import 'core-js/es6/object';
@@ -81,8 +82,7 @@
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
  */
-import 'zone.js/dist/zone';  // Included with Angular CLI.
-
+import 'zone.js/dist/zone'; // Included with Angular CLI.
 
 /***************************************************************************************************
  * APPLICATION IMPORTS
@@ -91,5 +91,5 @@ import 'zone.js/dist/zone';  // Included with Angular CLI.
 (window as any).global = window;
 (window as any).process = { browser: true };
 // @ts-ignore
+// tslint:disable-next-line:no-var-requires
 window.Buffer = window.Buffer || require('buffer').Buffer;
-

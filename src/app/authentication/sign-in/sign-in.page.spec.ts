@@ -13,65 +13,61 @@ import { SignIn } from '../state/authentication.actions';
 import { SignInPage } from './sign-in.page';
 
 describe('SignInPage', () => {
-  let component: SignInPage;
-  let fixture: ComponentFixture<SignInPage>;
+    let component: SignInPage;
+    let fixture: ComponentFixture<SignInPage>;
 
-  let store: MockStore<{ authentication: {
-      authenticationState: string,
-    }
-  }>;
+    let store: MockStore<{
+        authentication: {
+            authenticationState: string;
+        };
+    }>;
 
-  const initialState = {
-    authentication: {
-      user: { username: 'admin'},
-      authenticationState: AuthenticationStates.LOGGEDOUT,
-      userAttributes: [
-        {Name: 'sub', Value: '4a4eb79c-5898-4de7-8540-153515c25f80'},
-        {Name: 'email', Value: 'rebekahapelt@gmail.com'},
-        {Name: 'email_verified', Value: ''}
-      ],
-      username: 'admin',
-      session: null
-    }
-  };
+    const initialState = {
+        authentication: {
+            user: { username: 'admin' },
+            authenticationState: AuthenticationStates.LOGGEDOUT,
+            userAttributes: [
+                { Name: 'sub', Value: '4a4eb79c-5898-4de7-8540-153515c25f80' },
+                { Name: 'email', Value: 'rebekahapelt@gmail.com' },
+                { Name: 'email_verified', Value: '' },
+            ],
+            username: 'admin',
+            session: null,
+        },
+    };
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ SignInPage ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-      imports: [
-        FormsModule,
-        ReactiveFormsModule,
-        MessagesModule,
-        BrowserModule,
-        IonicModule.forRoot({
-          _testing: true
-        }),
-        RouterTestingModule.withRoutes([])
-      ],
-      providers: [
-        provideMockStore({ initialState })
-      ]
-    })
-      .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [SignInPage],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [
+                FormsModule,
+                ReactiveFormsModule,
+                MessagesModule,
+                BrowserModule,
+                IonicModule.forRoot({
+                    _testing: true,
+                }),
+                RouterTestingModule.withRoutes([]),
+            ],
+            providers: [provideMockStore({ initialState })],
+        }).compileComponents();
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(SignInPage);
-    component = fixture.componentInstance;
-    store = TestBed.get(Store);
-    spyOn(store, 'dispatch').and.callThrough();
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(SignInPage);
+        component = fixture.componentInstance;
+        store = TestBed.get(Store);
+        spyOn(store, 'dispatch').and.callThrough();
+        fixture.detectChanges();
+    }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 
-  it('should dispatch Sign In when all is correct', () => {
-    component.signInForm.setValue({instructor: 'blarg', password: 'yes'});
-    component.onSubmit();
-    const action = new SignIn({username: 'blarg', password: 'yes'});
-    expect(store.dispatch).toHaveBeenCalledWith(action);
-  });
+    it('should dispatch Sign In when all is correct', () => {
+        component.signInForm.setValue({ instructor: 'blarg', password: 'yes' });
+        component.onSubmit();
+        const action = new SignIn({ username: 'blarg', password: 'yes' });
+        expect(store.dispatch).toHaveBeenCalledWith(action);
+    });
 });

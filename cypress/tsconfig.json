@@ -8,5 +8,14 @@
   },
   "include": [
     "**/*.js"
-  ]
+  ],
+  "ordered-imports": [
+    true,
+    {
+      "import-sources-order": "any",
+      "named-imports-order": "any"
+    }
+  ],
+  "object-literal-sort-keys": false,
+  "no-string-literal": false
 }

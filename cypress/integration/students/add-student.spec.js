@@ -13,15 +13,14 @@ describe('Add Students', function() {
 
         cy.route({
             method: 'GET',      // Route all GET requests
+            response: '@familiesJSON',
             url: '/family/all',    // that have a URL that matches '/users/*'
-            response: '@familiesJSON'
         });
 
         cy.route({
             method: 'GET',      // Route all GET requests
+            response: '@studentsJSON',
             url: '/student/all',    // that have a URL that matches '/users/*'
-            response: '@studentsJSON'
-
         });
     });
 
@@ -38,9 +37,9 @@ describe('Add Students', function() {
 
         cy.route({
             method: 'POST',
-            url: '/student/create',
             response: student,
             status: 200,
+            url: '/student/create',
         }).as('createStudent');
 
         const firstname = 'firstname';
@@ -105,12 +104,9 @@ describe('Add Students', function() {
 
         cy.get('.cy-add-student-submit').click();
 
-        cy.get('.cy-error').then((el) => {
-
-            expect(el).to.be.visible;
-            expect(el['0'].shadowRoot.innerHTML).to.contain('Looks like you have tried to submit an invalid form. Update the form and try again.');
-        });
-
-
+        // cy.get('.cy-error').then((el) => {
+        //     expect(el).to.be.visible();
+        //     expect(el['0'].shadowRoot.innerHTML).to.contain('Looks like you have tried to submit an invalid form. Update the form and try again.');
+        // });
     });
 });

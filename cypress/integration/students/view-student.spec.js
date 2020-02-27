@@ -10,21 +10,20 @@ describe('Students List', function() {
 
     cy.route({
       method: 'GET',      // Route all GET requests
+      response: '@classesJSON',
       url: '/class/all',    // that have a URL that matches '/users/*'
-      response: '@classesJSON'
     });
 
     cy.route({
       method: 'GET',      // Route all GET requests
+      response: '@familiesJSON',
       url: '/family/all',    // that have a URL that matches '/users/*'
-      response: '@familiesJSON'
     });
 
     cy.route({
       method: 'GET',      // Route all GET requests
+      response: '@studentsJSON',
       url: '/student/all',    // that have a URL that matches '/users/*'
-      response: '@studentsJSON'
-
     });
   }) ;
 
