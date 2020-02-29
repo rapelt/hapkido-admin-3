@@ -46,25 +46,25 @@ describe('StudentListPopoverComponent', () => {
     });
 
     it('should dismiss popover on route change', fakeAsync(() => {
-      const mockPopoverController = component.popoverCtrl as any as MockPopOverController;
-      const router = TestBed.get(Router);
+        const mockPopoverController = (component.popoverCtrl as any) as MockPopOverController;
+        const router = TestBed.get(Router);
 
+        spyOn(router, 'navigateByUrl').and.callThrough();
 
-      spyOn(router, 'navigateByUrl').and.callThrough();
+        mockPopoverController.create({
+            component: MockComponent,
+            translucent: true,
+        });
 
-      mockPopoverController.create({
-        component: MockComponent,
-        translucent: true
-      });
+        fixture.detectChanges();
+        expect(mockPopoverController.getLast().visible).toBeFalsy();
 
-      fixture.detectChanges();
-      expect(mockPopoverController.getLast().visible).toBeFalsy();
+        component.goToDeactivatedStudents();
+        tick(1000);
 
-      component.goToDeactivatedStudents();
-      tick(1000);
-
-      expect(mockPopoverController.getLast().visible).toBeFalsy();
-      expect(router.navigateByUrl).toHaveBeenCalledWith('/student/list/inactive');
-
+        expect(mockPopoverController.getLast().visible).toBeFalsy();
+        expect(router.navigateByUrl).toHaveBeenCalledWith(
+            '/student/list/inactive'
+        );
     }));
 });

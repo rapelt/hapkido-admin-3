@@ -93,29 +93,33 @@ export class EditStudentPage implements OnInit, OnDestroy {
 
         this.classTypes = [ClassTypes.Adults, ClassTypes.Family];
 
-        this.studentObservable = this.studentOb.subscribe((student: StudentModel) => {
-            debugger;
-            this.student = student;
-            this.editStudentForm = this.fb.group({
-                firstname: [
-                    student.name.firstname,
-                    [Validators.maxLength(100), emptyValidator()],
-                ],
-                lastname: [
-                    student.name.lastname,
-                    [Validators.maxLength(100), emptyValidator()],
-                ],
-                email: [
-                    student.email,
-                    [
-                        Validators.email,
-                        Validators.maxLength(100),
-                        emptyValidator(),
+        this.studentObservable = this.studentOb.subscribe(
+            (student: StudentModel) => {
+                this.student = student;
+                this.editStudentForm = this.fb.group({
+                    firstname: [
+                        student.name.firstname,
+                        [Validators.maxLength(100), emptyValidator()],
                     ],
-                ],
-                preferredClass: [student.preferredClass, [Validators.required]],
-            });
-        });
+                    lastname: [
+                        student.name.lastname,
+                        [Validators.maxLength(100), emptyValidator()],
+                    ],
+                    email: [
+                        student.email,
+                        [
+                            Validators.email,
+                            Validators.maxLength(100),
+                            emptyValidator(),
+                        ],
+                    ],
+                    preferredClass: [
+                        student.preferredClass,
+                        [Validators.required],
+                    ],
+                });
+            }
+        );
     }
 
     segmentChanged(something) {

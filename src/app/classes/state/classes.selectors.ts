@@ -1,8 +1,9 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createFeatureSelector, createSelector, Selector, MemoizedSelector } from '@ngrx/store';
 import { ClassModel } from '../../common/models/class';
 import * as fromClasses from './classes.reducers';
 // tslint:disable-next-line:no-duplicate-imports
 import { ClassesState } from './classes.reducers';
+import { Observable } from 'rxjs';
 
 export const getClassState = createFeatureSelector<ClassesState>(
     fromClasses.CLASSES_FEATURE_NAME

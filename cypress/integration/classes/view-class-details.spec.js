@@ -89,4 +89,25 @@ describe('View Class Details', function() {
     });
 
   });
+
+  it('should be able to delete a class', function() {
+    cy.route({
+      method: 'POST',
+      response: {},
+      status: 200,
+      url: '/class/delete/4',
+    }).as('deleteclass');
+
+    window.localStorage.setItem('login', true);
+    cy.visit('/class/view/4');
+    cy.url().should('include', '/class/view/4');
+    cy.get('.cy-delete-class').should('be.visible').trigger('mouseover');
+    cy.wait(200);
+    cy.get('.cy-delete-class').click();
+    cy.wait(200);
+
+    cy.wait('@deleteclass').then((xhr) => {
+      cy.url().should('include', '/class/list');
+    });
+  });
 });

@@ -1,10 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { GetAllStudents } from '../../students/state/students.actions';
-import { GetAllClasses, MakeClassAGrading } from '../state/classes.actions';
+import {
+    ActionTypes,
+    DeleteClass,
+    GetAllClasses,
+    MakeClassAGrading,
+} from '../state/classes.actions';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
+import { ActionsSubject, Store } from '@ngrx/store';
 import { AppState } from '../../state/app.reducers';
-import { selectSelectedStudent } from '../../students/state/students.selectors';
+import {
+    selectActiveStudents,
+    selectInactiveStudents,
+    selectSelectedStudent,
+} from '../../students/state/students.selectors';
 import { ClassModel } from '../../common/models/class';
 import { Observable } from 'rxjs';
 import { selectSelectedClass } from '../state/classes.selectors';
@@ -18,11 +27,13 @@ export class ViewClassComponent implements OnInit {
     classId: string;
     aclass: Observable<ClassModel>;
     segment: string;
+    subsc;
 
     constructor(
         public router: Router,
         public activatedRoute: ActivatedRoute,
-        public store: Store<AppState>
+        public store: Store<AppState>,
+        private actionsSubject: ActionsSubject
     ) {}
 
     ngOnInit() {
@@ -33,6 +44,13 @@ export class ViewClassComponent implements OnInit {
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.classId = params.get('classId');
             this.updateClass();
+        });
+
+        this.subsc = this.actionsSubject.subscribe(data => {
+            console.log(data.type);
+            if (data.type === ActionTypes.Delete_class_success) {
+                this.router.navigateByUrl('class');
+            }
         });
     }
 
@@ -50,5 +68,9 @@ export class ViewClassComponent implements OnInit {
 
     makeClassGrading() {
         this.store.dispatch(new MakeClassAGrading(this.classId));
+    }
+
+    delete() {
+        this.store.dispatch(new DeleteClass(this.classId));
     }
 }

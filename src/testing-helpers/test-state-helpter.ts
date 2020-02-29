@@ -2,7 +2,7 @@ import { AuthenticationStates } from '../app/authentication/authentication-state
 import { createStudent, createStudentAll } from './student-test-helper';
 import { createClassWithAll } from './class-test-helper';
 
-export function emptyInitialState()  {
+export function emptyInitialState() {
     return {
         authentication: {
             user: null,
@@ -19,11 +19,11 @@ export function emptyInitialState()  {
         classes: {
             classes: [],
             selectedClass: null,
-        }
+        },
     };
 }
 
-export function popululdatedInitialState()  {
+export function popululdatedInitialState() {
     const student = createStudentAll();
 
     return {
@@ -42,6 +42,6 @@ export function popululdatedInitialState()  {
         classes: {
             classes: [createClassWithAll()],
             selectedClass: null,
-        }
+        },
     };
 }

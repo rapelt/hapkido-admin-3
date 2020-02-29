@@ -89,7 +89,7 @@ export class ClassesEffects {
     deleteClasses = this.actions.pipe(
         ofType(ActionTypes.Delete_class),
         mergeMap((action: DeleteClass) =>
-            this.classesService.deleteClass(action.payload.classId).pipe(
+            this.classesService.deleteClass(action.payload).pipe(
                 map(
                     (aClass: ClassModel) => {
                         return {

@@ -4,9 +4,13 @@
       <ion-back-button [defaultHref]="'/class/list'" class="cy-back-button"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="edit()">
+      <!-- <ion-button (click)="edit()">
         <ion-icon [icon]="'create'" ></ion-icon>
+      </ion-button> -->
+      <ion-button class="cy-delete-class" (click)="delete()" [disabled]="(aclass | async)?.attendance.length > 0">
+        <ion-icon [icon]="'trash'" ></ion-icon>
       </ion-button>
+      
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

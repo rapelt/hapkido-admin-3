@@ -54,9 +54,7 @@ export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
     constructor(
         public store: Store<AppState>,
         private actionsSubject: ActionsSubject
-    ) {
-
-    }
+    ) {}
 
     ngOnInit() {
         this.store.dispatch(new GetAllStudents());

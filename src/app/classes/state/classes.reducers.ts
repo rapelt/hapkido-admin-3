@@ -49,7 +49,7 @@ function getIndexOfStudentInClass(
 }
 
 function removeStudentFromClass(state, payload): ClassesState {
-    const index = getIndexOfClass(state.classes, state.viewingClass.classId);
+    const index = getIndexOfClass(state.classes, state.selectedClass.classId);
     const indexOfStudent = getIndexOfStudentInClass(
         state.classes[index],
         payload
@@ -66,7 +66,7 @@ function removeStudentFromClass(state, payload): ClassesState {
     return {
         ...state,
         classes: classes,
-        viewingClass: updateClass,
+        selectedClass: updateClass,
     };
 }
 
@@ -85,7 +85,7 @@ function addStudentToClass(state, payload): ClassesState {
     return {
         ...state,
         classes: classes,
-        viewingClass: updateClassWithStudent,
+        selectedClass: updateClassWithStudent,
     };
 }
 
@@ -94,14 +94,14 @@ function setSelectedClass(state, payload): ClassesState {
 
     return {
         ...state,
-        viewingClass: classSelected,
+        selectedClass: classSelected,
     };
 }
 
 function resetSelectedClass(state): ClassesState {
     return {
         ...state,
-        viewingClass: null,
+        selectedClass: null,
     };
 }
 
@@ -122,7 +122,7 @@ function addClass(state, payload): ClassesState {
 function deleteClass(state, payload): ClassesState {
     const deletedClassIdex = getIndexOfClass(
         state.classes,
-        state.selectedClass.classId
+        parseInt(payload.classid, 10)
     );
     const classes1 = [...state.classes];
     classes1.splice(deletedClassIdex, 1);
@@ -144,6 +144,6 @@ function makeClassAGrading(state, payload): ClassesState {
     return {
         ...state,
         classes: classes,
-        viewingClass: updateClass,
+        selectedClass: updateClass,
     };
 }

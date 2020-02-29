@@ -13,7 +13,6 @@ import { StudentModel } from '../../models/student';
     styleUrls: ['./missed-class-warning.component.scss'],
 })
 export class MissedClassWarningComponent implements OnInit, OnDestroy {
-
     shouldShowWarning;
 
     timeSinceLastClass;

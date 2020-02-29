@@ -24,9 +24,11 @@ export class StudentListPage implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        this.activatedRouteSubscriber = this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-            this.listType = params.get('active');
-        });
+        this.activatedRouteSubscriber = this.activatedRoute.paramMap.subscribe(
+            (params: ParamMap) => {
+                this.listType = params.get('active');
+            }
+        );
     }
 
     async showMore(ev) {

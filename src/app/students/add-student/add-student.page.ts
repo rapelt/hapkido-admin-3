@@ -154,5 +154,4 @@ export class AddStudentPage implements OnInit {
     cancel() {
         this.navController.navigateBack('/student/list/active');
     }
-
 }

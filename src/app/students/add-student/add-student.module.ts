@@ -11,26 +11,24 @@ import { MessagesModule } from '../../messages/messages.module';
 import { AddStudentPage } from './add-student.page';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: AddStudentPage
-  }
+    {
+        path: '',
+        component: AddStudentPage,
+    },
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    FormsModule,
-    MessagesModule,
-    CommonComponentsModule
-  ],
-  providers: [
-    CapitialisePipe
-  ],
-  declarations: [AddStudentPage]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
+        FormsModule,
+        MessagesModule,
+        CommonComponentsModule,
+    ],
+    providers: [CapitialisePipe],
+    declarations: [AddStudentPage],
 })
 export class AddStudentPageModule {}

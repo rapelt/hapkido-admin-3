@@ -36,10 +36,12 @@ export class ViewStudentPage implements OnInit, OnDestroy {
         this.store.dispatch(new GetAllStudents());
         this.store.dispatch(new GetAllClasses());
 
-        this.activatedRouteSubscriber = this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
-            this.studentId = params.get('studentId');
-            this.updateStudent();
-        });
+        this.activatedRouteSubscriber = this.activatedRoute.paramMap.subscribe(
+            (params: ParamMap) => {
+                this.studentId = params.get('studentId');
+                this.updateStudent();
+            }
+        );
     }
 
     updateStudent() {

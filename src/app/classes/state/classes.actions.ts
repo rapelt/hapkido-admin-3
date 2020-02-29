@@ -35,7 +35,7 @@ export class AddClasses implements Action {
 
 export class DeleteClass implements Action {
     readonly type = ActionTypes.Delete_class;
-    constructor(public payload: ClassModel) {}
+    constructor(public payload: string) {}
 }
 
 export class ViewClass implements Action {
