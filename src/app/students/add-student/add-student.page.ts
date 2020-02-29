@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NavController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
@@ -154,4 +154,5 @@ export class AddStudentPage implements OnInit {
     cancel() {
         this.navController.navigateBack('/student/list/active');
     }
+
 }

@@ -11,31 +11,26 @@
 // import { CapitialisePipe } from '../../common/pipes/capitialise.pipe';
 // import { MessagesModule } from '../../messages/messages.module';
 // import { MessagesService } from '../../messages/messages.service';
-//
+
 // import { EditStudentPage } from './edit-student.page';
 // import { AuthLibModule } from 'hapkido-auth-lib';
 // import { config } from '../../../environments/environment';
-//
+// import { popululdatedInitialState } from 'src/testing-helpers/test-state-helpter';
+
 // describe('EditStudentPage', () => {
 //     let component: EditStudentPage;
 //     let fixture: ComponentFixture<EditStudentPage>;
 //     let router: Router;
 //     let messageService: MessagesService;
-//
+
 //     let store: MockStore<{
 //         authentication: {
 //             authenticationState: string;
 //         };
 //     }>;
-//
-//     const initialState = {
-//         students: {
-//             students: [],
-//             selectedStudent: null,
-//             families: [],
-//         },
-//     };
-//
+
+//     const initialState = popululdatedInitialState();
+
 //     beforeEach(async(() => {
 //         TestBed.configureTestingModule({
 //             declarations: [EditStudentPage],
@@ -54,7 +49,7 @@
 //             ],
 //             providers: [provideMockStore({ initialState }), CapitialisePipe],
 //         }).compileComponents();
-//
+
 //         fixture = TestBed.createComponent(EditStudentPage);
 //         component = fixture.componentInstance;
 //         store = TestBed.get(Store);
@@ -63,7 +58,7 @@
 //         spyOn(store, 'dispatch').and.callThrough();
 //         fixture.detectChanges();
 //     }));
-//
+
 //     it('should create', () => {
 //         expect(component).toBeTruthy();
 //     });

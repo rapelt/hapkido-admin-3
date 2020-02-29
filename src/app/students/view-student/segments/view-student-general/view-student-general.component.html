@@ -1,6 +1,6 @@
 <div class="general-profile">
   <ion-item>
-    <ion-label text-wrap>
+    <ion-label >
       <ion-text class="ut-email-label" color="primary">
         <h3>Email</h3>
       </ion-text>
@@ -11,7 +11,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-label text-wrap>
+    <ion-label >
       <ion-text class="ut-preferred-class-label" color="primary">
         <h3>Preferred class</h3>
       </ion-text>
@@ -22,7 +22,7 @@
   </ion-item>
 
   <ion-item>
-    <ion-label text-wrap>
+    <ion-label >
       <ion-text class="ut-is-active-label" color="primary">
         <h3>Is active</h3>
       </ion-text>
@@ -33,7 +33,7 @@
   </ion-item>
 
   <ion-item *ngIf="(studentLastClass | async)?.date">
-    <ion-label text-wrap>
+    <ion-label >
       <ion-text class="ut-is-active-label" color="primary">
         <h3>Last class</h3>
       </ion-text>
@@ -45,7 +45,7 @@
   </ion-item>
 
   <ion-item *ngIf="(studentFamily | async)?.length > 0">
-    <ion-label text-wrap>
+    <ion-label >
       <ion-text class="ut-family-label" color="primary">
         <h3>Family Members</h3>
       </ion-text>

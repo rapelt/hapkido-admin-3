@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed, fakeAsync } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { Router } from '@angular/router';
@@ -15,6 +15,7 @@ import { MessagesService } from '../../messages/messages.service';
 import { AddStudentPage } from './add-student.page';
 import { AuthenticationGuard, AuthLibModule } from 'hapkido-auth-lib';
 import { config } from '../../../environments/environment';
+import { routes } from '../students-routing.module';
 
 describe('AddStudentPage', () => {
     let component: AddStudentPage;
@@ -46,17 +47,13 @@ describe('AddStudentPage', () => {
                 MessagesModule,
                 BrowserModule,
                 CommonComponentsModule,
-                IonicModule.forRoot({
-                    _testing: true,
-                }),
+                IonicModule,
                 AuthLibModule.forRoot(config),
-                RouterTestingModule.withRoutes([]),
+                RouterTestingModule.withRoutes(routes),
             ],
             providers: [provideMockStore({ initialState }), CapitialisePipe],
         }).compileComponents();
-    }));
 
-    beforeEach(() => {
         fixture = TestBed.createComponent(AddStudentPage);
         component = fixture.componentInstance;
         store = TestBed.get(Store);
@@ -64,24 +61,19 @@ describe('AddStudentPage', () => {
         messageService = TestBed.get(MessagesService);
         spyOn(store, 'dispatch').and.callThrough();
         fixture.detectChanges();
-    });
+    }));
 
     it('should create', () => {
         expect(component).toBeTruthy();
     });
 
-    // it('should redirect back to student list when cancel clicked', () => {
-    //     const navigateSpy = spyOn(router, 'navigateByUrl');
-    //
-    //     const route = {
-    //         path: null,
-    //         canLoad: [AuthenticationGuard],
-    //     };
-    //
-    //     component.cancel();
-    //
-    //     expect(navigateSpy).toHaveBeenCalledWith('/student/list/active', {});
-    // });
+    it('should redirect back to student list when cancel clicked', fakeAsync(() => {
+        const navigateSpy = spyOn(router, 'navigateByUrl');
+
+        component.cancel();
+
+        expect(navigateSpy).toHaveBeenCalled();
+    }));
 
     it('should display error message when form invalid', () => {
         spyOn(messageService.updateError, 'next').and.callThrough();

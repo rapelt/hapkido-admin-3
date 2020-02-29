@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -18,12 +18,15 @@ import {
     GetAllStudents,
 } from './students/state/students.actions';
 import { AuthStatesEnum, AuthStateService } from 'hapkido-auth-lib';
+import { debug } from 'util';
+import { take } from 'rxjs/operators';
+import { Observable, Subject } from 'rxjs';
 
 @Component({
     selector: 'app-root',
     templateUrl: 'app.component.html',
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, OnDestroy {
     public appPages = [
         {
             title: 'Home',
@@ -63,7 +66,7 @@ export class AppComponent implements OnInit {
         this.shouldShowSignOut =
             this.authState.isLoggedIn === AuthStatesEnum.LoggedIn;
 
-        this.authState._isLoggedInEvent.subscribe(isLoggedIn => {
+        this.authState._isLoggedInEvent.pipe(take(1)).subscribe(isLoggedIn => {
             this.shouldShowSignOut = isLoggedIn === AuthStatesEnum.LoggedIn;
 
             this.store.dispatch(new SignInSuccess(this.authState.cognitoUser));
@@ -89,5 +92,10 @@ export class AppComponent implements OnInit {
     signout() {
         console.log('logout');
         this.store.dispatch(new SignOut());
+    }
+
+    ngOnDestroy() {
+        this.authState._isLoggedInEvent.unsubscribe();
+        this.authState._messageInEvent.unsubscribe();
     }
 }

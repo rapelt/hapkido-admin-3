@@ -58,6 +58,7 @@ export class EditStudentPage implements OnInit, OnDestroy {
     studentId: string;
 
     studentOb: Observable<any>;
+    studentObservable;
 
     student: StudentModel = null;
 
@@ -82,6 +83,7 @@ export class EditStudentPage implements OnInit, OnDestroy {
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.studentId = params.get('studentId');
+            console.log(this.studentId);
             this.studentOb = this.store.select(
                 selectSelectedStudent(this.studentId)
             );
@@ -91,7 +93,8 @@ export class EditStudentPage implements OnInit, OnDestroy {
 
         this.classTypes = [ClassTypes.Adults, ClassTypes.Family];
 
-        this.studentOb.subscribe((student: StudentModel) => {
+        this.studentObservable = this.studentOb.subscribe((student: StudentModel) => {
+            debugger;
             this.student = student;
             this.editStudentForm = this.fb.group({
                 firstname: [
@@ -113,10 +116,6 @@ export class EditStudentPage implements OnInit, OnDestroy {
                 preferredClass: [student.preferredClass, [Validators.required]],
             });
         });
-    }
-
-    ngOnDestroy() {
-        // this.store.dispatch(new ResetSelectedStudent());
     }
 
     segmentChanged(something) {
@@ -164,5 +163,9 @@ export class EditStudentPage implements OnInit, OnDestroy {
             ],
             preferredClass: ['', [Validators.required]],
         });
+    }
+
+    ngOnDestroy() {
+        this.studentObservable.unsubscribe();
     }
 }

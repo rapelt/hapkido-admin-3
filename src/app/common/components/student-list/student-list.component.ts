@@ -5,6 +5,7 @@ import {
     OnChanges,
     OnInit,
     Output,
+    OnDestroy,
 } from '@angular/core';
 import { ActionsSubject, ReducerManagerDispatcher, Store } from '@ngrx/store';
 import { Observable, of } from 'rxjs';
@@ -30,7 +31,7 @@ import { emptyValidator } from '../../validators/empty.validator';
     templateUrl: './student-list.component.html',
     styleUrls: ['./student-list.component.scss'],
 })
-export class StudentListComponent implements OnChanges, OnInit {
+export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
     students: Observable<StudentModel[]> = of([]);
     filteredStudents: Observable<StudentModel[]> = of([]);
 
@@ -54,7 +55,13 @@ export class StudentListComponent implements OnChanges, OnInit {
         public store: Store<AppState>,
         private actionsSubject: ActionsSubject
     ) {
-        this.subsc = actionsSubject.subscribe(data => {
+
+    }
+
+    ngOnInit() {
+        this.store.dispatch(new GetAllStudents());
+
+        this.subsc = this.actionsSubject.subscribe(data => {
             console.log(data.type);
             if (
                 data.type === ActionTypes.Deactivate_student_success ||
@@ -69,10 +76,6 @@ export class StudentListComponent implements OnChanges, OnInit {
                 this.filteredStudents = this.students;
             }
         });
-    }
-
-    ngOnInit() {
-        this.store.dispatch(new GetAllStudents());
     }
 
     ngOnChanges() {
@@ -104,5 +107,10 @@ export class StudentListComponent implements OnChanges, OnInit {
     activate(studentID, index, slide) {
         this.store.dispatch(new ActivateStudent(studentID));
         slide.close();
+    }
+
+    ngOnDestroy() {
+        this.subsc.unsubscribe();
+        this.studentClickEvent.unsubscribe();
     }
 }

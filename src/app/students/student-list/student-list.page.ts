@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
@@ -11,9 +11,10 @@ import { SetSelectedStudent } from '../state/students.actions';
     templateUrl: './student-list.page.html',
     styleUrls: ['./student-list.page.scss'],
 })
-export class StudentListPage implements OnInit {
+export class StudentListPage implements OnInit, OnDestroy {
     listType = '';
     searchvalue = '';
+    activatedRouteSubscriber;
 
     constructor(
         public popoverController: PopoverController,
@@ -23,7 +24,7 @@ export class StudentListPage implements OnInit {
     ) {}
 
     ngOnInit() {
-        this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+        this.activatedRouteSubscriber = this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.listType = params.get('active');
         });
     }
@@ -51,5 +52,9 @@ export class StudentListPage implements OnInit {
 
     studentClicked(studentId: string) {
         this.router.navigate(['student/view/' + studentId]);
+    }
+
+    ngOnDestroy() {
+        this.activatedRouteSubscriber.unsubscribe();
     }
 }

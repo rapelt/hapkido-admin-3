@@ -1,10 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../../../state/app.reducers';
 import { selectSelectedStudentsLastClass } from '../../../students/state/students.selectors';
 import { ClassModel } from '../../models/class';
-import * as moment from 'moment';
+import * as moment from 'moment-timezone';
 import { StudentModel } from '../../models/student';
 
 @Component({
@@ -12,7 +12,8 @@ import { StudentModel } from '../../models/student';
     templateUrl: './missed-class-warning.component.html',
     styleUrls: ['./missed-class-warning.component.scss'],
 })
-export class MissedClassWarningComponent implements OnInit {
+export class MissedClassWarningComponent implements OnInit, OnDestroy {
+
     shouldShowWarning;
 
     timeSinceLastClass;
@@ -23,13 +24,15 @@ export class MissedClassWarningComponent implements OnInit {
     @Input()
     showDays = false;
 
+    studentSubscriber;
+
     constructor(public store: Store<AppState>) {}
 
     ngOnInit() {
         const studentLastClass = this.store.select(
             selectSelectedStudentsLastClass(this.student.hbId)
         );
-        studentLastClass.subscribe(aclass => {
+        this.studentSubscriber = studentLastClass.subscribe(aclass => {
             if (aclass) {
                 const lastClassDate = aclass.date;
                 const today = moment();
@@ -40,5 +43,9 @@ export class MissedClassWarningComponent implements OnInit {
                 this.shouldShowWarning = this.timeSinceLastClass > 60;
             }
         });
+    }
+
+    ngOnDestroy(): void {
+        this.studentSubscriber.unsubscribe();
     }
 }

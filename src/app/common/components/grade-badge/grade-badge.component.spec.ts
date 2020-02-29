@@ -13,7 +13,7 @@ describe('GradeBadgeComponent', () => {
         TestBed.configureTestingModule({
             declarations: [GradeBadgeComponent],
             providers: [GradeHelper],
-            imports: [IonicModule.forRoot()],
+            imports: [IonicModule],
         }).compileComponents();
 
         fixture = TestBed.createComponent(GradeBadgeComponent);

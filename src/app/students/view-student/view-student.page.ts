@@ -24,6 +24,8 @@ export class ViewStudentPage implements OnInit, OnDestroy {
 
     segment = 'general';
 
+    activatedRouteSubscriber;
+
     constructor(
         public router: Router,
         public activatedRoute: ActivatedRoute,
@@ -34,7 +36,7 @@ export class ViewStudentPage implements OnInit, OnDestroy {
         this.store.dispatch(new GetAllStudents());
         this.store.dispatch(new GetAllClasses());
 
-        this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+        this.activatedRouteSubscriber = this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.studentId = params.get('studentId');
             this.updateStudent();
         });
@@ -45,7 +47,7 @@ export class ViewStudentPage implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.store.dispatch(new ResetSelectedStudent());
+        this.activatedRouteSubscriber.unsubscribe();
     }
 
     segmentChanged(something) {

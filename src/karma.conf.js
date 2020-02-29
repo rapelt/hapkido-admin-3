@@ -38,6 +38,22 @@ module.exports = function (config) {
     preprocessors: {
       "**/*.ts": "karma-typescript"
     },
+    files: [
+      // 'node_modules/zone.js/dist/jasmine-patch.js'
+
+      // Adapter
+
+      // simple patterns to load the needed testfiles
+      // '**/*.ts',
+      // '**/*.spec.ts',
+      // './**.*'
+
+      // this file gets served but will be ignored by the watcher
+      // {pattern: 'compiled/index.html', watched: false},
+
+      // this file only gets watched but otherwise ignored
+      // {pattern: 'app/index.html', included: false, served: false}
+    ]
   });
 
 

@@ -1,6 +1,7 @@
 import * as moment from 'moment';
 import { ClassTypes } from '../app/common/models/class-types';
 import { StudentModel } from '../app/common/models/student';
+import { StudentsState } from '../app/students/state/students.reducers';
 
 export function createStudent(): StudentModel {
     return {
@@ -14,7 +15,9 @@ export function createStudent(): StudentModel {
         isAdmin: false,
         isActive: true,
         preferredClass: ClassTypes.Adults,
-        gradingDates: [{ grade: 1, date: moment('01/02/19') }],
+        gradingDates: [
+            { grade: 1, date: moment(new Date('01/02/19').toISOString()) },
+        ],
     };
 }
 
@@ -30,7 +33,9 @@ export function createStudentWithName(firstname, lastname): StudentModel {
         isAdmin: false,
         isActive: true,
         preferredClass: ClassTypes.Adults,
-        gradingDates: [{ grade: 1, date: moment('01/02/19') }],
+        gradingDates: [
+            { grade: 1, date: moment(new Date('01/02/19').toISOString()) },
+        ],
     };
 }
 
@@ -43,7 +48,9 @@ export function createStudentAll(
     isAdmin = false,
     isActive = true,
     preferredClass = ClassTypes.Adults,
-    gradingDates = [{ grade: 1, date: moment('01/02/19') }],
+    gradingDates = [
+        { grade: 1, date: moment(new Date('01/02/19').toISOString()) },
+    ],
     familyId = 1
 ): StudentModel {
     return {

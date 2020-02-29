@@ -12,6 +12,7 @@ import { Subject } from 'rxjs';
 import { MockToastController } from '../../../testing-helpers/ionic.mocks';
 
 import { MessageComponent } from './message.component';
+import { doesNotReject } from 'assert';
 
 describe('MessageComponent', () => {
     let component: MessageComponent;
@@ -23,9 +24,7 @@ describe('MessageComponent', () => {
             imports: [
                 CommonModule,
                 BrowserModule,
-                IonicModule.forRoot({
-                    _testing: true,
-                }),
+                IonicModule
             ],
 
             providers: [
@@ -50,42 +49,42 @@ describe('MessageComponent', () => {
         expect(component).toBeTruthy();
     });
 
-    // it('should show error toast', fakeAsync(() => {
-    //   const mockToastController = component.toastCtrl as any as MockToastController;
-    //   component.ngOnInit();
-    //
-    //   component.messagesService.updateError.next('error');
-    //
-    //   tick(1000);
-    //
-    //   expect(mockToastController.getLast().visible).toBeTruthy();
-    //   expect(mockToastController.getLast().message).toBe('error');
-    //   expect(mockToastController.getLast().color).toBe('danger');
-    // }));
-    //
-    // it('should show info toast', fakeAsync(() => {
-    //   const mockToastController = component.toastCtrl as any as MockToastController;
-    //   component.ngOnInit();
-    //
-    //   component.messagesService.updateInfo.next('info');
-    //
-    //   tick(1000);
-    //
-    //   expect(mockToastController.getLast().visible).toBeTruthy();
-    //   expect(mockToastController.getLast().message).toBe('info');
-    //   expect(mockToastController.getLast().color).toBe('warning');
-    // }));
-    //
-    // it('should show success toast', fakeAsync(() => {
-    //   const mockToastController = component.toastCtrl as any as MockToastController;
-    //   component.ngOnInit();
-    //
-    //   component.messagesService.updateSuccess.next('winner');
-    //
-    //   tick(1000);
-    //
-    //   expect(mockToastController.getLast().visible).toBeTruthy();
-    //   expect(mockToastController.getLast().message).toBe('winner');
-    //   expect(mockToastController.getLast().color).toBe('success');
-    // }));
+    it('should show error toast', fakeAsync(() => {
+      const mockToastController = component.toastCtrl as any as MockToastController;
+      component.ngOnInit();
+
+      component.messagesService.updateError.next('error');
+
+      tick(1000);
+
+      expect(mockToastController.getLast().visible).toBeTruthy();
+      expect(mockToastController.getLast().message).toBe('error');
+      expect(mockToastController.getLast().color).toBe('danger');
+    }));
+
+    it('should show info toast', fakeAsync(() => {
+      const mockToastController = component.toastCtrl as any as MockToastController;
+      component.ngOnInit();
+
+      component.messagesService.updateInfo.next('info');
+
+      tick(1000);
+
+      expect(mockToastController.getLast().visible).toBeTruthy();
+      expect(mockToastController.getLast().message).toBe('info');
+      expect(mockToastController.getLast().color).toBe('warning');
+    }));
+
+    it('should show success toast', fakeAsync(() => {
+      const mockToastController = component.toastCtrl as any as MockToastController;
+      component.ngOnInit();
+
+      component.messagesService.updateSuccess.next('winner');
+
+      tick(1000);
+
+      expect(mockToastController.getLast().visible).toBeTruthy();
+      expect(mockToastController.getLast().message).toBe('winner');
+      expect(mockToastController.getLast().color).toBe('success');
+    }));
 });

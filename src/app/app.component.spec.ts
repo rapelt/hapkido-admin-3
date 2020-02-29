@@ -120,49 +120,44 @@ describe('AppComponent', () => {
         expect(app.shouldShowSignOut).toEqual(true);
     });
 
-    // it('should have menu labels', async () => {
-    //     store.setState({
-    //         authentication: {
-    //             authenticationState: AuthenticationStates.LOGGEDIN,
-    //         },
-    //     });
-    //
-    //     const fixture = await TestBed.createComponent(AppComponent);
-    //     await fixture.detectChanges();
-    //     const app = fixture.nativeElement;
-    //     const menuItems = app.querySelectorAll('ion-label');
-    //     expect(menuItems.length).toEqual(4);
-    //     expect(menuItems[0].textContent).toContain('Home');
-    //     expect(menuItems[1].textContent).toContain('Students');
-    //     expect(menuItems[2].textContent).toContain('Settings');
-    // });
-    //
-    // it('should have urls', async () => {
-    //     store.setState({
-    //         authentication: {
-    //             authenticationState: AuthenticationStates.LOGGEDIN,
-    //         },
-    //     });
-    //
-    //     // const authStateService: AuthStateService = TestBed.get(
-    //     //     AuthStateService
-    //     // );
-    //     // authStateService.setIsLoggedIn(AuthStatesEnum.LoggedIn);
-    //
-    //     const fixture = await TestBed.createComponent(AppComponent);
-    //     await fixture.detectChanges();
-    //     const app = fixture.nativeElement;
-    //
-    //     const menuItems = app.querySelectorAll('ion-item');
-    //     expect(menuItems.length).toEqual(4);
-    //     expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual(
-    //         '/home'
-    //     );
-    //     expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual(
-    //         '/student'
-    //     );
-    //     expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual(
-    //         '/settings'
-    //     );
-    // });
+    it('should have menu labels', async () => {
+        localStorage.setItem('login', 'true');
+        const fixture = await TestBed.createComponent(AppComponent);
+
+        const authState: AuthStateService = TestBed.get(AuthStateService);
+        authState.setIsLoggedIn(AuthStatesEnum.LoggedIn);
+
+        await fixture.detectChanges();
+        const app = fixture.nativeElement;
+        const menuItems = app.querySelectorAll('ion-label');
+        expect(menuItems.length).toEqual(5);
+        expect(menuItems[0].textContent).toContain('Home');
+        expect(menuItems[1].textContent).toContain('Students');
+        expect(menuItems[2].textContent).toContain('Classes');
+        expect(menuItems[3].textContent).toContain('Settings');
+    });
+
+    it('should have urls', async () => {
+        localStorage.setItem('login', 'true');
+        const fixture = await TestBed.createComponent(AppComponent);
+
+        const authState: AuthStateService = TestBed.get(AuthStateService);
+        authState.setIsLoggedIn(AuthStatesEnum.LoggedIn);
+
+        await fixture.detectChanges();
+        const app = fixture.nativeElement;
+
+        const menuItems = app.querySelectorAll('ion-item');
+        expect(menuItems.length).toEqual(5);
+        expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual(
+            '/home'
+        );
+        expect(menuItems[1].getAttribute('ng-reflect-router-link')).toEqual(
+            '/student'
+        );
+
+        expect(menuItems[2].getAttribute('ng-reflect-router-link')).toEqual(
+            '/class'
+        );
+    });
 });

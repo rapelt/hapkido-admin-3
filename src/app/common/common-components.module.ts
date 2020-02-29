@@ -25,7 +25,7 @@ import {IonCalendar} from './components/calendar/calendar';
     MissedClassWarningComponent],
   imports: [
     CommonModule,
-    IonicModule.forRoot()
+    IonicModule
   ],
   providers: [
     GradeHelper

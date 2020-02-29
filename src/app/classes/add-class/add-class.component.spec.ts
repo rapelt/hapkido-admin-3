@@ -10,7 +10,7 @@
 //     beforeEach(async(() => {
 //         TestBed.configureTestingModule({
 //             declarations: [AddClassComponent],
-//             imports: [IonicModule.forRoot()],
+//             imports: [IonicModule],
 //         }).compileComponents();
 //
 //         fixture = TestBed.createComponent(AddClassComponent);

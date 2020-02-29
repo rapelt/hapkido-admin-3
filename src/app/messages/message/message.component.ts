@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastController } from '@ionic/angular';
 import { MessagesService } from '../messages.service';
 
@@ -7,7 +7,7 @@ import { MessagesService } from '../messages.service';
   templateUrl: './message.component.html',
   styleUrls: ['./message.component.scss']
 })
-export class MessageComponent implements OnInit {
+export class MessageComponent implements OnInit, OnDestroy {
 
   constructor(public toastCtrl: ToastController, public messagesService: MessagesService) {
   }
@@ -64,6 +64,12 @@ export class MessageComponent implements OnInit {
       cssClass: 'cy-success'
     });
     toast.present();
+  }
+
+  ngOnDestroy() {
+    this.messagesService.updateError.unsubscribe();
+    this.messagesService.updateInfo.unsubscribe();
+    this.messagesService.updateSuccess.unsubscribe();
   }
 
 

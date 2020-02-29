@@ -1,5 +1,5 @@
-import { Moment } from 'moment';
-import * as moment from 'moment';
+import { Moment } from 'moment-timezone';
+import * as moment from 'moment-timezone';
 import { ClassModel } from '../app/common/models/class';
 import { ClassTypes } from '../app/common/models/class-types';
 
@@ -7,7 +7,7 @@ export function createClass(): ClassModel {
     return {
         classId: '1',
         classType: 'Adults',
-        attendance: [],
+        attendance: ['hb001'],
         isGrading: false,
         date: moment(),
         startTime: '16:00',
@@ -28,9 +28,9 @@ export function createClassWithDate(date: Moment): ClassModel {
 export function createClassWithAll(
     classId = '1',
     classType = ClassTypes.Adults,
-    attendance = ['hb088'],
+    attendance = ['hb088', 'hb001'],
     isGrading = false,
-    date = moment(),
+    date = moment().tz('Australia/Brisbane'),
     startTime = '16:00'
 ): ClassModel {
     return {
