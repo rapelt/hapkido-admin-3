@@ -40,7 +40,7 @@
           <h3>Date</h3>
         </ion-text>
         <ion-text class="ut-date cy-date">
-          {{(aclass | async)?.date | date: 'dd MMM yyyy'}}
+          {{(aclass | async)?.date | date: 'dd MMM yyyy': '+1000'}}
         </ion-text>
       </ion-label>
     </ion-item>
@@ -51,7 +51,7 @@
           <h3>Time</h3>
         </ion-text>
         <ion-text class="ut-time cy-time">
-          {{(aclass | async)?.date | date: 'h:mm aa'}}
+          {{(aclass | async)?.date | date: 'h:mm aa': '+1000'}}
         </ion-text>
       </ion-label>
     </ion-item>
