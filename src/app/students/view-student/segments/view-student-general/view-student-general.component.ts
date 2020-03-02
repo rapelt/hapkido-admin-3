@@ -8,6 +8,10 @@ import {
     selectSelectedStudentFamilyMembers,
     selectSelectedStudentsLastClass,
 } from '../../../state/students.selectors';
+import {
+    ActivateStudent,
+    DeactivateStudent,
+} from '../../../state/students.actions';
 
 @Component({
     selector: 'app-view-student-general',
@@ -36,5 +40,13 @@ export class ViewStudentGeneralComponent implements OnInit {
         this.studentLastClass = this.store.select(
             selectSelectedStudentsLastClass(this.studentId)
         );
+    }
+
+    deactivateStudent() {
+        this.store.dispatch(new DeactivateStudent(this.studentId));
+    }
+
+    activateStudent() {
+        this.store.dispatch(new ActivateStudent(this.studentId));
     }
 }

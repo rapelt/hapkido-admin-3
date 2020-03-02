@@ -36,11 +36,15 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
                 students: [...state.students, action.payload],
             };
         case ActionTypes.Edit_student_success:
+            console.log(action.payload);
             const editedStudent = {
                 ...action.payload,
             };
             const editStudentIndex = state.students.findIndex(s => {
-                return s.hbId === action.payload.hbId ? true : false;
+                return s.hbId.toLowerCase() ===
+                    action.payload.hbId.toLowerCase()
+                    ? true
+                    : false;
             });
 
             const editStudentsList = [...state.students];
@@ -49,6 +53,7 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
             return {
                 ...state,
                 students: editStudentsList,
+                selectedStudent: editedStudent,
             };
         case ActionTypes.Set_selected_student:
             const student = state.students.find(s => {

@@ -17,22 +17,22 @@
 
       <ion-item>
         <ion-label position="stacked">Firstname</ion-label>
-        <ion-input formControlName="firstname" name="firstname" type="text"></ion-input>
+        <ion-input class="cy-form-control-firstname" formControlName="firstname" name="firstname" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked">Lastname</ion-label>
-        <ion-input formControlName="lastname" name="lastname" type="text"></ion-input>
+        <ion-input class="cy-form-control-lastname" formControlName="lastname" name="lastname" type="text"></ion-input>
       </ion-item>
 
       <ion-item>
         <ion-label position="stacked" class="ut-is-active-label" color="primary">Email</ion-label>
-        <ion-input formControlName="email" name="email" type="text"></ion-input>
+        <ion-input class="cy-form-control-email" formControlName="email" name="email" type="text"></ion-input>
       </ion-item>
 
       <ion-item  lines="inset" class="cy-class-type">
         <ion-label position="stacked" class="ut-is-active-label" color="primary">Preferred Class</ion-label>
-        <ion-select name="preferredClass" okText="Okay" cancelText="Cancel" formControlName="preferredClass">
+        <ion-select class="cy-form-control-preferred-class" name="preferredClass" okText="Okay" cancelText="Cancel" formControlName="preferredClass">
           <ion-select-option [value]="classtype" *ngFor="let classtype of classTypes">{{classtype}}</ion-select-option>
         </ion-select>
       </ion-item>
@@ -51,7 +51,7 @@
       <ion-button (click)="cancel()">Cancel</ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button (click)="save()">Save</ion-button>
+      <ion-button (click)="save()" class="cy-save">Save</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-footer>

@@ -6,6 +6,7 @@ import { AppState } from '../../state/app.reducers';
 import {
     AddNewStudent,
     EditStudent,
+    GetAllStudents,
     ResetSelectedStudent,
     SetSelectedStudent,
 } from '../state/students.actions';
@@ -18,6 +19,7 @@ import * as moment from 'moment';
 import { CapitialisePipe } from '../../common/pipes/capitialise.pipe';
 import { MessagesService } from '../../messages/messages.service';
 import { NavController } from '@ionic/angular';
+import { GetAllClasses } from '../../classes/state/classes.actions';
 
 @Component({
     selector: 'app-edit-student',
@@ -81,44 +83,51 @@ export class EditStudentPage implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
+        this.store.dispatch(new GetAllStudents());
+        this.store.dispatch(new GetAllClasses());
+
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.studentId = params.get('studentId');
             this.studentOb = this.store.select(
                 selectSelectedStudent(this.studentId)
             );
+
+            this.studentObservable = this.studentOb.subscribe(
+                (student: StudentModel) => {
+                    this.student = student;
+
+                    if (this.student === null) {
+                        return;
+                    }
+                    this.editStudentForm = this.fb.group({
+                        firstname: [
+                            student.name.firstname,
+                            [Validators.maxLength(100), emptyValidator()],
+                        ],
+                        lastname: [
+                            student.name.lastname,
+                            [Validators.maxLength(100), emptyValidator()],
+                        ],
+                        email: [
+                            student.email,
+                            [
+                                Validators.email,
+                                Validators.maxLength(100),
+                                emptyValidator(),
+                            ],
+                        ],
+                        preferredClass: [
+                            student.preferredClass,
+                            [Validators.required],
+                        ],
+                    });
+                }
+            );
+
+            this.initialiseForm();
         });
 
-        this.initialiseForm();
-
         this.classTypes = [ClassTypes.Adults, ClassTypes.Family];
-
-        this.studentObservable = this.studentOb.subscribe(
-            (student: StudentModel) => {
-                this.student = student;
-                this.editStudentForm = this.fb.group({
-                    firstname: [
-                        student.name.firstname,
-                        [Validators.maxLength(100), emptyValidator()],
-                    ],
-                    lastname: [
-                        student.name.lastname,
-                        [Validators.maxLength(100), emptyValidator()],
-                    ],
-                    email: [
-                        student.email,
-                        [
-                            Validators.email,
-                            Validators.maxLength(100),
-                            emptyValidator(),
-                        ],
-                    ],
-                    preferredClass: [
-                        student.preferredClass,
-                        [Validators.required],
-                    ],
-                });
-            }
-        );
     }
 
     segmentChanged(something) {

@@ -70,7 +70,7 @@ describe('View Class List', function() {
       expect(list[0].textContent).to.contain('3');
 
       expect(list[1].textContent).to.contain('Family');
-      expect(list[1].textContent).to.contain('5');
+      expect(list[1].textContent).to.contain('6');
     });
   });
 });

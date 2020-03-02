@@ -50,7 +50,7 @@ describe('View Class Details', function() {
       expect(list[0].textContent).to.contain('3');
 
       expect(list[1].textContent).to.contain('Family');
-      expect(list[1].textContent).to.contain('5');
+      expect(list[1].textContent).to.contain('6');
     });
 
     cy.get('.list-md > :nth-child(1) > .sc-ion-label-md-h').click();

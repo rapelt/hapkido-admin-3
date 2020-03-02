@@ -30,6 +30,12 @@
         {{(student | async)?.isActive === true? 'Active' : 'Inactive'}}
       </ion-text>
     </ion-label>
+    <ion-button class="cy-deactivate-student" slot="end" *ngIf="(student | async)?.isActive === true" (click)="deactivateStudent()">
+      Deactivate Student
+    </ion-button>
+    <ion-button class="cy-activate-student" slot="end" *ngIf="(student | async)?.isActive === false" (click)="activateStudent()">
+      Activate Student
+    </ion-button>
   </ion-item>
 
   <ion-item *ngIf="(studentLastClass | async)?.date">
