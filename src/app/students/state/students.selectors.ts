@@ -1,9 +1,17 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import {
+    createFeatureSelector,
+    createSelector,
+    MemoizedSelectorWithProps,
+} from '@ngrx/store';
 import { getClassState } from '../../classes/state/classes.selectors';
 import { StudentModel } from '../../common/models/student';
 import { StudentsState } from './students.reducers';
 import * as fromStudents from './students.reducers';
 import * as moment from 'moment';
+import { forEach } from '@angular-devkit/schematics';
+import { pipe } from 'rxjs';
+import { select } from '@ngrx/core';
+import { map } from 'rxjs/operators';
 
 export const getStudentsState = createFeatureSelector<StudentsState>(
     fromStudents.STUDENTS_FEATURE_NAME
@@ -68,6 +76,33 @@ export const selectSelectedStudentClassDates = (id: string) =>
             });
         }
     );
+
+export const selectStudentsWhoAttendedClass = (studentIds: string[]) =>
+    createSelector(getStudentsState, studentsState => {
+        return studentIds.map(id => {
+            return studentsState.students.find(s => {
+                return s.hbId.toLowerCase() === id.toLowerCase();
+            });
+        });
+    });
+
+export const selectStudentsWhoAttendedClass2 = createSelector(
+    getStudentsState,
+    (studentState, props) => {
+        return props.studentIds.map(id => {
+            return studentState.students.find(s => {
+                return s.hbId.toLowerCase() === id.toLowerCase();
+            });
+        });
+    }
+);
+
+export const selectStudentsWhoDidntAttendedClass = (studentIds: string[]) =>
+    createSelector(getStudentsState, studentsState => {
+        return studentsState.students.filter((student: StudentModel) => {
+            return studentIds.indexOf(student.hbId) < 0;
+        });
+    });
 
 export const selectSelectedStudentFamilyMembers = (studentId: string) =>
     createSelector(getStudentsState, studentsState => {

@@ -49,10 +49,10 @@ function getIndexOfStudentInClass(
 }
 
 function removeStudentFromClass(state, payload): ClassesState {
-    const index = getIndexOfClass(state.classes, state.selectedClass.classId);
+    const index = getIndexOfClass(state.classes, parseInt(payload.classId, 10));
     const indexOfStudent = getIndexOfStudentInClass(
         state.classes[index],
-        payload
+        payload.studentId
     );
     const classes = [...state.classes];
     let updateClass;
@@ -71,17 +71,14 @@ function removeStudentFromClass(state, payload): ClassesState {
 }
 
 function addStudentToClass(state, payload): ClassesState {
-    const classIndex = getIndexOfClass(
-        state.classes,
-        state.selectedClass.classId
-    );
+    const index = getIndexOfClass(state.classes, parseInt(payload.classId, 10));
 
     const updateClassWithStudent = {
-        ...state.classes[classIndex],
+        ...state.classes[index],
     };
-    updateClassWithStudent.attendance.push(payload);
+    updateClassWithStudent.attendance.push(payload.studentId);
     const classes = [...state.classes];
-    classes[classIndex] = updateClassWithStudent;
+    classes[index] = updateClassWithStudent;
     return {
         ...state,
         classes: classes,

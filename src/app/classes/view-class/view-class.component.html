@@ -4,9 +4,6 @@
       <ion-back-button [defaultHref]="'/class/list'" class="cy-back-button"></ion-back-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <!-- <ion-button (click)="edit()">
-        <ion-icon [icon]="'create'" ></ion-icon>
-      </ion-button> -->
       <ion-button class="cy-delete-class" (click)="delete()" [disabled]="(aclass | async)?.attendance.length > 0">
         <ion-icon [icon]="'trash'" ></ion-icon>
       </ion-button>
@@ -16,85 +13,35 @@
 </ion-header>
 
 <ion-content>
-  <div class="profile" *ngIf="segment === 'general'">
+  <div class="profile" >
     <ion-text color="secondary" class="cy-class-title">
       <h1>{{(aclass | async)?.date | date: 'dd MMM yyyy'}} - {{(aclass | async)?.classType | capitialise}} Class</h1>
     </ion-text>
   </div>
 
-  <div class="general-class">
-    <ion-item>
-      <ion-label >
-        <ion-text class="ut-class-type-label cy-class-type-label" color="primary">
-          <h3>Class Type</h3>
-        </ion-text>
-        <ion-text class="ut-class-type cy-class-type">
-          {{(aclass | async)?.classType}}
-        </ion-text>
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label >
-        <ion-text class="ut-date-label cy-date-label" color="primary">
-          <h3>Date</h3>
-        </ion-text>
-        <ion-text class="ut-date cy-date">
-          {{(aclass | async)?.date | date: 'dd MMM yyyy': '+1000'}}
-        </ion-text>
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label >
-        <ion-text class="ut-time-label cy-time-label" color="primary">
-          <h3>Time</h3>
-        </ion-text>
-        <ion-text class="ut-time cy-time">
-          {{(aclass | async)?.date | date: 'h:mm aa': '+1000'}}
-        </ion-text>
-      </ion-label>
-    </ion-item>
-
-    <ion-item>
-      <ion-label >
-        <ion-text class="ut-grading-label cy-grading-label" color="primary">
-          <h3>Grading</h3>
-        </ion-text>
-        <ion-text class="ut-grading cy-grading">
-          {{(aclass | async)?.isGrading ? 'True' : 'False'}}
-        </ion-text>
-      </ion-label>
-      <ion-button class="cy-make-class-a-grading-btn" slot="end" *ngIf="!(aclass | async)?.isGrading" (click)="makeClassGrading()">
-        Make this class a grading
-      </ion-button>
-    </ion-item>
+  <div class="general-class" *ngIf="segment === 'general'">
+    <app-class-view-general></app-class-view-general>
   </div>
 
-  <ion-item>
-    <ion-label >
-      <ion-text class="ut-attendance-label cy-attendance-label" color="primary">
-        <h3>Total attendance</h3>
-      </ion-text>
-      <ion-text class="ut-attendance cy-attendance">
-        {{(aclass | async)?.attendance.length}}
-      </ion-text>
-    </ion-label>
-  </ion-item>
+  <div *ngIf="segment === 'attendance'">
+    <app-view-attendance></app-view-attendance>
+  </div>
 
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="cy-add-attendance-btn" color="tertiary" (click)="attendance()">
+      <ion-icon name="person-add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 
-  <!--  <app-view-student-general *ngIf="segment === 'general'" [studentId]="studentId"> </app-view-student-general>-->
-<!--  <app-view-student-dates *ngIf="segment === 'dates'" [studentId]="studentId"></app-view-student-dates>-->
-<!--  <app-view-student-payments *ngIf="segment === 'payments'"></app-view-student-payments>-->
 </ion-content>
 
 <ion-footer>
   <ion-toolbar>
     <ion-segment (ionChange)="segmentChanged($event)" color="secondary">
-      <ion-segment-button value="general" checked>
+      <ion-segment-button value="general" checked class="cy-class-details-general">
         <ion-icon name="calendar"></ion-icon>
       </ion-segment-button>
-      <ion-segment-button value="dates">
+      <ion-segment-button value="attendance" class="cy-class-details-attendance">
         <ion-icon name="people"></ion-icon>
       </ion-segment-button>
     </ion-segment>

@@ -10,6 +10,8 @@ import { ClassesPage } from './classes.page';
 import { AddClassComponent } from './add-class/add-class.component';
 import { EditClassComponent } from './edit-class/edit-class.component';
 import { ViewClassComponent } from './view-class/view-class.component';
+import { ViewAttendanceComponent } from './view-class/segments/view-attendance/view-attendance.component';
+import { ClassViewGeneralComponent } from './view-class/segments/class-view-general/class-view-general.component';
 
 @NgModule({
     imports: [
@@ -26,6 +28,8 @@ import { ViewClassComponent } from './view-class/view-class.component';
         AddClassComponent,
         EditClassComponent,
         ViewClassComponent,
+        ViewAttendanceComponent,
+        ClassViewGeneralComponent,
     ],
 })
 export class ClassesPageModule {}

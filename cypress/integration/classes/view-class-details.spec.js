@@ -70,6 +70,30 @@ describe('View Class Details', function() {
     cy.get('.cy-attendance').contains('3');
   });
 
+  it('should see class attendance details', function() {
+    window.localStorage.setItem('login', true);
+    cy.visit('/class/view/2');
+    cy.url().should('include', '/class/view/2');
+    cy.get('.cy-class-details-attendance').click();
+    cy.wait(500);
+    cy.get('ion-card-header').contains('3');
+    cy.get('.cy-student-in-attendance').then((student) => {
+      console.log(student);
+      expect(student[0].textContent).to.contain('Firstname0 Lastname0');
+      expect(student[1].textContent).to.contain('Firstname1 Lastname1');
+      expect(student[2].textContent).to.contain('Firstname2 Lastname2');
+    });
+  });
+
+  it('should see class attendance details no attendance', function() {
+    window.localStorage.setItem('login', true);
+    cy.visit('/class/view/4');
+    cy.url().should('include', '/class/view/4');
+    cy.get('.cy-class-details-attendance').click();
+    cy.get('ion-card-header').contains('0');
+    cy.get('.cy-no-attendance-list').contains('No one was in attendance');
+  });
+
   it('should be able to set class as a grading', function() {
     cy.route({
       method: 'POST',

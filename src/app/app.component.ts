@@ -4,13 +4,11 @@ import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Store } from '@ngrx/store';
-import { AuthenticationStates } from './authentication/authentication-states';
 import {
     SetUserAttributes,
     SignInSuccess,
     SignOut,
 } from './authentication/state/authentication.actions';
-import { selectAuthenticationState } from './authentication/state/authentication.selectors';
 import { GetAllClasses } from './classes/state/classes.actions';
 import { AppState } from './state/app.reducers';
 import {
@@ -18,9 +16,7 @@ import {
     GetAllStudents,
 } from './students/state/students.actions';
 import { AuthStatesEnum, AuthStateService } from 'hapkido-auth-lib';
-import { debug } from 'util';
 import { take } from 'rxjs/operators';
-import { Observable, Subject } from 'rxjs';
 
 @Component({
     selector: 'app-root',

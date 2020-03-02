@@ -22,6 +22,7 @@ import { MessagesModule } from './messages/messages.module';
 import { reducers } from './state/app.reducers';
 import { StudentsEffects } from './students/state/students.effects';
 import { StudentsModule } from './students/students.module';
+import { AttendanceModule } from './attendance/attendance.module';
 
 @NgModule({
     declarations: [AppComponent, MockComponent],
@@ -39,6 +40,7 @@ import { StudentsModule } from './students/students.module';
         StoreDevtoolsModule.instrument(),
         MessagesModule,
         StudentsModule,
+        AttendanceModule,
         HttpClientModule,
         AuthLibModule.forRoot(config),
     ],

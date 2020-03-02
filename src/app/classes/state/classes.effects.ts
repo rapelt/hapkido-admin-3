@@ -120,7 +120,10 @@ export class ClassesEffects {
                         (student: StudentModel) => {
                             return {
                                 type: ActionTypes.Add_student_to_class_success,
-                                payload: student['studentId'],
+                                payload: {
+                                    studentId: student['studentId'],
+                                    classId: action.payload.classId,
+                                },
                             };
                         },
                         catchError(error => {
@@ -147,7 +150,10 @@ export class ClassesEffects {
                             return {
                                 type:
                                     ActionTypes.Remove_student_from_class_success,
-                                payload: student['studentId'],
+                                payload: {
+                                    studentId: student['studentId'],
+                                    classId: action.payload.classId,
+                                },
                             };
                         },
                         catchError(error => {

@@ -74,12 +74,12 @@ export class DeleteClassSuccess implements Action {
 
 export class AddStudentToClassSuccess implements Action {
     readonly type = ActionTypes.Add_student_to_class_success;
-    constructor(public payload: string) {}
+    constructor(public payload: { classId: string; studentId: string }) {}
 }
 
 export class RemoveStudentFromClassSuccess implements Action {
     readonly type = ActionTypes.Remove_student_from_class_success;
-    constructor(public payload: string) {}
+    constructor(public payload: { classId: string; studentId: string }) {}
 }
 
 export class MakeClassAGradingSuccess implements Action {

@@ -1,0 +1,45 @@
+<ion-card>
+  <ion-card-header>
+    <ion-item>
+      Attendance ({{attendance.length}})
+<!--      <button ion-button outline item-end color="orange" (click)="editAttedanceButton()">Edit</button>-->
+    </ion-item>
+  </ion-card-header>
+  <ion-card-content *ngIf="attendance.length > 0" class="cy-attendance-list attendance-list">
+    <p *ngFor="let student of attendance" class="cy-student-in-attendance">
+      {{student?.name.firstname | capitialise}} {{student?.name.lastname | capitialise}}
+    </p>
+  </ion-card-content>
+  <ion-card-content *ngIf="attendance.length == 0" class="cy-no-attendance-list no-attendance-list">
+    <p>No one was in attendance</p>
+  </ion-card-content>
+</ion-card>
+
+
+
+<!--<ion-card *ngIf="selectedClass.isGrading">-->
+<!--  <ion-card-header>-->
+<!--    <ion-item>-->
+<!--      Gradings-->
+<!--      <button ion-button outline item-end color="orange" (click)="editGradingButton()">Edit</button>-->
+<!--    </ion-item>-->
+<!--  </ion-card-header>-->
+<!--  <ion-card-content *ngIf="studentsGradedInClass.length > 0">-->
+<!--    <ion-list>-->
+<!--      <div *ngFor="let student of studentsGradedInClass">-->
+<!--        <ion-item *ngIf="student.didGrade">-->
+<!--          <span>{{student.name.firstname}} {{student.name.lastname}}</span>-->
+<!--          <span item-end>-->
+<!--            <grade-badge [grade]="student.gradeBeforeGrading"></grade-badge>-->
+<!--            <span class="grade-to" *ngIf="student.didGrade"><ion-icon name="arrow-round-forward"></ion-icon>-->
+<!--              <grade-badge [grade]="student.gradeAfterGrading"></grade-badge>-->
+<!--            </span>-->
+<!--          </span>-->
+<!--        </ion-item>-->
+<!--      </div>-->
+<!--    </ion-list>-->
+<!--  </ion-card-content>-->
+<!--  <ion-card-content *ngIf="studentsGradedInClass.length === 0">-->
+<!--    <p>No one graded</p>-->
+<!--  </ion-card-content>-->
+<!--</ion-card>-->

@@ -1,29 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { GetAllStudents } from '../../students/state/students.actions';
 import {
     ActionTypes,
-    DeleteClass,
     GetAllClasses,
     MakeClassAGrading,
-} from '../state/classes.actions';
+} from '../../../state/classes.actions';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { AppState } from '../../state/app.reducers';
-import {
-    selectActiveStudents,
-    selectInactiveStudents,
-    selectSelectedStudent,
-} from '../../students/state/students.selectors';
-import { ClassModel } from '../../common/models/class';
+import { AppState } from '../../../../state/app.reducers';
 import { Observable } from 'rxjs';
-import { selectSelectedClass } from '../state/classes.selectors';
+import { ClassModel } from '../../../../common/models/class';
+import { GetAllStudents } from '../../../../students/state/students.actions';
+import { selectSelectedClass } from '../../../state/classes.selectors';
 
 @Component({
-    selector: 'app-view-class',
-    templateUrl: './view-class.component.html',
-    styleUrls: ['./view-class.component.scss'],
+    selector: 'app-class-view-general',
+    templateUrl: './class-view-general.component.html',
+    styleUrls: ['./class-view-general.component.scss'],
 })
-export class ViewClassComponent implements OnInit, OnDestroy {
+export class ClassViewGeneralComponent implements OnInit, OnDestroy {
     classId: string;
     aclass: Observable<ClassModel>;
     segment: string;
@@ -43,34 +37,19 @@ export class ViewClassComponent implements OnInit, OnDestroy {
 
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.classId = params.get('classId');
-            this.updateClass();
+            this.aclass = this.store.select(selectSelectedClass(this.classId));
         });
 
         this.subsc = this.actionsSubject.subscribe(data => {
+            console.log(data.type);
             if (data.type === ActionTypes.Delete_class_success) {
                 this.router.navigateByUrl('class');
             }
         });
     }
 
-    updateClass() {
-        this.aclass = this.store.select(selectSelectedClass(this.classId));
-    }
-
-    edit() {
-        this.router.navigateByUrl('class/edit/' + this.classId);
-    }
-
-    segmentChanged(event) {
-        this.segment = event.detail.value;
-    }
-
-    delete() {
-        this.store.dispatch(new DeleteClass(this.classId));
-    }
-
-    attendance() {
-        this.router.navigateByUrl('attendance/' + this.classId);
+    makeClassGrading() {
+        this.store.dispatch(new MakeClassAGrading(this.classId));
     }
 
     ngOnDestroy(): void {

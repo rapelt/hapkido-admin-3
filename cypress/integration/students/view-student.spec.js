@@ -33,13 +33,13 @@ describe('Students List', function() {
         cy.url().should('include', '/student/list');
 
         cy.get(':nth-child(3) > ion-item-sliding.md > .cy-student-list-item').should('be.visible').click();
-        cy.url().should('include', '/student/view/hb088');
+        cy.url().should('include', '/student/view/hb003');
   });
 
   it('should allow see a students name, preferred class and active status', function() {
     window.localStorage.setItem('login', true);
-    cy.visit('/student/view/hb088');
-    cy.url().should('include', '/student/view/hb088');
+    cy.visit('/student/view/hb003');
+    cy.url().should('include', '/student/view/hb003');
 
     cy.get('h1').contains('Firstname2 Lastname2');
     cy.get('.ut-short-name').contains('Red 1');

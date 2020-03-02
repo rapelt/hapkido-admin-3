@@ -4,37 +4,38 @@ import { Observable } from 'rxjs';
 import { StudentModel } from '../../../../common/models/student';
 import { AppState } from '../../../../state/app.reducers';
 import {
-  selectSelectedStudent,
-  selectSelectedStudentFamilyMembers,
-  selectSelectedStudentsLastClass
+    selectSelectedStudent,
+    selectSelectedStudentFamilyMembers,
+    selectSelectedStudentsLastClass,
 } from '../../../state/students.selectors';
 
 @Component({
-  selector: 'app-view-student-general',
-  templateUrl: './view-student-general.component.html',
-  styleUrls: ['./view-student-general.component.scss']
+    selector: 'app-view-student-general',
+    templateUrl: './view-student-general.component.html',
+    styleUrls: ['./view-student-general.component.scss'],
 })
 export class ViewStudentGeneralComponent implements OnInit {
+    @Input()
+    studentId: string;
 
-  @Input()
-  studentId: string;
+    student: Observable<any>;
+    studentLastClass: Observable<any>;
+    studentFamily: Observable<any>;
 
-  student: Observable<any>;
-  studentLastClass: Observable<any>;
-  studentFamily: Observable<any>;
+    lastClassIsTooLongAgo = false;
 
-  lastClassIsTooLongAgo = false;
+    timeSinceLastClass;
 
-  timeSinceLastClass;
+    constructor(public store: Store<AppState>) {}
 
-
-  constructor(
-    public store: Store<AppState>
-  ) { }
-
-  ngOnInit() {
-    this.student = this.store.select(selectSelectedStudent(this.studentId));
-    this.studentFamily = this.store.select(selectSelectedStudentFamilyMembers(this.studentId));
-    this.studentLastClass = this.store.select(selectSelectedStudentsLastClass(this.studentId));
-  }
+    ngOnInit() {
+        debugger;
+        this.student = this.store.select(selectSelectedStudent(this.studentId));
+        this.studentFamily = this.store.select(
+            selectSelectedStudentFamilyMembers(this.studentId)
+        );
+        this.studentLastClass = this.store.select(
+            selectSelectedStudentsLastClass(this.studentId)
+        );
+    }
 }

@@ -32,7 +32,6 @@ import { emptyValidator } from '../../validators/empty.validator';
     styleUrls: ['./student-list.component.scss'],
 })
 export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
-    students: Observable<StudentModel[]> = of([]);
     filteredStudents: Observable<StudentModel[]> = of([]);
 
     selectSelectedStudentsLastClass = selectSelectedStudentsLastClass;
@@ -48,6 +47,9 @@ export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
     @Input()
     shouldShowWarning = false;
 
+    @Input()
+    students: Observable<StudentModel[]> = of([]);
+
     @Output()
     studentClickEvent: EventEmitter<string> = new EventEmitter<string>();
 
@@ -60,7 +62,6 @@ export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
         this.store.dispatch(new GetAllStudents());
 
         this.subsc = this.actionsSubject.subscribe(data => {
-            console.log(data.type);
             if (
                 data.type === ActionTypes.Deactivate_student_success ||
                 data.type === ActionTypes.Activate_student_success ||
@@ -80,6 +81,7 @@ export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
         this.filteredStudents = this.students.pipe(
             map(students =>
                 students.filter(student => {
+                    console.log(student);
                     return (
                         student.name.firstname
                             .toLocaleLowerCase()
