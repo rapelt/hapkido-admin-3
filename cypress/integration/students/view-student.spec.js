@@ -62,6 +62,22 @@ describe('Students List', function() {
   });
 
   it('should deactive and activate a student', function() {
+    cy.route({
+      method: 'POST',
+      response: {"studentId":"HB001"},
+      status: 200,
+      url: '/student/reactivate/*',
+    }).as('ActivateStudent');
+
+
+    cy.route({
+      method: 'POST',
+      response: {"studentId":"HB001"},
+      status: 200,
+      url: '/student/deactivate/*',
+    }).as('DeactivateStudent');
+
+
     window.localStorage.setItem('login', true);
     cy.visit('/student/view/hb001');
     cy.url().should('include', '/student/view/hb001');
