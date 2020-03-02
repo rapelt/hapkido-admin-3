@@ -15,6 +15,12 @@ describe('Edit Students', () => {
 
         cy.route({
             method: 'GET', // Route all GET requests
+            response: '@studentsJSON',
+            url: '/student/all', // that have a URL that matches '/users/*'
+        });
+
+        cy.route({
+            method: 'GET', // Route all GET requests
             response: '@familiesJSON',
             url: '/family/all', // that have a URL that matches '/users/*'
         });
