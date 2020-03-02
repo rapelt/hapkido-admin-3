@@ -172,7 +172,6 @@ export class ClassesEffects {
             this.classesService.makeClassAGrading(action.payload).pipe(
                 map(
                     () => {
-                        console.log(action.payload);
                         return {
                             type: ActionTypes.Make_a_class_a_grading_success,
                             payload: action.payload,

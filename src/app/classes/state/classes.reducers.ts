@@ -71,6 +71,7 @@ function removeStudentFromClass(state, payload): ClassesState {
 }
 
 function addStudentToClass(state, payload): ClassesState {
+    console.log('added student to class');
     const index = getIndexOfClass(state.classes, parseInt(payload.classId, 10));
 
     const updateClassWithStudent = {

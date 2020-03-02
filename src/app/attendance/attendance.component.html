@@ -14,10 +14,10 @@
 <ion-content>
   <div>
     <ion-segment [(ngModel)]="segment">
-      <ion-segment-button value="studentsAttended">
+      <ion-segment-button value="studentsAttended" class="cy-attended-btn">
         Attended
       </ion-segment-button>
-      <ion-segment-button value="not-attended">
+      <ion-segment-button value="not-attended" class="cy-not-attended-btn">
         Not Attended
       </ion-segment-button>
     </ion-segment>
@@ -27,18 +27,18 @@
 
 
     <div *ngSwitchCase="'studentsAttended'">
-      <app-student-list [listType]="'filtered'" [students]="getAttendanceList()" (studentClickEvent)="removeStudentFromClass($event)"></app-student-list>
+      <app-student-list class="cy-attended-list" [listType]="'filtered'" [students]="getAttendanceList()" (studentClickEvent)="removeStudentFromClass($event)"></app-student-list>
 
       <div *ngIf="attendance2.length == 0">
-        <ion-item>No students yet</ion-item>
+        <ion-item class="no-students">No students have attended</ion-item>
       </div>
     </div>
 
     <div *ngSwitchCase="'not-attended'">
-      <app-student-list [listType]="'filtered'" [students]="getNotAttendanceList()" (studentClickEvent)="addStudentToClass($event)"></app-student-list>
+      <app-student-list class="cy-not-attended-list" [listType]="'filtered'" [students]="getNotAttendanceList()" (studentClickEvent)="addStudentToClass($event)"></app-student-list>
 
       <div *ngIf="notAttendance.length == 0">
-        <ion-item>No students yet</ion-item>
+        <ion-item class="no-students">All the students attended</ion-item>
       </div>
     </div>
 

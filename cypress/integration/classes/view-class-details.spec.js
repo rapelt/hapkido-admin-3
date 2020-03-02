@@ -78,7 +78,6 @@ describe('View Class Details', function() {
     cy.wait(500);
     cy.get('ion-card-header').contains('3');
     cy.get('.cy-student-in-attendance').then((student) => {
-      console.log(student);
       expect(student[0].textContent).to.contain('Firstname0 Lastname0');
       expect(student[1].textContent).to.contain('Firstname1 Lastname1');
       expect(student[2].textContent).to.contain('Firstname2 Lastname2');

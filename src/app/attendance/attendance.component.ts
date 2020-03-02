@@ -27,6 +27,8 @@ export class AttendanceComponent implements OnInit, OnDestroy {
     classId: string;
     subsc;
     subsc1;
+    subsc2;
+
     aclass: ClassModel;
 
     segment = 'studentsAttended';
@@ -49,7 +51,6 @@ export class AttendanceComponent implements OnInit, OnDestroy {
         this.subsc = this.activatedRoute.paramMap.subscribe(
             (params: ParamMap) => {
                 this.classId = params.get('classId');
-                console.log(this.classId);
                 this.subsc1 = this.store
                     .select(selectSelectedClass(this.classId))
                     .subscribe((aclass: ClassModel) => {
@@ -82,7 +83,7 @@ export class AttendanceComponent implements OnInit, OnDestroy {
         //     });
         // return;
 
-        this.store
+        this.subsc2 = this.store
             .pipe(
                 select(selectStudentsWhoAttendedClass2, {
                     studentIds: studentIds,
@@ -103,9 +104,6 @@ export class AttendanceComponent implements OnInit, OnDestroy {
     }
 
     removeStudentFromClass(event) {
-        console.log(event, 'Remove student');
-        console.log(this.classId, event);
-
         this.store.dispatch(
             new RemoveStudentFromClass({
                 classId: this.classId,
@@ -115,9 +113,6 @@ export class AttendanceComponent implements OnInit, OnDestroy {
     }
 
     addStudentToClass(event) {
-        console.log(event, 'Add student');
-        console.log(this.classId, event);
-
         this.store.dispatch(
             new AddStudentToClass({
                 classId: this.classId,
@@ -129,5 +124,6 @@ export class AttendanceComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.subsc.unsubscribe();
         this.subsc1.unsubscribe();
+        this.subsc2.unsubscribe();
     }
 }

@@ -100,7 +100,11 @@ export const selectStudentsWhoAttendedClass2 = createSelector(
 export const selectStudentsWhoDidntAttendedClass = (studentIds: string[]) =>
     createSelector(getStudentsState, studentsState => {
         return studentsState.students.filter((student: StudentModel) => {
-            return studentIds.indexOf(student.hbId) < 0;
+            return (
+                studentIds
+                    .map(studentId => studentId.toLowerCase())
+                    .indexOf(student.hbId.toLowerCase()) < 0
+            );
         });
     });
 

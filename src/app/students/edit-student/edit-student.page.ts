@@ -83,7 +83,6 @@ export class EditStudentPage implements OnInit, OnDestroy {
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.studentId = params.get('studentId');
-            console.log(this.studentId);
             this.studentOb = this.store.select(
                 selectSelectedStudent(this.studentId)
             );
