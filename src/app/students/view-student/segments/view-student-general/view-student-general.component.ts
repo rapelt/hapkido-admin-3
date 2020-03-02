@@ -29,7 +29,6 @@ export class ViewStudentGeneralComponent implements OnInit {
     constructor(public store: Store<AppState>) {}
 
     ngOnInit() {
-        debugger;
         this.student = this.store.select(selectSelectedStudent(this.studentId));
         this.studentFamily = this.store.select(
             selectSelectedStudentFamilyMembers(this.studentId)

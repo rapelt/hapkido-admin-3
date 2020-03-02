@@ -8,10 +8,6 @@ import { StudentModel } from '../../common/models/student';
 import { StudentsState } from './students.reducers';
 import * as fromStudents from './students.reducers';
 import * as moment from 'moment';
-import { forEach } from '@angular-devkit/schematics';
-import { pipe } from 'rxjs';
-import { select } from '@ngrx/core';
-import { map } from 'rxjs/operators';
 
 export const getStudentsState = createFeatureSelector<StudentsState>(
     fromStudents.STUDENTS_FEATURE_NAME
