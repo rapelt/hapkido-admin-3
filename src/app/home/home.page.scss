@@ -1,4 +1,26 @@
 .welcome-card ion-img {
   max-height: 35vh;
   overflow: hidden;
+  padding: 10px;
+  max-width: 400px;
+  width: 400px;
+
+}
+
+.welcome-card {
+
+}
+
+ion-card {
+  width: 400px;
+}
+
+.for-flex{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+ion-content{
+
 }

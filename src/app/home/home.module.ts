@@ -6,7 +6,8 @@ import { RouterModule } from '@angular/router';
 import { MessagesModule } from '../messages/messages.module';
 
 import { HomePage } from './home.page';
-import {AuthLibModule} from 'hapkido-auth-lib';
+import { AuthLibModule } from 'hapkido-auth-lib';
+import { CommonComponentsModule } from '../common/common-components.module';
 
 @NgModule({
     imports: [
@@ -17,10 +18,11 @@ import {AuthLibModule} from 'hapkido-auth-lib';
         RouterModule.forChild([
             {
                 path: '',
-                component: HomePage
-            }
-        ])
+                component: HomePage,
+            },
+        ]),
+        CommonComponentsModule,
     ],
-  declarations: [HomePage]
+    declarations: [HomePage],
 })
 export class HomePageModule {}

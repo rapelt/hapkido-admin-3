@@ -23,6 +23,7 @@ import { reducers } from './state/app.reducers';
 import { StudentsEffects } from './students/state/students.effects';
 import { StudentsModule } from './students/students.module';
 import { AttendanceModule } from './attendance/attendance.module';
+import { GradingsModule } from './gradings/gradings.module';
 
 @NgModule({
     declarations: [AppComponent, MockComponent],
@@ -43,6 +44,7 @@ import { AttendanceModule } from './attendance/attendance.module';
         AttendanceModule,
         HttpClientModule,
         AuthLibModule.forRoot(config),
+        GradingsModule,
     ],
     providers: [
         StatusBar,

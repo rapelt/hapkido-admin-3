@@ -41,7 +41,6 @@ export class ClassViewGeneralComponent implements OnInit, OnDestroy {
         });
 
         this.subsc = this.actionsSubject.subscribe(data => {
-            console.log(data.type);
             if (data.type === ActionTypes.Delete_class_success) {
                 this.router.navigateByUrl('class');
             }

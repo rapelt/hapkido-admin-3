@@ -8,8 +8,13 @@ import {
     OnDestroy,
 } from '@angular/core';
 import { ActionsSubject, ReducerManagerDispatcher, Store } from '@ngrx/store';
-import { Observable, of } from 'rxjs';
-import { filter, map } from 'rxjs/operators';
+import { combineLatest, Observable, of } from 'rxjs';
+import {
+    debounceTime,
+    distinctUntilChanged,
+    filter,
+    map,
+} from 'rxjs/operators';
 import { AppState } from '../../../state/app.reducers';
 import {
     ActionTypes,
@@ -79,8 +84,11 @@ export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
 
     ngOnChanges() {
         this.filteredStudents = this.students.pipe(
+            debounceTime(200),
+            distinctUntilChanged(),
             map(students =>
                 students.filter(student => {
+                    console.log('changed');
                     return (
                         student.name.firstname
                             .toLocaleLowerCase()

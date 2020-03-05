@@ -9,9 +9,11 @@ import { StudentModel } from '../../common/models/student';
 import {
     ActionTypes,
     ActivateStudent,
+    AddGrading,
     AddNewStudent,
     DeactivateStudent,
     EditStudent,
+    RemoveGrading,
 } from './students.actions';
 import { StudentsServices } from './students.services';
 
@@ -131,6 +133,51 @@ export class StudentsEffects {
                 })
             )
         )
+    );
+
+    @Effect()
+    addGrading = this.actions.pipe(
+        ofType(ActionTypes.Add_grading),
+        mergeMap((action: AddGrading) => {
+            return this.studentService
+                .addGrading(action.payload.student.hbId, action.payload.grading)
+                .pipe(
+                    map(student => {
+                        return {
+                            type: ActionTypes.Add_grading_success,
+                            payload: student,
+                        };
+                    }),
+                    catchError(err => {
+                        this.handleError(err.message);
+                        return EMPTY;
+                    })
+                );
+        })
+    );
+
+    @Effect()
+    removeGrading = this.actions.pipe(
+        ofType(ActionTypes.Remove_grading),
+        mergeMap((action: RemoveGrading) => {
+            return this.studentService
+                .removeGrading(
+                    action.payload.student.hbId,
+                    action.payload.grading
+                )
+                .pipe(
+                    map(student => {
+                        return {
+                            type: ActionTypes.Remove_grading_success,
+                            payload: student,
+                        };
+                    }),
+                    catchError(err => {
+                        this.handleError(err.message);
+                        return EMPTY;
+                    })
+                );
+        })
     );
 
     handleError(message) {

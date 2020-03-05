@@ -31,6 +31,13 @@ export const selectInactiveStudents = createSelector(
     }
 );
 
+export const selectStudents = createSelector(
+    getStudentsState,
+    studentsState => {
+        return studentsState.students;
+    }
+);
+
 export const selectFamilies = createSelector(
     getStudentsState,
     studentsState => {

@@ -1,0 +1,25 @@
+ <ion-card>
+   <ion-card-header>
+     <ion-item>
+       Gradings
+     </ion-item>
+   </ion-card-header>
+    <ion-card-content *ngIf="gradings.length > 0">
+      <ion-list lines="none">
+        <div *ngFor="let student of gradings" class="cy-student-grading" [class]="'cy-grading-' + student.hbId">
+          <ion-item>
+            <span>{{student.name.firstname}} {{student.name.lastname}}</span>
+            <span slot="end">
+            <app-grade-badge [grade]="student.beforeGrading"></app-grade-badge>
+            <span class="grade-to"><ion-icon name="arrow-round-forward"></ion-icon>
+              <app-grade-badge [grade]="student.afterGrading"></app-grade-badge>
+            </span>
+          </span>
+          </ion-item>
+        </div>
+      </ion-list>
+    </ion-card-content>
+    <ion-card-content *ngIf="gradings.length === 0">
+      <p>No one graded</p>
+    </ion-card-content>
+  </ion-card>

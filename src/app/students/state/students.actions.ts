@@ -1,12 +1,15 @@
 import { Action } from '@ngrx/store';
 import { FamilyModel } from '../../common/models/family.model';
 import { StudentModel } from '../../common/models/student';
+import { GradingDatesModel } from '../../common/models/grading-dates';
 
 export enum ActionTypes {
     Get_all_students = '[Students] Get All Students',
     Get_all_students_success = '[Students] Set All Students Success',
+
     Get_all_families = '[Students] Get All Families',
     Get_all_families_success = '[Students] Set All Families Success',
+
     Add_new_student = '[Students] Add new Student',
     Add_new_student_success = '[Students] Add new student Success',
 
@@ -21,6 +24,12 @@ export enum ActionTypes {
 
     Deactivate_student = '[Students] Deactivate Student',
     Deactivate_student_success = '[Students] Deactivate Student Success',
+
+    Add_grading = '[Students] Add Grading',
+    Add_grading_success = '[Students] Add Grading Success',
+
+    Remove_grading = '[Students] Remove Grading',
+    Remove_grading_success = '[Students] Remove Grading Success',
 }
 
 export class GetAllStudents implements Action {
@@ -101,6 +110,30 @@ export class DeactivateStudentSuccess implements Action {
     constructor(public payload: string) {}
 }
 
+export class AddGrading implements Action {
+    readonly type = ActionTypes.Add_grading;
+    constructor(
+        public payload: { student: StudentModel; grading: GradingDatesModel[] }
+    ) {}
+}
+
+export class RemoveGrading implements Action {
+    readonly type = ActionTypes.Remove_grading;
+    constructor(
+        public payload: { student: StudentModel; grading: GradingDatesModel[] }
+    ) {}
+}
+
+export class AddGradingSuccess implements Action {
+    readonly type = ActionTypes.Add_grading_success;
+    constructor(public payload: StudentModel) {}
+}
+
+export class RemoveGradingSuccess implements Action {
+    readonly type = ActionTypes.Remove_grading_success;
+    constructor(public payload: StudentModel) {}
+}
+
 export type StudentsActions =
     | GetAllStudents
     | GetAllStudentsSuccess
@@ -115,4 +148,8 @@ export type StudentsActions =
     | DeactivateStudentSuccess
     | ActivateStudent
     | ActivateStudentSuccess
-    | ResetSelectedStudent;
+    | ResetSelectedStudent
+    | AddGrading
+    | AddGradingSuccess
+    | RemoveGrading
+    | RemoveGradingSuccess;

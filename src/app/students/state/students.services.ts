@@ -20,6 +20,13 @@ export class StudentsServices {
         return this.httpClient.get(this.studentUrl + 'all');
     }
 
+    removeGrading(hbId, grading) {
+        return this.httpClient.post(
+            this.studentUrl + 'removeGrading/' + hbId,
+            grading
+        );
+    }
+
     getAllFamilies() {
         return this.httpClient.get(this.familiesUrl + 'all');
     }
@@ -46,6 +53,13 @@ export class StudentsServices {
         return this.httpClient.post(
             this.studentUrl + 'deactivate/' + studentId,
             null
+        );
+    }
+
+    addGrading(hbId, grading) {
+        return this.httpClient.post(
+            this.studentUrl + 'addgrading/' + hbId,
+            grading
         );
     }
 }

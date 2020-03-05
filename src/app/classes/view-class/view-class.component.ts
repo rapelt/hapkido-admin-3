@@ -73,6 +73,10 @@ export class ViewClassComponent implements OnInit, OnDestroy {
         this.router.navigateByUrl('attendance/' + this.classId);
     }
 
+    grading() {
+        this.router.navigateByUrl('gradings/' + this.classId);
+    }
+
     ngOnDestroy(): void {
         this.subsc.unsubscribe();
     }

@@ -12,6 +12,7 @@ import { EditClassComponent } from './edit-class/edit-class.component';
 import { ViewClassComponent } from './view-class/view-class.component';
 import { ViewAttendanceComponent } from './view-class/segments/view-attendance/view-attendance.component';
 import { ClassViewGeneralComponent } from './view-class/segments/class-view-general/class-view-general.component';
+import { ViewGradingComponent } from './view-class/segments/view-grading/view-grading.component';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { ClassViewGeneralComponent } from './view-class/segments/class-view-gene
         ViewClassComponent,
         ViewAttendanceComponent,
         ClassViewGeneralComponent,
+        ViewGradingComponent,
     ],
 })
 export class ClassesPageModule {}

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationGuard, AuthLibModule } from 'hapkido-auth-lib';
 import { AttendanceComponent } from './attendance/attendance.component';
+import { AddGradingComponent } from './gradings/add-grading/add-grading.component';
 
 const routes: Routes = [
     {
@@ -38,15 +39,23 @@ const routes: Routes = [
     },
     {
         path: 'attendance',
-        // loadChildren: () =>
-        //     import('./attendance/attendance.module').then(
-        //         m => m.AttendanceModule
-        //     ),
         children: [
             {
                 path: ':classId',
                 pathMatch: 'full',
                 component: AttendanceComponent,
+            },
+        ],
+        canActivate: [AuthenticationGuard],
+        runGuardsAndResolvers: 'always',
+    },
+    {
+        path: 'gradings',
+        children: [
+            {
+                path: ':classId',
+                pathMatch: 'full',
+                component: AddGradingComponent,
             },
         ],
         canActivate: [AuthenticationGuard],

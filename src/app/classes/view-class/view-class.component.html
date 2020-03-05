@@ -21,17 +21,35 @@
 
   <div class="general-class" *ngIf="segment === 'general'">
     <app-class-view-general></app-class-view-general>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="cy-add-attendance-btn" color="tertiary" (click)="attendance()">
+        <ion-icon name="person-add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </div>
 
   <div *ngIf="segment === 'attendance'">
     <app-view-attendance></app-view-attendance>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="cy-add-attendance-btn" color="tertiary" (click)="attendance()">
+        <ion-icon name="person-add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </div>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button class="cy-add-attendance-btn" color="tertiary" (click)="attendance()">
-      <ion-icon name="person-add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <div *ngIf="segment === 'grading'">
+    <app-view-grading [aclassId]="classId"></app-view-grading>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="cy-add-attendance-btn" color="tertiary" (click)="grading()">
+        <ion-icon src="assets/icon/add-grading.svg"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+
 
 </ion-content>
 
@@ -43,6 +61,9 @@
       </ion-segment-button>
       <ion-segment-button value="attendance" class="cy-class-details-attendance">
         <ion-icon name="people"></ion-icon>
+      </ion-segment-button>
+      <ion-segment-button value="grading" class="cy-class-details-grading" *ngIf="(aclass | async)?.isGrading">
+        <ion-icon name="ribbon"></ion-icon>
       </ion-segment-button>
     </ion-segment>
   </ion-toolbar>

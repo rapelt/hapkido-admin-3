@@ -133,4 +133,18 @@ describe('View Class Details', function() {
       cy.url().should('include', '/class/list');
     });
   });
+
+  it('should see grading details', function() {
+    window.localStorage.setItem('login', true);
+    cy.visit('/class/view/2');
+    cy.url().should('include', '/class/view/2');
+    cy.get('.cy-class-details-grading').click();
+    cy.wait(500);
+    cy.get('ion-card-header').contains('Gradings');
+    cy.get('.cy-grading-hb001 > .item').contains('Wh');
+    cy.get('.cy-grading-hb001 > .item').contains('Y1');
+    cy.get('.cy-grading-hb002 > .item').contains('Y2');
+    cy.get('.cy-grading-hb002 > .item').contains('Y3');
+
+  });
 });

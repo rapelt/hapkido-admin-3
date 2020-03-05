@@ -1,5 +1,7 @@
 import { FamilyModel } from '../../common/models/family.model';
 import { ActionTypes, StudentsActions } from './students.actions';
+import { ClassesState } from '../../classes/state/classes.reducers';
+import * as _ from 'underscore';
 import { StudentModel } from '../../common/models/student';
 
 export const STUDENTS_FEATURE_NAME = 'students';
@@ -18,6 +20,10 @@ const initialState: StudentsState = {
 
 export function studentsReducer(state = initialState, action: StudentsActions) {
     switch (action.type) {
+        case ActionTypes.Remove_grading_success:
+            return updateGradingState(state, action.payload);
+        case ActionTypes.Add_grading_success:
+            return updateGradingState(state, action.payload);
         case ActionTypes.Get_all_students_success:
             const newState = {
                 ...state,
@@ -108,4 +114,21 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
         default:
             return state;
     }
+}
+
+function updateGradingState(state, payload): StudentsState {
+    const updateStudent = {
+        ...payload,
+    };
+    const students = [...state.students];
+    const index = getIndexOfStudent(state.students, payload.hbId);
+    students[index] = updateStudent;
+    return {
+        ...state,
+        students: students,
+    };
+}
+
+function getIndexOfStudent(students: StudentModel[], hbId: string): number {
+    return _.findIndex(students, { hbId: hbId });
 }

@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/class/view/' + aclassId" class="cy-back-button"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Gradings
+    </ion-title>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h3 text-center>Swipe for grading options</h3>
+  <ion-list>
+    <ion-item-sliding #slidingItem *ngFor="let student of gradings" [class]="'cy-graded-student-' + student.hbId">
+      <ion-item>
+        <span>{{student.name.firstname}} {{student.name.lastname}}</span>
+        <span slot="end">
+            <span *ngIf="student.didGrade">
+              <app-grade-badge [grade]="student.beforeGrading"></app-grade-badge>
+              <span class="grade-to" *ngIf="student.didGrade"><ion-icon name="arrow-round-forward"></ion-icon>
+                <app-grade-badge [grade]="student.afterGrading"></app-grade-badge>
+              </span>
+            </span>
+
+            <span *ngIf="!student.didGrade">
+              <app-grade-badge [grade]="student.beforeGrading"></app-grade-badge>
+            </span>
+
+          </span>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-button color="dark" (click)="none(student, slidingItem)" class="cy-none">
+          <ion-icon slot="icon-only" size="small" name="close"></ion-icon>
+        </ion-button>
+        <ion-button color="secondary" (click)="single(student, slidingItem)" class="cy-single">
+          <ion-icon slot="icon-only" size="small" name="checkmark"></ion-icon>
+        </ion-button>
+        <ion-button color="primary" (click)="double(student, slidingItem)" class="cy-double">
+          <ion-icon slot="icon-only" size="small" name="done-all"></ion-icon>
+        </ion-button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+
+
+</ion-content>
+
+
+
+
