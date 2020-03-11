@@ -16,10 +16,15 @@ export enum ActionTypes {
     Make_a_class_a_grading_success = '[Classes] Make a class a grading success',
     Add_student_to_class_success = '[Classes] Add student to class success',
     Remove_student_from_class_success = '[Classes] Remove student from class success',
+    Clear_loaded = '[Classes] Clear loaded',
 }
 
 export class GetAllClasses implements Action {
     readonly type = ActionTypes.Get_all_classes;
+}
+
+export class ClearLoadedClasses implements Action {
+    readonly type = ActionTypes.Clear_loaded;
 }
 
 export class GetAllClassesSuccess implements Action {
@@ -101,4 +106,5 @@ export type ClassesActions =
     | DeleteClassSuccess
     | AddStudentToClassSuccess
     | RemoveStudentFromClassSuccess
+    | ClearLoadedClasses
     | MakeClassAGradingSuccess;

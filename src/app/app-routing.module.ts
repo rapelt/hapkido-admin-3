@@ -18,15 +18,16 @@ const routes: Routes = [
         runGuardsAndResolvers: 'always',
     },
     {
-        path: 'list',
+        path: 'authentication',
         loadChildren: () =>
-            import('./list/list.module').then(m => m.ListPageModule),
-        canActivate: [AuthenticationGuard],
-        runGuardsAndResolvers: 'always',
+            import('./authentication/authentication.module').then(
+                m => m.AuthenticationWrapperModule
+            ),
     },
     {
-        path: 'authentication',
-        loadChildren: () => AuthLibModule,
+        path: 'sign-in',
+        redirectTo: '/authentication/sign-in',
+        pathMatch: 'full',
     },
     {
         path: 'settings',

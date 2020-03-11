@@ -1,4 +1,9 @@
-import { createFeatureSelector, createSelector, Selector, MemoizedSelector } from '@ngrx/store';
+import {
+    createFeatureSelector,
+    createSelector,
+    Selector,
+    MemoizedSelector,
+} from '@ngrx/store';
 import { ClassModel } from '../../common/models/class';
 import * as fromClasses from './classes.reducers';
 // tslint:disable-next-line:no-duplicate-imports
@@ -23,3 +28,7 @@ export const selectSelectedClass = (id: string) =>
             return c.classId.toString() === id;
         });
     });
+
+export const selectClassLoaded = createSelector(getClassState, classesState => {
+    return classesState.loaded;
+});

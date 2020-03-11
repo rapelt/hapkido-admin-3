@@ -3,7 +3,7 @@
     <ion-list-header>
       <ion-label>Gradings</ion-label>
     </ion-list-header>
-    <ion-item *ngFor="let grade of gradingDates | async">
+    <ion-item *ngFor="let grade of gradingDates | async | orderGradings: 'descending'">
       <ion-label>
         <app-grade-badge [grade]="grade.grade" [nameLength]="'text'"></app-grade-badge>
       </ion-label>

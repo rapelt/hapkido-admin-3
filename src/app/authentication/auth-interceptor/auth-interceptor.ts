@@ -8,7 +8,7 @@ import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../../state/app.reducers';
-import { AuthenticationStates } from '../authentication-states';
+import { AuthStatesEnum } from 'hapkido-auth-lib';
 
 /*
   Generated class for the AuthInterceptorProvider provider.
@@ -22,7 +22,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     constructor(private store: Store<AppState>) {
         this.store.select('authentication').subscribe(data => {
-            if (data.authenticationState === AuthenticationStates.LOGGEDIN) {
+            if (data.authenticationState === AuthStatesEnum.LoggedIn) {
                 if (
                     !data ||
                     !data.user ||

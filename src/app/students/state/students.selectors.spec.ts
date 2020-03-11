@@ -1,7 +1,6 @@
 import { createClassWithAll } from '../../../testing-helpers/class-test-helper';
 import { createFamilyWithAll } from '../../../testing-helpers/family-test-helper';
 import { createStudentAll } from '../../../testing-helpers/student-test-helper';
-import { AuthenticationStates } from '../../authentication/authentication-states';
 import { ClassesState } from '../../classes/state/classes.reducers';
 import { AppState } from '../../state/app.reducers';
 import { StudentsState } from './students.reducers';
@@ -84,6 +83,7 @@ describe('Student Selectors', () => {
             students: [activeStudent, inactiveStudent],
             selectedStudent: null,
             families: [],
+            loaded: true,
         };
 
         const state: AppState = {
@@ -137,11 +137,13 @@ describe('Student Selectors', () => {
             students: [activeStudent],
             selectedStudent: null,
             families: [],
+            loaded: true,
         };
 
         const classesState: ClassesState = {
             classes: [classWithoutStudent, classWithStudent, classWithStudent2],
             selectedClass: null,
+            loaded: true,
         };
 
         const state: AppState = {
@@ -222,6 +224,7 @@ describe('Student Selectors', () => {
             ],
             selectedStudent: null,
             families: [familyToSelect],
+            loaded: true,
         };
 
         const state: AppState = {
@@ -289,6 +292,7 @@ describe('Student Selectors', () => {
             students: [activeStudent],
             selectedStudent: null,
             families: [],
+            loaded: true,
         };
 
         const classesState: ClassesState = {
@@ -300,6 +304,7 @@ describe('Student Selectors', () => {
                 classWithStudent3,
             ],
             selectedClass: null,
+            loaded: true,
         };
 
         const state: AppState = {

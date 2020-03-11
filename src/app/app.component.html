@@ -1,7 +1,7 @@
 <ion-app>
   <app-message></app-message>
   <ion-split-pane contentId="main">
-    <ion-menu *ngIf="shouldShowSignOut" contentId="main">
+    <ion-menu contentId="main">
       <ion-header>
         <ion-toolbar color="primary">
           <ion-title>Menu</ion-title>
@@ -9,9 +9,8 @@
       </ion-header>
       <ion-content>
         <ion-list>
-          <ion-menu-toggle>
             <div *ngFor="let p of appPages">
-              <ion-item [routerDirection]="'root'" [routerLink]="[p.url]">
+              <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" (click)="closeMenu()">
                 <ion-icon slot="start" color="tertiary" [name]="p.icon"></ion-icon>
                 <ion-label>
                   {{p.title}}
@@ -19,7 +18,6 @@
               </ion-item>
             </div>
             <auth-sign-out></auth-sign-out>
-          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>

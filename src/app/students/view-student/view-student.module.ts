@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { CommonComponentsModule } from '../../common/common-components.module';
@@ -10,25 +10,26 @@ import { ViewStudentPage } from './view-student.page';
 import { ViewStudentGeneralComponent } from './segments/view-student-general/view-student-general.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ViewStudentPage
-  }
+    {
+        path: '',
+        component: ViewStudentPage,
+    },
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes),
-    CommonComponentsModule,
-      ReactiveFormsModule,
-  ],
-  declarations: [
-    ViewStudentPage,
-    ViewStudentGeneralComponent,
-    ViewStudentDatesComponent,
-    ViewStudentPaymentsComponent]
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes),
+        CommonComponentsModule,
+        ReactiveFormsModule,
+    ],
+    declarations: [
+        ViewStudentPage,
+        ViewStudentGeneralComponent,
+        ViewStudentDatesComponent,
+        ViewStudentPaymentsComponent,
+    ],
 })
 export class ViewStudentPageModule {}

@@ -45,6 +45,13 @@ export const selectFamilies = createSelector(
     }
 );
 
+export const selectStudentLoaded = createSelector(
+    getStudentsState,
+    studentsState => {
+        return studentsState.loaded;
+    }
+);
+
 export const selectSelectedStudent = (id: string) =>
     createSelector(getStudentsState, studentsState => {
         if (studentsState.students.length === 0) {
@@ -106,7 +113,7 @@ export const selectStudentsWhoDidntAttendedClass = (studentIds: string[]) =>
             return (
                 studentIds
                     .map(studentId => studentId.toLowerCase())
-                    .indexOf(student.hbId.toLowerCase()) < 0
+                    .indexOf(student.hbId.toLowerCase()) < 0 && student.isActive
             );
         });
     });

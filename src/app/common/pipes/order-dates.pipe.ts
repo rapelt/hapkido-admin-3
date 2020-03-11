@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { ClassModel } from '../models/class';
+import { GradingDatesModel } from '../models/grading-dates';
 
 @Pipe({
     name: 'orderDates',

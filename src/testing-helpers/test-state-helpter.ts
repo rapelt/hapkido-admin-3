@@ -1,12 +1,12 @@
-import { AuthenticationStates } from '../app/authentication/authentication-states';
 import { createStudent, createStudentAll } from './student-test-helper';
 import { createClassWithAll } from './class-test-helper';
+import { AuthStatesEnum } from 'hapkido-auth-lib';
 
 export function emptyInitialState() {
     return {
         authentication: {
             user: null,
-            authenticationState: AuthenticationStates.LOGGEDOUT,
+            authenticationState: AuthStatesEnum.Loggedout,
             userAttributes: [],
             username: null,
             session: null,
@@ -15,10 +15,12 @@ export function emptyInitialState() {
             students: [],
             selectedStudent: null,
             families: [],
+            loaded: false,
         },
         classes: {
             classes: [],
             selectedClass: null,
+            loaded: false,
         },
     };
 }
@@ -29,7 +31,7 @@ export function popululdatedInitialState() {
     return {
         authentication: {
             user: null,
-            authenticationState: AuthenticationStates.LOGGEDOUT,
+            authenticationState: AuthStatesEnum.Loggedout,
             userAttributes: [],
             username: null,
             session: null,

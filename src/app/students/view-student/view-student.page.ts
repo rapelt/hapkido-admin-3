@@ -3,11 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { AppState } from '../../state/app.reducers';
-import {
-    GetAllStudents,
-    ResetSelectedStudent,
-    SetSelectedStudent,
-} from '../state/students.actions';
+import { GetAllStudents } from '../state/students.actions';
 import { selectSelectedStudent } from '../state/students.selectors';
 import { StudentModel } from '../../common/models/student';
 import { GetAllClasses } from '../../classes/state/classes.actions';

@@ -9,7 +9,7 @@ import { StudentModel } from '../../common/models/student';
 })
 export class StudentsServices {
     studentUrl = 'http://localhost:8080/student/';
-    familiesUrl = 'http://localhost:8080/student/';
+    familiesUrl = 'http://localhost:8080/family/';
 
     constructor(private httpClient: HttpClient) {
         this.studentUrl = config['studentAPIEndpoint'];

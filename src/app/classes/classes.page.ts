@@ -9,17 +9,26 @@ import { ViewClass } from './state/classes.actions';
 import {
     getClasses,
     getClassState,
+    selectClassLoaded,
     selectSelectedClass,
 } from './state/classes.selectors';
 import { NavigationExtras, Router } from '@angular/router';
-import { mergeMap } from 'rxjs/operators';
+import {
+    delay,
+    map,
+    mergeMap,
+    takeWhile,
+    withLatestFrom,
+} from 'rxjs/operators';
+import { selectStudentLoaded } from '../students/state/students.selectors';
+import { PageComponent } from '../common/page.component';
 
 @Component({
     selector: 'app-classes',
     templateUrl: './classes.page.html',
     styleUrls: ['./classes.page.scss'],
 })
-export class ClassesPage implements OnInit, OnDestroy {
+export class ClassesPage extends PageComponent implements OnInit, OnDestroy {
     // Dates selected on init
     preselectedDates: Moment[] = [];
 
@@ -34,16 +43,20 @@ export class ClassesPage implements OnInit, OnDestroy {
 
     subscriber;
 
+    loaded;
+
     constructor(
         public store: Store<AppState>,
         public classHelper: ClassesHelper,
         public router: Router
-    ) {}
+    ) {
+        super();
+    }
 
     ngOnInit() {
-        this.subscriber = this.store
+        this.store
             .select(getClassState)
-            .pipe()
+            .pipe(takeWhile(() => this.isAlive))
             .subscribe(classState => {
                 this.selectedValue =
                     classState.selectedClass && classState.selectedClass.date
@@ -55,6 +68,19 @@ export class ClassesPage implements OnInit, OnDestroy {
                 );
                 this.allClasses = classState.classes;
                 this.resetClassesOnDay();
+            });
+
+        this.store
+            .pipe(
+                map(selectStudentLoaded),
+                withLatestFrom(this.store.pipe(map(selectClassLoaded))),
+                map(([studentLoaded, classLoaded]) => {
+                    return studentLoaded && classLoaded;
+                }),
+                takeWhile(() => this.isAlive)
+            )
+            .subscribe(allValuesLoaded => {
+                this.loaded = allValuesLoaded;
             });
     }
 
@@ -83,9 +109,5 @@ export class ClassesPage implements OnInit, OnDestroy {
             queryParams: { date: this.selectedValue.toString() },
         };
         this.router.navigate(['/class/add'], navigationExtras);
-    }
-
-    ngOnDestroy() {
-        this.subscriber.unsubscribe();
     }
 }

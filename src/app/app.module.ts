@@ -10,8 +10,8 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AuthLibComponent, AuthLibModule } from 'hapkido-auth-lib';
-import { config } from '../environments/environment';
+import { AuthLibModule } from 'hapkido-auth-lib';
+import { config, environment } from '../environments/environment';
 import { MockComponent } from '../testing-helpers/mock.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -24,6 +24,8 @@ import { StudentsEffects } from './students/state/students.effects';
 import { StudentsModule } from './students/students.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { GradingsModule } from './gradings/gradings.module';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { CommonComponentsModule } from './common/common-components.module';
 
 @NgModule({
     declarations: [AppComponent, MockComponent],
@@ -45,6 +47,10 @@ import { GradingsModule } from './gradings/gradings.module';
         HttpClientModule,
         AuthLibModule.forRoot(config),
         GradingsModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {
+            enabled: environment.production,
+        }),
+        CommonComponentsModule,
     ],
     providers: [
         StatusBar,

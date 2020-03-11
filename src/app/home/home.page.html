@@ -6,6 +6,12 @@
     <ion-title>
       {{env}}
     </ion-title>
+    <ion-buttons slot="end">
+      <ion-button class="cy-refresh-data" (click)="refreshData()">
+        <ion-icon [icon]="'sync'" ></ion-icon>
+      </ion-button>
+
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -29,12 +35,27 @@
       <ion-card-subtitle>Today's Classes</ion-card-subtitle>
       <ion-card-title>{{date | date:'dd MMM yyyy'}}</ion-card-title>
     </ion-card-header>
-    <ion-list>
+    <div class="spinner">
+      <ion-spinner  *ngIf="!loaded"></ion-spinner>
+    </div>
+
+    <ion-list *ngIf="loaded">
       <ion-item button="true" type="button" class="cy-class-list-item" *ngFor="let aclass of classesOnDay | orderDates: 'ascending'" (click)="classSelected(aclass)">
         <ion-label>
           <ion-text slot="start">{{aclass.classType}} class {{aclass.date | date: 'h:mm aa'}}</ion-text>
         </ion-label>
         <ion-text slot="end">{{aclass.attendance.length}}</ion-text>
+      </ion-item>
+      <ion-item class="cy-class-list-item" *ngIf="classesOnDay.length === 0">
+        <ion-label>
+          No classes
+        </ion-label>
+      </ion-item>
+      <ion-item button="true" type="button" class="cy-class-list-item" *ngIf="classesOnDay.length === 0" (click)="addClass()">
+        <ion-label>
+          <ion-icon slot="start" name="add"></ion-icon>
+          Add a new class
+        </ion-label>
       </ion-item>
     </ion-list>
   </ion-card>

@@ -12,30 +12,36 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid>
-    <ion-row>
-      <ion-col size-xl="3" size-lg="4" size-md="5" size-sm="12" size-xs="12">
-        <calendar (change)="onPeriodChange($event)" [preselectedValues]="preselectedDates" [selectionType]="'single'"></calendar>
-      </ion-col>
-      <ion-col size-xl="9" size-lg="8" size-md="7" size-sm="12" size-xs="12">
-        <ion-item-group>
-          <ion-item-divider color="light" class="cy-class-list-date">Classes on {{selectedValue | date:'dd/MMM/yyyy'}}</ion-item-divider>
-          <ion-list>
-            <ion-item button="true" type="button" class="cy-class-list-item" *ngFor="let aclass of classesOnDay" (click)="classSelected(aclass)">
-              <ion-label>
-                <ion-text slot="start">{{aclass.classType}}</ion-text>
-              </ion-label>
-              <ion-text slot="end">{{aclass.attendance.length}}</ion-text>
-            </ion-item>
-          </ion-list>
-        </ion-item-group>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <div class="spinner" *ngIf="!loaded">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div *ngIf="loaded">
+    <ion-grid>
+      <ion-row>
+        <ion-col class="calendar">
+          <calendar (change)="onPeriodChange($event)" [preselectedValues]="preselectedDates" [selectionType]="'single'"></calendar>
+        </ion-col>
+        <ion-col class="class-list">
+          <ion-item-group>
+            <ion-item-divider color="light" class="cy-class-list-date">Classes on {{selectedValue | date:'dd/MMM/yyyy'}}</ion-item-divider>
+            <ion-list>
+              <ion-item button="true" type="button" class="cy-class-list-item" *ngFor="let aclass of classesOnDay" (click)="classSelected(aclass)">
+                <ion-label>
+                  <ion-text slot="start">{{aclass.classType}}</ion-text>
+                </ion-label>
+                <ion-text slot="end">{{aclass.attendance.length}}</ion-text>
+              </ion-item>
+            </ion-list>
+          </ion-item-group>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button class="cy-add-class-btn" color="tertiary" (click)="addNewClass()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="cy-add-class-btn" color="tertiary" (click)="addNewClass()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
 </ion-content>

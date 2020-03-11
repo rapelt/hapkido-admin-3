@@ -6,16 +6,6 @@ import {
 import { Observable } from 'rxjs';
 import { getAuthenticationState } from '../authentication/state/authentication.selectors';
 
-// export const selectUserSettings = createSelector(
-//   getAuthenticationState,
-//   state => {
-//     return {
-//       userAttributes: state.userAttributes,
-//       username: state.user['username'] ? state.user['username'] : null
-//     };
-//   }
-// );
-
 export const selectUsername = createSelector(getAuthenticationState, state => {
     return state.user['Username'];
 });

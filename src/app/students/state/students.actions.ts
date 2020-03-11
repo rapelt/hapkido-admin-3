@@ -30,10 +30,16 @@ export enum ActionTypes {
 
     Remove_grading = '[Students] Remove Grading',
     Remove_grading_success = '[Students] Remove Grading Success',
+
+    Clear_loaded = '[Students] Clear loaded',
 }
 
 export class GetAllStudents implements Action {
     readonly type = ActionTypes.Get_all_students;
+}
+
+export class ClearLoadedStudents implements Action {
+    readonly type = ActionTypes.Clear_loaded;
 }
 
 export class GetAllFamilies implements Action {
@@ -152,4 +158,5 @@ export type StudentsActions =
     | AddGrading
     | AddGradingSuccess
     | RemoveGrading
+    | ClearLoadedStudents
     | RemoveGradingSuccess;

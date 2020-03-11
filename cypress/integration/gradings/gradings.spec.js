@@ -142,7 +142,7 @@ describe('Grading', function() {
 
   });
 
-  it.only('should be able to remove a grading', function() {
+  it('should be able to remove a grading', function() {
     var student = {
       "email": "test@user.com",
       "grade": 7,

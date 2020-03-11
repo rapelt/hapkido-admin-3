@@ -1,0 +1,11 @@
+{
+  "appId": "hapkido.admin.ui.v3",
+  "appName": "hapkido-admin-3",
+  "bundledWebRuntime": false,
+  "webDir": "www",
+  "android": {
+    "allowMixedContent": true,
+    "captureInput": true,
+    "webContentsDebuggingEnabled": true
+  }
+}

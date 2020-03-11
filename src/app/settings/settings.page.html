@@ -18,7 +18,7 @@
         <h3>Username</h3>
       </ion-text>
       <ion-text class="ut-username">
-        <p>{{username | async}}</p>
+        <p>{{username}}</p>
       </ion-text>
     </ion-label>
   </ion-item>
@@ -29,30 +29,17 @@
         <h3>Email</h3>
       </ion-text>
       <ion-text class="ut-email">
-        <p *ngIf="userAttributes | async; let userAttribute">{{userAttribute.email}} <span *ngIf="userAttribute.emailVerified !== 'true'">(Not Verified)</span></p>
+        <p *ngIf="userAttributes">{{userAttributes?.email}} <span *ngIf="userAttributes?.emailVerified !== 'true'">(Not Verified)</span></p>
       </ion-text>
     </ion-label>
   </ion-item>
 
 
-  <div *ngIf="userAttributes | async; let userAttribute">
-    <div *ngIf="userAttribute.emailVerified === 'false'">
+  <div *ngIf="userAttributes">
+    <div *ngIf="userAttributes?.emailVerified === 'false'">
       <div *ngIf="!codeSent">
         <p class="cy-email-is-not-verified"><b>To make sure you can reset your password if you forget it we need to make sure your email is verified.</b></p>
         <ion-button class="cy-send-email-verify-code" expand="block" (click)="sendCode()">Send Code</ion-button>
-      </div>
-      <div *ngIf="codeSent">
-        <p><b>Please check your email for the verification code.</b></p>
-
-        <form [formGroup]="verifyEmailForm" (ngSubmit)="verifyEmailSubmit()">
-          <ion-list>
-            <ion-item>
-              <ion-label position="stacked">Verification Code</ion-label>
-              <ion-input name="verify-email-code" type="text" formControlName="code"></ion-input>
-            </ion-item>
-          </ion-list>
-          <ion-button class="cy-verify-email" type="submit" expand="block" [disabled]="verifyEmailForm.invalid">Verify Email</ion-button>
-        </form>
       </div>
     </div>
   </div>

@@ -3,7 +3,14 @@ import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as moment from 'moment';
 import { EMPTY } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import {
+    catchError,
+    delay,
+    exhaustMap,
+    map,
+    mergeMap,
+    tap,
+} from 'rxjs/operators';
 import { ClassModel } from '../../common/models/class';
 import { StudentModel } from '../../common/models/student';
 import { MessagesService } from '../../messages/messages.service';
@@ -16,13 +23,16 @@ import {
     RemoveStudentFromClass,
 } from './classes.actions';
 import { ClassesServices } from './classes.services';
+import { getClassState } from './classes.selectors';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../state/app.reducers';
 
 @Injectable()
 export class ClassesEffects {
     @Effect()
     getAllClasses = this.actions.pipe(
         ofType(ActionTypes.Get_all_classes),
-        mergeMap(() =>
+        exhaustMap(() =>
             this.classesService.getAllClasses().pipe(
                 map(
                     (classes: ClassModel[]) => {
@@ -211,6 +221,7 @@ export class ClassesEffects {
     constructor(
         private actions: Actions,
         private router: Router,
+        private store: Store<AppState>,
         private classesService: ClassesServices,
         private messageService: MessagesService
     ) {}

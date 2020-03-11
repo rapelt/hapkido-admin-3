@@ -17,6 +17,7 @@ import {
     selectStudentsWhoDidntAttendedClass,
 } from '../students/state/students.selectors';
 import { from, Observable, of } from 'rxjs';
+import { classTypes } from '../common/models/class-types';
 
 @Component({
     selector: 'app-attendance',
@@ -32,11 +33,10 @@ export class AttendanceComponent implements OnInit, OnDestroy {
     aclass: ClassModel;
 
     segment = 'studentsAttended';
+    classTypes = classTypes;
 
     attendance: StudentModel[] = [];
     notAttendance: StudentModel[] = [];
-
-    attendance2: StudentModel[] = [];
 
     constructor(
         public router: Router,
@@ -68,7 +68,7 @@ export class AttendanceComponent implements OnInit, OnDestroy {
     }
 
     getAttendanceList(): Observable<StudentModel[]> {
-        return from([this.attendance2]);
+        return from([this.attendance]);
     }
 
     getNotAttendanceList(): Observable<StudentModel[]> {
@@ -76,13 +76,6 @@ export class AttendanceComponent implements OnInit, OnDestroy {
     }
 
     getStudentsNames(studentIds: string[]) {
-        // this.store
-        //     .select(selectStudentsWhoAttendedClass(studentIds))
-        //     .subscribe(studentsArray => {
-        //         this.attendance = studentsArray;
-        //     });
-        // return;
-
         this.subsc2 = this.store
             .pipe(
                 select(selectStudentsWhoAttendedClass2, {
@@ -90,12 +83,12 @@ export class AttendanceComponent implements OnInit, OnDestroy {
                 })
             )
             .subscribe(students => {
-                this.attendance2 = students;
+                this.attendance = students;
             });
     }
 
     getEveryOtherStudentsNames(studentIds: string[]): StudentModel[] {
-        this.store
+        this.subsc1 = this.store
             .select(selectStudentsWhoDidntAttendedClass(studentIds))
             .subscribe(studentsArray => {
                 this.notAttendance = studentsArray;
@@ -107,7 +100,7 @@ export class AttendanceComponent implements OnInit, OnDestroy {
         this.store.dispatch(
             new RemoveStudentFromClass({
                 classId: this.classId,
-                studentId: event,
+                studentId: event.hbId,
             })
         );
     }
@@ -116,7 +109,7 @@ export class AttendanceComponent implements OnInit, OnDestroy {
         this.store.dispatch(
             new AddStudentToClass({
                 classId: this.classId,
-                studentId: event,
+                studentId: event.hbId,
             })
         );
     }

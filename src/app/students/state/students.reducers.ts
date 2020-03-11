@@ -10,12 +10,14 @@ export interface StudentsState {
     students: any[];
     selectedStudent: any;
     families: FamilyModel[];
+    loaded: boolean;
 }
 
 const initialState: StudentsState = {
     students: [],
     selectedStudent: null,
     families: [],
+    loaded: false,
 };
 
 export function studentsReducer(state = initialState, action: StudentsActions) {
@@ -28,6 +30,7 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
             const newState = {
                 ...state,
                 students: action.payload,
+                loaded: true,
             };
             return newState;
         case ActionTypes.Get_all_families_success:
@@ -73,6 +76,11 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
             return {
                 ...state,
                 selectedStudent: null,
+            };
+        case ActionTypes.Clear_loaded:
+            return {
+                ...state,
+                loaded: false,
             };
         case ActionTypes.Activate_student_success:
             const activatesStudentId = action.payload;

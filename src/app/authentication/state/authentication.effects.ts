@@ -13,6 +13,7 @@ import {
     SignOut,
     VerifyEmail,
 } from './authentication.actions';
+import { AuthManagerService } from 'hapkido-auth-lib/lib/services/auth-manager.service';
 
 @Injectable()
 export class AuthenticationEffects {
@@ -33,17 +34,16 @@ export class AuthenticationEffects {
     //     )
     // );
 
-    // @Effect()
-    // signOut = this.actions.pipe(
-    //     ofType(ActionTypes.Sign_out),
-    //     tap(() => {
-    //         this.authServices.signout();
-    //         location.reload();
-    //     }),
-    //     map((action: SignOut) => {
-    //         return { type: ActionTypes.Sign_out_success };
-    //     })
-    // );
+    @Effect()
+    signOut = this.actions.pipe(
+        ofType(ActionTypes.Sign_out),
+        tap(() => {
+            location.reload();
+        }),
+        map((action: SignOut) => {
+            return { type: ActionTypes.Sign_out_success };
+        })
+    );
 
     // @Effect()
     // resetPasswordRequired = this.actions.pipe(
@@ -118,5 +118,5 @@ export class AuthenticationEffects {
     //     })
     // );
 
-    constructor(private actions: Actions, private router: Router) {}
+    constructor(private actions: Actions) {}
 }

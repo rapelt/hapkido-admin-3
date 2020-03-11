@@ -46,7 +46,8 @@ export class StudentsEffects {
                     payload: families,
                 })),
                 catchError(error => {
-                    this.handleError(error.message);
+                    // this.handleError(error.message);
+                    console.log(error);
                     return EMPTY;
                 })
             )

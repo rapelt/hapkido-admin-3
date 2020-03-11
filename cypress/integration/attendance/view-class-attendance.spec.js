@@ -46,11 +46,13 @@ describe('Attendance', function() {
     cy.visit('/attendance/2');
     cy.url().should('include', '/attendance/2');
     cy.wait(500);
-    cy.get('.cy-student-list').then((student) => {
-      expect(student[0].textContent).to.contain('Firstname0 Lastname0');
-      expect(student[1].textContent).to.contain('Firstname1 Lastname1');
-      expect(student[2].textContent).to.contain('Firstname2 Lastname2');
-    });
+
+    cy.get('.student-hb001').should('exist');
+    cy.get('.student-hb002').should('exist');
+    cy.get('.student-hb003').should('exist');
+    cy.get('.student-hb004').should('not.exist');
+    cy.get('.student-hb005').should('not.exist');
+    cy.get('.student-hb006').should('not.exist');
   });
 
   it('should be able to see no student left when all attended', function() {
@@ -61,14 +63,12 @@ describe('Attendance', function() {
     cy.get('.cy-not-attended-btn').click();
     cy.wait(200);
 
-
-    cy.get('.cy-student-list').then((student) => {
-      expect(student[0].textContent).to.contain('Firstname3 Lastname3');
-      expect(student[1].textContent).to.contain('Firstname4 Lastname4');
-      expect(student[2].textContent).to.contain('Firstname5 Lastname5');
-    });
-
-    // No students have attended
+    cy.get('.student-hb001').should('not.exist');
+    cy.get('.student-hb002').should('not.exist');
+    cy.get('.student-hb003').should('not.exist');
+    cy.get('.student-hb004').should('exist');
+    cy.get('.student-hb005').should('not.exist'); // Not Active
+    cy.get('.student-hb006').should('exist');
   });
 
   it('be able to add a student to a class', function() {

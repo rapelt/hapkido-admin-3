@@ -81,7 +81,7 @@ export class StudentsHelper {
             return grade.grade;
         }
 
-        return null;
+        return 0;
     }
 
     gradeAfterGrading(student: StudentModel, classDate: Moment) {
@@ -104,6 +104,18 @@ export class StudentsHelper {
     reverseOrderGrades(gradingDates: GradingDatesModel[]): GradingDatesModel[] {
         return gradingDates.sort((a, b) => {
             if (b.grade < a.grade) {
+                return -1;
+            } else if (a.grade < b.grade) {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
+    }
+
+    orderGrades(gradingDates: GradingDatesModel[]): GradingDatesModel[] {
+        return gradingDates.sort((a, b) => {
+            if (b.grade > a.grade) {
                 return -1;
             } else if (a.grade < b.grade) {
                 return 1;

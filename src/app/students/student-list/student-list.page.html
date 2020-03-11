@@ -16,11 +16,22 @@
 </ion-header>
 
 <ion-content>
-  <ion-searchbar class="cy-student-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
-  <app-student-list [listType]="listType" [search]="searchvalue" (studentClickEvent)="studentClicked($event)"></app-student-list>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button class="cy-add-student-btn" color="tertiary" (click)="addStudent()">
-      <ion-icon name="person-add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <div *ngIf="!loaded" class="spinner">
+    <ion-spinner></ion-spinner>
+  </div>
+  <div *ngIf="loaded">
+    <ion-searchbar class="cy-student-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
+    <app-student-list [listType]="listType" [search]="searchvalue" (studentClickEvent)="studentClicked($event)"></app-student-list>
+  </div>
+
 </ion-content>
+
+<ion-footer>
+  <div *ngIf="loaded">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="cy-add-student-btn" color="tertiary" (click)="addStudent()">
+        <ion-icon name="person-add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-footer>

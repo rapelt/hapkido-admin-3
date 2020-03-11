@@ -11,6 +11,10 @@ import { ValidationErrorMessageComponent } from './components/validation-error-m
 import { OrderDatesPipe } from './pipes/order-dates.pipe';
 import { MissedClassWarningComponent } from './components/missed-class-warning/missed-class-warning.component';
 import { IonCalendar } from './components/calendar/calendar';
+import { LoadingSpinnerComponent } from './components/loading-spinner/loading-spinner.component';
+import { OrderGradingsPipe } from './pipes/order-gradings.pipe';
+import { FilterByPreferredClassTypePipe } from './pipes/filterbypreferredclasstype/filterbypreferredclasstype';
+import { PrioritiseSelectedClassPipe } from './pipes/prioritiseselectedclass/prioritiseselectedclass';
 
 @NgModule({
     declarations: [
@@ -23,6 +27,10 @@ import { IonCalendar } from './components/calendar/calendar';
         OrderDatesPipe,
         IonCalendar,
         MissedClassWarningComponent,
+        LoadingSpinnerComponent,
+        OrderGradingsPipe,
+        FilterByPreferredClassTypePipe,
+        PrioritiseSelectedClassPipe,
     ],
     imports: [CommonModule, IonicModule],
     providers: [GradeHelper],
@@ -37,6 +45,10 @@ import { IonCalendar } from './components/calendar/calendar';
         OrderDatesPipe,
         MissedClassWarningComponent,
         IonCalendar,
+        LoadingSpinnerComponent,
+        OrderGradingsPipe,
+        FilterByPreferredClassTypePipe,
+        PrioritiseSelectedClassPipe,
     ],
 })
 export class CommonComponentsModule {}

@@ -7,11 +7,13 @@ export const CLASSES_FEATURE_NAME = 'classes';
 export interface ClassesState {
     classes: any[];
     selectedClass: any;
+    loaded: boolean;
 }
 
 const initialState: ClassesState = {
     classes: [],
     selectedClass: null,
+    loaded: false,
 };
 
 export function classesReducer(state = initialState, action: ClassesActions) {
@@ -32,6 +34,11 @@ export function classesReducer(state = initialState, action: ClassesActions) {
             return setSelectedClass(state, action.payload);
         case ActionTypes.Reset_selected_class:
             return resetSelectedClass(state);
+        case ActionTypes.Clear_loaded:
+            return {
+                ...state,
+                loaded: false,
+            };
         default:
             return state;
     }
@@ -107,6 +114,7 @@ function getAllClasses(state, payload): ClassesState {
     return {
         ...state,
         classes: payload,
+        loaded: true,
     };
 }
 
