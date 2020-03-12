@@ -86,10 +86,10 @@ describe('Attendance', function() {
     cy.get('.cy-not-attended-btn').click();
     cy.wait(200);
 
-    cy.get('.student-hb006').trigger('mouseover');
+    cy.get('.student-hb006').first().trigger('mouseover');
     cy.wait(200);
 
-    cy.get('.student-hb006').click();
+    cy.get('.student-hb006').first().click();
     cy.wait(200);
 
     // TODO figure out how to do this

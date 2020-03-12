@@ -20,6 +20,7 @@ describe('Students List', function() {
 
         window.localStorage.setItem('login', true);
         cy.visit('/student');
+        cy.wait(100);
         cy.get('.cy-student-list-item').then((list) => {
             expect(list.length).to.equal(5);
             expect(list[0].textContent).to.contain('Firstname0 Lastname0');
@@ -52,6 +53,8 @@ describe('Students List', function() {
 
         window.localStorage.setItem('login', true);
         cy.visit('/student/list/inactive');
+        cy.wait(100);
+
         cy.get('.cy-student-list-item').then((list) => {
             expect(list.length).to.equal(1);
             expect(list[0].textContent).to.contain('Firstname4 Lastname4');
@@ -72,6 +75,8 @@ describe('Students List', function() {
 
         window.localStorage.setItem('login', true);
         cy.visit('/student/list/active');
+        cy.wait(100);
+
 
         cy.get('.searchbar-input').type('lastname3');
 
