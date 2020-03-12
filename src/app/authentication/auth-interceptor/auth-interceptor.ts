@@ -21,15 +21,26 @@ export class AuthInterceptor implements HttpInterceptor {
     accessToken = null;
 
     constructor(private store: Store<AppState>) {
+        console.log('Auth Interceptor Constructor');
         this.store.select('authentication').subscribe(data => {
+            console.log('Auth Interceptor - Authentication State Changed');
+
             if (data.authenticationState === AuthStatesEnum.LoggedIn) {
+                console.log('Auth Interceptor - Logged in');
+
                 if (
                     !data ||
                     !data.user ||
                     data.user['signInUserSession'] === undefined
                 ) {
+                    console.log(
+                        'Auth Interceptor - Empty Access Token because user session is undefined'
+                    );
+
                     this.accessToken = '';
                 } else {
+                    console.log('Auth Interceptor - With access token');
+
                     this.accessToken =
                         data.user['signInUserSession']['accessToken'][
                             'jwtToken'

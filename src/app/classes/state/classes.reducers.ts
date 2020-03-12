@@ -111,6 +111,8 @@ function resetSelectedClass(state): ClassesState {
 }
 
 function getAllClasses(state, payload): ClassesState {
+    console.log('Classes reducer - Set all Classes');
+
     return {
         ...state,
         classes: payload,

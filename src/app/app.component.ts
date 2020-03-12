@@ -69,10 +69,14 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        console.log('App Component - Init method started');
         this.shouldShowSignOut =
             this.authState.isLoggedIn === AuthStatesEnum.LoggedIn;
+        console.log('App Component - is logged in ' + this.shouldShowSignOut);
 
         this.authState._isLoggedInEvent.pipe().subscribe(isLoggedIn => {
+            console.log('App Component - logged in event ' + isLoggedIn);
+
             this.shouldShowSignOut = isLoggedIn === AuthStatesEnum.LoggedIn;
             if (!this.shouldShowSignOut) {
                 return;
@@ -91,6 +95,7 @@ export class AppComponent implements OnInit, OnDestroy {
             }
 
             if (this.shouldShowSignOut) {
+                console.log('App Component - Get data');
                 this.store.dispatch(new GetAllStudents());
                 this.store.dispatch(new GetAllFamilies());
                 this.store.dispatch(new GetAllClasses());

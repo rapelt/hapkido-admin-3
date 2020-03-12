@@ -45,12 +45,16 @@ export class HomePage extends PageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        console.log('Home page - Init');
+
         this.env = config.environmentName;
 
         this.store
             .select(getClassState)
             .pipe(takeWhile(() => this.isAlive))
             .subscribe(classState => {
+                console.log('Home page - Classes State');
+
                 this.classesOnDay = this.classHelper.getClassesOnDay(
                     new Date(),
                     classState.classes
