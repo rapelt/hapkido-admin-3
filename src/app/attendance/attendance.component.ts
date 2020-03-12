@@ -10,30 +10,36 @@ import {
     GetAllClasses,
     RemoveStudentFromClass,
 } from '../classes/state/classes.actions';
-import { selectSelectedClass } from '../classes/state/classes.selectors';
 import {
+    selectClassLoaded,
+    selectSelectedClass,
+} from '../classes/state/classes.selectors';
+import {
+    selectStudentLoaded,
     selectStudentsWhoAttendedClass,
     selectStudentsWhoAttendedClass2,
     selectStudentsWhoDidntAttendedClass,
 } from '../students/state/students.selectors';
 import { from, Observable, of } from 'rxjs';
 import { classTypes } from '../common/models/class-types';
+import { PageComponent } from '../common/page.component';
+import { delay, map, takeWhile, withLatestFrom } from 'rxjs/operators';
 
 @Component({
     selector: 'app-attendance',
     templateUrl: './attendance.component.html',
     styleUrls: ['./attendance.component.scss'],
 })
-export class AttendanceComponent implements OnInit, OnDestroy {
+export class AttendanceComponent extends PageComponent
+    implements OnInit, OnDestroy {
     classId: string;
-    subsc;
-    subsc1;
-    subsc2;
 
     aclass: ClassModel;
 
     segment = 'studentsAttended';
     classTypes = classTypes;
+
+    loaded;
 
     attendance: StudentModel[] = [];
     notAttendance: StudentModel[] = [];
@@ -42,29 +48,44 @@ export class AttendanceComponent implements OnInit, OnDestroy {
         public router: Router,
         public activatedRoute: ActivatedRoute,
         public store: Store<AppState>
-    ) {}
+    ) {
+        super();
+    }
 
     ngOnInit() {
         this.store.dispatch(new GetAllStudents());
         this.store.dispatch(new GetAllClasses());
 
-        this.subsc = this.activatedRoute.paramMap.subscribe(
-            (params: ParamMap) => {
-                this.classId = params.get('classId');
-                this.subsc1 = this.store
-                    .select(selectSelectedClass(this.classId))
-                    .subscribe((aclass: ClassModel) => {
-                        if (aclass === null) {
-                            return;
-                        }
+        this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
+            this.classId = params.get('classId');
+            this.store
+                .select(selectSelectedClass(this.classId))
+                .pipe(takeWhile(() => this.isAlive))
+                .subscribe((aclass: ClassModel) => {
+                    if (aclass === null) {
+                        return;
+                    }
 
-                        this.aclass = aclass;
+                    this.aclass = aclass;
 
-                        this.getStudentsNames(aclass.attendance);
-                        this.getEveryOtherStudentsNames(aclass.attendance);
-                    });
-            }
-        );
+                    this.getStudentsNames(aclass.attendance);
+                    this.getEveryOtherStudentsNames(aclass.attendance);
+                });
+        });
+
+        this.store
+            .pipe(
+                map(selectStudentLoaded),
+                withLatestFrom(this.store.pipe(map(selectClassLoaded))),
+                delay(5000),
+                map(([studentLoaded, classLoaded]) => {
+                    return studentLoaded && classLoaded;
+                }),
+                takeWhile(() => this.isAlive)
+            )
+            .subscribe(allValuesLoaded => {
+                this.loaded = allValuesLoaded;
+            });
     }
 
     getAttendanceList(): Observable<StudentModel[]> {
@@ -76,11 +97,12 @@ export class AttendanceComponent implements OnInit, OnDestroy {
     }
 
     getStudentsNames(studentIds: string[]) {
-        this.subsc2 = this.store
+        this.store
             .pipe(
                 select(selectStudentsWhoAttendedClass2, {
                     studentIds: studentIds,
-                })
+                }),
+                takeWhile(() => this.isAlive)
             )
             .subscribe(students => {
                 this.attendance = students;
@@ -88,8 +110,9 @@ export class AttendanceComponent implements OnInit, OnDestroy {
     }
 
     getEveryOtherStudentsNames(studentIds: string[]): StudentModel[] {
-        this.subsc1 = this.store
+        this.store
             .select(selectStudentsWhoDidntAttendedClass(studentIds))
+            .pipe(takeWhile(() => this.isAlive))
             .subscribe(studentsArray => {
                 this.notAttendance = studentsArray;
             });
@@ -112,11 +135,5 @@ export class AttendanceComponent implements OnInit, OnDestroy {
                 studentId: event.hbId,
             })
         );
-    }
-
-    ngOnDestroy(): void {
-        this.subsc.unsubscribe();
-        this.subsc1.unsubscribe();
-        this.subsc2.unsubscribe();
     }
 }

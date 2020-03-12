@@ -25,39 +25,17 @@
 
   <div [ngSwitch]="segment" padding>
 
-
-    <div *ngSwitchCase="'studentsAttended'">
-
-      <ion-list class="cy-student-list">
-        <div *ngIf="attendance?.length > 0">
-          <ion-item (click)="removeStudentFromClass(student)"
-                    *ngFor="let student of attendance | alphabeticalstudents; let i = index"
-                    [class]="'student-' + student.hbId"
-                    button="true"
-                    class="cy-student-list-item" type="button">
-            <ion-label>
-              {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
-              <app-missed-class-warning [student]="student" [showDays]="false"></app-missed-class-warning>
-            </ion-label>
-            <ion-note slot="end">
-              <app-grade-badge [grade]="student.grade"></app-grade-badge>
-            </ion-note>
-          </ion-item>
-        </div>
-        <div *ngIf="attendance?.length == 0">
-          <ion-item class="no-students">No students yet</ion-item>
-        </div>
-      </ion-list>
+    <div *ngIf="!loaded" class="spinner">
+      <ion-spinner></ion-spinner>
     </div>
 
-    <div *ngSwitchCase="'not-attended'">
-      <ion-item-group *ngFor="let classType of classTypes | prioritiseselectedclass: aclass.classType">
-        <ion-item-divider color="light" class="item-divider">{{classType}}</ion-item-divider>
+    <div *ngIf="loaded">
+      <div *ngSwitchCase="'studentsAttended'">
 
         <ion-list class="cy-student-list">
-          <div *ngIf="notAttendance?.length > 0">
-            <ion-item (click)="addStudentToClass(student)"
-                      *ngFor="let student of notAttendance | filterbypreferredclasstype: classType | alphabeticalstudents; let i = index"
+          <div *ngIf="attendance?.length > 0">
+            <ion-item (click)="removeStudentFromClass(student)"
+                      *ngFor="let student of attendance | alphabeticalstudents; let i = index"
                       [class]="'student-' + student.hbId"
                       button="true"
                       class="cy-student-list-item" type="button">
@@ -70,12 +48,41 @@
               </ion-note>
             </ion-item>
           </div>
-          <div *ngIf="notAttendance?.length === 0">
+          <div *ngIf="attendance?.length == 0">
             <ion-item class="no-students">No students yet</ion-item>
           </div>
         </ion-list>
-      </ion-item-group>
+      </div>
+
+      <div *ngSwitchCase="'not-attended'">
+        <ion-item-group *ngFor="let classType of classTypes | prioritiseselectedclass: aclass.classType">
+          <ion-item-divider color="light" class="item-divider">{{classType}}</ion-item-divider>
+
+          <ion-list class="cy-student-list">
+            <div *ngIf="notAttendance?.length > 0">
+              <ion-item (click)="addStudentToClass(student)"
+                        *ngFor="let student of notAttendance | filterbypreferredclasstype: classType | alphabeticalstudents; let i = index"
+                        [class]="'student-' + student.hbId"
+                        button="true"
+                        class="cy-student-list-item" type="button">
+                <ion-label>
+                  {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
+                  <app-missed-class-warning [student]="student" [showDays]="false"></app-missed-class-warning>
+                </ion-label>
+                <ion-note slot="end">
+                  <app-grade-badge [grade]="student.grade"></app-grade-badge>
+                </ion-note>
+              </ion-item>
+            </div>
+            <div *ngIf="notAttendance?.length === 0">
+              <ion-item class="no-students">No students yet</ion-item>
+            </div>
+          </ion-list>
+        </ion-item-group>
+      </div>
+
     </div>
+
 
   </div>
 
