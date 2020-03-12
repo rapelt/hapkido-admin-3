@@ -55,7 +55,7 @@ describe('Attendance', function() {
     cy.get('.student-hb006').should('not.exist');
   });
 
-  it('should be able to see no student left when all attended', function() {
+  it('should be able to active non attended students', function() {
     window.localStorage.setItem('login', true);
     cy.visit('/attendance/2');
     cy.url().should('include', '/attendance/2');
@@ -93,27 +93,6 @@ describe('Attendance', function() {
     cy.wait(200);
 
     // TODO figure out how to do this
-
-
-    // cy.get('.cy-student-list').then((student) => {
-    //   cy.wait(200);
-    //
-    //   expect(student[0].textContent).to.contain('Firstname4 Lastname4');
-    //   expect(student[1].textContent).to.contain('Firstname5 Lastname5');
-    //
-    //   cy.wait(200);
-    //   cy.get('.cy-attended-btn').click();
-    //   cy.wait(200);
-    //
-    //   cy.get('.cy-student-list').then((student) => {
-    //     console.log(student);
-    //     expect(student[0].textContent).to.contain('Firstname0 Lastname0');
-    //     expect(student[1].textContent).to.contain('Firstname1 Lastname1');
-    //     expect(student[2].textContent).to.contain('Firstname2 Lastname2');
-    //     expect(student[3].textContent).to.contain('Firstname3 Lastname3');
-    //   });
-    //
-    // });
   });
 
   it('be able to remove a student from a class', function() {
@@ -135,8 +114,6 @@ describe('Attendance', function() {
     cy.get('.student-hb001').click();
     cy.wait(200);
     // TODO figure out how to do this
-
-    // No students have attended
   });
 
   it('be see an empty attendance list', function() {
@@ -155,6 +132,6 @@ describe('Attendance', function() {
     cy.wait(500);
     cy.get('.cy-not-attended-btn').click();
     cy.wait(200);
-    cy.get('.no-students').should('be.visible');
+    cy.get('.no-students').should('exist');
   });
 });

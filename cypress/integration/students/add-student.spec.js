@@ -7,9 +7,15 @@ describe('Add Students', function() {
 
     beforeEach(function () {
         cy.server();
+        cy.fixture('classes.json').as('classesJSON');
         cy.fixture('families.json').as('familiesJSON');
         cy.fixture('students.json').as('studentsJSON');
 
+        cy.route({
+            method: 'GET',      // Route all GET requests
+            response: '@classesJSON',
+            url: '/class/all',    // that have a URL that matches '/users/*'
+        });
 
         cy.route({
             method: 'GET',      // Route all GET requests

@@ -2,6 +2,25 @@
 
 
 describe('Students List', function() {
+    beforeEach(function () {
+        cy.server();
+        cy.fixture('classes.json').as('classesJSON');
+        cy.fixture('families.json').as('familiesJSON');
+
+        cy.route({
+            method: 'GET',      // Route all GET requests
+            response: '@classesJSON',
+            url: '/class/all',    // that have a URL that matches '/users/*'
+        });
+
+        cy.route({
+            method: 'GET',      // Route all GET requests
+            response: '@familiesJSON',
+            url: '/family/all',    // that have a URL that matches '/users/*'
+        });
+
+    });
+
     it('should allow a user to navigate to students list', function() {
         window.localStorage.setItem('login', true);
         cy.visit('/student');
