@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 
-describe('Students List', function() {
+describe('View Student', function() {
   beforeEach(() => {
     cy.server();
     cy.fixture('families.json').as('familiesJSON');
@@ -48,18 +48,18 @@ describe('Students List', function() {
     cy.get('.ut-is-active').contains('Active');
   });
 
-  it('should allow see grading dates and class dates', function() {
-    window.localStorage.setItem('login', true);
-    cy.visit('/student/view/hb001');
-    cy.url().should('include', '/student/view/hb001');
-    cy.get(':nth-child(4) > .sc-ion-label-md-h > .ut-is-active').contains('19 Feb 2020');
-    cy.get('[value="dates"]').click();
-
-    cy.get('.profile-dates > :nth-child(1) > .item-label').contains('White');
-    cy.get('.profile-dates > :nth-child(1) > .item-label').contains('01 Aug 2004');
-    cy.get('.profile-dates > :nth-child(2) > :nth-child(2)').contains('19 Feb 2020');
-    cy.get('.profile-dates > :nth-child(2) > :nth-child(2)').contains('Family');
-  });
+  // it('should allow see grading dates and class dates', function() {
+  //   window.localStorage.setItem('login', true);
+  //   cy.visit('/student/view/hb001');
+  //   cy.url().should('include', '/student/view/hb001');
+  //   cy.get(':nth-child(4) > .sc-ion-label-md-h > .ut-is-active').contains('19 Feb 2020');
+  //   cy.get('[value="dates"]').click();
+  //
+  //   cy.get('.profile-dates > :nth-child(1) > .item-label').contains('White');
+  //   cy.get('.profile-dates > :nth-child(1) > .item-label').contains('01 Aug 2004');
+  //   cy.get('.profile-dates > :nth-child(2) > :nth-child(2)').contains('19 Feb 2020');
+  //   cy.get('.profile-dates > :nth-child(2) > :nth-child(2)').contains('Family');
+  // });
 
   it('should deactive and activate a student', function() {
     cy.route({
