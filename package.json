@@ -28,6 +28,7 @@
     "lint": "ng lint",
     "lint-fix": "./node_modules/.bin/tslint -c tslint.json '{src}/**/*.ts' --fix",
     "cy:start:local": "cypress open",
+    "cy:run:local": "cypress run",
     "e2e": "cypress open",
     "before-push": "ng lint --fix && npm run test:ci:all:no-record",
     "cy:run:ci": " $(npm bin)/cypress run --record --key 8e6e9972-e3f4-407e-a618-a228d3dcb8dc --config baseUrl=http://localhost:8000",

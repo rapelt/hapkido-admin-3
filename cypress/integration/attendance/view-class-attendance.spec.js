@@ -45,7 +45,7 @@ describe('Attendance', function() {
     window.localStorage.setItem('login', true);
     cy.visit('/attendance/2');
     cy.url().should('include', '/attendance/2');
-    cy.wait(500);
+    cy.wait(1000);
 
     cy.get('.student-hb001').should('exist');
     cy.get('.student-hb002').should('exist');
@@ -59,9 +59,9 @@ describe('Attendance', function() {
     window.localStorage.setItem('login', true);
     cy.visit('/attendance/2');
     cy.url().should('include', '/attendance/2');
-    cy.wait(500);
+    cy.wait(1000);
     cy.get('.cy-not-attended-btn').click();
-    cy.wait(200);
+    cy.wait(1000);
 
     cy.get('.student-hb001').should('not.exist');
     cy.get('.student-hb002').should('not.exist');
@@ -82,9 +82,9 @@ describe('Attendance', function() {
     window.localStorage.setItem('login', true);
     cy.visit('/attendance/2');
     cy.url().should('include', '/attendance/2');
-    cy.wait(500);
+    cy.wait(1500);
     cy.get('.cy-not-attended-btn').click();
-    cy.wait(200);
+    cy.wait(1000);
 
     cy.get('.student-hb006').first().trigger('mouseover');
     cy.wait(200);
@@ -106,7 +106,7 @@ describe('Attendance', function() {
     window.localStorage.setItem('login', true);
     cy.visit('/attendance/2');
     cy.url().should('include', '/attendance/2');
-    cy.wait(500);
+    cy.wait(1500);
 
     cy.get('.student-hb001').trigger('mouseover');
     cy.wait(200);
@@ -120,7 +120,7 @@ describe('Attendance', function() {
     window.localStorage.setItem('login', true);
     cy.visit('/attendance/4');
     cy.url().should('include', '/attendance/4');
-    cy.wait(500);
+    cy.wait(1000);
 
     cy.get('.no-students').should('be.visible');
   });
@@ -129,7 +129,7 @@ describe('Attendance', function() {
     window.localStorage.setItem('login', true);
     cy.visit('/attendance/7');
     cy.url().should('include', '/attendance/7');
-    cy.wait(500);
+    cy.wait(1000);
     cy.get('.cy-not-attended-btn').click();
     cy.wait(200);
     cy.get('.no-students').should('exist');
