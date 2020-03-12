@@ -7,17 +7,29 @@ cache:
 before_script:
   - 'echo $TRAVIS_BRANCH'
   - 'echo $TRAVIS_PULL_REQUEST'
-script:
-
-#  - npm run lint
-#  - npm run test:ci:all:no-record
-  - npm run build:prod
-
-deploy:
-  provider: s3
-  access_key_id: $AWS_ACCESS_KEY
-  secret_access_key: $AWS_SECRET_KEY
-  bucket: hapkido-admin-site
-  region: ap-southeast-2
-  local-dir: www
-  skip_cleanup: true
+jobs:
+  include:
+    - stage: tests
+#      script: "npm run lint && npm run test:ci:all:no-record"
+    - stage: deploy to staging
+      script: "npm run build:staging"
+      deploy:
+        on: master
+        provider: s3
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY
+        bucket: hapkido-admin-staging
+        region: ap-southeast-2
+        local-dir: www
+        skip_cleanup: true
+    - stage: deploy to prod
+      script: "npm run build:prod"
+      deploy:
+        on: prod
+        provider: s3
+        access_key_id: $AWS_ACCESS_KEY
+        secret_access_key: $AWS_SECRET_KEY
+        bucket: hapkido-admin-site
+        region: ap-southeast-2
+        local-dir: www
+        skip_cleanup: true
