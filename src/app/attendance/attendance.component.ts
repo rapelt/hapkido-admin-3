@@ -38,9 +38,6 @@ export class AttendanceComponent extends PageComponent
 
     segment = 'studentsAttended';
     classTypes = classTypes;
-
-    loaded;
-
     attendance: StudentModel[] = [];
     notAttendance: StudentModel[] = [];
 
@@ -77,7 +74,6 @@ export class AttendanceComponent extends PageComponent
             .pipe(
                 map(selectStudentLoaded),
                 withLatestFrom(this.store.pipe(map(selectClassLoaded))),
-                delay(5000),
                 map(([studentLoaded, classLoaded]) => {
                     return studentLoaded && classLoaded;
                 }),
