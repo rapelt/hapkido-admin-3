@@ -51,10 +51,6 @@ export class StudentListPage extends PageComponent
         this.store
             .pipe(
                 map(selectStudentLoaded),
-                withLatestFrom(this.store.pipe(map(selectClassLoaded))),
-                map(([studentLoaded, classLoaded]) => {
-                    return studentLoaded && classLoaded;
-                }),
                 takeWhile(() => this.isAlive)
             )
             .subscribe(allValuesLoaded => {

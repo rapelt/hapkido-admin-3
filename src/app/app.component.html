@@ -1,26 +1,33 @@
 <ion-app>
   <app-message></app-message>
-  <ion-split-pane contentId="main">
-    <ion-menu contentId="main">
-      <ion-header>
-        <ion-toolbar color="primary">
-          <ion-title>Menu</ion-title>
-        </ion-toolbar>
-      </ion-header>
-      <ion-content>
-        <ion-list>
-            <div *ngFor="let p of appPages">
-              <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" (click)="closeMenu()">
-                <ion-icon slot="start" color="tertiary" [name]="p.icon"></ion-icon>
-                <ion-label>
-                  {{p.title}}
-                </ion-label>
-              </ion-item>
-            </div>
-            <auth-sign-out></auth-sign-out>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
-   <ion-router-outlet id="main"></ion-router-outlet>
-  </ion-split-pane>
+  <div *ngIf="shouldShowSignOut">
+
+<!--    <ion-split-pane contentId="main">-->
+      <ion-menu contentId="main" >
+        <ion-header>
+          <ion-toolbar color="primary">
+            <ion-title>Menu</ion-title>
+          </ion-toolbar>
+        </ion-header>
+        <ion-content>
+          <ion-list>
+              <div *ngFor="let p of appPages">
+                <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" (click)="closeMenu()">
+                  <ion-icon slot="start" color="tertiary" [name]="p.icon"></ion-icon>
+                  <ion-label>
+                    {{p.title}}
+                  </ion-label>
+                </ion-item>
+              </div>
+              <auth-sign-out></auth-sign-out>
+          </ion-list>
+        </ion-content>
+      </ion-menu>
+     <ion-router-outlet id="main"></ion-router-outlet>
+<!--    </ion-split-pane>-->
+  </div>
+
+  <div *ngIf="!shouldShowSignOut">
+    <ion-router-outlet id="sign-in"></ion-router-outlet>
+  </div>
 </ion-app>

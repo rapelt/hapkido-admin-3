@@ -51,7 +51,7 @@ export class HomePage extends PageComponent implements OnInit, OnDestroy {
 
         this.store
             .select(getClassState)
-            .pipe(takeWhile(() => this.isAlive))
+            .pipe(takeWhile(() => this.isAlive && this.loaded))
             .subscribe(classState => {
                 console.log('Home page - Classes State');
 
