@@ -23,7 +23,10 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private store: Store<AppState>) {
         console.log('Auth Interceptor Constructor');
         this.store.select('authentication').subscribe(data => {
-            console.log('Auth Interceptor - Authentication State Changed');
+            console.log(
+                'Auth Interceptor - Authentication State Changed ' +
+                    data.authenticationState
+            );
 
             if (data.authenticationState === AuthStatesEnum.LoggedIn) {
                 console.log('Auth Interceptor - Logged in');
