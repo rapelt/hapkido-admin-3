@@ -371,14 +371,6 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 // // const file = video.target.files[0];
 // // console.log(file);
 // //
-// // AWSService.config.accessKeyId = 'AKIA4JUIA7A6MSBPQRPL';
-// // AWSService.config.secretAccessKey =
-// //     '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';
-// //
-// // const bucket = new AWSService.S3({
-// //     params: { Bucket: 'hapkido-uploaded-videos' },
-// // });
-// //
 // // const params = {
 // //     Key:
 // //         'inputs/' +
