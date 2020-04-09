@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button class="cy-menu-button"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Techniques
+    </ion-title>
+<!--    <ion-buttons slot="end">-->
+<!--      <ion-button (click)="showMore($event)" *ngIf="listType !== 'inactive'">-->
+<!--        <ion-icon slot="icon-only" name="more" ></ion-icon>-->
+<!--      </ion-button>-->
+<!--    </ion-buttons>-->
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <p>
+    technique-list works!
+  </p>
+</ion-content>
+<ion-footer>
+  <div *ngIf="loaded">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="cy-add-student-btn" color="tertiary" (click)="newTechnique()">
+        <ion-icon name="videocam"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-footer>

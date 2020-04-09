@@ -26,6 +26,12 @@ import { AttendanceModule } from './attendance/attendance.module';
 import { GradingsModule } from './gradings/gradings.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CommonComponentsModule } from './common/common-components.module';
+import { TechniquesEffects } from './techniques/state/techniques.effects';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { TagsModule } from './tags/tags.module';
+import { TagsEffects } from './tags/state/tags.effects';
+import { MediaEffects } from './media/state/media.effects';
+import { MediaModule } from './media/media.module';
 
 @NgModule({
     declarations: [AppComponent, MockComponent],
@@ -39,18 +45,24 @@ import { CommonComponentsModule } from './common/common-components.module';
             AuthenticationEffects,
             StudentsEffects,
             ClassesEffects,
+            TechniquesEffects,
+            TagsEffects,
+            MediaEffects,
         ]),
         StoreDevtoolsModule.instrument(),
         MessagesModule,
         StudentsModule,
         AttendanceModule,
+        MediaModule,
         HttpClientModule,
         AuthLibModule.forRoot(config),
         GradingsModule,
+        AutoCompleteModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
         }),
         CommonComponentsModule,
+        TagsModule,
     ],
     providers: [
         StatusBar,

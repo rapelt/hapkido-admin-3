@@ -10,10 +10,11 @@ import {
     ViewClass,
 } from '../classes/state/classes.actions';
 import {
+    getClasses,
     getClassState,
     selectClassLoaded,
 } from '../classes/state/classes.selectors';
-import { takeWhile } from 'rxjs/operators';
+import { takeWhile, withLatestFrom } from 'rxjs/operators';
 import { PageComponent } from '../common/page.component';
 import {
     ClearLoadedStudents,
@@ -28,9 +29,6 @@ import {
 })
 export class HomePage extends PageComponent implements OnInit, OnDestroy {
     env = '';
-    subscriber;
-    subscriber2;
-
     loaded;
 
     date = new Date();
@@ -50,11 +48,14 @@ export class HomePage extends PageComponent implements OnInit, OnDestroy {
         this.env = config.environmentName;
 
         this.store
-            .select(getClassState)
-            .pipe(takeWhile(() => this.isAlive))
-            .subscribe(classState => {
+            .select(selectClassLoaded)
+            .pipe(
+                takeWhile(loaded => this.isAlive && loaded),
+                withLatestFrom(this.store.select(getClassState))
+            )
+            .subscribe(([loaded, classState]) => {
                 console.log('Home page - Classes State');
-
+                this.loaded = loaded;
                 this.classesOnDay = this.classHelper.getClassesOnDay(
                     new Date(),
                     classState.classes

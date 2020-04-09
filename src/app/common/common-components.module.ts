@@ -15,6 +15,8 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { OrderGradingsPipe } from './pipes/order-gradings.pipe';
 import { FilterByPreferredClassTypePipe } from './pipes/filterbypreferredclasstype/filterbypreferredclasstype';
 import { PrioritiseSelectedClassPipe } from './pipes/prioritiseselectedclass/prioritiseselectedclass';
+import { TechniqueSetFilterService } from './helper/technique-set-filter.service';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 
 @NgModule({
     declarations: [
@@ -31,9 +33,10 @@ import { PrioritiseSelectedClassPipe } from './pipes/prioritiseselectedclass/pri
         OrderGradingsPipe,
         FilterByPreferredClassTypePipe,
         PrioritiseSelectedClassPipe,
+        ProgressBarComponent,
     ],
     imports: [CommonModule, IonicModule],
-    providers: [GradeHelper],
+    providers: [GradeHelper, TechniqueSetFilterService],
     exports: [
         StudentListComponent,
         CapitialisePipe,
@@ -49,6 +52,7 @@ import { PrioritiseSelectedClassPipe } from './pipes/prioritiseselectedclass/pri
         OrderGradingsPipe,
         FilterByPreferredClassTypePipe,
         PrioritiseSelectedClassPipe,
+        ProgressBarComponent,
     ],
 })
 export class CommonComponentsModule {}

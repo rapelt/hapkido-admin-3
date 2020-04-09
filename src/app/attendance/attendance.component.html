@@ -33,8 +33,8 @@
       <div *ngSwitchCase="'studentsAttended'">
 
         <ion-list class="cy-student-list">
-          <div *ngIf="attendance?.length > 0">
-            <ion-item (click)="removeStudentFromClass(student)"
+          <div *ngIf="attendance?.length > 0; let i = index">
+            <ion-item (click)="removeStudentFromClass(student, i)"
                       *ngFor="let student of attendance | alphabeticalstudents; let i = index"
                       [class]="'student-' + student.hbId"
                       button="true"

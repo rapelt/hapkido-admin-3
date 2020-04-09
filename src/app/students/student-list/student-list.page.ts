@@ -4,7 +4,7 @@ import { PopoverController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/app.reducers';
 import { StudentListPopoverComponent } from '../components/student-list-popover/student-list-popover.component';
-import { SetSelectedStudent } from '../state/students.actions';
+import { GetAllStudents, SetSelectedStudent } from '../state/students.actions';
 import { LoadingSpinnerService } from '../../common/components/loading-spinner/loading-spinner.service';
 import { selectClassLoaded } from '../../classes/state/classes.selectors';
 import { selectStudentLoaded } from '../state/students.selectors';
@@ -19,6 +19,7 @@ import {
 } from 'rxjs/operators';
 import { combineLatest } from 'rxjs';
 import { PageComponent } from '../../common/page.component';
+import { GetAllClasses } from '../../classes/state/classes.actions';
 
 @Component({
     selector: 'app-student-list-page',

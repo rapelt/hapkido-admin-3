@@ -25,6 +25,11 @@ import { AuthStatesEnum, AuthStateService } from 'hapkido-auth-lib';
 import { delay, take } from 'rxjs/operators';
 import { LoadingSpinnerService } from './common/components/loading-spinner/loading-spinner.service';
 import { of } from 'rxjs';
+import { GetAllTags } from './tags/state/tags.actions';
+import {
+    GetAllTechniques,
+    GetAllTechniquesSets,
+} from './techniques/state/techniques.actions';
 
 @Component({
     selector: 'app-root',
@@ -46,6 +51,11 @@ export class AppComponent implements OnInit, OnDestroy {
             title: 'Classes',
             url: '/class',
             icon: 'calendar',
+        },
+        {
+            title: 'Techniques',
+            url: '/technique',
+            icon: 'videocam',
         },
         {
             title: 'Settings',
@@ -74,6 +84,13 @@ export class AppComponent implements OnInit, OnDestroy {
             this.authState.isLoggedIn === AuthStatesEnum.LoggedIn;
         console.log('App Component - is logged in ' + this.shouldShowSignOut);
 
+        this.authState.load().then(() => {
+            console.log('App Init');
+            this.authService._messageInEvent.subscribe(err => {
+                console.log(err.message);
+            });
+        });
+
         this.authState._isLoggedInEvent.pipe().subscribe(isLoggedIn => {
             console.log('App Component - logged in event ' + isLoggedIn);
 
@@ -99,6 +116,9 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.store.dispatch(new GetAllStudents());
                 this.store.dispatch(new GetAllFamilies());
                 this.store.dispatch(new GetAllClasses());
+                this.store.dispatch(new GetAllTags());
+                this.store.dispatch(new GetAllTechniquesSets());
+                this.store.dispatch(new GetAllTechniques());
             }
         });
     }

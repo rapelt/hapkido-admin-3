@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="progress">
+    <div class="progress-track"></div>
+    <div *ngFor="let step of steps" [id]="step.step" class="progress-step"> {{step.description}}</div>
+  </div>
+
+
+<!--  <button (click)=next()>Next Step</button>-->
+</div>

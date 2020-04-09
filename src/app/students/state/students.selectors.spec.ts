@@ -90,6 +90,9 @@ describe('Student Selectors', () => {
             students: studentState,
             classes: null,
             authentication: null,
+            techniques: null,
+            tags: null,
+            media: null,
         };
 
         expect(selectSelectedStudent(activeStudent.hbId)(state)).toEqual(
@@ -150,6 +153,9 @@ describe('Student Selectors', () => {
             students: studentState,
             classes: classesState,
             authentication: null,
+            techniques: null,
+            tags: null,
+            media: null,
         };
 
         expect(
@@ -231,6 +237,9 @@ describe('Student Selectors', () => {
             students: studentState,
             classes: null,
             authentication: null,
+            techniques: null,
+            tags: null,
+            media: null,
         };
 
         expect(
@@ -311,6 +320,9 @@ describe('Student Selectors', () => {
             students: studentState,
             classes: classesState,
             authentication: null,
+            techniques: null,
+            tags: null,
+            media: null,
         };
 
         expect(

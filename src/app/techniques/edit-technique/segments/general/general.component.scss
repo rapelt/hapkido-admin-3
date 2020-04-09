@@ -1,0 +1,173 @@
+.footer {
+  ion-toolbar {
+    position: fixed;
+    bottom: 0;
+  }
+
+
+  .half-button-size {
+    display: flex;
+    justify-content: space-around;
+
+    ion-button {
+      width: 50%;
+    }
+  }
+}
+
+:host ::ng-deep ion-auto-complete ul {
+  width: 90%;
+  margin-left: 16px;
+  margin-right: 40px;
+}
+
+:host ::ng-deep ion-input {
+  font-size: 16px;
+  --padding-start: 0px;
+}
+
+
+:host ::ng-deep .error-message {
+  color: #d92026;
+  margin-left: 16px !important;
+}
+
+.general-details {
+  .header {
+    text-align: center;
+  }
+
+  display: flex;
+  flex-direction: column;
+
+  ion-text {
+    text-align: left;
+  }
+
+  .technique-form {
+    height: 100%;
+
+    ion-card {
+      flex-grow: 1;
+    }
+
+    .media-cards {
+      flex-grow: 1;
+      align-items: stretch;
+      display: flex;
+      flex-direction: column;
+    }
+
+
+    .technique-group {
+      margin-left: 15px;
+      padding-top: 15px;
+      border-bottom: solid lightgrey 1px;
+      color: black;
+
+      ion-label {
+        margin-bottom: 10px;
+        font-size: 13px;
+      }
+
+      .ion-form-group {
+        display: flex;
+
+        ion-button {
+          align-self: flex-end;
+        }
+
+        :host ::ng-deep input {
+          font-size: 16px;
+        }
+
+        div{
+          width: 100%;
+        }
+
+        ion-auto-complete {
+          width: 100%;
+          display: inline-block;
+        }
+
+
+      }
+    }
+
+    .tag-group {
+      .tag-group-with-btn {
+        display: flex;
+        justify-content: space-between;
+
+        .ion-form-group {
+          width: 100%;
+        }
+
+        ion-button {
+          align-self: flex-end;
+        }
+      }
+    }
+
+
+
+    .media-cards {
+      .upload-btns {
+        display: flex;
+        flex-wrap: wrap;
+
+        .upload-file-input {
+          margin: 5px;
+        }
+      }
+
+      .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+      }
+
+      .inputfile + label {
+        font-size: 40px;
+        font-weight: 700;
+        color: #104EA3;
+        background-color: white;
+        display: flex;
+        cursor: pointer; /* "hand" cursor */
+        width: 100px;
+        height: 100px;
+        justify-content: center;
+        align-content: center;
+        border-radius: 10px;
+        border: 1px dashed #104EA3;
+
+        ion-icon {
+          align-self: center;
+        }
+
+      }
+
+      .inputfile:focus + label,
+      .inputfile + label:hover {
+        background-color: #7bd2f3;
+      }
+
+      .inputfile:focus + label {
+        outline: 1px dotted #000;
+        outline: -webkit-focus-ring-color auto 5px;
+      }
+
+      .inputfile + label * {
+        pointer-events: none;
+      }
+
+
+    }
+  }
+
+
+
+}

@@ -115,7 +115,9 @@ export class AttendanceComponent extends PageComponent
         return;
     }
 
-    removeStudentFromClass(event) {
+    removeStudentFromClass(event, index) {
+        this.attendance.splice(index, 1);
+        this.notAttendance.push(event);
         this.store.dispatch(
             new RemoveStudentFromClass({
                 classId: this.classId,
@@ -125,6 +127,33 @@ export class AttendanceComponent extends PageComponent
     }
 
     addStudentToClass(event) {
+        if (event == null) {
+            return;
+        }
+        let studentIndex = null;
+
+        const notAttended = this.notAttendance.find((student, index) => {
+            if (student.hbId === event.hbId) {
+                studentIndex = index;
+                return student;
+            }
+        });
+
+        if (notAttended) {
+            this.notAttendance.splice(studentIndex, 1);
+            this.notAttendance = this.notAttendance.slice();
+        }
+
+        const attendedAlready = this.attendance.find(student => {
+            if (student.hbId === event.hbId) {
+                return student;
+            }
+        });
+
+        if (!attendedAlready) {
+            this.attendance.push(event);
+        }
+
         this.store.dispatch(
             new AddStudentToClass({
                 classId: this.classId,

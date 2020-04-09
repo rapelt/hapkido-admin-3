@@ -5,7 +5,7 @@ import { Moment } from 'moment';
 import * as moment from 'moment';
 import { AppState } from '../state/app.reducers';
 import { ClassesHelper } from './classes.helper';
-import { ViewClass } from './state/classes.actions';
+import { GetAllClasses, ViewClass } from './state/classes.actions';
 import {
     getClasses,
     getClassState,
@@ -22,6 +22,7 @@ import {
 } from 'rxjs/operators';
 import { selectStudentLoaded } from '../students/state/students.selectors';
 import { PageComponent } from '../common/page.component';
+import { GetAllStudents } from '../students/state/students.actions';
 
 @Component({
     selector: 'app-classes',

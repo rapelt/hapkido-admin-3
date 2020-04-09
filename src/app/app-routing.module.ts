@@ -51,6 +51,15 @@ const routes: Routes = [
         runGuardsAndResolvers: 'always',
     },
     {
+        path: 'technique',
+        loadChildren: () =>
+            import('./techniques/techniques.module').then(
+                m => m.TechniquesModule
+            ),
+        canActivate: [AuthenticationGuard],
+        runGuardsAndResolvers: 'always',
+    },
+    {
         path: 'gradings',
         children: [
             {
