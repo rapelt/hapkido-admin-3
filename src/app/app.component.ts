@@ -21,15 +21,20 @@ import {
     GetAllFamilies,
     GetAllStudents,
 } from './students/state/students.actions';
-import { AuthStatesEnum, AuthStateService } from 'hapkido-auth-lib';
+import {
+    AuthenticationServices,
+    AuthStatesEnum,
+    AuthStateService,
+} from 'hapkido-auth-lib';
 import { delay, take } from 'rxjs/operators';
 import { LoadingSpinnerService } from './common/components/loading-spinner/loading-spinner.service';
 import { of } from 'rxjs';
-import { GetAllTags } from './tags/state/tags.actions';
+import { GetAllPhotos, GetAllVideos } from './media/state/media.actions';
 import {
     GetAllTechniques,
     GetAllTechniquesSets,
 } from './techniques/state/techniques.actions';
+import { GetAllTags } from './tags/state/tags.actions';
 
 @Component({
     selector: 'app-root',
@@ -53,11 +58,6 @@ export class AppComponent implements OnInit, OnDestroy {
             icon: 'calendar',
         },
         {
-            title: 'Techniques',
-            url: '/technique',
-            icon: 'videocam',
-        },
-        {
             title: 'Settings',
             url: '/settings',
             icon: 'settings',
@@ -72,6 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
         private statusBar: StatusBar,
         private store: Store<AppState>,
         private authState: AuthStateService,
+        private authService: AuthenticationServices,
         private menu: MenuController,
         private loadingSpinnerService: LoadingSpinnerService
     ) {
@@ -80,47 +81,54 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         console.log('App Component - Init method started');
-        this.shouldShowSignOut =
-            this.authState.isLoggedIn === AuthStatesEnum.LoggedIn;
-        console.log('App Component - is logged in ' + this.shouldShowSignOut);
 
-        this.authState.load().then(() => {
-            console.log('App Init');
-            this.authService._messageInEvent.subscribe(err => {
-                console.log(err.message);
-            });
-        });
-
-        this.authState._isLoggedInEvent.pipe().subscribe(isLoggedIn => {
-            console.log('App Component - logged in event ' + isLoggedIn);
-
-            this.shouldShowSignOut = isLoggedIn === AuthStatesEnum.LoggedIn;
-            if (!this.shouldShowSignOut) {
-                return;
-            }
-
-            if (this.authState.cognitoUser) {
-                this.store.dispatch(
-                    new SignInSuccess(this.authState.cognitoUser)
-                );
-            }
-
-            if (this.authState.userAttributes) {
-                this.store.dispatch(
-                    new SetUserAttributes(this.authState.userAttributes)
-                );
-            }
+        this.authService.load().then(() => {
+            console.log('App Component - Init method started');
+            this.shouldShowSignOut =
+                this.authState.isLoggedIn === AuthStatesEnum.LoggedIn;
+            console.log(
+                'App Component - is logged in ' + this.shouldShowSignOut
+            );
 
             if (this.shouldShowSignOut) {
-                console.log('App Component - Get data');
-                this.store.dispatch(new GetAllStudents());
-                this.store.dispatch(new GetAllFamilies());
-                this.store.dispatch(new GetAllClasses());
-                this.store.dispatch(new GetAllTags());
-                this.store.dispatch(new GetAllTechniquesSets());
-                this.store.dispatch(new GetAllTechniques());
+                this.loggedIn(this.authState.isLoggedIn);
             }
+
+            this.authState._isLoggedInEvent.pipe().subscribe(isLoggedIn => {
+                this.loggedIn(isLoggedIn);
+            });
         });
+    }
+
+    loggedIn(isLoggedIn) {
+        console.log('App Component - logged in event ' + isLoggedIn);
+
+        this.shouldShowSignOut = isLoggedIn === AuthStatesEnum.LoggedIn;
+        if (!this.shouldShowSignOut) {
+            return;
+        }
+
+        if (this.authState.cognitoUser) {
+            this.store.dispatch(new SignInSuccess(this.authState.cognitoUser));
+        }
+
+        if (this.authState.userAttributes) {
+            this.store.dispatch(
+                new SetUserAttributes(this.authState.userAttributes)
+            );
+        }
+
+        if (this.shouldShowSignOut) {
+            console.log('App Component - Get data');
+            this.store.dispatch(new GetAllStudents());
+            this.store.dispatch(new GetAllFamilies());
+            this.store.dispatch(new GetAllClasses());
+            this.store.dispatch(new GetAllPhotos());
+            this.store.dispatch(new GetAllTechniques());
+            this.store.dispatch(new GetAllTechniquesSets());
+            this.store.dispatch(new GetAllTags());
+            this.store.dispatch(new GetAllVideos());
+        }
     }
 
     initializeApp() {

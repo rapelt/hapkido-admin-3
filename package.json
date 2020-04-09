@@ -72,7 +72,7 @@
     "amazon-cognito-identity-js": "^3.2.4",
     "aws-sdk": "^2.620.0",
     "core-js": "^2.6.11",
-    "hapkido-auth-lib": "^0.1.17",
+    "hapkido-auth-lib": "^0.1.23",
     "ionic": "^5.4.16",
     "ionic4-auto-complete": "^2.6.0",
     "jsonwebtoken": "^8.5.1",
