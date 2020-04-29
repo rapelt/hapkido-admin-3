@@ -81,7 +81,6 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         console.log('App Component - Init method started');
-
         this.authService.load().then(() => {
             console.log('App Component - Init method started');
             this.shouldShowSignOut =
@@ -123,11 +122,11 @@ export class AppComponent implements OnInit, OnDestroy {
             this.store.dispatch(new GetAllStudents());
             this.store.dispatch(new GetAllFamilies());
             this.store.dispatch(new GetAllClasses());
-            this.store.dispatch(new GetAllPhotos());
-            this.store.dispatch(new GetAllTechniques());
-            this.store.dispatch(new GetAllTechniquesSets());
-            this.store.dispatch(new GetAllTags());
-            this.store.dispatch(new GetAllVideos());
+            // this.store.dispatch(new GetAllPhotos());
+            // this.store.dispatch(new GetAllTechniques());
+            // this.store.dispatch(new GetAllTechniquesSets());
+            // this.store.dispatch(new GetAllTags());
+            // this.store.dispatch(new GetAllVideos());
         }
     }
 
