@@ -1,18 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TechniqueModel } from '../../../../common/models/technique';
-import {
-    EditTechnique,
-    SetSelectedTechnique,
-} from '../../../state/techniques.actions';
+import { SetSelectedTechnique } from '../../../state/techniques.actions';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { selectLoaded } from '../../edit-technique.selector';
-import { filter, takeWhile, withLatestFrom } from 'rxjs/operators';
-import {
-    selectSelectedTechnique,
-    selectTechniquesSets,
-} from '../../../state/techniques.selectors';
-import { selectTags } from '../../../../tags/state/tags.selectors';
-import { ActionTypes } from '../../../../tags/state/tags.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../../state/app.reducers';
 
@@ -52,4 +40,12 @@ export class VideosComponent implements OnInit {
     save() {
         this.next();
     }
+
+    newVideo() {
+        this.router.navigateByUrl(
+            'technique/edit/' + this.techniqueId + '/video/new'
+        );
+    }
+
+    addVideo() {}
 }

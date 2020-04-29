@@ -1,14 +1,102 @@
-<div class="videos-details">
+<div class="edit-video-details">
 
   <h3 class="header">Add a video</h3>
+
+  <div class="video-section">
+    <div class="video-details">
+<!--      <div  class="files-list" *ngFor="let file of files;let i= index">-->
+<!--        <p> {{ file }} </p>-->
+<!--        <ion-button class="delete-file" fill="clear" (click)="deleteAttachment(i)">-->
+<!--          <ion-icon name="trash" color="danger"></ion-icon>-->
+<!--        </ion-button>-->
+<!--      </div>-->
+
+      <div class="technique-form" [formGroup]="videoForm">
+
+        <div class="original_file_name">
+          <ion-item  lines="inset">
+            <ion-label position="stacked">Original File Name</ion-label>
+            <ion-input disabled="true" formControlName="original_file_name" name="original_file_name" type="text"></ion-input>
+          </ion-item>
+          <app-validation-error-message [formElement]="videoForm.get('original_file_name')" [validationMessages]="validation_messages.original_file_name" [saveAttempted]="saveAttempted"></app-validation-error-message>
+        </div>
+
+
+        <div class="file_type">
+          <ion-item  lines="inset">
+            <ion-label position="stacked">File Type</ion-label>
+            <ion-input disabled="true" formControlName="file_type" name="file_type" type="text"></ion-input>
+          </ion-item>
+          <app-validation-error-message [formElement]="videoForm.get('file_type')" [validationMessages]="validation_messages.file_type" [saveAttempted]="saveAttempted"></app-validation-error-message>
+        </div>
+
+        <div class="file_name">
+          <ion-item  lines="inset">
+            <ion-label position="stacked">File Name</ion-label>
+            <ion-input formControlName="file_name" name="file_name" type="text"></ion-input>
+          </ion-item>
+          <app-validation-error-message [formElement]="videoForm.get('file_name')" [validationMessages]="validation_messages.file_name" [saveAttempted]="saveAttempted"></app-validation-error-message>
+        </div>
+
+        <div class="tag-group">
+          <div class="tag-group-with-btn">
+            <div class="ion-form-group">
+              <ion-item  lines="inset" class="cy-tag-group">
+                <ion-label position="stacked">Tags</ion-label>
+                <ion-select multiple="true"  formControlName="tag_group" [compareWith]="compareWith">
+                  <ion-select-option [value]="tag" *ngFor="let tag of tags">{{tag.name}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
+
+            <ion-button (click)="triggerAddTag()">
+              <ion-icon name="add"></ion-icon>
+            </ion-button>
+          </div>
+          <app-validation-error-message [formElement]="videoForm.get('tag_group')" [validationMessages]="validation_messages.tag_group" [saveAttempted]="saveAttempted"></app-validation-error-message>
+        </div>
+
+
+        <div class="description">
+          <ion-item  lines="inset">
+            <ion-label position="stacked">Description</ion-label>
+            <ion-textarea formControlName="description" name="description" type="text"></ion-textarea>
+          </ion-item>
+          <app-validation-error-message [formElement]="videoForm.get('description')" [validationMessages]="validation_messages.description" [saveAttempted]="saveAttempted"></app-validation-error-message>
+        </div>
+      </div>
+
+
+    </div>
+
+
+    <div class="video-upload">
+      <ion-button (click)="onSubmit()" color="secondary" expand="full">Upload</ion-button>
+
+      <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (fileDropped)="fileProgress($event)">
+        <input hidden type="file" #fileInput (change)="fileProgress($event)">
+      </div>
+      <div *ngIf="fileUploadProgress">
+        Upload progress: {{ fileUploadProgress }}
+      </div>
+      <div class="image-preview mb-3" *ngIf="previewUrl">
+        <img [src]="previewUrl" height="300" />
+      </div>
+
+    </div>
+
+  </div>
+
+
 
   <div class="footer">
     <ion-toolbar>
       <div class="half-button-size">
         <ion-button (click)="back()" color="secondary" expand="full">Back</ion-button>
-        <ion-button (click)="next()" class="cy-add-student-submit" color="tertiary" expand="full" type="submit">Save and Continue
+        <ion-button (click)="next()" class="cy-add-student-submit" color="tertiary" expand="full" type="submit">Upload
         </ion-button>
       </div>
     </ion-toolbar>
   </div>
 </div>
+

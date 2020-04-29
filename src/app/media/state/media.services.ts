@@ -37,6 +37,13 @@ export class MediaServices {
         ]);
     }
 
+    uploadNewVideo(video: VideoModel, file: any) {
+        return this.httpClient.post(this.mediaUrl + 'video/upload', {
+            video,
+            file,
+        });
+    }
+
     addNewPhoto(photo: PhotoModel, file: any) {
         return this.httpClient.post(this.mediaUrl + 'photo/create', [
             photo,
