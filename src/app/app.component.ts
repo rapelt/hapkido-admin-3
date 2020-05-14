@@ -118,7 +118,12 @@ export class AppComponent implements OnInit, OnDestroy {
         }
 
         if (this.authState.cognitoUser) {
-            this.store.dispatch(new SignInSuccess(this.authState.cognitoUser));
+            console.log(this.authState.cognitoUser);
+            const user = {
+                username: this.authState.cognitoUser.getUsername(),
+                signInUserSession: this.authState.cognitoUser.getSignInUserSession(),
+            };
+            this.store.dispatch(new SignInSuccess(user));
         }
 
         if (this.authState.userAttributes) {
