@@ -16,7 +16,23 @@
 }
 
 .videos-details {
+
   .header {
     text-align: center;
+  }
+
+  .videos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    ion-card {
+      width: 350px;
+    }
+
+    ion-fab {
+      margin-bottom: 60px;
+    }
+
   }
 }

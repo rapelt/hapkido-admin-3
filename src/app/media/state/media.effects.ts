@@ -10,6 +10,7 @@ import {
     AddNewVideo,
     GetPhoto,
     GetVideo,
+    UploadNewVideo,
 } from './media.actions';
 import { VideoModel } from '../../common/models/video';
 import { PhotoModel } from '../../common/models/photo';
@@ -100,6 +101,30 @@ export class MediaEffects {
                         this.messageService.updateSuccess.next(
                             'New video created'
                         );
+                    }),
+                    catchError(error => {
+                        this.handleError(error.message);
+                        return EMPTY;
+                    })
+                )
+        )
+    );
+
+    @Effect()
+    uploadNewVideo = this.actions.pipe(
+        ofType(ActionTypes.Upload_new_video),
+        mergeMap((action: UploadNewVideo) =>
+            this.mediaServices
+                .uploadNewVideo(action.payload.video, action.payload.file)
+                .pipe(
+                    map((video: string) => ({
+                        type: ActionTypes.Upload_new_video_success,
+                        payload: video,
+                    })),
+                    tap((response: any) => {
+                        // this.messageService.updateSuccess.next(
+                        //     'New video created'
+                        // );
                     }),
                     catchError(error => {
                         this.handleError(error.message);

@@ -16,6 +16,9 @@ export enum ActionTypes {
     Add_new_video = '[Media] Add new video',
     Add_new_video_success = '[Media] Add new video success',
 
+    Upload_new_video = '[Media] Upload new video',
+    Upload_new_video_success = '[Media] Upload new video success',
+
     Edit_video = '[Media] Edit video',
     Edit_video_success = '[Media] Edit video success',
 
@@ -92,6 +95,12 @@ export class AddNewVideo implements Action {
     constructor(public payload: { video: VideoModel; file: any }) {}
 }
 
+export class UploadNewVideo implements Action {
+    readonly type = ActionTypes.Upload_new_video;
+
+    constructor(public payload: { video: VideoModel; file: any }) {}
+}
+
 export class AddNewPhoto implements Action {
     readonly type = ActionTypes.Add_new_photo;
 
@@ -100,6 +109,12 @@ export class AddNewPhoto implements Action {
 
 export class AddNewVideoSuccess implements Action {
     readonly type = ActionTypes.Add_new_video_success;
+
+    constructor(public payload: VideoModel) {}
+}
+
+export class UploadNewVideoSuccess implements Action {
+    readonly type = ActionTypes.Upload_new_video_success;
 
     constructor(public payload: VideoModel) {}
 }
@@ -146,8 +161,10 @@ export type MediaActions =
     | ClearVideoLoaded
     | ClearPhotoLoaded
     | AddNewVideo
+    | UploadNewVideo
     | AddNewPhoto
     | AddNewVideoSuccess
+    | UploadNewVideoSuccess
     | AddNewPhotoSuccess
     | EditVideo
     | EditPhoto

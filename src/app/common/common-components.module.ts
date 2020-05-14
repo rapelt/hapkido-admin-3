@@ -17,6 +17,8 @@ import { FilterByPreferredClassTypePipe } from './pipes/filterbypreferredclassty
 import { PrioritiseSelectedClassPipe } from './pipes/prioritiseselectedclass/prioritiseselectedclass';
 import { TechniqueSetFilterService } from './helper/technique-set-filter.service';
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { DragDropDirective } from './directives/drag-drop.directive';
+import { SocketioService } from './services/socketio.service';
 
 @NgModule({
     declarations: [
@@ -34,9 +36,10 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
         FilterByPreferredClassTypePipe,
         PrioritiseSelectedClassPipe,
         ProgressBarComponent,
+        DragDropDirective,
     ],
     imports: [CommonModule, IonicModule],
-    providers: [GradeHelper, TechniqueSetFilterService],
+    providers: [GradeHelper, TechniqueSetFilterService, SocketioService],
     exports: [
         StudentListComponent,
         CapitialisePipe,
@@ -53,6 +56,7 @@ import { ProgressBarComponent } from './components/progress-bar/progress-bar.com
         FilterByPreferredClassTypePipe,
         PrioritiseSelectedClassPipe,
         ProgressBarComponent,
+        DragDropDirective,
     ],
 })
 export class CommonComponentsModule {}

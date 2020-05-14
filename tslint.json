@@ -28,6 +28,7 @@
     "object-literal-shorthand": false,
     "eofline": true,
     "forin": true,
+    "prefer-for-of": false,
     "import-spacing": true,
     "indent": [
       true,

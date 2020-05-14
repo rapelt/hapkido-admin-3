@@ -35,6 +35,7 @@ import {
     GetAllTechniquesSets,
 } from './techniques/state/techniques.actions';
 import { GetAllTags } from './tags/state/tags.actions';
+import { SocketioService } from './common/services/socketio.service';
 
 @Component({
     selector: 'app-root',
@@ -58,6 +59,11 @@ export class AppComponent implements OnInit, OnDestroy {
             icon: 'calendar',
         },
         {
+            title: 'Techniques',
+            url: '/technique',
+            icon: 'videocam',
+        },
+        {
             title: 'Settings',
             url: '/settings',
             icon: 'settings',
@@ -74,12 +80,15 @@ export class AppComponent implements OnInit, OnDestroy {
         private authState: AuthStateService,
         private authService: AuthenticationServices,
         private menu: MenuController,
-        private loadingSpinnerService: LoadingSpinnerService
+        private loadingSpinnerService: LoadingSpinnerService,
+        private socketService: SocketioService
     ) {
         this.initializeApp();
     }
 
     ngOnInit(): void {
+        this.socketService.setupSocketConnection();
+
         console.log('App Component - Init method started');
         this.authService.load().then(() => {
             console.log('App Component - Init method started');
@@ -108,7 +117,12 @@ export class AppComponent implements OnInit, OnDestroy {
         }
 
         if (this.authState.cognitoUser) {
-            this.store.dispatch(new SignInSuccess(this.authState.cognitoUser));
+            console.log(this.authState.cognitoUser);
+            const user = {
+                username: this.authState.cognitoUser.getUsername(),
+                signInUserSession: this.authState.cognitoUser.getSignInUserSession(),
+            };
+            this.store.dispatch(new SignInSuccess(user));
         }
 
         if (this.authState.userAttributes) {
@@ -123,9 +137,9 @@ export class AppComponent implements OnInit, OnDestroy {
             this.store.dispatch(new GetAllFamilies());
             this.store.dispatch(new GetAllClasses());
             // this.store.dispatch(new GetAllPhotos());
-            // this.store.dispatch(new GetAllTechniques());
-            // this.store.dispatch(new GetAllTechniquesSets());
-            // this.store.dispatch(new GetAllTags());
+            this.store.dispatch(new GetAllTechniques());
+            this.store.dispatch(new GetAllTechniquesSets());
+            this.store.dispatch(new GetAllTags());
             // this.store.dispatch(new GetAllVideos());
         }
     }

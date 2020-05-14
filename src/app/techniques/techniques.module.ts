@@ -15,6 +15,7 @@ import { VideoComponent } from './edit-technique/segments/video/video.component'
 import { PhotosComponent } from './edit-technique/segments/photos/photos.component';
 import { PhotoComponent } from './edit-technique/segments/photo/photo.component';
 import { ReviewComponent } from './edit-technique/segments/review/review.component';
+import { DragDropDirective } from '../common/directives/drag-drop.directive';
 
 @NgModule({
     declarations: [

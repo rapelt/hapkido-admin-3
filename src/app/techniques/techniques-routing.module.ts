@@ -38,7 +38,11 @@ export const routes: Routes = [
                 component: VideosComponent,
             },
             {
-                path: 'video',
+                path: 'video/new',
+                component: VideoComponent,
+            },
+            {
+                path: 'video/:id',
                 component: VideoComponent,
             },
             {
@@ -46,7 +50,11 @@ export const routes: Routes = [
                 component: PhotosComponent,
             },
             {
-                path: 'photo',
+                path: 'photo/new',
+                component: PhotoComponent,
+            },
+            {
+                path: 'photo/:id',
                 component: PhotoComponent,
             },
             {

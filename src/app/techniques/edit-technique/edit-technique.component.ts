@@ -46,7 +46,6 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
                 this.store.select(selectSelectedTechnique(this.techniqueId)),
             ]).pipe(
                 filter(([allLoaded]) => {
-                    console.log(allLoaded);
                     return this.isAlive && allLoaded;
                 })
             );

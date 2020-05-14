@@ -28,6 +28,7 @@ export function authenticationReducer(
     switch (action.type) {
         case ActionTypes.Sign_in_success:
             console.log('Auth Reducer - Logged in');
+            console.log(action.payload);
             return {
                 ...state,
                 user: action.payload,

@@ -26,6 +26,12 @@ export function mediaReducer(state = initialState, action: MediaActions) {
                 videos: action.payload,
                 videosLoaded: true,
             };
+        // case ActionTypes.Upload_new_video_success:
+        //     return {
+        //         ...state,
+        //         videos: action.payload,
+        //         videosLoaded: true,
+        //     };
         case ActionTypes.Get_all_photos_success:
             return {
                 ...state,
