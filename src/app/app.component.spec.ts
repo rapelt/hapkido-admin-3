@@ -86,13 +86,13 @@ describe('AppComponent', () => {
         expect(splashScreenSpy.hide).toHaveBeenCalled();
     });
 
-    it('should not show menu if logged out', async () => {
-        localStorage.setItem('login', 'false');
-        const fixture = await TestBed.createComponent(AppComponent);
-        const app = fixture.componentInstance;
-        app.ngOnInit();
-        expect(app.shouldShowSignOut).toEqual(false);
-    });
+    // it('should not show menu if logged out', async () => {
+    //     localStorage.setItem('login', 'false');
+    //     const fixture = await TestBed.createComponent(AppComponent);
+    //     const app = fixture.componentInstance;
+    //     app.ngOnInit();
+    //     expect(app.shouldShowSignOut).toEqual(false);
+    // });
 
     it('should signout user', async () => {
         const fixture = await TestBed.createComponent(AppComponent);
@@ -129,12 +129,12 @@ describe('AppComponent', () => {
         await fixture.detectChanges();
         const app = fixture.nativeElement;
         const menuItems = app.querySelectorAll('ion-label');
-        expect(menuItems.length).toEqual(6);
+        expect(menuItems.length).toEqual(5);
         expect(menuItems[0].textContent).toContain('Home');
         expect(menuItems[1].textContent).toContain('Students');
         expect(menuItems[2].textContent).toContain('Classes');
-        expect(menuItems[3].textContent).toContain('Techniques');
-        expect(menuItems[4].textContent).toContain('Settings');
+        // expect(menuItems[3].textContent).toContain('Techniques');
+        expect(menuItems[3].textContent).toContain('Settings');
     });
 
     it('should have urls', async () => {
@@ -148,7 +148,7 @@ describe('AppComponent', () => {
         const app = fixture.nativeElement;
 
         const menuItems = app.querySelectorAll('ion-item');
-        expect(menuItems.length).toEqual(6);
+        expect(menuItems.length).toEqual(5);
         expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual(
             '/home'
         );

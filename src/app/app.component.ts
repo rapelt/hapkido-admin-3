@@ -90,7 +90,6 @@ export class AppComponent implements OnInit, OnDestroy {
         this.socketService.setupSocketConnection();
 
         console.log('App Component - Init method started');
-
         this.authService.load().then(() => {
             console.log('App Component - Init method started');
             this.shouldShowSignOut =
