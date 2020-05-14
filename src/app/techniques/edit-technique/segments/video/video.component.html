@@ -71,7 +71,7 @@
 
 
     <div class="video-upload">
-      <ion-button (click)="onSubmit()" color="secondary" expand="full">Upload</ion-button>
+      <ion-button (click)="onSubmit()" color="secondary" expand="full" [disabled]="fileData === null">Upload</ion-button>
 
       <div class="uploadfilecontainer" (click)="fileInput.click()" appDragDrop (fileDropped)="fileProgress($event)">
         <input hidden type="file" #fileInput (change)="fileProgress($event)">

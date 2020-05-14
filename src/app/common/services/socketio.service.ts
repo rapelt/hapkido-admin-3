@@ -25,8 +25,8 @@ export class SocketioService {
         }
 
         return new Observable(observer => {
-            this.socket.on('message', data => {
-                console.log(data);
+            this.socket.on('posts', data => {
+                console.log('I am data', data);
                 observer.next(data);
             });
             return () => {
