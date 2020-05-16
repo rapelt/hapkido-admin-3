@@ -1,12 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
-import { AddNewTechnique, GetAllTechniques } from '../state/techniques.actions';
+import {
+    AddNewTechnique,
+    GetAllTechniques,
+    GetAllTechniquesSets,
+} from '../state/techniques.actions';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../state/app.reducers';
 import { getClassState } from '../../classes/state/classes.selectors';
 import { takeWhile } from 'rxjs/operators';
 import { getTechniquesState } from '../state/techniques.selectors';
 import { PageComponent } from '../../common/page.component';
+import { GetAllTags } from '../../tags/state/tags.actions';
 
 @Component({
     selector: 'app-technique-list',
@@ -25,6 +30,9 @@ export class TechniqueListComponent extends PageComponent implements OnInit {
 
     ngOnInit() {
         this.store.dispatch(new GetAllTechniques());
+        // this.store.dispatch(new GetAllTechniques());
+        this.store.dispatch(new GetAllTechniquesSets());
+        this.store.dispatch(new GetAllTags());
 
         this.store
             .select(getTechniquesState)
