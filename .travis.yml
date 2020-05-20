@@ -12,6 +12,7 @@ jobs:
     - stage: tests
 #      script: "npm run lint && npm run test:ci:all:no-record"
     - stage: deploy to staging
+      if: branch = master
       script: "npm run build:staging"
       deploy:
         on: master
@@ -23,6 +24,7 @@ jobs:
         local-dir: www
         skip_cleanup: true
     - stage: deploy to prod
+      if: branch = prod
       script: "npm run build:prod"
       deploy:
         on: prod
