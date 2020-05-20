@@ -17,7 +17,11 @@ export const selectStudentAndClassFeatureLoaded = createSelector(
     getClassState,
     getStudentsState,
     (classesState, studentState) => {
-        return classesState.loaded && studentState.loaded;
+        return (
+            classesState.loaded &&
+            studentState.loaded &&
+            studentState.familiesLoaded
+        );
     }
 );
 

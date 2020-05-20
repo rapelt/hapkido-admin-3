@@ -9,7 +9,7 @@ export class AlphabeticalFamilyPipe implements PipeTransform {
         if (array === null) {
             return array;
         }
-        array.sort((a, b) => {
+        array.slice().sort((a, b) => {
             if (a.name.toLowerCase() < b.name.toLowerCase()) {
                 return -1;
             }

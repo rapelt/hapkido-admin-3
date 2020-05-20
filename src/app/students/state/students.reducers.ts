@@ -11,6 +11,7 @@ export interface StudentsState {
     selectedStudent: any;
     families: FamilyModel[];
     loaded: boolean;
+    familiesLoaded: boolean;
 }
 
 const initialState: StudentsState = {
@@ -18,6 +19,7 @@ const initialState: StudentsState = {
     selectedStudent: null,
     families: [],
     loaded: false,
+    familiesLoaded: false,
 };
 
 export function studentsReducer(state = initialState, action: StudentsActions) {
@@ -37,6 +39,7 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
             const familiesNewState = {
                 ...state,
                 families: action.payload,
+                familiesLoaded: true,
             };
             return familiesNewState;
         case ActionTypes.Add_new_student_success:

@@ -6,7 +6,7 @@ import { AppState } from '../state/app.reducers';
 import { Store } from '@ngrx/store';
 import { selectStudentAndClassFeatureLoaded } from './state/students.selectors';
 import { GetAllClasses } from '../classes/state/classes.actions';
-import { GetAllStudents } from './state/students.actions';
+import { GetAllFamilies, GetAllStudents } from './state/students.actions';
 
 @Injectable()
 export class StudentsDataDispatcher implements Resolve<any> {
@@ -21,6 +21,7 @@ export class StudentsDataDispatcher implements Resolve<any> {
                 } else {
                     this.store.dispatch(new GetAllClasses());
                     this.store.dispatch(new GetAllStudents());
+                    this.store.dispatch(new GetAllFamilies());
                     return {};
                 }
             });
