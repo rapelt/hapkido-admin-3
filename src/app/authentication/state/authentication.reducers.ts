@@ -27,8 +27,6 @@ export function authenticationReducer(
 ) {
     switch (action.type) {
         case ActionTypes.Sign_in_success:
-            console.log('Auth Reducer - Logged in');
-            console.log(action.payload);
             return {
                 ...state,
                 user: action.payload,
@@ -36,15 +34,11 @@ export function authenticationReducer(
             };
         case ActionTypes.Sign_out_success:
             // refresh
-            console.log('Auth Reducer - Logged out');
-
             return {
                 ...state,
                 authenticationState: AuthStatesEnum.Loggedout,
             };
         case ActionTypes.Set_user_attributes:
-            console.log('Auth Reducer - Set Attributes');
-
             return {
                 ...state,
                 userAttributes: action.payload,

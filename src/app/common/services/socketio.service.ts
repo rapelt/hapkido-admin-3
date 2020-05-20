@@ -15,7 +15,6 @@ export class SocketioService {
     }
 
     setupSocketConnection() {
-        console.log(this.endpoint);
         this.socket = io(this.endpoint);
     }
 

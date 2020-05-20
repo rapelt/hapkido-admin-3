@@ -32,6 +32,9 @@ import { TagsModule } from './tags/tags.module';
 import { TagsEffects } from './tags/state/tags.effects';
 import { MediaEffects } from './media/state/media.effects';
 import { MediaModule } from './media/media.module';
+import { TechniquesDataDispatcher } from './techniques/techniques-data.resolver';
+import { ClassesDataDispatcher } from './classes/classes-data.resolver';
+import { StudentsDataDispatcher } from './students/students-data.resolver';
 
 @NgModule({
     declarations: [AppComponent, MockComponent],
@@ -74,6 +77,9 @@ import { MediaModule } from './media/media.module';
             multi: true,
         },
         FormBuilder,
+        TechniquesDataDispatcher,
+        ClassesDataDispatcher,
+        StudentsDataDispatcher,
     ],
     bootstrap: [AppComponent],
 })

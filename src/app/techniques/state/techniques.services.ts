@@ -14,19 +14,14 @@ export class TechniquesServices {
     }
 
     getAllTechniques() {
-        console.log('Techniques Service - Get all techniques');
-
         return this.httpClient.get(this.techniqueUrl + 'all');
     }
 
     getAllTechniquesSets() {
-        console.log('Techniques Service - Get all techniques sets');
-
         return this.httpClient.get(this.techniqueUrl + 'set/all');
     }
 
     addNewTechniqueSet(techniqueSet: string) {
-        console.log('Add New Technique set with name ' + techniqueSet);
         return this.httpClient.post(
             this.techniqueUrl + 'set/create',
             techniqueSet
@@ -34,7 +29,6 @@ export class TechniquesServices {
     }
 
     addNewTechnique(technique: string) {
-        console.log('Add New Technique with name ' + technique);
         return this.httpClient.post(this.techniqueUrl + 'create', technique);
     }
 

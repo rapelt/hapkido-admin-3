@@ -65,8 +65,6 @@ export class SettingsPage implements OnInit, OnDestroy {
                 email: email.getValue(),
                 emailVerified: emailVerified,
             };
-
-            console.log(this.userAttributes);
         }
 
         this.subsc = this.authState._isLoggedInEvent.subscribe(loggedIn => {
@@ -92,8 +90,6 @@ export class SettingsPage implements OnInit, OnDestroy {
                 email: email.getValue(),
                 emailVerified: emailVerified,
             };
-
-            console.log(this.userAttributes);
         });
     }
 

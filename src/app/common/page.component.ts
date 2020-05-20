@@ -5,7 +5,6 @@ export abstract class PageComponent implements OnDestroy {
     public loaded = false;
 
     ngOnDestroy(): void {
-        console.log('destroyed');
         this.isAlive = false;
     }
 }

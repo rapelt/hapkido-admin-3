@@ -3,14 +3,22 @@ import {
     createSelector,
     MemoizedSelectorWithProps,
 } from '@ngrx/store';
-import { getClassState } from '../../classes/state/classes.selectors';
 import { StudentModel } from '../../common/models/student';
 import { StudentsState } from './students.reducers';
 import * as fromStudents from './students.reducers';
 import * as moment from 'moment';
+import { getClassState } from '../../classes/state/classes.selectors';
 
 export const getStudentsState = createFeatureSelector<StudentsState>(
     fromStudents.STUDENTS_FEATURE_NAME
+);
+
+export const selectStudentAndClassFeatureLoaded = createSelector(
+    getClassState,
+    getStudentsState,
+    (classesState, studentState) => {
+        return classesState.loaded && studentState.loaded;
+    }
 );
 
 export const selectActiveStudents = createSelector(

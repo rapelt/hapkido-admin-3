@@ -93,7 +93,6 @@ export class GeneralComponent extends PageComponent implements OnInit {
                         this.store.select(selectTags)
                     ),
                     filter(([allLoaded]) => {
-                        console.log(allLoaded);
                         return this.isAlive && allLoaded;
                     })
                 )

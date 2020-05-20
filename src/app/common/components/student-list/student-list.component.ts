@@ -88,7 +88,6 @@ export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
             distinctUntilChanged(),
             map(students =>
                 students.filter(student => {
-                    console.log('changed');
                     return (
                         student.name.firstname
                             .toLocaleLowerCase()
