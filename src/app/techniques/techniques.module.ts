@@ -16,6 +16,7 @@ import { PhotosComponent } from './edit-technique/segments/photos/photos.compone
 import { PhotoComponent } from './edit-technique/segments/photo/photo.component';
 import { ReviewComponent } from './edit-technique/segments/review/review.component';
 import { DragDropDirective } from '../common/directives/drag-drop.directive';
+import { TechniquesDataDispatcher } from './techniques-data.resolver';
 
 @NgModule({
     declarations: [
@@ -38,5 +39,6 @@ import { DragDropDirective } from '../common/directives/drag-drop.directive';
         ReactiveFormsModule,
         AutoCompleteModule,
     ],
+    providers: [TechniquesDataDispatcher],
 })
 export class TechniquesModule {}

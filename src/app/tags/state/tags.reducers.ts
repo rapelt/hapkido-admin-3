@@ -20,7 +20,6 @@ const initialState: TagsState = {
 export function tagsReducer(state = initialState, action: TagsActions) {
     switch (action.type) {
         case ActionTypes.Get_all_tags_success:
-            console.log('Tags Reducer - Set all Tags');
             return {
                 ...state,
                 tags: action.payload,

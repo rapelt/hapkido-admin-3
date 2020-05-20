@@ -88,10 +88,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
         // this.socketService.setupSocketConnection();
-
-        console.log('App Component - Init method started');
         this.authService.load().then(() => {
-            console.log('App Component - Init method started');
             this.shouldShowSignOut =
                 this.authState.isLoggedIn === AuthStatesEnum.LoggedIn;
             console.log(
@@ -109,18 +106,18 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     loggedIn(isLoggedIn) {
-        console.log('App Component - logged in event ' + isLoggedIn);
-
         this.shouldShowSignOut = isLoggedIn === AuthStatesEnum.LoggedIn;
         if (!this.shouldShowSignOut) {
             return;
         }
 
         if (this.authState.cognitoUser) {
-            console.log(this.authState.cognitoUser);
             const user = {
                 username: this.authState.cognitoUser.getUsername(),
-                signInUserSession: this.authState.cognitoUser.getSignInUserSession(),
+                signInUserSession: this.authState.cognitoUser
+                    .getSignInUserSession
+                    ? this.authState.cognitoUser.getSignInUserSession()
+                    : { accessToken: { jwtToken: null } },
             };
             this.store.dispatch(new SignInSuccess(user));
         }
@@ -129,18 +126,6 @@ export class AppComponent implements OnInit, OnDestroy {
             this.store.dispatch(
                 new SetUserAttributes(this.authState.userAttributes)
             );
-        }
-
-        if (this.shouldShowSignOut) {
-            console.log('App Component - Get data');
-            this.store.dispatch(new GetAllStudents());
-            this.store.dispatch(new GetAllFamilies());
-            this.store.dispatch(new GetAllClasses());
-            // this.store.dispatch(new GetAllPhotos());
-            // this.store.dispatch(new GetAllTechniques());
-            // this.store.dispatch(new GetAllTechniquesSets());
-            // this.store.dispatch(new GetAllTags());
-            // this.store.dispatch(new GetAllVideos());
         }
     }
 
@@ -152,7 +137,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     signout() {
-        console.log('logout');
         this.store.dispatch(new SignOut());
     }
 

@@ -3,6 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthenticationGuard, AuthLibModule } from 'hapkido-auth-lib';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AddGradingComponent } from './gradings/add-grading/add-grading.component';
+import { TechniquesDataDispatcher } from './techniques/techniques-data.resolver';
+import { ClassesDataDispatcher } from './classes/classes-data.resolver';
+import { StudentsDataDispatcher } from './students/students-data.resolver';
 
 const routes: Routes = [
     {
@@ -16,6 +19,7 @@ const routes: Routes = [
             import('./home/home.module').then(m => m.HomePageModule),
         canActivate: [AuthenticationGuard],
         runGuardsAndResolvers: 'always',
+        resolve: { data: ClassesDataDispatcher },
     },
     {
         path: 'authentication',
@@ -58,6 +62,7 @@ const routes: Routes = [
             ),
         canActivate: [AuthenticationGuard],
         runGuardsAndResolvers: 'always',
+        resolve: { data: TechniquesDataDispatcher },
     },
     {
         path: 'gradings',
@@ -77,13 +82,15 @@ const routes: Routes = [
             import('./students/students.module').then(m => m.StudentsModule),
         canActivate: [AuthenticationGuard],
         runGuardsAndResolvers: 'always',
+        resolve: { data: StudentsDataDispatcher },
     },
     {
         path: 'class',
         loadChildren: () =>
-            import('./classes/classes.module').then(m => m.ClassesPageModule),
+            import('./classes/classes.module').then(m => m.ClassesModule),
         canActivate: [AuthenticationGuard],
         runGuardsAndResolvers: 'always',
+        resolve: { data: ClassesDataDispatcher },
     },
 ];
 

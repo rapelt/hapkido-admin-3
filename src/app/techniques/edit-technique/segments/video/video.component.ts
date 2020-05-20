@@ -88,7 +88,6 @@ export class VideoComponent extends PageComponent implements OnInit {
                         this.store.select(selectTags)
                     ),
                     filter(([allLoaded]) => {
-                        console.log(allLoaded);
                         return this.isAlive && allLoaded;
                     })
                 )
@@ -248,7 +247,6 @@ export class VideoComponent extends PageComponent implements OnInit {
                 observe: 'events',
             })
             .subscribe(events => {
-                console.log(events);
                 if (events.type === HttpEventType.UploadProgress) {
                     this.fileUploadProgress =
                         Math.round((events.loaded / events.total) * 100) + '%';

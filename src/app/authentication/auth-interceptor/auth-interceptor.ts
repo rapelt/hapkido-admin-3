@@ -21,7 +21,6 @@ export class AuthInterceptor implements HttpInterceptor {
     accessToken = null;
 
     constructor(private store: Store<AppState>) {
-        console.log('Auth Interceptor Constructor');
         this.store.select('authentication').subscribe(data => {
             console.log(
                 'Auth Interceptor - Authentication State Changed ' +
@@ -29,8 +28,6 @@ export class AuthInterceptor implements HttpInterceptor {
             );
 
             if (data.authenticationState === AuthStatesEnum.LoggedIn) {
-                console.log('Auth Interceptor - Logged in');
-
                 if (
                     !data ||
                     !data.user ||
@@ -57,7 +54,6 @@ export class AuthInterceptor implements HttpInterceptor {
         req: HttpRequest<any>,
         next: HttpHandler
     ): Observable<HttpEvent<any>> {
-        console.log('interceptor');
         req = req.clone({
             setHeaders: {
                 Authorization: `Bearer ${this.accessToken}`,

@@ -9,12 +9,14 @@ import { VideoComponent } from './edit-technique/segments/video/video.component'
 import { PhotosComponent } from './edit-technique/segments/photos/photos.component';
 import { PhotoComponent } from './edit-technique/segments/photo/photo.component';
 import { ReviewComponent } from './edit-technique/segments/review/review.component';
+import { TechniquesDataDispatcher } from './techniques-data.resolver';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'list' },
     {
         path: 'list',
         component: TechniqueListComponent,
+        // resolve: { data: TechniquesDataDispatcher },
     },
     {
         path: 'view/:techniqueId',
@@ -23,6 +25,7 @@ export const routes: Routes = [
     {
         path: 'edit/:techniqueId',
         component: EditTechniqueComponent,
+        // resolve: { data: TechniquesDataDispatcher },
         children: [
             {
                 path: '',

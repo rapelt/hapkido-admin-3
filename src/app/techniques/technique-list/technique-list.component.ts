@@ -38,12 +38,12 @@ export class TechniqueListComponent extends PageComponent implements OnInit {
             .select(getTechniquesState)
             .pipe(takeWhile(() => this.isAlive))
             .subscribe(techniqueState => {
-                console.log(techniqueState);
+                // console.log(techniqueState);
             });
     }
 
     addTechnique(techniqueName) {
-        console.log(techniqueName.name);
+        // console.log(techniqueName.name);
         this.store.dispatch(new AddNewTechnique(techniqueName));
     }
 

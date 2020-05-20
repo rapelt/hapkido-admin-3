@@ -27,7 +27,6 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
         case ActionTypes.Add_grading_success:
             return updateGradingState(state, action.payload);
         case ActionTypes.Get_all_students_success:
-            console.log('Students Reducer - Set all Students');
             const newState = {
                 ...state,
                 students: action.payload,
@@ -35,8 +34,6 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
             };
             return newState;
         case ActionTypes.Get_all_families_success:
-            console.log('Students Reducer - Set all families');
-
             const familiesNewState = {
                 ...state,
                 families: action.payload,
@@ -48,7 +45,6 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
                 students: [...state.students, action.payload],
             };
         case ActionTypes.Edit_student_success:
-            console.log(action.payload);
             const editedStudent = {
                 ...action.payload,
             };

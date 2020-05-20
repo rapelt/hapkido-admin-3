@@ -38,8 +38,8 @@ export class ViewClassComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.segment = 'general';
-        this.store.dispatch(new GetAllStudents());
-        this.store.dispatch(new GetAllClasses());
+        // this.store.dispatch(new GetAllStudents());
+        // this.store.dispatch(new GetAllClasses());
 
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.classId = params.get('classId');

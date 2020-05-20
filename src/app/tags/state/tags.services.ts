@@ -14,13 +14,10 @@ export class TagsServices {
     }
 
     getAllTags() {
-        console.log('Tags Service - Get all tags');
-
         return this.httpClient.get(this.tagUrl + 'all');
     }
 
     addNewTag(tag: string) {
-        console.log('Add New Tag with name ' + tag);
         return this.httpClient.post(this.tagUrl + 'create', tag);
     }
 

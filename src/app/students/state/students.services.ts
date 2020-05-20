@@ -17,8 +17,6 @@ export class StudentsServices {
     }
 
     getAllStudents() {
-        console.log('Students Service - Get all students');
-
         return this.httpClient.get(this.studentUrl + 'all');
     }
 
@@ -30,7 +28,6 @@ export class StudentsServices {
     }
 
     getAllFamilies() {
-        console.log('Students Service - Get all families');
         return this.httpClient.get(this.familiesUrl + 'all');
     }
 

@@ -27,14 +27,12 @@ export function techniquesReducer(
 ) {
     switch (action.type) {
         case ActionTypes.Get_all_techniques_success:
-            console.log('Techniques Reducer - Set all Techniques');
             return {
                 ...state,
                 techniques: action.payload,
                 loaded: true,
             };
         case ActionTypes.Get_all_techniques_sets_success:
-            console.log('Techniques Reducer - Set all Techniques sets');
             return {
                 ...state,
                 techniqueSets: action.payload,
@@ -51,7 +49,6 @@ export function techniquesReducer(
                 techniqueSets: [...state.techniqueSets, action.payload],
             };
         case ActionTypes.Edit_technique_success:
-            console.log(action.payload);
             const editedTechnique = {
                 ...action.payload,
             };
