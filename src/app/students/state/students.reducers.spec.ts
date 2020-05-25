@@ -11,6 +11,7 @@ describe('Student Reducer', () => {
             selectedStudent: null,
             families: [],
             loaded: false,
+            familiesLoaded: false,
         };
 
         const expectedStudents = {
@@ -18,6 +19,7 @@ describe('Student Reducer', () => {
             selectedStudent: null,
             families: [],
             loaded: true,
+            familiesLoaded: false,
         };
 
         expect(
@@ -34,6 +36,7 @@ describe('Student Reducer', () => {
             selectedStudent: null,
             families: [],
             loaded: false,
+            familiesLoaded: false,
         };
 
         const expectedStudents = {
@@ -41,6 +44,7 @@ describe('Student Reducer', () => {
             selectedStudent: null,
             families: [],
             loaded: true,
+            familiesLoaded: false,
         };
 
         expect(reducer.studentsReducer(students, new GetAllStudents())).toEqual(

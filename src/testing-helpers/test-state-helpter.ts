@@ -22,6 +22,9 @@ export function emptyInitialState() {
             selectedClass: null,
             loaded: false,
         },
+        techniques: {},
+        tags: {},
+        media: {},
     };
 }
 

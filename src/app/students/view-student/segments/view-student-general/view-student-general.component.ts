@@ -22,7 +22,7 @@ export class ViewStudentGeneralComponent implements OnInit {
     @Input()
     studentId: string;
 
-    student: Observable<any>;
+    student: Observable<StudentModel>;
     studentLastClass: Observable<any>;
     studentFamily: Observable<any>;
 

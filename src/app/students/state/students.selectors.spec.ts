@@ -1,9 +1,3 @@
-import { createClassWithAll } from '../../../testing-helpers/class-test-helper';
-import { createFamilyWithAll } from '../../../testing-helpers/family-test-helper';
-import { createStudentAll } from '../../../testing-helpers/student-test-helper';
-import { ClassesState } from '../../classes/state/classes.reducers';
-import { AppState } from '../../state/app.reducers';
-import { StudentsState } from './students.reducers';
 import * as moment from 'moment';
 import {
     selectActiveStudents,
@@ -14,321 +8,401 @@ import {
     selectSelectedStudentFamilyMembers,
     selectSelectedStudentGradingDates,
     selectSelectedStudentsLastClass,
+    selectStudentAndClassFeatureLoaded,
+    selectStudentLoaded,
+    selectStudents,
+    selectStudentsWhoAttendedClass,
+    selectStudentsWhoAttendedClass2,
+    selectStudentsWhoDidntAttendedClass,
 } from './students.selectors';
 
 describe('Student Selectors', () => {
-    const activeStudent = createStudentAll();
-    const inactiveStudent = createStudentAll(
-        null,
-        null,
-        'hb002',
-        null,
-        null,
-        null,
-        false
-    );
-    const family = createFamilyWithAll();
-
-    // it('selectActiveStudents should return a list of all the active students', () => {
-    //     const studentState: StudentsState = {
-    //         students: [activeStudent, inactiveStudent],
-    //         selectedStudent: null,
-    //         families: [],
-    //     };
-    //
-    //     const state: AppState = {
-    //         students: studentState,
-    //         classes: null,
-    //         authentication: null,
-    //     };
-    //
-    //     expect(selectActiveStudents(state)).toEqual([activeStudent]);
-    // });
-
-    // it('selectInactiveStudents should return a list of all the inactive students', () => {
-    //
-    //   const studentState: StudentsState = {
-    //     students: [activeStudent, inactiveStudent],
-    //     selectedStudent: null,
-    //     families: []
-    //   };
-    //
-    //   const state: AppState = {
-    //     students: studentState,
-    //     classes: null,
-    //     authentication: null
-    //   };
-    //
-    //   expect(selectInactiveStudents(state)).toEqual([inactiveStudent]);
-    // });
-
-    // it('selectFamilies should return a list of all the families', () => {
-    //     const studentState: StudentsState = {
-    //         students: [],
-    //         selectedStudent: null,
-    //         families: [family],
-    //     };
-    //
-    //     const state: AppState = {
-    //         students: studentState,
-    //         classes: null,
-    //         authentication: null,
-    //     };
-    //
-    //     expect(selectFamilies(state)).toEqual([family]);
-    // });
-
-    it('selectSelectedStudent should return a student', () => {
-        const studentState: StudentsState = {
-            students: [activeStudent, inactiveStudent],
-            selectedStudent: null,
-            families: [],
-            loaded: true,
+    it('selectActiveStudents should return a list of all the active students', () => {
+        const state = {
+            students: [{ isActive: true }, { isActive: false }],
         };
 
-        const state: AppState = {
-            students: studentState,
-            classes: null,
-            authentication: null,
-            techniques: null,
-            tags: null,
-            media: null,
-        };
-
-        expect(selectSelectedStudent(activeStudent.hbId)(state)).toEqual(
-            activeStudent
-        );
+        expect(selectActiveStudents.projector(state)).toEqual([
+            {
+                isActive: true,
+            },
+        ]);
     });
 
-    // it('selectSelectedStudentGradingDates should return a students grading dates', () => {
-    //     const studentState: StudentsState = {
-    //         students: [activeStudent],
-    //         selectedStudent: null,
-    //         families: [],
-    //     };
-    //
-    //     const state: AppState = {
-    //         students: studentState,
-    //         classes: null,
-    //         authentication: null,
-    //     };
-    //
-    //     expect(
-    //         selectSelectedStudentGradingDates(activeStudent.hbId)(state)
-    //     ).toEqual(activeStudent.gradingDates);
-    // });
+    it('selectActiveStudents should return an empty array if no active students', () => {
+        const state = {
+            students: [{ isActive: false }, { isActive: false }],
+        };
 
-    it('selectSelectedStudentClassDates should return a list of class that the student attended', () => {
-        const studentWhoAttendedClasses = createStudentAll(
-            null,
-            null,
-            'hb003',
-            null,
-            null,
-            null,
-            false
-        );
+        expect(selectActiveStudents.projector(state)).toEqual([]);
+    });
 
-        const classWithStudent = createClassWithAll(null, null, ['hb003']);
-        const classWithoutStudent = createClassWithAll(null, null, ['hb002']);
-        const classWithStudent2 = createClassWithAll(null, null, [
-            'hb002',
-            'hb003',
+    it('selectInactiveStudents should return a list of all the inactive students', () => {
+        const state = {
+            students: [{ isActive: true }, { isActive: false }],
+        };
+
+        expect(selectInactiveStudents.projector(state)).toEqual([
+            {
+                isActive: false,
+            },
         ]);
+    });
 
-        const studentState: StudentsState = {
-            students: [activeStudent],
-            selectedStudent: null,
-            families: [],
-            loaded: true,
+    it('selectInactiveStudents should return an empty array if no inactive students', () => {
+        const state = {
+            students: [{ isActive: false }, { isActive: false }],
         };
 
-        const classesState: ClassesState = {
-            classes: [classWithoutStudent, classWithStudent, classWithStudent2],
-            selectedClass: null,
-            loaded: true,
+        expect(selectActiveStudents.projector(state)).toEqual([]);
+    });
+
+    it('selectStudents should return an all student', () => {
+        const state = {
+            students: [{ student: 'student1' }, { student: 'student2' }],
         };
 
-        const state: AppState = {
-            students: studentState,
-            classes: classesState,
-            authentication: null,
-            techniques: null,
-            tags: null,
-            media: null,
+        expect(selectStudents.projector(state)).toEqual(state.students);
+    });
+
+    it('selectFamilies should return an all famlies', () => {
+        const state = {
+            families: [
+                { family_id: 2, name: 'higgins' },
+                { family_id: 2, name: 'higgins' },
+            ],
+        };
+
+        expect(selectFamilies.projector(state)).toEqual(state.families);
+    });
+
+    it('selectSelectedStudent should return the student with the requested id', () => {
+        const state = {
+            students: [{ hbId: 'hb001' }, { hbId: 'hb002' }],
+        };
+
+        expect(selectSelectedStudent('hb001').projector(state)).toEqual({
+            hbId: 'hb001',
+        });
+    });
+
+    it('selectSelectedStudent should return the student with the same id', () => {
+        const state = {
+            students: [{ hbId: 'hb001' }, { hbId: 'hb002' }],
+        };
+
+        expect(selectSelectedStudent('hb001').projector(state)).toEqual({
+            hbId: 'hb001',
+        });
+    });
+
+    it('selectSelectedStudent should return null when null is passes as the id', () => {
+        const state = {
+            students: [{ hbId: 'hb001' }, { hbId: 'hb002' }],
+        };
+
+        expect(selectSelectedStudent(null).projector(state)).toEqual(null);
+    });
+
+    it('selectSelectedStudent should return null no students exist', () => {
+        const state = {
+            students: [],
+        };
+
+        expect(selectSelectedStudent('hb001').projector(state)).toEqual(null);
+    });
+
+    it('selectSelectedStudentGradingDates should return a list students grading dates', () => {
+        const state = {
+            students: {
+                students: [
+                    { hbId: 'hb001', gradingDates: [{ id: 1 }, { id: 2 }] },
+                    { hbId: 'hb002', gradingDates: [{ id: 3 }, { id: 4 }] },
+                ],
+            },
+        };
+
+        expect(selectSelectedStudentGradingDates('hb001')(state)).toEqual([
+            { id: 1 },
+            { id: 2 },
+        ]);
+    });
+
+    it('selectSelectedStudentClassDates should return a list of students class dates', () => {
+        const state = {
+            students: {
+                students: [{ hbId: 'hb001' }, { hbId: 'hb002' }],
+            },
+            classes: {
+                classes: [
+                    { id: 1, attendance: ['hb001'] },
+                    { id: 2, attendance: ['hb002', 'hb001'] },
+                ],
+            },
+        };
+
+        expect(selectSelectedStudentClassDates('hb002')(state)).toEqual([
+            { id: 2, attendance: ['hb002', 'hb001'] },
+        ]);
+    });
+
+    it('selectSelectedStudentClassDates should return an emplty list if no classes attended', () => {
+        const state = {
+            students: {
+                students: [{ hbId: 'hb001' }, { hbId: 'hb002' }],
+            },
+            classes: {
+                classes: [
+                    { id: 1, attendance: ['hb001'] },
+                    { id: 2, attendance: ['hb002', 'hb001'] },
+                ],
+            },
+        };
+
+        expect(selectSelectedStudentClassDates('hb003')(state)).toEqual([]);
+    });
+
+    it('selectStudentsWhoAttendedClass should return a list students who attended a class', () => {
+        const state = {
+            students: {
+                students: [
+                    { hbId: 'hb001' },
+                    { hbId: 'hb002' },
+                    { hbId: 'hb003' },
+                ],
+            },
         };
 
         expect(
-            selectSelectedStudentClassDates(studentWhoAttendedClasses.hbId)(
-                state
-            )
-        ).toEqual([classWithStudent, classWithStudent2]);
+            selectStudentsWhoAttendedClass(['hb001', 'hb003'])(state)
+        ).toEqual([{ hbId: 'hb001' }, { hbId: 'hb003' }]);
+    });
+
+    it('selectStudentsWhoAttendedClass2 should return a list students who attended a class', () => {
+        const state = {
+            students: {
+                students: [
+                    { hbId: 'hb001' },
+                    { hbId: 'hb002' },
+                    { hbId: 'hb003' },
+                ],
+            },
+        };
+
+        expect(
+            selectStudentsWhoAttendedClass2(state, {
+                studentIds: ['hb001', 'hb003'],
+            })
+        ).toEqual([{ hbId: 'hb001' }, { hbId: 'hb003' }]);
+    });
+
+    it('selectStudentsWhoDidntAttendedClass should return a list students who didnt attended a class', () => {
+        const state = {
+            students: {
+                students: [
+                    { hbId: 'hb001', isActive: true },
+                    { hbId: 'hb002', isActive: true },
+                    { hbId: 'hb003', isActive: true },
+                ],
+            },
+        };
+
+        expect(
+            selectStudentsWhoDidntAttendedClass(['hb001', 'hb003'])(state)
+        ).toEqual([{ hbId: 'hb002', isActive: true }]);
     });
 
     it('selectSelectedStudentFamilyMembers should return a students family members', () => {
-        const familyId = 3;
-        const familyToSelect = createFamilyWithAll(familyId);
-
-        const studentWithFamilyMember = createStudentAll(
-            null,
-            null,
-            'hb001',
-            null,
-            null,
-            null,
-            false,
-            null,
-            null,
-            familyId
-        );
-
-        const familyMember = createStudentAll(
-            null,
-            null,
-            'hb002',
-            null,
-            null,
-            null,
-            false,
-            null,
-            null,
-            familyId
-        );
-
-        const notAFamilyMember = createStudentAll(
-            null,
-            null,
-            'hb003',
-            null,
-            null,
-            null,
-            false,
-            null,
-            null,
-            4
-        );
-
-        const anotherFamilyMember = createStudentAll(
-            null,
-            null,
-            'hb004',
-            null,
-            null,
-            null,
-            false,
-            null,
-            null,
-            familyId
-        );
-
-        const studentState: StudentsState = {
-            students: [
-                studentWithFamilyMember,
-                familyMember,
-                notAFamilyMember,
-                anotherFamilyMember,
-            ],
-            selectedStudent: null,
-            families: [familyToSelect],
-            loaded: true,
+        const firstFamilyMember = {
+            hbId: 'hb001',
+            familyId: 3,
+        };
+        const secondFamilyMember = {
+            hbId: 'hb003',
+            familyId: 3,
         };
 
-        const state: AppState = {
-            students: studentState,
-            classes: null,
-            authentication: null,
-            techniques: null,
-            tags: null,
-            media: null,
+        const state = {
+            students: {
+                students: [
+                    firstFamilyMember,
+                    { hbId: 'hb002', familyId: 2 },
+                    secondFamilyMember,
+                    { hbId: 'hb004', familyId: 3 },
+                ],
+            },
         };
 
-        expect(
-            selectSelectedStudentFamilyMembers(studentWithFamilyMember.hbId)(
-                state
-            )
-        ).toEqual([familyMember, anotherFamilyMember]);
+        expect(selectSelectedStudentFamilyMembers('hb004')(state)).toEqual([
+            firstFamilyMember,
+            secondFamilyMember,
+        ]);
+    });
+
+    it('selectSelectedStudentFamilyMembers should return null is student is not found', () => {
+        const state = {
+            students: {
+                students: [
+                    {
+                        hbId: 'hb001',
+                        familyId: 3,
+                    },
+                    { hbId: 'hb002', familyId: 2 },
+                ],
+            },
+        };
+
+        expect(selectSelectedStudentFamilyMembers('hb004')(state)).toEqual(
+            null
+        );
     });
 
     it('selectSelectedStudentLastClass should return the latest class a student attended', () => {
-        const studentWhoAttendedClasses = createStudentAll(
-            null,
-            null,
-            'hb003',
-            null,
-            null,
-            null,
-            false
-        );
-
-        const classWithStudent = createClassWithAll(
-            null,
-            null,
-            ['hb003'],
-            null,
-            moment('01/02/03')
-        );
-        const classWithStudent2 = createClassWithAll(
-            null,
-            null,
-            ['hb003'],
-            null,
-            moment('29/01/03')
-        );
-        const classWithStudent3 = createClassWithAll(
-            null,
-            null,
-            ['hb003'],
-            null,
-            moment('01/02/03')
-        );
-
-        const classWithoutStudent = createClassWithAll(
-            null,
-            null,
-            ['hb002'],
-            null,
-            moment('02/02/03')
-        );
-        const lastClassWithStudent = createClassWithAll(
-            null,
-            null,
-            ['hb002', 'hb003'],
-            null,
-            moment('03/02/03')
-        );
-
-        const studentState: StudentsState = {
-            students: [activeStudent],
-            selectedStudent: null,
-            families: [],
-            loaded: true,
+        const attendedClass = {
+            id: 3,
+            attendance: ['hb002', 'hb003'],
+            date: moment(new Date('2020/05/26')),
         };
 
-        const classesState: ClassesState = {
-            classes: [
-                classWithoutStudent,
-                classWithStudent,
-                lastClassWithStudent,
-                classWithStudent2,
-                classWithStudent3,
-            ],
-            selectedClass: null,
-            loaded: true,
+        const state = {
+            students: {
+                students: [],
+            },
+            classes: {
+                classes: [
+                    {
+                        id: 1,
+                        attendance: ['hb001', 'hb003'],
+                        date: moment(new Date('2020/05/24')),
+                    },
+                    {
+                        id: 2,
+                        attendance: ['hb002', 'hb001', 'hb003'],
+                        date: moment(new Date('2020/05/23')),
+                    },
+                    {
+                        id: 5,
+                        attendance: ['hb001', 'hb002', 'hb003'],
+                        date: moment(new Date('2020/05/24')),
+                    },
+                    attendedClass,
+                    {
+                        id: 4,
+                        attendance: ['hb002', 'hb001', 'hb003'],
+                        date: moment(new Date('2020/05/25')),
+                    },
+                ],
+            },
         };
 
-        const state: AppState = {
-            students: studentState,
-            classes: classesState,
-            authentication: null,
-            techniques: null,
-            tags: null,
-            media: null,
+        expect(selectSelectedStudentsLastClass('hb003')(state)).toEqual(
+            attendedClass
+        );
+    });
+
+    it('selectSelectedStudentLastClass should return null if student id is undefined', () => {
+        const state = {
+            students: {
+                students: [],
+            },
+            classes: {
+                classes: [],
+            },
         };
 
-        expect(
-            selectSelectedStudentsLastClass(studentWhoAttendedClasses.hbId)(
-                state
-            )
-        ).toEqual(lastClassWithStudent);
+        expect(selectSelectedStudentsLastClass(null)(state)).toEqual(null);
+    });
+
+    it('selectSelectedStudentLastClass should return null if no classes found', () => {
+        const state = {
+            students: {
+                students: [],
+            },
+            classes: {
+                classes: [
+                    {
+                        id: 1,
+                        attendance: ['hb001', 'hb003'],
+                        date: moment(new Date('2020/05/24')),
+                    },
+                    {
+                        id: 2,
+                        attendance: ['hb002', 'hb001', 'hb003'],
+                        date: moment(new Date('2020/05/23')),
+                    },
+                    {
+                        id: 4,
+                        attendance: ['hb002', 'hb001', 'hb003'],
+                        date: moment(new Date('2020/05/25')),
+                    },
+                ],
+            },
+        };
+
+        expect(selectSelectedStudentsLastClass('hb004')(state)).toEqual(null);
+    });
+
+    it('selectStudentAndClassFeatureLoaded should return true if all features are loaded', () => {
+        const state = {
+            students: {
+                loaded: true,
+                familiesLoaded: true,
+            },
+            classes: {
+                loaded: true,
+            },
+        };
+
+        expect(selectStudentAndClassFeatureLoaded(state)).toEqual(true);
+    });
+
+    it('selectStudentAndClassFeatureLoaded should return false if students are not loaded', () => {
+        const state = {
+            students: {
+                loaded: false,
+                familiesLoaded: true,
+            },
+            classes: {
+                loaded: true,
+            },
+        };
+
+        expect(selectStudentAndClassFeatureLoaded(state)).toEqual(false);
+    });
+
+    it('selectStudentAndClassFeatureLoaded should return false if classes are not loaded', () => {
+        const state = {
+            students: {
+                loaded: true,
+                familiesLoaded: false,
+            },
+            classes: {
+                loaded: true,
+            },
+        };
+        expect(selectStudentAndClassFeatureLoaded(state)).toEqual(false);
+    });
+
+    it('selectStudentAndClassFeatureLoaded should return false if families are not loaded', () => {
+        const state = {
+            students: {
+                loaded: true,
+                familiesLoaded: true,
+            },
+            classes: {
+                loaded: false,
+            },
+        };
+        expect(selectStudentAndClassFeatureLoaded(state)).toEqual(false);
+    });
+
+    it('selectStudentLoaded should return true if students are loaded', () => {
+        const state = {
+            students: {
+                loaded: true,
+            },
+        };
+
+        expect(selectStudentLoaded(state)).toEqual(true);
     });
 });

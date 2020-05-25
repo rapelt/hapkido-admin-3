@@ -10,7 +10,7 @@ before_script:
 jobs:
   include:
     - stage: tests
-#      script: "npm run lint && npm run test:ci:all:no-record"
+      script: "npm run lint && npm run test:ci:all:no-record"
     - stage: deploy to staging
       if: branch = master
       script: "npm run build:staging"

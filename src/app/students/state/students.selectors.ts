@@ -66,6 +66,10 @@ export const selectStudentLoaded = createSelector(
 
 export const selectSelectedStudent = (id: string) =>
     createSelector(getStudentsState, studentsState => {
+        if (id === null || id === undefined) {
+            return null;
+        }
+
         if (studentsState.students.length === 0) {
             return null;
         }
@@ -156,6 +160,10 @@ export const selectSelectedStudentsLastClass = (id: string) =>
         getStudentsState,
         getClassState,
         (studentsState, classState) => {
+            if (id === null || id === undefined) {
+                return null;
+            }
+
             const classes = classState.classes.filter(aclass => {
                 const didAttendClass = aclass.attendance.find(student => {
                     return student.toLowerCase() === id.toLowerCase();
@@ -163,6 +171,14 @@ export const selectSelectedStudentsLastClass = (id: string) =>
 
                 return !!didAttendClass;
             });
+
+            if (
+                classes === null ||
+                classes === undefined ||
+                classes.length === 0
+            ) {
+                return null;
+            }
 
             classes.sort((a, b) => {
                 if (moment(a.date).isBefore(moment(b.date))) {

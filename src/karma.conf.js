@@ -31,7 +31,7 @@ module.exports = function (config) {
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,
-    browsers: ['ChromeHeadless', 'ChromeCanary'],
+    browsers: ['ChromeHeadless', 'Chrome'],
     autoWatch: true,
     concurrency: Infinity,
     singleRun: false,
