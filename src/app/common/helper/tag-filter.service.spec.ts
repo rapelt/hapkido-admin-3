@@ -6,7 +6,7 @@
 //   beforeEach(() => TestBed.configureTestingModule({}));
 //
 //   it('should be created', () => {
-//     const service: TagFilterService = TestBed.get(TagFilterService);
+//     const service: TagFilterService = TestBed.inject(TagFilterService);
 //     expect(service).toBeTruthy();
 //   });
 // });

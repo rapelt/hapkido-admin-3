@@ -49,8 +49,8 @@
 //
 //         fixture = TestBed.createComponent(ViewStudentPaymentsComponent);
 //         component = fixture.componentInstance;
-//         store = TestBed.get(Store);
-//         router = TestBed.get(Router);
+//         store = TestBed.inject(Store);
+//         router = TestBed.inject(Router);
 //         spyOn(store, 'dispatch').and.callThrough();
 //         fixture.detectChanges();
 //     }));

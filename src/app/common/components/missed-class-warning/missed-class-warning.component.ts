@@ -28,6 +28,9 @@ export class MissedClassWarningComponent implements OnInit, OnDestroy {
     constructor(public store: Store<AppState>) {}
 
     ngOnInit() {
+        if (!this.student) {
+            return;
+        }
         const studentLastClass = this.store.select(
             selectSelectedStudentsLastClass(this.student.hbId)
         );

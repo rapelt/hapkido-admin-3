@@ -70,8 +70,8 @@
 //         fixture = TestBed.createComponent(MissedClassWarningComponent);
 //         component = fixture.componentInstance;
 //         component.student = createStudentAll(null, null, 'hb088');
-//         store = TestBed.get(Store);
-//         router = TestBed.get(Router);
+//         store = TestBed.inject(Store);
+//         router = TestBed.inject(Router);
 //         spyOn(store, 'dispatch').and.callThrough();
 //         fixture.detectChanges();
 //     }));

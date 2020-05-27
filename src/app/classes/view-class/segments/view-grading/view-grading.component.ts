@@ -26,7 +26,7 @@ export class ViewGradingComponent implements OnInit, OnDestroy {
             firstname: string;
             lastname: string;
         };
-    }>;
+    }> = [];
 
     constructor(
         public studentHelper: StudentsHelper,

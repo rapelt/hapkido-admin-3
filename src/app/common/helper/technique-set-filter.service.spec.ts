@@ -6,7 +6,7 @@
 //   beforeEach(() => TestBed.configureTestingModule({}));
 //
 //   it('should be created', () => {
-//     const service: TechniqueSetFilterService = TestBed.get(TechniqueSetFilterService);
+//     const service: TechniqueSetFilterService = TestBed.inject(TechniqueSetFilterService);
 //     expect(service).toBeTruthy();
 //   });
 // });

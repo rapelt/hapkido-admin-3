@@ -27,11 +27,7 @@ describe('StudentListPage Active', () => {
     let fixture: ComponentFixture<StudentListPage>;
     let activatedRoute: ActivatedRouteStub;
 
-    let store: MockStore<{
-        authentication: {
-            authenticationState: string;
-        };
-    }>;
+    let store;
 
     const initialState = {
         ...emptyInitialState(),
@@ -88,7 +84,7 @@ describe('StudentListPage Active', () => {
     beforeEach(async(() => {
         fixture = TestBed.createComponent(StudentListPage);
         component = fixture.componentInstance;
-        store = TestBed.get(Store);
+        store = TestBed.inject(Store);
         spyOn(store, 'dispatch').and.callThrough();
         fixture.detectChanges();
     }));

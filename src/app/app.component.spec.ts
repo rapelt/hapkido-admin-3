@@ -29,11 +29,7 @@ describe('AppComponent', () => {
     let platformReadySpy;
     let platformSpy;
 
-    let store: MockStore<{
-        authentication: {
-            authenticationState: number;
-        };
-    }>;
+    let store;
 
     const initialState = {
         authentication: {
@@ -68,7 +64,7 @@ describe('AppComponent', () => {
             ],
         }).compileComponents();
 
-        store = TestBed.get(Store);
+        store = TestBed.inject(Store);
         spyOn(store, 'dispatch').and.callThrough();
     }));
 
@@ -111,7 +107,7 @@ describe('AppComponent', () => {
     //             authenticationState: AuthStatesEnum.LoggedIn,
     //         },
     //     });
-    //     const authState: AuthStateService = TestBed.get(AuthStateService);
+    //     const authState: AuthStateService = TestBed.inject(AuthStateService);
     //     authState.setIsLoggedIn(AuthStatesEnum.LoggedIn);
     //     const fixture = await TestBed.createComponent(AppComponent);
     //     const app = fixture.componentInstance;
@@ -123,7 +119,7 @@ describe('AppComponent', () => {
         localStorage.setItem('login', 'true');
         const fixture = await TestBed.createComponent(AppComponent);
 
-        const authState: AuthStateService = TestBed.get(AuthStateService);
+        const authState: AuthStateService = TestBed.inject(AuthStateService);
         authState.setIsLoggedIn(AuthStatesEnum.LoggedIn);
 
         await fixture.detectChanges();
@@ -141,7 +137,7 @@ describe('AppComponent', () => {
         localStorage.setItem('login', 'true');
         const fixture = await TestBed.createComponent(AppComponent);
 
-        const authState: AuthStateService = TestBed.get(AuthStateService);
+        const authState: AuthStateService = TestBed.inject(AuthStateService);
         authState.setIsLoggedIn(AuthStatesEnum.LoggedIn);
 
         await fixture.detectChanges();
