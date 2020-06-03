@@ -9,7 +9,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { StudentsServices } from './students.services';
 import { MessagesService } from '../../messages/messages.service';
 
-fdescribe('Student Effects', () => {
+describe('Student Effects', () => {
     let actions$: ReplaySubject<any>;
     let effects: StudentsEffects;
     let service: StudentsServices;
