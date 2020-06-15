@@ -17,4 +17,6 @@ export interface EnvironementModel {
         cognito_login: boolean;
         download_graphs: boolean;
     };
+    static_image_location: string;
+    default_logo: string;
 }

@@ -1,10 +1,4 @@
-import {
-    Component,
-    OnInit,
-    OnDestroy,
-    ViewChild,
-    ElementRef,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -15,26 +9,13 @@ import {
     SignInSuccess,
     SignOut,
 } from './authentication/state/authentication.actions';
-import { GetAllClasses } from './classes/state/classes.actions';
 import { AppState } from './state/app.reducers';
-import {
-    GetAllFamilies,
-    GetAllStudents,
-} from './students/state/students.actions';
 import {
     AuthenticationServices,
     AuthStatesEnum,
     AuthStateService,
 } from 'hapkido-auth-lib';
-import { delay, take } from 'rxjs/operators';
 import { LoadingSpinnerService } from './common/components/loading-spinner/loading-spinner.service';
-import { of } from 'rxjs';
-import { GetAllPhotos, GetAllVideos } from './media/state/media.actions';
-import {
-    GetAllTechniques,
-    GetAllTechniquesSets,
-} from './techniques/state/techniques.actions';
-import { GetAllTags } from './tags/state/tags.actions';
 import { SocketioService } from './common/services/socketio.service';
 
 @Component({
