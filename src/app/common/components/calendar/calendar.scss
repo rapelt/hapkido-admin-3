@@ -11,6 +11,11 @@
 
   flex-direction: column;
 
+  .calendar-border {
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+    height: 300px;
+  }
+
   .ion-calendar-header, .ion-calendar-row {
     display: flex;
     box-sizing: border-box;
@@ -22,6 +27,11 @@
 
   .ion-calendar-header {
     height: $ion-calendar-row-height;
+    background: white;
+    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+    margin-bottom: 12px;
+    margin-top: 12px;
+
 
     button[ion-fab] {
       width: $ion-calendar-row-height;
@@ -30,26 +40,48 @@
       position: relative;
       left: 0;
       right: 0;
+      background-color: white;
     }
     .ion-calendar-header-title {
       flex: 1;
       margin: 0 10px;
+      background-color: white;
     }
   }
 
   .ion-calendar-row {
     flex: 1;
 
-    ion-button, div {
+    button, div {
       flex: 1;
       margin: 3px;
-      height: auto;
+      //height: auto;
       width: 35px;
+      height: 30px;
+      background: white;
+
+      &.light {
+        background-color: white;
+      }
+
+      &.primary {
+        background-color: var(--ion-color-primary);
+        color: white;
+        border-radius: 4px;
+
+      }
+
+      &.secondary {
+        //background-color: yellow;
+        border: 1px var(--ion-color-secondary) solid;
+        border-radius: 4px;
+      }
     }
 
     div {
       line-height: $ion-calendar-row-height;
       text-align: center;
+      color: gray;
     }
 
     .ion-calendar-partial-selection {

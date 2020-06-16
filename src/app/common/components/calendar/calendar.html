@@ -1,26 +1,28 @@
 <div class="calendar">
   <div class="ion-calendar-header">
     <button ion-fab [disabled]="disabled" (click)="prevPage()">&#8592;</button>
-    <ion-button [disabled]="disabled" (click)="previousViewMode()" color="primary" class="ion-calendar-header-title">
+    <button [disabled]="disabled" (click)="previousViewMode()" class="ion-calendar-header-title">
       {{ viewHeader }}
-    </ion-button>
+    </button>
     <button ion-fab right [disabled]="disabled" (click)="nextPage()">&#8594;</button>
   </div>
-  <div class="ion-calendar-row" *ngIf="viewMode == 'month'">
-    <div *ngFor="let weekDay of weekDays">
-      <div class="button-label">{{ weekDay }}</div>
+  <div class="calendar-border">
+    <div class="ion-calendar-row weekday" *ngIf="viewMode == 'month'">
+      <div *ngFor="let weekDay of weekDays">
+        <div class="button-label">{{ weekDay }}</div>
+      </div>
     </div>
-  </div>
-  <div class="ion-calendar-row" *ngFor="let row of calendarRows">
-    <ion-button
-            [color]="dayColour(entry)"
-            [disabled]="disabled || entry.disabled"
-            [class.ion-calendar-partial-selection]="entry.selected == 'partial'"
-            [class.ion-calendar-highlight]="entry.selected === 'none' && entry.highlight"
-            [ngClass]="'cy-day-' + entry.toString()"
-            (click)="selectEntry(entry)"
-            *ngFor="let entry of row">
-      {{ entry.toString() }}
-    </ion-button>
+    <div class="ion-calendar-row" *ngFor="let row of calendarRows">
+      <button
+              [className]="dayColour(entry)"
+              [disabled]="disabled || entry.disabled"
+              [class.ion-calendar-partial-selection]="entry.selected == 'partial'"
+              [class.ion-calendar-highlight]="entry.selected === 'none' && entry.highlight"
+              [ngClass]="'cy-day-' + entry.toString()"
+              (click)="selectEntry(entry)"
+              *ngFor="let entry of row">
+        {{ entry.toString() }}
+      </button>
+    </div>
   </div>
 </div>
