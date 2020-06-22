@@ -1,9 +1,19 @@
-.attendance-list {
-  padding: 0px 30px 30px 30px;
-  color: black;
+
+ion-list {
+  background-color: var(--custom-background-color);
 }
 
-.no-attendance-list {
-  padding: 0px 30px 30px 30px;
-  color: black;
+.student-attended {
+  p {
+    text-align: center;
+  }
+
+  ion-item {
+    margin: 12px 12px 12px 12px;
+    box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+
+    ion-label {
+      color: black;
+    }
+  }
 }

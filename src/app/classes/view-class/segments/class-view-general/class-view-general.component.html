@@ -1,57 +1,63 @@
+<ion-list lines="none">
+  <ion-list-header>
+    <ion-label>{{(aclass | async)?.classType | capitialise}} Class, {{(aclass | async)?.date | date: 'dd MMM yyyy'}} </ion-label>
+  </ion-list-header>
+
 <ion-item>
-  <ion-label>
+  <ion-label position="start">
     <ion-text class="ut-class-type-label cy-class-type-label" color="primary">
       <h3>Class Type</h3>
     </ion-text>
-    <ion-text class="ut-class-type cy-class-type">
-      {{(aclass | async)?.classType}}
-    </ion-text>
   </ion-label>
+  <ion-text class="ut-class-type cy-class-type">
+    {{(aclass | async)?.classType}}
+  </ion-text>
 </ion-item>
 
 <ion-item>
-  <ion-label >
+  <ion-label position="start">
     <ion-text class="ut-date-label cy-date-label" color="primary">
       <h3>Date</h3>
     </ion-text>
-    <ion-text class="ut-date cy-date">
-      {{(aclass | async)?.date | date: 'dd MMM yyyy': '+1000'}}
-    </ion-text>
   </ion-label>
+  <ion-text class="ut-date cy-date">
+    {{(aclass | async)?.date | date: 'dd MMM yyyy': '+1000'}}
+  </ion-text>
 </ion-item>
 
 <ion-item>
-  <ion-label >
+  <ion-label position="start">
     <ion-text class="ut-time-label cy-time-label" color="primary">
       <h3>Time</h3>
     </ion-text>
-    <ion-text class="ut-time cy-time">
-      {{(aclass | async)?.date | date: 'h:mm aa': '+1000'}}
-    </ion-text>
   </ion-label>
+  <ion-text class="ut-time cy-time">
+    {{(aclass | async)?.date | date: 'h:mm aa': '+1000'}}
+  </ion-text>
 </ion-item>
 
 <ion-item>
-  <ion-label >
+  <ion-label position="start">
     <ion-text class="ut-grading-label cy-grading-label" color="primary">
       <h3>Grading</h3>
     </ion-text>
-    <ion-text class="ut-grading cy-grading">
-      {{(aclass | async)?.isGrading ? 'True' : 'False'}}
-    </ion-text>
   </ion-label>
+  <ion-text class="ut-grading cy-grading" *ngIf="(aclass | async)?.isGrading">
+    Yes
+  </ion-text>
   <ion-button class="cy-make-class-a-grading-btn" slot="end" *ngIf="!(aclass | async)?.isGrading" (click)="makeClassGrading()">
-    Make this class a grading
+    No
   </ion-button>
 </ion-item>
 
 <ion-item>
-  <ion-label >
+  <ion-label position="start">
     <ion-text class="ut-attendance-label cy-attendance-label" color="primary">
       <h3>Total attendance</h3>
     </ion-text>
-    <ion-text class="ut-attendance cy-attendance">
-      {{(aclass | async)?.attendance.length}}
-    </ion-text>
   </ion-label>
+  <ion-text class="ut-attendance cy-attendance">
+    {{(aclass | async)?.attendance.length}}
+  </ion-text>
 </ion-item>
+</ion-list>

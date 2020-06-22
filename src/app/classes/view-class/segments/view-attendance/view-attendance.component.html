@@ -1,23 +1,23 @@
-<ion-card>
-  <ion-card-header>
-    <ion-item>
-      Attendance ({{attendance.length}})
-<!--      <button ion-button outline item-end color="orange" (click)="editAttedanceButton()">Edit</button>-->
-    </ion-item>
-  </ion-card-header>
-  <ion-card-content *ngIf="attendance.length > 0" class="cy-attendance-list attendance-list">
-    <ion-list>
-      <ion-item *ngFor="let student of attendance" class="cy-student-in-attendance">
+<!--  <ion-card-header>-->
+<!--    <ion-item>-->
+<!--      Attendance ({{attendance.length}})-->
+<!--&lt;!&ndash;      <button ion-button outline item-end color="orange" (click)="editAttedanceButton()">Edit</button>&ndash;&gt;-->
+<!--    </ion-item>-->
+<!--  </ion-card-header>-->
+<!--  <ion-card-content *ngIf="attendance.length > 0" class="cy-attendance-list attendance-list">-->
+
+    <ion-list class="cy-student-list student-attended">
+      <ion-item class="cy-student-list-item" lines="none" button="false" [class]="'student-' + student.hbId" *ngFor="let student of attendance | alphabeticalstudents; let i = index">
         <ion-label>
-          {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
+         {{i+1}}. {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
         </ion-label>
         <ion-note slot="end">
           <app-grade-badge [grade]="student.grade"></app-grade-badge>
         </ion-note>
       </ion-item>
+
     </ion-list>
-  </ion-card-content>
-  <ion-card-content *ngIf="attendance.length == 0" class="cy-no-attendance-list no-attendance-list">
-    <p>No one was in attendance</p>
-  </ion-card-content>
-</ion-card>
+<!--  </ion-card-content>-->
+<!--  <ion-card-content *ngIf="attendance.length == 0" class="cy-no-attendance-list no-attendance-list">-->
+<!--    <p>No one was in attendance</p>-->
+<!--  </ion-card-content>-->
