@@ -61,35 +61,48 @@ function removeStudentFromClass(state, payload): ClassesState {
         state.classes[index],
         payload.studentId
     );
-    const classes = [...state.classes];
-    let updateClass;
-    if (indexOfStudent >= 0) {
-        updateClass = {
-            ...state.classes[index],
-        };
-        updateClass.attendance.splice(indexOfStudent, 1);
-        classes[index] = updateClass;
-    }
+    const classes = [
+        ...state.classes.map((c, i) => {
+            if (i !== index) {
+                return c;
+            } else {
+                const tempAttendance = c.attendance.filter(
+                    (a, i2) => i2 !== indexOfStudent
+                );
+                return {
+                    ...c,
+                    attendance: [...tempAttendance],
+                };
+            }
+        }),
+    ];
     return {
         ...state,
         classes: classes,
-        selectedClass: updateClass,
+        selectedClass: classes[index],
     };
 }
 
 function addStudentToClass(state, payload): ClassesState {
     const index = getIndexOfClass(state.classes, parseInt(payload.classId, 10));
+    const classes = [
+        ...state.classes.map((c, i) => {
+            if (i !== index) {
+                return c;
+            } else {
+                const tempAttendance = [...c.attendance, payload.studentId];
+                return {
+                    ...c,
+                    attendance: [...tempAttendance],
+                };
+            }
+        }),
+    ];
 
-    const updateClassWithStudent = {
-        ...state.classes[index],
-    };
-    updateClassWithStudent.attendance.push(payload.studentId);
-    const classes = [...state.classes];
-    classes[index] = updateClassWithStudent;
     return {
         ...state,
         classes: classes,
-        selectedClass: updateClassWithStudent,
+        selectedClass: classes[index],
     };
 }
 

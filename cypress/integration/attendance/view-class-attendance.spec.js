@@ -63,9 +63,9 @@ describe('Attendance', function() {
     cy.get('.cy-not-attended-btn').click();
     cy.wait(1000);
 
-    cy.get('.student-hb001').should('not.exist');
-    cy.get('.student-hb002').should('not.exist');
-    cy.get('.student-hb003').should('not.exist');
+    cy.get('.student-hb001').should('have.class', 'item-disabled');
+    cy.get('.student-hb002').should('have.class', 'item-disabled');
+    cy.get('.student-hb003').should('have.class', 'item-disabled');
     cy.get('.student-hb004').should('exist');
     cy.get('.student-hb005').should('not.exist'); // Not Active
     cy.get('.student-hb006').should('exist');

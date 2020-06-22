@@ -3,13 +3,14 @@ import { FamilyModel } from '../models/family.model';
 
 @Pipe({
     name: 'alphabeticalFamily',
+    pure: true,
 })
 export class AlphabeticalFamilyPipe implements PipeTransform {
     transform(array: FamilyModel[]): FamilyModel[] {
         if (array === null) {
             return array;
         }
-        array.slice().sort((a, b) => {
+        return array.slice().sort((a, b) => {
             if (a.name.toLowerCase() < b.name.toLowerCase()) {
                 return -1;
             }
@@ -18,6 +19,5 @@ export class AlphabeticalFamilyPipe implements PipeTransform {
             }
             return 0;
         });
-        return array;
     }
 }

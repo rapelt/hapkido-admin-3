@@ -44,11 +44,12 @@ describe('View Class List', function() {
     cy.get('.ion-calendar-header-title').click();
     cy.contains('2020');
     cy.get('.ion-calendar-header-title').contains('2020');
-    cy.get('.calendar > :nth-child(2) > :nth-child(2)').click();
+    cy.get('.cy-day-Feb').click();
     cy.get('.ion-calendar-header-title').contains('Feb 2020');
-    cy.get(':nth-child(6) > :nth-child(4)').contains('19');
-    cy.get(':nth-child(6) > :nth-child(4)').click();
-    cy.get('.cy-class-list-date').contains('Classes on 19/Feb/2020');
+    cy.get('.cy-day-19').contains('19');
+    cy.get('.cy-day-19').click();
+    cy.get('.primary').contains('19');
+
   });
 
   it('should show a class list for a particular day', function() {
@@ -58,11 +59,10 @@ describe('View Class List', function() {
     cy.get('.ion-calendar-header-title').click();
     cy.contains('2020');
     cy.get('.ion-calendar-header-title').contains('2020');
-    cy.get('.calendar > :nth-child(2) > :nth-child(2)').click();
+    cy.get('.cy-day-Feb').click();
     cy.get('.ion-calendar-header-title').contains('Feb 2020');
-    cy.get(':nth-child(6) > :nth-child(4)').contains('19');
-    cy.get(':nth-child(6) > :nth-child(4)').click();
-    cy.get('.cy-class-list-date').contains('Classes on 19/Feb/2020');
+    cy.get('.cy-day-19').contains('19');
+    cy.get('.cy-day-19').click();
 
     cy.get('.cy-class-list-item').then((list) => {
       expect(list.length).to.equal(2);

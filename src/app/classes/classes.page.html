@@ -23,16 +23,18 @@
         </ion-col>
         <ion-col class="class-list">
           <ion-item-group>
-            <ion-item-divider color="light" class="cy-class-list-date">Classes on {{selectedValue | date:'dd/MMM/yyyy'}}</ion-item-divider>
-            <ion-list>
+<!--            <ion-item-divider color="light" class="cy-class-list-date">Classes on {{selectedValue | date:'dd/MMM/yyyy'}}</ion-item-divider>-->
+            <ion-list [lines]="'none'">
               <ion-item button="true" type="button" class="cy-class-list-item" *ngFor="let aclass of classesOnDay" (click)="classSelected(aclass)">
                 <ion-label>
-                  <ion-text slot="start">{{aclass.classType}}</ion-text>
+                  <ion-text slot="start">{{aclass.classType}} {{aclass.date | date: 'h:mm aa': '+1000'}}</ion-text>
                 </ion-label>
+
                 <ion-text slot="end">{{aclass.attendance.length}}</ion-text>
               </ion-item>
             </ion-list>
           </ion-item-group>
+
         </ion-col>
       </ion-row>
     </ion-grid>

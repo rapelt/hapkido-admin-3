@@ -8,12 +8,18 @@
 
   width: 100%;
   height: $ion-calendar-height;
+  min-width: 200px;
 
   flex-direction: column;
 
   .calendar-border {
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
-    height: 300px;
+    box-shadow: var(--box-shadow-default);
+    height: 260px;
+    background-color: white;
+
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
   }
 
   .ion-calendar-header, .ion-calendar-row {
@@ -28,7 +34,7 @@
   .ion-calendar-header {
     height: $ion-calendar-row-height;
     background: white;
-    box-shadow: 1px 1px 1px 1px rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: var(--box-shadow-default);
     margin-bottom: 12px;
     margin-top: 12px;
 
@@ -52,6 +58,11 @@
   .ion-calendar-row {
     flex: 1;
 
+    .button-label-centred {
+      display: flex;
+      justify-content: center;
+    }
+
     button, div {
       flex: 1;
       margin: 3px;
@@ -61,20 +72,30 @@
       background: white;
 
       &.light {
+        //Nothing
         background-color: white;
       }
 
       &.primary {
+        //Date that is selected
         background-color: var(--ion-color-primary);
         color: white;
         border-radius: 4px;
 
       }
 
-      &.secondary {
-        //background-color: yellow;
-        border: 1px var(--ion-color-secondary) solid;
+      &.tertiary {
+        //Date with a class
+        background-color: var(--ion-color-tertiary);
+        color: black;
         border-radius: 4px;
+
+      }
+
+      &.secondary {
+        //Todays date is selected
+        outline: auto;
+        outline-color: var(--ion-color-secondary);
       }
     }
 
