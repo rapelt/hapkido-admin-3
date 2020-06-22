@@ -38,11 +38,11 @@ describe('View Class Details', function() {
     cy.get('.ion-calendar-header-title').click();
     cy.contains('2020');
     cy.get('.ion-calendar-header-title').contains('2020');
-    cy.get('.calendar > :nth-child(2) > :nth-child(2)').click();
+    cy.get('.cy-day-Feb').click();
     cy.get('.ion-calendar-header-title').contains('Feb 2020');
-    cy.get(':nth-child(6) > :nth-child(4)').contains('19');
-    cy.get(':nth-child(6) > :nth-child(4)').click();
-    cy.get('.cy-class-list-date').contains('Classes on 19/Feb/2020');
+    cy.get('.cy-day-19').contains('19');
+    cy.get('.cy-day-19').click();
+    cy.get('.primary').contains('19');
 
     cy.get('.cy-class-list-item').then((list) => {
       expect(list.length).to.equal(2);
@@ -66,7 +66,7 @@ describe('View Class Details', function() {
     cy.get('.cy-class-type').contains('Adults');
     cy.get('.cy-date').contains('19 Feb 2020');
     cy.get('.cy-time').contains('6:51 PM');
-    cy.get('.cy-grading').contains('True');
+    cy.get('.cy-grading').contains('Yes');
     cy.get('.cy-attendance').contains('3');
   });
 
@@ -76,7 +76,6 @@ describe('View Class Details', function() {
     cy.url().should('include', '/class/view/2');
     cy.get('.cy-class-details-attendance').click();
     cy.wait(500);
-    cy.get('ion-card-header').contains('3');
     cy.get('.cy-student-in-attendance').then((student) => {
       expect(student[0].textContent).to.contain('Firstname0 Lastname0');
       expect(student[1].textContent).to.contain('Firstname1 Lastname1');
@@ -89,7 +88,6 @@ describe('View Class Details', function() {
     cy.visit('/class/view/4');
     cy.url().should('include', '/class/view/4');
     cy.get('.cy-class-details-attendance').click();
-    cy.get('ion-card-header').contains('0');
     cy.get('.cy-no-attendance-list').contains('No one was in attendance');
   });
 
@@ -104,11 +102,10 @@ describe('View Class Details', function() {
     window.localStorage.setItem('login', true);
     cy.visit('/class/view/7');
     cy.url().should('include', '/class/view/7');
-    cy.get('.cy-grading').contains('False');
-    cy.get('.cy-make-class-a-grading-btn').click();
+    cy.get('.cy-make-class-a-grading-btn').contains('No').click();
 
     cy.wait('@makeclassagrading').then((xhr) => {
-      cy.get('.cy-grading').contains('True');
+      cy.get('.cy-grading').contains('Yes');
     });
 
   });

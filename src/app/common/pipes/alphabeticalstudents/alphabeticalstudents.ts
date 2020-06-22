@@ -1,11 +1,16 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { StudentModel } from '../../models/student';
+import { AttendanceModule } from '../../../attendance/attendance.module';
+import { AttendanceModel } from '../../models/attendance.model';
+
+type HasNameType = AttendanceModel[] | StudentModel[];
 
 @Pipe({
     name: 'alphabeticalstudents',
+    pure: true,
 })
 export class AlphabeticalStudentsPipe implements PipeTransform {
-    transform(array: StudentModel[]): StudentModel[] {
+    transform(array: HasNameType): HasNameType {
         if (array === null) {
             return array;
         }

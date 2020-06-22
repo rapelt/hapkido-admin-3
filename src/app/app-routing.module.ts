@@ -53,6 +53,7 @@ const routes: Routes = [
         ],
         canActivate: [AuthenticationGuard],
         runGuardsAndResolvers: 'always',
+        resolve: { data: StudentsDataDispatcher },
     },
     {
         path: 'technique',
