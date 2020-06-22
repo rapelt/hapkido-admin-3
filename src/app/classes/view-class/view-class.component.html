@@ -45,18 +45,19 @@ View Class
 </ion-content>
 
 <ion-footer>
-  <div *ngIf="segment === 'grading'">
+
+  <div *ngIf="segment === 'attendance' || segment === 'general'">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button class="cy-add-attendance-btn" color="tertiary" (click)="grading()">
-        <ion-icon src="assets/icon/add-grading.svg"></ion-icon>
+      <ion-fab-button class="cy-add-attendance-btn" color="tertiary" (click)="attendance()">
+        <ion-icon name="person-add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </div>
 
-  <div *ngIf="segment === 'attendance'">
+  <div *ngIf="segment === 'grading'">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button class="cy-add-attendance-btn" color="tertiary" (click)="attendance()">
-        <ion-icon name="person-add"></ion-icon>
+      <ion-fab-button class="cy-add-attendance-btn" color="tertiary" (click)="grading()">
+        <ion-icon src="assets/icon/add-grading.svg"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </div>
