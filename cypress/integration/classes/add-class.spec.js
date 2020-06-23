@@ -66,9 +66,9 @@ describe('Add Classes', function() {
     cy.get('.ion-calendar-header-title').contains('Feb 2020');
 
     // Select date of month
-    cy.get(':nth-child(6) > :nth-child(4)').contains('19').should('be.visible').trigger('mouseover');
+    cy.get('.cy-day-19').contains('19').should('be.visible').trigger('mouseover');
     cy.wait(200);
-    cy.get(':nth-child(6) > :nth-child(4)').click();
+    cy.get('.cy-day-19').click();
 
     // Select date of month
     cy.get('.cy-day-11').contains('11').should('be.visible').trigger('mouseover');

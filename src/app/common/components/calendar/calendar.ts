@@ -366,15 +366,24 @@ export class IonCalendar
     }
 
     dayColour(day): string {
+        let colour = '';
+
         if (day.selected === 'full') {
-            return 'primary';
-        } else if (day.highlight) {
-            return 'secondary';
-        } else if (day.selected === 'partial') {
-            return 'tertiary';
-        } else {
-            return 'light';
+            colour = colour + 'primary';
         }
+        if (day.highlight) {
+            colour = colour + ' secondary';
+        }
+
+        if (day.selected === 'partial') {
+            colour = colour + ' tertiary';
+        }
+
+        if (colour === '') {
+            colour = 'light';
+        }
+
+        return colour;
     }
 
     prevPage(): void {

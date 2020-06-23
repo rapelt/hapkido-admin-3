@@ -19,6 +19,9 @@ import { TechniqueSetFilterService } from './helper/technique-set-filter.service
 import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
 import { DragDropDirective } from './directives/drag-drop.directive';
 import { SocketioService } from './services/socketio.service';
+import { AttendanceFilterPipePipe } from './pipes/attendance-filter-pipe.pipe';
+import { ActiveStudentPipe } from './pipes/active-students.pipe';
+import { StudentNameFilterPipe } from './pipes/student-name-filter.pipe';
 
 @NgModule({
     declarations: [
@@ -37,6 +40,9 @@ import { SocketioService } from './services/socketio.service';
         PrioritiseSelectedClassPipe,
         ProgressBarComponent,
         DragDropDirective,
+        AttendanceFilterPipePipe,
+        ActiveStudentPipe,
+        StudentNameFilterPipe,
     ],
     imports: [CommonModule, IonicModule],
     providers: [GradeHelper, TechniqueSetFilterService, SocketioService],
@@ -57,6 +63,9 @@ import { SocketioService } from './services/socketio.service';
         PrioritiseSelectedClassPipe,
         ProgressBarComponent,
         DragDropDirective,
+        AttendanceFilterPipePipe,
+        ActiveStudentPipe,
+        StudentNameFilterPipe,
     ],
 })
 export class CommonComponentsModule {}
