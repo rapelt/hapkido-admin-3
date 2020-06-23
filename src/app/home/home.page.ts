@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { config } from '../../environments/environment';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { AppState } from '../state/app.reducers';
 import { ClassesHelper } from '../classes/classes.helper';
 import { Router } from '@angular/router';
@@ -14,13 +14,20 @@ import {
     getClassState,
     selectClassLoaded,
 } from '../classes/state/classes.selectors';
-import { takeWhile, withLatestFrom } from 'rxjs/operators';
+import { filter, map, takeWhile, withLatestFrom } from 'rxjs/operators';
 import { PageComponent } from '../common/page.component';
 import {
     ClearLoadedStudents,
     GetAllFamilies,
     GetAllStudents,
 } from '../students/state/students.actions';
+import {
+    attendanceSelector,
+    selectAttendanceloaded,
+} from '../attendance/attendance.selector';
+import { Observable } from 'rxjs';
+import { ClassModel } from '../common/models/class';
+import { selectHomeloaded, todaysClassSelector } from './home.selector';
 
 @Component({
     selector: 'app-home',
@@ -33,6 +40,7 @@ export class HomePage extends PageComponent implements OnInit, OnDestroy {
 
     date = new Date();
     classesOnDay: any = [];
+    todaysClasses: Observable<ClassModel[]>;
 
     constructor(
         public store: Store<AppState>,
@@ -45,25 +53,19 @@ export class HomePage extends PageComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         this.env = config.environmentName;
 
-        this.store
-            .select(selectClassLoaded)
-            .pipe(
-                takeWhile(loaded => this.isAlive && loaded),
-                withLatestFrom(this.store.select(getClassState))
-            )
-            .subscribe(([loaded, classState]) => {
-                this.loaded = loaded;
-                this.classesOnDay = this.classHelper.getClassesOnDay(
-                    new Date(),
-                    classState.classes
-                );
-            });
+        this.todaysClasses = this.store.pipe(
+            filter(() => this.loaded),
+            select(todaysClassSelector),
+            takeWhile(() => this.isAlive)
+        );
 
         this.store
-            .select(selectClassLoaded)
-            .pipe(takeWhile(() => this.isAlive))
-            .subscribe(loaded => {
-                this.loaded = loaded;
+            .pipe(
+                takeWhile(() => this.isAlive),
+                map(selectHomeloaded)
+            )
+            .subscribe(allValuesLoaded => {
+                this.loaded = allValuesLoaded;
             });
     }
 

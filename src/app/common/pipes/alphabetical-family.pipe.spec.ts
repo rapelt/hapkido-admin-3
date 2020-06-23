@@ -1,7 +1,7 @@
 import { FamilyModel } from '../models/family.model';
 import { AlphabeticalFamilyPipe } from './alphabetical-family.pipe';
 
-fdescribe('Alphabetical Family Pipe', () => {
+describe('Alphabetical Family Pipe', () => {
     const familyArray: FamilyModel[] = [
         { family_id: 1, name: 'a' },
         { family_id: 3, name: 'c' },
