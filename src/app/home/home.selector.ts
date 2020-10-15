@@ -2,7 +2,7 @@ import { createSelector } from '@ngrx/store';
 import {
     getClasses,
     selectClassLoaded,
-} from '../classes/state/classes.selectors';
+} from '../app-store/classes-state/classes.selectors';
 import { ClassModel } from '../common/models/class';
 import * as moment from 'moment';
 

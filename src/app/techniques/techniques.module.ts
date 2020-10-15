@@ -17,11 +17,15 @@ import { PhotoComponent } from './edit-technique/segments/photo/photo.component'
 import { ReviewComponent } from './edit-technique/segments/review/review.component';
 import { DragDropDirective } from '../common/directives/drag-drop.directive';
 import { TechniquesDataDispatcher } from './techniques-data.resolver';
+import { TechniqueSetListComponent } from './technique-set-list/technique-set-list.component';
+import { AddTechniqueComponent } from './add-technique/add-technique.component';
+import { AddTechniqueSetComponent } from './add-technique-set/add-technique-set.component';
 
 @NgModule({
     declarations: [
         ViewTechniqueComponent,
         TechniqueListComponent,
+        TechniqueSetListComponent,
         EditTechniqueComponent,
         GeneralComponent,
         VideosComponent,
@@ -29,6 +33,8 @@ import { TechniquesDataDispatcher } from './techniques-data.resolver';
         PhotosComponent,
         PhotoComponent,
         ReviewComponent,
+        AddTechniqueComponent,
+        AddTechniqueSetComponent,
     ],
     imports: [
         CommonModule,

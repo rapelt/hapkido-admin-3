@@ -2,24 +2,24 @@ import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from '../../state/app.reducers';
+import { AppState } from '../../app-store/state/app.reducers';
 import {
     AddNewStudent,
     EditStudent,
     GetAllStudents,
     ResetSelectedStudent,
     SetSelectedStudent,
-} from '../state/students.actions';
-import { selectSelectedStudent } from '../state/students.selectors';
+} from '../../app-store/student-state/students.actions';
+import { selectSelectedStudent } from '../../app-store/student-state/students.selectors';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { StudentModel } from '../../common/models/student';
 import { emptyValidator } from '../../common/validators/empty.validator';
 import { classType, ClassTypes } from '../../common/models/class-types';
 import * as moment from 'moment';
 import { CapitialisePipe } from '../../common/pipes/capitialise.pipe';
-import { MessagesService } from '../../messages/messages.service';
+import { MessagesService } from '../../common/messages/messages.service';
 import { NavController } from '@ionic/angular';
-import { GetAllClasses } from '../../classes/state/classes.actions';
+import { GetAllClasses } from '../../app-store/classes-state/classes.actions';
 
 @Component({
     selector: 'app-edit-student',

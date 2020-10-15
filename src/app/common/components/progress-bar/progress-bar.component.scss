@@ -33,7 +33,7 @@ $white: #fff;
       display: none;
     }
 
-    // Step's circle in default state
+    // Step's circle in default technique-tags-student-media-classes-auth-state
     &:before {
       content: "\f00c";
       display: flex;
@@ -47,7 +47,7 @@ $white: #fff;
       color: $white;
     }
 
-    // Step's progress bar in default state
+    // Step's progress bar in default technique-tags-student-media-classes-auth-state
     &:after {
       content: "";
       position: absolute;
@@ -60,7 +60,7 @@ $white: #fff;
       z-index: -1;
     }
 
-    // Step's active state
+    // Step's active technique-tags-student-media-classes-auth-state
     &.is-active {
       z-index: 9;
       color: $blue;
@@ -71,11 +71,11 @@ $white: #fff;
       }
     }
 
-    // Step's complete state
+    // Step's complete technique-tags-student-media-classes-auth-state
     &.is-complete {
       color: $green;
 
-      // Step's circle in complete state
+      // Step's circle in complete technique-tags-student-media-classes-auth-state
       &:before {
         font-family: FontAwesome;
         font-size: 10px;
@@ -84,7 +84,7 @@ $white: #fff;
         border: 4px solid transparent;
       }
 
-      // Step's progress bar in complete state
+      // Step's progress bar in complete technique-tags-student-media-classes-auth-state
       &:after {
         background: $blue;
         animation: nextStep 1s;
@@ -95,7 +95,7 @@ $white: #fff;
 }
 
 // Animations --------------------------------------
-// Pulse animation for Step's circle in active state
+// Pulse animation for Step's circle in active technique-tags-student-media-classes-auth-state
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(33,131,221, 0.4);

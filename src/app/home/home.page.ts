@@ -1,26 +1,26 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { config } from '../../environments/environment';
 import { select, Store } from '@ngrx/store';
-import { AppState } from '../state/app.reducers';
+import { AppState } from '../app-store/state/app.reducers';
 import { ClassesHelper } from '../classes/classes.helper';
 import { Router } from '@angular/router';
 import {
     ClearLoadedClasses,
     GetAllClasses,
     ViewClass,
-} from '../classes/state/classes.actions';
+} from '../app-store/classes-state/classes.actions';
 import {
     getClasses,
     getClassState,
     selectClassLoaded,
-} from '../classes/state/classes.selectors';
+} from '../app-store/classes-state/classes.selectors';
 import { filter, map, takeWhile, withLatestFrom } from 'rxjs/operators';
 import { PageComponent } from '../common/page.component';
 import {
     ClearLoadedStudents,
     GetAllFamilies,
     GetAllStudents,
-} from '../students/state/students.actions';
+} from '../app-store/student-state/students.actions';
 import {
     attendanceSelector,
     selectAttendanceloaded,

@@ -7,7 +7,7 @@
 // import { AuthLibModule } from 'hapkido-auth-lib';
 // import { config } from '../../../environments/environment.test';
 // import { CommonComponentsModule } from '../../common/common-components.module';
-// import { provideMockStore } from '@ngrx/store/testing';
+// import { provideMockStore } from '@ngrx/app-store/testing';
 // import { AuthenticationStates } from '../../authentication/authentication-states';
 //
 // describe('ViewClassComponent', () => {

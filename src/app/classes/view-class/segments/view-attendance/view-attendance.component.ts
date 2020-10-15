@@ -3,12 +3,15 @@ import { ClassModel } from '../../../../common/models/class';
 import { Observable } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { AppState } from '../../../../state/app.reducers';
-import { GetAllStudents } from '../../../../students/state/students.actions';
-import { ActionTypes, GetAllClasses } from '../../../state/classes.actions';
-import { selectSelectedClass } from '../../../state/classes.selectors';
+import { AppState } from '../../../../app-store/state/app.reducers';
+import { GetAllStudents } from '../../../../app-store/student-state/students.actions';
+import {
+    ActionTypes,
+    GetAllClasses,
+} from '../../../../app-store/classes-state/classes.actions';
+import { selectSelectedClass } from '../../../../app-store/classes-state/classes.selectors';
 import { StudentModel } from '../../../../common/models/student';
-import { selectStudentsWhoAttendedClass } from '../../../../students/state/students.selectors';
+import { selectStudentsWhoAttendedClass } from '../../../../app-store/student-state/students.selectors';
 
 @Component({
     selector: 'app-view-attendance',

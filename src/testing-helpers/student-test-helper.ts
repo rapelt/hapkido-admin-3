@@ -1,7 +1,7 @@
 import * as moment from 'moment';
 import { ClassTypes } from '../app/common/models/class-types';
 import { StudentModel } from '../app/common/models/student';
-import { StudentsState } from '../app/students/state/students.reducers';
+import { StudentsState } from '../app/app-store/student-state/students.reducers';
 
 export function createStudent(): StudentModel {
     return {

@@ -22,6 +22,11 @@ import { SocketioService } from './services/socketio.service';
 import { AttendanceFilterPipePipe } from './pipes/attendance-filter-pipe.pipe';
 import { ActiveStudentPipe } from './pipes/active-students.pipe';
 import { StudentNameFilterPipe } from './pipes/student-name-filter.pipe';
+import { TechniqueSetFilterPipe } from './pipes/technique-set-filter.pipe';
+import { TechniqueFilterPipe } from './pipes/technique-filter.pipe';
+import { MessageComponent } from './messages/message/message.component';
+import { MessagesService } from './messages/messages.service';
+import { SidePanelComponent } from './components/side-panel/side-panel.component';
 
 @NgModule({
     declarations: [
@@ -43,9 +48,18 @@ import { StudentNameFilterPipe } from './pipes/student-name-filter.pipe';
         AttendanceFilterPipePipe,
         ActiveStudentPipe,
         StudentNameFilterPipe,
+        TechniqueSetFilterPipe,
+        TechniqueFilterPipe,
+        MessageComponent,
+        SidePanelComponent,
     ],
     imports: [CommonModule, IonicModule],
-    providers: [GradeHelper, TechniqueSetFilterService, SocketioService],
+    providers: [
+        GradeHelper,
+        TechniqueSetFilterService,
+        SocketioService,
+        MessagesService,
+    ],
     exports: [
         StudentListComponent,
         CapitialisePipe,
@@ -66,6 +80,10 @@ import { StudentNameFilterPipe } from './pipes/student-name-filter.pipe';
         AttendanceFilterPipePipe,
         ActiveStudentPipe,
         StudentNameFilterPipe,
+        TechniqueSetFilterPipe,
+        TechniqueFilterPipe,
+        MessageComponent,
+        SidePanelComponent,
     ],
 })
 export class CommonComponentsModule {}

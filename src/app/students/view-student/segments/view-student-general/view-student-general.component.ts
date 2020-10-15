@@ -2,16 +2,16 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { StudentModel } from '../../../../common/models/student';
-import { AppState } from '../../../../state/app.reducers';
+import { AppState } from '../../../../app-store/state/app.reducers';
 import {
     selectSelectedStudent,
     selectSelectedStudentFamilyMembers,
     selectSelectedStudentsLastClass,
-} from '../../../state/students.selectors';
+} from '../../../../app-store/student-state/students.selectors';
 import {
     ActivateStudent,
     DeactivateStudent,
-} from '../../../state/students.actions';
+} from '../../../../app-store/student-state/students.actions';
 
 @Component({
     selector: 'app-view-student-general',
