@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../../state/app.reducers';
-import { SetSelectedTechnique } from '../../../state/techniques.actions';
+import { AppState } from '../../../../app-store/state/app.reducers';
+import { SetSelectedTechnique } from '../../../../app-store/technique-state/techniques.actions';
 
 @Component({
     selector: 'app-photos',

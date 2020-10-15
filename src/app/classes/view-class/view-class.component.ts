@@ -1,11 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActionTypes, DeleteClass } from '../state/classes.actions';
+import {
+    ActionTypes,
+    DeleteClass,
+} from '../../app-store/classes-state/classes.actions';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { AppState } from '../../state/app.reducers';
+import { AppState } from '../../app-store/state/app.reducers';
 import { ClassModel } from '../../common/models/class';
 import { Observable } from 'rxjs';
-import { selectSelectedClass } from '../state/classes.selectors';
+import { selectSelectedClass } from '../../app-store/classes-state/classes.selectors';
 
 @Component({
     selector: 'app-view-class',

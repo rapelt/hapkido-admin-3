@@ -3,15 +3,18 @@ import { Store, select } from '@ngrx/store';
 import { Moment } from 'moment';
 // tslint:disable-next-line:no-duplicate-imports
 import * as moment from 'moment';
-import { AppState } from '../state/app.reducers';
+import { AppState } from '../app-store/state/app.reducers';
 import { ClassesHelper } from './classes.helper';
-import { GetAllClasses, ViewClass } from './state/classes.actions';
+import {
+    GetAllClasses,
+    ViewClass,
+} from '../app-store/classes-state/classes.actions';
 import {
     getClasses,
     getClassState,
     selectClassLoaded,
     selectSelectedClass,
-} from './state/classes.selectors';
+} from '../app-store/classes-state/classes.selectors';
 import { NavigationExtras, Router } from '@angular/router';
 import {
     delay,
@@ -20,9 +23,9 @@ import {
     takeWhile,
     withLatestFrom,
 } from 'rxjs/operators';
-import { selectStudentLoaded } from '../students/state/students.selectors';
+import { selectStudentLoaded } from '../app-store/student-state/students.selectors';
 import { PageComponent } from '../common/page.component';
-import { GetAllStudents } from '../students/state/students.actions';
+import { GetAllStudents } from '../app-store/student-state/students.actions';
 
 @Component({
     selector: 'app-classes',

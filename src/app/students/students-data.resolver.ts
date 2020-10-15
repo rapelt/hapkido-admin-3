@@ -2,11 +2,14 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
 import { ActivatedRouteSnapshot } from '@angular/router';
-import { AppState } from '../state/app.reducers';
+import { AppState } from '../app-store/state/app.reducers';
 import { Store } from '@ngrx/store';
-import { selectStudentAndClassFeatureLoaded } from './state/students.selectors';
-import { GetAllClasses } from '../classes/state/classes.actions';
-import { GetAllFamilies, GetAllStudents } from './state/students.actions';
+import { selectStudentAndClassFeatureLoaded } from '../app-store/student-state/students.selectors';
+import { GetAllClasses } from '../app-store/classes-state/classes.actions';
+import {
+    GetAllFamilies,
+    GetAllStudents,
+} from '../app-store/student-state/students.actions';
 
 @Injectable()
 export class StudentsDataDispatcher implements Resolve<any> {

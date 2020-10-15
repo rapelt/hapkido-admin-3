@@ -13,7 +13,7 @@ import {
     ActionTypes,
     SignIn,
     SignOut,
-} from './authentication/state/authentication.actions';
+} from './app-store/auth-state/authentication.actions';
 import {
     AuthLibModule,
     AuthStatesEnum,
@@ -102,7 +102,7 @@ describe('AppComponent', () => {
     });
 
     // it('should show menu if logged in', async () => {
-    //     store.setState({
+    //     app-store.setState({
     //         authentication: {
     //             authenticationState: AuthStatesEnum.LoggedIn,
     //         },

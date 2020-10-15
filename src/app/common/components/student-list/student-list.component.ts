@@ -15,19 +15,19 @@ import {
     filter,
     map,
 } from 'rxjs/operators';
-import { AppState } from '../../../state/app.reducers';
+import { AppState } from '../../../app-store/state/app.reducers';
 import {
     ActionTypes,
     ActivateStudent,
     DeactivateStudent,
     GetAllStudents,
-} from '../../../students/state/students.actions';
+} from '../../../app-store/student-state/students.actions';
 import { StudentModel } from '../../models/student';
 import {
     selectActiveStudents,
     selectInactiveStudents,
-} from '../../../students/state/students.selectors';
-import { selectSelectedStudentsLastClass } from '../../../students/state/students.selectors';
+} from '../../../app-store/student-state/students.selectors';
+import { selectSelectedStudentsLastClass } from '../../../app-store/student-state/students.selectors';
 import { Validators } from '@angular/forms';
 import { emptyValidator } from '../../validators/empty.validator';
 

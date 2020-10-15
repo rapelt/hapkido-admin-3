@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { AppState } from '../../state/app.reducers';
+import { AppState } from '../../app-store/state/app.reducers';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { SetSelectedTechnique } from '../state/techniques.actions';
+import { SetSelectedTechnique } from '../../app-store/technique-state/techniques.actions';
 
-import { selectSelectedTechnique } from '../state/techniques.selectors';
+import { selectSelectedTechnique } from '../../app-store/technique-state/techniques.selectors';
 import { PageComponent } from '../../common/page.component';
 import { filter, takeWhile, tap, withLatestFrom } from 'rxjs/operators';
 import { selectLoaded } from './edit-technique.selector';
@@ -92,8 +92,8 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 
 // import { Component, OnInit } from '@angular/core';
 // import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { ActionsSubject, Store } from '@ngrx/store';
-// import { AppState } from '../../state/app.reducers';
+// import { ActionsSubject, Store } from '@ngrx/app-store';
+// import { AppState } from '../../technique-tags-student-media-classes-auth-state/app.reducers';
 // import { MessagesService } from '../../messages/messages.service';
 // import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 // import { AlertController, NavController } from '@ionic/angular';
@@ -107,8 +107,8 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 //     AddNewTechniqueSet,
 //     EditTechnique,
 //     SetSelectedTechnique,
-// } from '../state/techniques.actions';
-// import { ActionTypes, AddNewTag } from '../../tags/state/tags.actions';
+// } from '../technique-tags-student-media-classes-auth-state/techniques.actions';
+// import { ActionTypes, AddNewTag } from '../../tags/technique-tags-student-media-classes-auth-state/tags.actions';
 // import { TechniqueModel } from '../../common/models/technique';
 // import { TagModel } from '../../common/models/tag';
 // import {
@@ -116,15 +116,15 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 //     selectTechniqueLoaded,
 //     selectTechniqueSetsLoaded,
 //     selectTechniquesSets,
-// } from '../state/techniques.selectors';
+// } from '../technique-tags-student-media-classes-auth-state/techniques.selectors';
 // import { PageComponent } from '../../common/page.component';
 // import { filter, takeWhile, withLatestFrom } from 'rxjs/operators';
-// import { selectTagLoaded, selectTags } from '../../tags/state/tags.selectors';
+// import { selectTagLoaded, selectTags } from '../../tags/technique-tags-student-media-classes-auth-state/tags.selectors';
 // import { switchMap } from 'rxjs-compat/operator/switchMap';
 // import { TechniqueSetModel } from '../../common/models/technique-set';
 // import { selectLoaded } from './edit-technique.selector';
 // import { config, environment } from '../../../environments/environment';
-// import { AddNewVideo } from '../../media/state/media.actions';
+// import { AddNewVideo } from '../../media/technique-tags-student-media-classes-auth-state/media.actions';
 // import { VideoModel } from '../../common/models/video';
 //
 // @Component({
@@ -135,7 +135,7 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 // export class EditTechniqueComponent extends PageComponent implements OnInit {
 //     constructor(
 //         private fb: FormBuilder,
-//         private store: Store<AppState>,
+//         private app-store: Store<AppState>,
 //         private messages: MessagesService,
 //         public router: Router,
 //         public activatedRoute: ActivatedRoute,
@@ -176,19 +176,19 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 //     ngOnInit() {
 //         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
 //             this.techniqueId = parseInt(params.get('techniqueId'), 10);
-//             this.store.dispatch(new SetSelectedTechnique(5));
+//             this.app-store.dispatch(new SetSelectedTechnique(5));
 //             this.grades = this.gradeHelper.getAllGrades();
 //             this.initialiseForm();
 //
-//             this.store
+//             this.app-store
 //                 .select(selectLoaded)
 //                 .pipe(
 //                     withLatestFrom(
-//                         this.store.select(selectTechniquesSets),
-//                         this.store.select(
+//                         this.app-store.select(selectTechniquesSets),
+//                         this.app-store.select(
 //                             selectSelectedTechnique(this.techniqueId)
 //                         ),
-//                         this.store.select(selectTags)
+//                         this.app-store.select(selectTags)
 //                     ),
 //                     filter(([allLoaded]) => {
 //                         console.log(allLoaded);
@@ -218,7 +218,7 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 //             .pipe(
 //                 takeWhile(() => this.isAlive),
 //                 filter(data => data.type === ActionTypes.Add_new_tag_success),
-//                 withLatestFrom(this.store.select(selectTags))
+//                 withLatestFrom(this.app-store.select(selectTags))
 //             )
 //             .subscribe(([action, tags]) => {
 //                 this.tags = tags;
@@ -262,7 +262,7 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 //                 tags: techniqueFormValues.tag_group.map(tag => tag.id),
 //             };
 //
-//             this.store.dispatch(new EditTechnique(technique));
+//             this.app-store.dispatch(new EditTechnique(technique));
 //         }
 //     }
 //
@@ -281,7 +281,7 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 //             folder: this.techniqueSet.name.replace(/\s/g, '-'),
 //         };
 //
-//         this.store.dispatch(new AddNewVideo({ video, file }));
+//         this.app-store.dispatch(new AddNewVideo({ video, file }));
 //     }
 //
 //     triggerAddTag() {
@@ -355,11 +355,11 @@ export class EditTechniqueComponent extends PageComponent implements OnInit {
 //     }
 //
 //     addTechniqueSet(techniqueSetName) {
-//         this.store.dispatch(new AddNewTechniqueSet(techniqueSetName));
+//         this.app-store.dispatch(new AddNewTechniqueSet(techniqueSetName));
 //     }
 //
 //     addTag(tagName) {
-//         this.store.dispatch(new AddNewTag(tagName));
+//         this.app-store.dispatch(new AddNewTag(tagName));
 //     }
 // }
 //

@@ -14,8 +14,7 @@ import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CommonComponentsModule } from '../../common/common-components.module';
 import { CapitialisePipe } from '../../common/pipes/capitialise.pipe';
-import { MessagesModule } from '../../messages/messages.module';
-import { MessagesService } from '../../messages/messages.service';
+import { MessagesService } from '../../common/messages/messages.service';
 
 import { AddStudentPage } from './add-student.page';
 import { AuthenticationGuard, AuthLibModule } from 'hapkido-auth-lib';
@@ -45,7 +44,6 @@ describe('AddStudentPage', () => {
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
-                MessagesModule,
                 BrowserModule,
                 CommonComponentsModule,
                 IonicModule,

@@ -3,14 +3,14 @@ import {
     ActionTypes,
     GetAllClasses,
     MakeClassAGrading,
-} from '../../../state/classes.actions';
+} from '../../../../app-store/classes-state/classes.actions';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { AppState } from '../../../../state/app.reducers';
+import { AppState } from '../../../../app-store/state/app.reducers';
 import { Observable } from 'rxjs';
 import { ClassModel } from '../../../../common/models/class';
-import { GetAllStudents } from '../../../../students/state/students.actions';
-import { selectSelectedClass } from '../../../state/classes.selectors';
+import { GetAllStudents } from '../../../../app-store/student-state/students.actions';
+import { selectSelectedClass } from '../../../../app-store/classes-state/classes.selectors';
 
 @Component({
     selector: 'app-class-view-general',

@@ -1,16 +1,19 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/app.reducers';
+import { AppState } from '../../app-store/state/app.reducers';
 import { StudentsHelper } from '../../students/students.helper';
-import { selectStudents } from '../../students/state/students.selectors';
-import { selectSelectedClass } from '../../classes/state/classes.selectors';
+import { selectStudents } from '../../app-store/student-state/students.selectors';
+import { selectSelectedClass } from '../../app-store/classes-state/classes.selectors';
 import {
     AddGrading,
     GetAllStudents,
     RemoveGrading,
-} from '../../students/state/students.actions';
-import { GetAllClasses, ViewClass } from '../../classes/state/classes.actions';
+} from '../../app-store/student-state/students.actions';
+import {
+    GetAllClasses,
+    ViewClass,
+} from '../../app-store/classes-state/classes.actions';
 import { ClassesHelper } from '../../classes/classes.helper';
 import { ClassModel } from '../../common/models/class';
 import * as moment from 'moment';

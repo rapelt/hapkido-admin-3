@@ -10,13 +10,18 @@ import { PhotosComponent } from './edit-technique/segments/photos/photos.compone
 import { PhotoComponent } from './edit-technique/segments/photo/photo.component';
 import { ReviewComponent } from './edit-technique/segments/review/review.component';
 import { TechniquesDataDispatcher } from './techniques-data.resolver';
+import { TechniqueSetListComponent } from './technique-set-list/technique-set-list.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'list' },
     {
-        path: 'list',
+        path: 'list/:techniqueSet',
         component: TechniqueListComponent,
-        // resolve: { data: TechniquesDataDispatcher },
+    },
+    {
+        path: 'list',
+        pathMatch: 'full',
+        component: TechniqueSetListComponent,
     },
     {
         path: 'view/:techniqueId',
@@ -25,7 +30,6 @@ export const routes: Routes = [
     {
         path: 'edit/:techniqueId',
         component: EditTechniqueComponent,
-        // resolve: { data: TechniquesDataDispatcher },
         children: [
             {
                 path: '',

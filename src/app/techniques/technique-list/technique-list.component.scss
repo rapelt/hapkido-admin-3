@@ -1,0 +1,32 @@
+ion-row {
+  width: 100%;
+}
+
+ion-list {
+  margin: 12px;
+}
+
+ion-list {
+  background-color: var(--custom-background-color);
+}
+
+ion-list-header {
+  color: var(--ion-color-primary);
+}
+
+ion-item {
+  margin: 12px 12px 0px 12px;
+  box-shadow: 0 0px 0px 0 rgba(0, 0, 0, 0.2), 0 4px 4px 0 rgba(0, 0, 0, 0.19);
+
+  ion-label {
+    display: flex;
+    align-items: center;
+
+    app-grade-badge {
+      margin-top: 2px;
+      margin-right: 15px;
+    }
+
+  }
+}
+

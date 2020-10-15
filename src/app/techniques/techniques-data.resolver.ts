@@ -2,21 +2,24 @@ import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
 import { ActivatedRouteSnapshot } from '@angular/router';
-import { AppState } from '../state/app.reducers';
+import { AppState } from '../app-store/state/app.reducers';
 import { Store } from '@ngrx/store';
 import {
     GetAllTechniques,
     GetAllTechniquesSets,
-} from './state/techniques.actions';
-import { GetAllTags } from '../tags/state/tags.actions';
+} from '../app-store/technique-state/techniques.actions';
+import { GetAllTags } from '../app-store/tags-state/tags.actions';
 import { filter, withLatestFrom } from 'rxjs/operators';
 import {
     selectSelectedTechnique,
     selectTechniqueFeatureLoaded,
     selectTechniquesSets,
-} from './state/techniques.selectors';
-import { selectTags } from '../tags/state/tags.selectors';
-import { GetAllPhotos, GetAllVideos } from '../media/state/media.actions';
+} from '../app-store/technique-state/techniques.selectors';
+import { selectTags } from '../app-store/tags-state/tags.selectors';
+import {
+    GetAllPhotos,
+    GetAllVideos,
+} from '../app-store/media-state/media.actions';
 
 @Injectable()
 export class TechniquesDataDispatcher implements Resolve<any> {

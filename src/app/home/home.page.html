@@ -18,47 +18,55 @@
 <ion-content>
   <div class="for-flex">
 
-    <ion-card class="welcome-card">
+    <div class="welcome-card">
       <ion-img src="/assets/home-page.png"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Hapkido Brisbane App for administrators</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>In this app you can add new students, create classes and add attendance to those classes.</p>
-      </ion-card-content>
-    </ion-card>
+      <h1>{{date | date:'dd MMM yyyy'}}</h1>
 
-  <ion-card>
-
-    <ion-card-header>
-      <ion-card-subtitle>Today's Classes</ion-card-subtitle>
-      <ion-card-title>{{date | date:'dd MMM yyyy'}}</ion-card-title>
-    </ion-card-header>
-    <div class="spinner">
-      <ion-spinner  *ngIf="!loaded"></ion-spinner>
     </div>
 
-    <ion-list *ngIf="loaded">
-      <ion-item button="true" type="button" class="cy-class-list-item" *ngFor="let aclass of classesOnDay | orderDates: 'ascending'" (click)="classSelected(aclass)">
-        <ion-label>
-          <ion-text slot="start">{{aclass.classType}} class {{aclass.date | date: 'h:mm aa'}}</ion-text>
+<div>
+
+
+  <ion-card>
+    <ion-card-header>
+      Today's Classes:
+    </ion-card-header>
+    <div class="spinner" *ngIf="!loaded">
+      <ion-spinner ></ion-spinner>
+    </div>
+
+    <ion-list *ngIf="loaded" lines="none">
+      <ion-item button="true" type="button" class="cy-class-list-item" *ngFor="let aclass of todaysClasses | async | orderDates: 'ascending'" (click)="classSelected(aclass)">
+        <ion-label class="class-label">
+          <ion-row>
+            <ion-col>
+              {{aclass.date | date: 'h:mmaa'}}
+            </ion-col>
+            <ion-col>
+              {{aclass.classType}}
+            </ion-col>
+
+          </ion-row>
         </ion-label>
-        <ion-text slot="end">{{aclass.attendance.length}}</ion-text>
+<!--        <span>{{aclass.attendance.length}}</span>-->
+
+        <ion-button expand="full" slot="end" color="danger" (click)="classSelected(aclass)">Attendance</ion-button>
       </ion-item>
-      <ion-item class="cy-class-list-item" *ngIf="classesOnDay.length === 0">
+      <ion-item class="cy-class-list-item" *ngIf="(todaysClasses | async).length === 0">
         <ion-label>
           No classes
         </ion-label>
       </ion-item>
-      <ion-item button="true" type="button" class="cy-class-list-item" *ngIf="classesOnDay.length === 0" (click)="addClass()">
-        <ion-label>
-          <ion-icon slot="start" name="add"></ion-icon>
-          Add a new class
-        </ion-label>
-      </ion-item>
     </ion-list>
   </ion-card>
+
+    <ion-button size="large" color="secondary" expand="full" class="cy-class-list-item add-class-btn" *ngIf="classesOnDay.length === 0" (click)="addClass()">
+      <ion-icon slot="start" name="add"></ion-icon>
+      Add new class
+    </ion-button>
   </div>
+  </div>
+
+
 
 </ion-content>

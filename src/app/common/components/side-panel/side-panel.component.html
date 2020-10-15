@@ -1,0 +1,11 @@
+<div class="side-pane" [ngClass]="{'open' : sidePaneOpen}">
+  <div class="header">
+    <ion-button fill="clear" (click)="closeSidePanel.emit()">
+      <ion-icon name="close-circle-outline"></ion-icon>
+    </ion-button>
+  </div>
+
+  <div class="main-content">
+    <ng-content></ng-content>
+  </div>
+</div>

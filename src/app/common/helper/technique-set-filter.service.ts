@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { AutoCompleteService } from 'ionic4-auto-complete';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/app.reducers';
-import { GetAllTechniquesSets } from '../../techniques/state/techniques.actions';
-import { selectTechniquesSets } from '../../techniques/state/techniques.selectors';
+import { AppState } from '../../app-store/state/app.reducers';
+import { GetAllTechniquesSets } from '../../app-store/technique-state/techniques.actions';
+import { selectTechniquesSets } from '../../app-store/technique-state/techniques.selectors';
 import { TechniqueSetModel } from '../models/technique-set';
 
 @Injectable({

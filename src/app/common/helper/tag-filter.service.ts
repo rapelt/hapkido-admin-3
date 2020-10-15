@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { GetAllTechniquesSets } from '../../techniques/state/techniques.actions';
-import { selectTechniquesSets } from '../../techniques/state/techniques.selectors';
+import { GetAllTechniquesSets } from '../../app-store/technique-state/techniques.actions';
+import { selectTechniquesSets } from '../../app-store/technique-state/techniques.selectors';
 import { TechniqueSetModel } from '../models/technique-set';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/app.reducers';
+import { AppState } from '../../app-store/state/app.reducers';
 import { TagModel } from '../models/tag';
-import { selectTags } from '../../tags/state/tags.selectors';
-import { GetAllTags } from '../../tags/state/tags.actions';
+import { selectTags } from '../../app-store/tags-state/tags.selectors';
+import { GetAllTags } from '../../app-store/tags-state/tags.actions';
 
 @Injectable({
     providedIn: 'root',

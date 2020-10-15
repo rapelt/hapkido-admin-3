@@ -19,7 +19,7 @@ import {
 import { CommonComponentsModule } from '../../common/common-components.module';
 
 import { StudentListPage } from './student-list.page';
-import { StudentsState } from '../state/students.reducers';
+import { StudentsState } from '../../app-store/student-state/students.reducers';
 import { emptyInitialState } from '../../../testing-helpers/test-state-helpter';
 
 describe('StudentListPage Active', () => {
