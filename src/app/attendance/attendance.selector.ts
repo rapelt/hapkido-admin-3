@@ -2,12 +2,12 @@ import { createSelector } from '@ngrx/store';
 import {
     selectClassLoaded,
     selectSelectedClass,
-} from '../classes/state/classes.selectors';
+} from '../app-store/classes-state/classes.selectors';
 import {
     selectActiveStudents,
     selectStudentLoaded,
     selectStudents,
-} from '../students/state/students.selectors';
+} from '../app-store/student-state/students.selectors';
 import { StudentModel } from '../common/models/student';
 import { ClassModel } from '../common/models/class';
 import { AlphabeticalStudentsPipe } from '../common/pipes/alphabeticalstudents/alphabeticalstudents';

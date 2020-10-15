@@ -7,7 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from '../../state/app.reducers';
+import { AppState } from '../../app-store/state/app.reducers';
 import { AuthStatesEnum } from 'hapkido-auth-lib';
 
 /*

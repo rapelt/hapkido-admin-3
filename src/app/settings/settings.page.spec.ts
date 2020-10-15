@@ -8,14 +8,14 @@
 // } from '@angular/core/testing';
 // import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 // import { IonicModule } from '@ionic/angular';
-// import { Store } from '@ngrx/store';
-// import { MockStore, provideMockStore } from '@ngrx/store/testing';
+// import { Store } from '@ngrx/app-store';
+// import { MockStore, provideMockStore } from '@ngrx/app-store/testing';
 // import { AuthenticationStates } from '../authentication/authentication-states';
 // import {
 //     SendEmailVerificationCode,
 //     SignOut,
 //     VerifyEmail,
-// } from '../authentication/state/authentication.actions';
+// } from '../authentication/technique-tags-student-media-classes-auth-state/authentication.actions';
 //
 // import { SettingsPage } from './settings.page';
 //
@@ -23,7 +23,7 @@
 //     let component: SettingsPage;
 //     let fixture: ComponentFixture<SettingsPage>;
 //
-//     let store: MockStore<{
+//     let app-store: MockStore<{
 //         authentication: {
 //             authenticationState: string;
 //         };
@@ -55,8 +55,8 @@
 //     beforeEach(() => {
 //         fixture = TestBed.createComponent(SettingsPage);
 //         component = fixture.componentInstance;
-//         store = TestBed.inject(Store);
-//         spyOn(store, 'dispatch').and.callThrough();
+//         app-store = TestBed.inject(Store);
+//         spyOn(app-store, 'dispatch').and.callThrough();
 //
 //         fixture.detectChanges();
 //     });
@@ -83,7 +83,7 @@
 //             },
 //         };
 //
-//         store.setState(initialEmailVerified);
+//         app-store.setState(initialEmailVerified);
 //
 //         tick();
 //         component.ngOnInit();
@@ -114,7 +114,7 @@
 //             },
 //         };
 //
-//         store.setState(initialEmailVerified);
+//         app-store.setState(initialEmailVerified);
 //
 //         tick();
 //         component.ngOnInit();
@@ -134,13 +134,13 @@
 //
 //         const action = new SendEmailVerificationCode();
 //
-//         expect(store.dispatch).toHaveBeenCalledWith(action);
+//         expect(app-store.dispatch).toHaveBeenCalledWith(action);
 //         expect(component.codeSent).toEqual(true);
 //     }));
 //
 //     it('should call SendEmailVerificationCode on send code', fakeAsync(() => {
 //         component.verifyEmailSubmit();
 //         const action = new VerifyEmail('');
-//         expect(store.dispatch).toHaveBeenCalledWith(action);
+//         expect(app-store.dispatch).toHaveBeenCalledWith(action);
 //     }));
 // });

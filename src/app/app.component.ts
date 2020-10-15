@@ -8,8 +8,8 @@ import {
     SetUserAttributes,
     SignInSuccess,
     SignOut,
-} from './authentication/state/authentication.actions';
-import { AppState } from './state/app.reducers';
+} from './app-store/auth-state/authentication.actions';
+import { AppState } from './app-store/state/app.reducers';
 import {
     AuthenticationServices,
     AuthStatesEnum,

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { AppState } from '../../../../state/app.reducers';
-import { MessagesService } from '../../../../messages/messages.service';
+import { AppState } from '../../../../app-store/state/app.reducers';
+import { MessagesService } from '../../../../common/messages/messages.service';
 import { ActivatedRoute, ParamMap, Params, Router } from '@angular/router';
 import { AlertController, NavController } from '@ionic/angular';
 import { GradeHelper } from '../../../../common/helper/grade/grade';
@@ -14,19 +14,22 @@ import {
     AddNewTechniqueSet,
     EditTechnique,
     SetSelectedTechnique,
-} from '../../../state/techniques.actions';
+} from '../../../../app-store/technique-state/techniques.actions';
 import { selectLoaded } from '../../edit-technique.selector';
 import { filter, takeWhile, withLatestFrom } from 'rxjs/operators';
 import {
     selectSelectedTechnique,
     selectTechniquesSets,
-} from '../../../state/techniques.selectors';
-import { selectTags } from '../../../../tags/state/tags.selectors';
-import { ActionTypes, AddNewTag } from '../../../../tags/state/tags.actions';
+} from '../../../../app-store/technique-state/techniques.selectors';
+import { selectTags } from '../../../../app-store/tags-state/tags.selectors';
+import {
+    ActionTypes,
+    AddNewTag,
+} from '../../../../app-store/tags-state/tags.actions';
 import { emptyValidator } from '../../../../common/validators/empty.validator';
 import { TechniqueModel } from '../../../../common/models/technique';
 import { VideoModel } from '../../../../common/models/video';
-import { AddNewVideo } from '../../../../media/state/media.actions';
+import { AddNewVideo } from '../../../../app-store/media-state/media.actions';
 import { PageComponent } from '../../../../common/page.component';
 
 @Component({

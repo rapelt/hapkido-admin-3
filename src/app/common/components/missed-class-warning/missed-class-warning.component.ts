@@ -1,8 +1,8 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from '../../../state/app.reducers';
-import { selectSelectedStudentsLastClass } from '../../../students/state/students.selectors';
+import { AppState } from '../../../app-store/state/app.reducers';
+import { selectSelectedStudentsLastClass } from '../../../app-store/student-state/students.selectors';
 import { ClassModel } from '../../models/class';
 import * as moment from 'moment-timezone';
 import { StudentModel } from '../../models/student';

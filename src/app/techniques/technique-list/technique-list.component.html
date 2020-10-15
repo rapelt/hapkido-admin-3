@@ -1,10 +1,10 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-menu-button class="cy-menu-button"></ion-menu-button>
+      <ion-back-button [defaultHref]="'/technique/list'" class="cy-back-button"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Techniques
+      {{(techniquesSet | async)?.name}}
     </ion-title>
 <!--    <ion-buttons slot="end">-->
 <!--      <ion-button (click)="showMore($event)" *ngIf="listType !== 'inactive'">-->
@@ -13,10 +13,43 @@
 <!--    </ion-buttons>-->
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
-  <p>
-    technique-list works!
-  </p>
+  <div>
+
+    <div *ngIf="!loaded" class="spinner">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <div *ngIf="loaded">
+      <div class="technique-set-list">
+        <ion-searchbar class="cy-technique-set-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
+
+        <ion-list class="cy-technique-set-list set-list">
+          <ion-item class="cy-technique-set-item set-item" lines="none" button="true" [class]="'technique-set-' + technique.id" (click)="goToTechniqueSet(technique)" *ngFor="let technique of techniques | async | techniqueFilter: searchvalue; let i = index">
+                <ion-label>
+                  <app-grade-badge [grade]="technique.grade"></app-grade-badge>
+                  {{technique.title | capitialise}}
+
+                  <p>Pubished</p>
+                  <ion-icon name="menu"></ion-icon>
+                </ion-label>
+
+          </ion-item>
+
+
+        </ion-list>
+
+        <div *ngIf="(techniques | async).length === 0">
+          <p class="no-techniques">Please add some techniques</p>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+
 </ion-content>
 <ion-footer>
   <div *ngIf="loaded">

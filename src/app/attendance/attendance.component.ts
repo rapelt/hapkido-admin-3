@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ClassModel } from '../common/models/class';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
-import { AppState } from '../state/app.reducers';
+import { AppState } from '../app-store/state/app.reducers';
 import {
     AddStudentToClass,
     RemoveStudentFromClass,
-} from '../classes/state/classes.actions';
+} from '../app-store/classes-state/classes.actions';
 import { Observable } from 'rxjs';
 import { classTypes } from '../common/models/class-types';
 import { PageComponent } from '../common/page.component';

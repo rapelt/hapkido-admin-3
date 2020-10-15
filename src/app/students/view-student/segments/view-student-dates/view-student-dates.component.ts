@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { GradingDatesModel } from '../../../../common/models/grading-dates';
-import { AppState } from '../../../../state/app.reducers';
+import { AppState } from '../../../../app-store/state/app.reducers';
 import {
     selectSelectedStudentClassDates,
     selectSelectedStudentGradingDates,
-} from '../../../state/students.selectors';
+} from '../../../../app-store/student-state/students.selectors';
 
 @Component({
     selector: 'app-view-student-dates',

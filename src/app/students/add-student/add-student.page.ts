@@ -12,10 +12,13 @@ import { paymentType, PaymentTypes } from '../../common/models/payment-types';
 import { StudentModel } from '../../common/models/student';
 import { CapitialisePipe } from '../../common/pipes/capitialise.pipe';
 import { emptyValidator } from '../../common/validators/empty.validator';
-import { MessagesService } from '../../messages/messages.service';
-import { AppState } from '../../state/app.reducers';
-import { AddNewStudent, GetAllFamilies } from '../state/students.actions';
-import { selectFamilies } from '../state/students.selectors';
+import { MessagesService } from '../../common/messages/messages.service';
+import { AppState } from '../../app-store/state/app.reducers';
+import {
+    AddNewStudent,
+    GetAllFamilies,
+} from '../../app-store/student-state/students.actions';
+import { selectFamilies } from '../../app-store/student-state/students.selectors';
 
 @Component({
     selector: 'app-add-student',

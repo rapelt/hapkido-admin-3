@@ -6,8 +6,8 @@ import {
     ActionTypes,
     SendEmailVerificationCode,
     VerifyEmail,
-} from '../authentication/state/authentication.actions';
-import { AppState } from '../state/app.reducers';
+} from '../app-store/auth-state/authentication.actions';
+import { AppState } from '../app-store/state/app.reducers';
 import { selectUserAttributes, selectUsername } from './settings.selectors';
 import { Router } from '@angular/router';
 import { AuthStateService } from 'hapkido-auth-lib';

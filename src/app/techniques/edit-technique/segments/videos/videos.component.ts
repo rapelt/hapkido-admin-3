@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { SetSelectedTechnique } from '../../../state/techniques.actions';
+import { SetSelectedTechnique } from '../../../../app-store/technique-state/techniques.actions';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../../../state/app.reducers';
+import { AppState } from '../../../../app-store/state/app.reducers';
 
 @Component({
     selector: 'app-videos',

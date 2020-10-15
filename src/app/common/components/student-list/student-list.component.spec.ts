@@ -6,8 +6,8 @@
 //     tick,
 // } from '@angular/core/testing';
 // import { IonicModule } from '@ionic/angular';
-// import { Store } from '@ngrx/store';
-// import { MockStore, provideMockStore } from '@ngrx/store/testing';
+// import { Store } from '@ngrx/app-store';
+// import { MockStore, provideMockStore } from '@ngrx/app-store/testing';
 // import {
 //     createStudent,
 //     createStudentAll,
@@ -26,7 +26,7 @@
 //     let component: StudentListComponent;
 //     let fixture: ComponentFixture<StudentListComponent>;
 
-//     let store: MockStore<{
+//     let app-store: MockStore<{
 //         authentication: {
 //             authenticationState: string;
 //         };
@@ -57,8 +57,8 @@
 
 //         fixture = TestBed.createComponent(StudentListComponent);
 //         component = fixture.componentInstance;
-//         store = TestBed.inject(Store);
-//         spyOn(store, 'dispatch').and.callThrough();
+//         app-store = TestBed.inject(Store);
+//         spyOn(app-store, 'dispatch').and.callThrough();
 //         fixture.detectChanges();
 //     }));
 

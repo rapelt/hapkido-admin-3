@@ -1,9 +1,9 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { StudentsHelper } from '../../../../students/students.helper';
 import { select, Store } from '@ngrx/store';
-import { AppState } from '../../../../state/app.reducers';
-import { selectStudents } from '../../../../students/state/students.selectors';
-import { selectSelectedClass } from '../../../state/classes.selectors';
+import { AppState } from '../../../../app-store/state/app.reducers';
+import { selectStudents } from '../../../../app-store/student-state/students.selectors';
+import { selectSelectedClass } from '../../../../app-store/classes-state/classes.selectors';
 import { combineLatest } from 'rxjs';
 import { map } from 'rxjs/operators';
 
