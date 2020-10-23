@@ -17,8 +17,6 @@ import {
     EditTechniqueSet,
 } from '../../app-store/technique-state/techniques.actions';
 import { Router } from '@angular/router';
-import { TechniqueSetModel } from '../../common/models/technique-set';
-import { createConsoleLogger } from '@angular-devkit/core/node';
 
 @Component({
     selector: 'app-add-technique-set',

@@ -80,7 +80,7 @@ export class TagsComponent extends FormElementDirective implements OnInit {
         }
 
         return false;
-    };
+    }
     compareWith = this.compareWithFn;
 
     ngOnInit() {
