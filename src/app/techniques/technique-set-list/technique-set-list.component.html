@@ -13,7 +13,6 @@
     </div>
 
     <div class="large-content">
-
       <div class="large-content-left">
 
         <div *ngIf="loaded">
@@ -30,20 +29,16 @@
           </div>
 
 
-          <div class="technique-set-list" *ngIf="segment === 'list'">
+          <div class="technique-set-list">
             <ion-list class="cy-technique-set-list">
-              <ion-item class="cy-technique-set-item" lines="none" button="true" [class]="'technique-set-' + techniqueSet.id" (click)="goToTechniqueSet(techniqueSet.id)" *ngFor="let techniqueSet of techniqueSets | async | techniqueSetFilter: searchvalue; let i = index">
-                <ion-row>
-                  <ion-col size="1">
-                    <ion-icon name="folder-open-outline"></ion-icon>
-                  </ion-col>
-                  <ion-col size="6">
-                    <ion-label>
-                      {{techniqueSet.name | capitialise}}
-                    </ion-label>
-                  </ion-col>
-                </ion-row>
-
+              <ion-item class="cy-technique-set-item" lines="none" button="true" [class]="'technique-set-' + techniqueSet.id"
+                        *ngFor="let techniqueSet of techniqueSets | async | techniqueSetFilter: searchvalue; let i = index"
+                        (click)="goToTechniqueSet(techniqueSet.id)">
+                <ion-icon name="folder-open-outline" slot="start"></ion-icon>
+                <ion-button slot="end" fill="clear" (click)="presentPopover($event, techniqueSet);$event.stopPropagation();">
+                  <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+                </ion-button>
+                <ion-label slot="start">{{techniqueSet.name | capitialise}} </ion-label>
               </ion-item>
             </ion-list>
 
@@ -51,41 +46,17 @@
               <p class="no-techniques">Please add some techniques</p>
             </div>
           </div>
-
-
       </div>
 
       </div>
-
       <app-side-panel [ngClass]="{'open': sidePaneOpen}" (closeSidePanel)="closeSidePanel()" [title]="sidebarTitle? sidebarTitle: sidebarTitleDefault">
-        <div>
-          <ion-icon class="top-icon" name="folder-open-outline"></ion-icon>
-
-          <form [formGroup]="newTechniqueSet">
-            <ion-list>
-              <ion-item>
-                <ion-label position="stacked">Title</ion-label>
-                <ion-input formControlName="title" name="title" type="text"></ion-input>
-              </ion-item>
-              <app-validation-error-message [formElement]="newTechniqueSet.get('title')" [validationMessages]="validation_messages.title" [saveAttempted]="saveAttempted"></app-validation-error-message>
-            </ion-list>
-          </form>
-        </div>
-        <div class="half-button-size">
-          <ion-button (click)="save()" color="primary" expand="full" type="submit">Save</ion-button>
-          <ion-button (click)="cancel()" fill="clear" expand="full">Cancel</ion-button>
-        </div>
-
+        <app-add-technique-set [techniqueSetName]="sidePanelData?.name" [techniqueSetId]="sidePanelData?.id" (cancel)="closeSidePanel()"></app-add-technique-set>
       </app-side-panel>
     </div>
 
   </div>
 
-
-
 </ion-content>
-
-
 
 <ion-footer>
   <div *ngIf="loaded && sidePaneOpen === false">

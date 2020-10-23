@@ -1,4 +1,10 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {
+    Component,
+    Input,
+    OnChanges,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core';
 import { AbstractControl, FormControl } from '@angular/forms';
 
 @Component({
@@ -6,7 +12,7 @@ import { AbstractControl, FormControl } from '@angular/forms';
     templateUrl: './validation-error-message.component.html',
     styleUrls: ['./validation-error-message.component.scss'],
 })
-export class ValidationErrorMessageComponent implements OnInit {
+export class ValidationErrorMessageComponent implements OnInit, OnChanges {
     @Input()
     validationMessages: Array<{ type: string; message: string }>;
 
@@ -19,4 +25,8 @@ export class ValidationErrorMessageComponent implements OnInit {
     constructor() {}
 
     ngOnInit() {}
+
+    ngOnChanges(changes: SimpleChanges) {
+        console.log(this.saveAttempted);
+    }
 }

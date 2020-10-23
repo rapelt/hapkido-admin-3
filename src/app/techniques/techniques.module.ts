@@ -20,6 +20,7 @@ import { TechniquesDataDispatcher } from './techniques-data.resolver';
 import { TechniqueSetListComponent } from './technique-set-list/technique-set-list.component';
 import { AddTechniqueComponent } from './add-technique/add-technique.component';
 import { AddTechniqueSetComponent } from './add-technique-set/add-technique-set.component';
+import { PopoverMenuComponent } from './technique-set-list/popover-menu/popover-menu.component';
 
 @NgModule({
     declarations: [
@@ -35,6 +36,7 @@ import { AddTechniqueSetComponent } from './add-technique-set/add-technique-set.
         ReviewComponent,
         AddTechniqueComponent,
         AddTechniqueSetComponent,
+        PopoverMenuComponent,
     ],
     imports: [
         CommonModule,

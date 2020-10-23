@@ -9,7 +9,9 @@ import {
     ActionTypes,
     AddNewTechnique,
     AddNewTechniqueSet,
+    DeactivateTechniqueSet,
     EditTechnique,
+    EditTechniqueSet,
 } from './techniques.actions';
 import { TechniqueModel } from '../../common/models/technique';
 import { TechniqueSetModel } from '../../common/models/technique-set';
@@ -55,17 +57,13 @@ export class TechniquesEffects {
         ofType(ActionTypes.Add_new_technique),
         mergeMap((action: AddNewTechnique) =>
             this.techniquesService.addNewTechnique(action.payload).pipe(
-                map((technique: string) => ({
+                map((technique: Partial<TechniqueModel>) => ({
                     type: ActionTypes.Add_new_technique_success,
                     payload: technique,
                 })),
                 tap((response: any) => {
                     this.messageService.updateSuccess.next(
                         'New technique created'
-                    );
-
-                    this.router.navigateByUrl(
-                        '/technique/edit/' + response.payload.techniqueId
                     );
                 }),
                 catchError(error => {
@@ -105,6 +103,46 @@ export class TechniquesEffects {
             this.techniquesService.editTechnique(action.payload).pipe(
                 map((technique: TechniqueModel[]) => ({
                     type: ActionTypes.Edit_technique_success,
+                    payload: action.payload,
+                })),
+                tap(() => {
+                    // this.messageService.updateSuccess.next('Technique Updated');
+                }),
+                catchError(error => {
+                    this.handleError(error.message);
+                    return EMPTY;
+                })
+            )
+        )
+    );
+
+    @Effect()
+    editTechniqueSet = this.actions.pipe(
+        ofType(ActionTypes.Edit_technique_set),
+        mergeMap((action: EditTechniqueSet) =>
+            this.techniquesService.editTechniqueSet(action.payload).pipe(
+                map((techniqueSet: TechniqueSetModel) => ({
+                    type: ActionTypes.Edit_technique_set_success,
+                    payload: action.payload,
+                })),
+                tap(() => {
+                    // this.messageService.updateSuccess.next('Technique Updated');
+                }),
+                catchError(error => {
+                    this.handleError(error.message);
+                    return EMPTY;
+                })
+            )
+        )
+    );
+
+    @Effect()
+    deactivateTechniqueSet = this.actions.pipe(
+        ofType(ActionTypes.Deactivate_technique_set),
+        mergeMap((action: DeactivateTechniqueSet) =>
+            this.techniquesService.deactivateTechniqueSet(action.payload).pipe(
+                map((techniqueSet: TechniqueSetModel) => ({
+                    type: ActionTypes.Deactivate_technique_set_success,
                     payload: action.payload,
                 })),
                 tap(() => {

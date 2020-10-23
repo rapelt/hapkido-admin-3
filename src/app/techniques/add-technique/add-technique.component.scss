@@ -1,0 +1,30 @@
+ion-list {
+  background: white;
+}
+
+ion-item {
+  box-shadow: none;
+  margin: 12px 12px 0px 12px;
+}
+
+::ng-deep app-validation-error-message {
+  .validation-errors {
+    .error-message {
+      margin-left: 26px;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+  }
+}
+
+.top-icon {
+  font-size: 72px;
+  width: 100%;
+}
+
+:host {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 56px - 44px);
+  justify-content: space-between;
+}

@@ -1,0 +1,15 @@
+ion-item.ion-invalid{
+  border-bottom-color: transparent;
+  --highlight-background: transparent;
+}
+ion-item.ion-valid{
+  border-bottom-color: transparent;
+  --highlight-background: transparent;
+
+}
+
+app-validation-error-message ::ng-deep .validation-errors .error-message {
+  margin-left: 16px;
+  font-size: 12px;
+  margin-top: 4px;
+}

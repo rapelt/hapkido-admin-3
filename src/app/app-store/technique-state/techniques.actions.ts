@@ -20,6 +20,12 @@ export enum ActionTypes {
     Add_new_technique_set = '[Techniques] Add new technique set',
     Add_new_technique_set_success = '[Techniques] Add new technique set success',
 
+    Edit_technique_set = '[Techniques] Edit technique set',
+    Edit_technique_set_success = '[Techniques] Edit technique set success',
+
+    Deactivate_technique_set = '[Techniques] Deactivate technique set',
+    Deactivate_technique_set_success = '[Techniques] Deactivate technique set success',
+
     Edit_technique = '[Techniques] Edit technique',
     Edit_technique_success = '[Techniques] Edit technique success',
 }
@@ -51,7 +57,7 @@ export class GetAllTechniquesSetsSuccess implements Action {
 export class AddNewTechnique implements Action {
     readonly type = ActionTypes.Add_new_technique;
 
-    constructor(public payload: string) {}
+    constructor(public payload: Partial<TechniqueModel>) {}
 }
 
 export class AddNewTechniqueSet implements Action {
@@ -84,6 +90,30 @@ export class EditTechniqueSuccess implements Action {
     constructor(public payload: TechniqueModel) {}
 }
 
+export class EditTechniqueSet implements Action {
+    readonly type = ActionTypes.Edit_technique_set;
+
+    constructor(public payload: TechniqueSetModel) {}
+}
+
+export class DeactivateTechniqueSet implements Action {
+    readonly type = ActionTypes.Deactivate_technique_set;
+
+    constructor(public payload: number) {}
+}
+
+export class DeactivateTechniqueSetSuccess implements Action {
+    readonly type = ActionTypes.Deactivate_technique_set_success;
+
+    constructor(public payload: number) {}
+}
+
+export class EditTechniqueSetSuccess implements Action {
+    readonly type = ActionTypes.Edit_technique_set_success;
+
+    constructor(public payload: TechniqueSetModel) {}
+}
+
 export class SetSelectedTechnique implements Action {
     readonly type = ActionTypes.Set_selected_technique;
 
@@ -104,6 +134,10 @@ export type TechniquesActions =
     | SetSelectedTechnique
     | EditTechnique
     | EditTechniqueSuccess
+    | EditTechniqueSet
+    | EditTechniqueSetSuccess
+    | DeactivateTechniqueSet
+    | DeactivateTechniqueSetSuccess
     | ResetSelectedTechnique
     | AddNewTechniqueSet
     | AddNewTechniqueSetSuccess
