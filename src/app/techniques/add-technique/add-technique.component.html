@@ -1,3 +1,16 @@
-<p>
-  add-technique works!
-</p>
+<div>
+  <ion-icon class="top-icon" name="body-outline"></ion-icon>
+
+  <form [formGroup]="form">
+    <ion-list>
+        <app-input [saveAttempted]="saveAttempted" [formControlName]="formData.title.id" [formData]="formData.title"></app-input>
+        <app-text-area [saveAttempted]="saveAttempted" [formControlName]="formData.description.id" [formData]="formData.description"></app-text-area>
+        <app-select-grade [saveAttempted]="saveAttempted" [formControlName]="formData.grade.id" [formData]="formData.grade"></app-select-grade>
+        <app-tags [saveAttempted]="saveAttempted" [formControlName]="formData.tags.id" [formData]="formData.tags"></app-tags>
+    </ion-list>
+  </form>
+</div>
+<div class="half-button-size">
+  <ion-button (click)="save()" color="primary" expand="full" type="submit">Save</ion-button>
+  <ion-button (click)="close()" fill="clear" expand="full">Cancel</ion-button>
+</div>

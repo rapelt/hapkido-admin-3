@@ -1,0 +1,6 @@
+<ion-item  lines="inset">
+  <!--  <ion-icon name="none" slot="start"></ion-icon>-->
+  <ion-label position="stacked">{{formData.label}}</ion-label>
+  <ion-textarea name="input" type="text" [formControl]="formElement" (ionChange)="doInput()" (blur)="doBlur()" rows="4" cols="20"></ion-textarea>
+</ion-item>
+<app-validation-error-message [formElement]="formElement" [validationMessages]="formData?.validationMessages" [saveAttempted]="saveAttempted"></app-validation-error-message>

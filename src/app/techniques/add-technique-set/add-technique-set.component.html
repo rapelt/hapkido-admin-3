@@ -1,23 +1,17 @@
-<!--<form [formGroup]="newTechniqueSetForm">-->
+<div>
+    <ion-icon class="top-icon" name="folder-open-outline"></ion-icon>
 
-<!--  <ion-list>-->
-<!--    <ion-item lines="inset">-->
-<!--      <ion-icon name="book-outline" color="tertiary" slot="start"></ion-icon>-->
-<!--      <ion-label position="floating">Technique Set Name</ion-label>-->
-<!--      <ion-input formControlName="techniqueSet" name="techniqueSet" type="text"></ion-input>-->
-<!--    </ion-item>-->
-<!--    <app-validation-error-message [formElement]="newTechniqueSetForm.get('techniqueSet')" [validationMessages]="validation_messages.techniqueSet" [saveAttempted]="saveAttempted"></app-validation-error-message>-->
-<!--  </ion-list>-->
-
-<!--</form>-->
-
-
-<!--  <ion-toolbar>-->
-<!--    <div class="half-button-size">-->
-<!--      <ion-button (click)="cancel()" color="secondary" expand="full">Cancel</ion-button>-->
-<!--      <ion-button (click)="save()" class="cy-add-student-submit" color="tertiary" expand="full" type="submit">Save-->
-<!--      </ion-button>-->
-<!--    </div>-->
-<!--  </ion-toolbar>-->
-
-add technique set
+    <form [formGroup]="newTechniqueSet">
+        <ion-list>
+            <ion-item>
+                <ion-label position="stacked">Title</ion-label>
+                <ion-input formControlName="title" name="title" type="text"></ion-input>
+            </ion-item>
+            <app-validation-error-message [formElement]="newTechniqueSet.get('title')" [validationMessages]="validation_messages.title" [saveAttempted]="saveAttempted"></app-validation-error-message>
+        </ion-list>
+    </form>
+</div>
+<div class="half-button-size">
+    <ion-button (click)="save()" color="primary" expand="full" type="submit">Save</ion-button>
+    <ion-button (click)="close()" fill="clear" expand="full">Cancel</ion-button>
+</div>

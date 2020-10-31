@@ -27,6 +27,11 @@ import { TechniqueFilterPipe } from './pipes/technique-filter.pipe';
 import { MessageComponent } from './messages/message/message.component';
 import { MessagesService } from './messages/messages.service';
 import { SidePanelComponent } from './components/side-panel/side-panel.component';
+import { InputComponent } from './form-component/input/input.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextAreaComponent } from './form-component/text-area/text-area.component';
+import { SelectGradeComponent } from './form-component/select-grade/select-grade.component';
+import { TagsComponent } from './form-component/tags/tags.component';
 
 @NgModule({
     declarations: [
@@ -52,8 +57,12 @@ import { SidePanelComponent } from './components/side-panel/side-panel.component
         TechniqueFilterPipe,
         MessageComponent,
         SidePanelComponent,
+        InputComponent,
+        TextAreaComponent,
+        SelectGradeComponent,
+        TagsComponent,
     ],
-    imports: [CommonModule, IonicModule],
+    imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule],
     providers: [
         GradeHelper,
         TechniqueSetFilterService,
@@ -84,6 +93,10 @@ import { SidePanelComponent } from './components/side-panel/side-panel.component
         TechniqueFilterPipe,
         MessageComponent,
         SidePanelComponent,
+        InputComponent,
+        TextAreaComponent,
+        SelectGradeComponent,
+        TagsComponent,
     ],
 })
 export class CommonComponentsModule {}

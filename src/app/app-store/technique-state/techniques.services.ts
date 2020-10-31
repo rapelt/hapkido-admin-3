@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../../environments/environment';
 import { TechniqueModel } from '../../common/models/technique';
+import { TechniqueSetModel } from '../../common/models/technique-set';
 
 @Injectable({
     providedIn: 'root',
@@ -27,7 +28,7 @@ export class TechniquesServices {
         });
     }
 
-    addNewTechnique(technique: string) {
+    addNewTechnique(technique: Partial<TechniqueModel>) {
         return this.httpClient.post(this.techniqueUrl + 'create', technique);
     }
 
@@ -35,6 +36,20 @@ export class TechniquesServices {
         return this.httpClient.post(
             this.techniqueUrl + 'update/' + technique.id,
             technique
+        );
+    }
+
+    editTechniqueSet(techniqueSet: TechniqueSetModel) {
+        return this.httpClient.post(
+            this.techniqueUrl + 'set/update/' + techniqueSet.id,
+            techniqueSet
+        );
+    }
+
+    deactivateTechniqueSet(id: number) {
+        return this.httpClient.post(
+            this.techniqueUrl + 'set/deactivate/' + id,
+            { id }
         );
     }
 }

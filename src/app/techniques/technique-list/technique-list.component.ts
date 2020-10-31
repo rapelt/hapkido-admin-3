@@ -1,35 +1,48 @@
-import { Component, OnInit } from '@angular/core';
-import { AlertController } from '@ionic/angular';
-import { AddNewTechnique } from '../../app-store/technique-state/techniques.actions';
-import { select, Store } from '@ngrx/store';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { TechniqueSetModel } from '../../common/models/technique-set';
+import { AlertController, PopoverController } from '@ionic/angular';
+import { ActionsSubject, select, Store } from '@ngrx/store';
 import { AppState } from '../../app-store/state/app.reducers';
 import { filter, map, takeWhile } from 'rxjs/operators';
+
+import {
+    ActionTypes,
+    DeactivateTechniqueSet,
+} from '../../app-store/technique-state/techniques.actions';
 import { PageComponent } from '../../common/page.component';
-import { Observable } from 'rxjs';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { PopoverMenuComponent } from '../technique-set-list/popover-menu/popover-menu.component';
 import { TechniqueModel } from '../../common/models/technique';
 import {
     selectTechniquesloaded,
     techniqueSetSelector,
     techniquesSelector,
 } from './technique-list.selector';
-import { ActivatedRoute, ParamMap } from '@angular/router';
-import { TechniqueSetModel } from '../../common/models/technique-set';
 
 @Component({
     selector: 'app-technique-list',
     templateUrl: './technique-list.component.html',
     styleUrls: ['./technique-list.component.scss'],
 })
-export class TechniqueListComponent extends PageComponent implements OnInit {
+export class TechniqueListComponent extends PageComponent
+    implements OnInit, OnDestroy {
     loaded = true;
     techniques: Observable<TechniqueModel[]>;
     searchvalue = '';
+    subsc;
+    sidePaneOpen = false;
+    sidebarTitleDefault = 'New Technique';
+    sidebarTitle;
+    sidePanelData: TechniqueModel = this.techniqueReset();
     techniqueSetId: number;
     techniquesSet: Observable<TechniqueSetModel>;
 
     constructor(
-        public alertController: AlertController,
         private store: Store<AppState>,
+        public router: Router,
+        private actionsSubject: ActionsSubject,
+        public popoverController: PopoverController,
         private activatedRoute: ActivatedRoute
     ) {
         super();
@@ -51,6 +64,16 @@ export class TechniqueListComponent extends PageComponent implements OnInit {
             );
         });
 
+        this.subsc = this.actionsSubject.subscribe(data => {
+            if (
+                data.type === ActionTypes.Add_new_technique_success ||
+                data.type === ActionTypes.Edit_technique_success
+            ) {
+                this.sidePanelData = this.techniqueReset();
+                this.closeSidePanel();
+            }
+        });
+
         this.store
             .pipe(
                 takeWhile(() => this.isAlive),
@@ -61,40 +84,8 @@ export class TechniqueListComponent extends PageComponent implements OnInit {
             });
     }
 
-    addTechnique(techniqueName) {
-        // console.log(techniqueName.name);
-        this.store.dispatch(new AddNewTechnique(techniqueName));
-    }
-
     async newTechnique() {
-        const alert = await this.alertController.create({
-            header: 'New technique',
-            inputs: [
-                {
-                    name: 'name',
-                    type: 'text',
-                    placeholder: 'Technique name',
-                },
-            ],
-            buttons: [
-                {
-                    text: 'Cancel',
-                    role: 'cancel',
-                    cssClass: 'secondary',
-                    handler: () => {
-                        console.log('Confirm Cancel');
-                    },
-                },
-                {
-                    text: 'Ok',
-                    handler: techniqueName => {
-                        this.addTechnique(techniqueName);
-                    },
-                },
-            ],
-        });
-
-        await alert.present();
+        this.sidePaneOpen = true;
     }
 
     searchInput(event) {
@@ -105,5 +96,56 @@ export class TechniqueListComponent extends PageComponent implements OnInit {
         this.searchvalue = '';
     }
 
-    goToTechniqueSet(techniqueSet) {}
+    goToTechnique(techniqueId) {
+        this.router.navigate(['technique/view/' + techniqueId]);
+    }
+
+    closeSidePanel() {
+        this.sidePaneOpen = false;
+    }
+
+    async presentPopover(ev: any, ts: TechniqueModel) {
+        const popover = await this.popoverController.create({
+            component: PopoverMenuComponent,
+            cssClass: 'my-custom-class',
+            event: ev,
+            translucent: true,
+        });
+
+        popover.onDidDismiss().then(data => {
+            console.log(data, ts);
+
+            if (data.data === 'view' || data.data === 'edit') {
+                this.sidePaneOpen = true;
+                this.sidePanelData = ts;
+            }
+
+            if (data.data === 'delete') {
+                // this.store.dispatch(new DeactivateTechniqueSet(ts.id));
+            }
+        });
+
+        return popover.present();
+    }
+
+    goToSetList() {
+        this.router.navigate(['technique/list/']);
+    }
+
+    techniqueReset(): TechniqueModel {
+        return {
+            id: -1,
+            videos: [],
+            photos: [],
+            description: '',
+            title: '',
+            grade: null,
+            techniqueSet: -1,
+            tags: [],
+        };
+    }
+
+    ngOnDestroy(): void {
+        this.subsc.unsubscribe();
+    }
 }

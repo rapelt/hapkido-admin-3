@@ -1,61 +1,68 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
-      <ion-back-button [defaultHref]="'/technique/list'" class="cy-back-button"></ion-back-button>
+      <ion-menu-button class="cy-menu-button"></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      {{(techniquesSet | async)?.name}}
-    </ion-title>
-<!--    <ion-buttons slot="end">-->
-<!--      <ion-button (click)="showMore($event)" *ngIf="listType !== 'inactive'">-->
-<!--        <ion-icon slot="icon-only" name="more" ></ion-icon>-->
-<!--      </ion-button>-->
-<!--    </ion-buttons>-->
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div>
-
+  <div class="more-stuff">
     <div *ngIf="!loaded" class="spinner">
       <ion-spinner></ion-spinner>
     </div>
 
-    <div *ngIf="loaded">
-      <div class="technique-set-list">
-        <ion-searchbar class="cy-technique-set-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
+    <div class="large-content">
+      <div class="large-content-left">
 
-        <ion-list class="cy-technique-set-list set-list">
-          <ion-item class="cy-technique-set-item set-item" lines="none" button="true" [class]="'technique-set-' + technique.id" (click)="goToTechniqueSet(technique)" *ngFor="let technique of techniques | async | techniqueFilter: searchvalue; let i = index">
-                <ion-label>
-                  <app-grade-badge [grade]="technique.grade"></app-grade-badge>
-                  {{technique.title | capitialise}}
+        <div *ngIf="loaded">
+          <div class="header-bar">
+            <div class="breadcrumb-set">
+              <span class="breadcrumb"><ion-button fill="clear" (click)="goToSetList()">Techniques <ion-icon name="chevron-forward-outline"></ion-icon></ion-button>  <ion-button fill="clear" disabled>{{(techniquesSet | async)?.name | capitialise}}</ion-button></span>
+            </div>
+            <div class="searchbar-container">
+              <ion-searchbar class="cy-technique-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
+              <ion-button fill="clear">
+                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
 
-                  <p>Pubished</p>
-                  <ion-icon name="menu"></ion-icon>
-                </ion-label>
 
-          </ion-item>
+          <div class="technique-list">
+            <ion-list class="cy-technique-list">
+              <ion-item class="cy-technique-item" lines="none" button="true" [class]="'technique-' + technique.id"
+                        *ngFor="let technique of techniques | async | techniqueFilter: searchvalue; let i = index"
+                        (click)="goToTechnique(technique.id)">
+                <app-grade-badge slot="start" [grade]="technique?.grade"></app-grade-badge>
+                <ion-button slot="end" fill="clear" (click)="presentPopover($event, technique);$event.stopPropagation();">
+                  <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+                </ion-button>
+                <ion-label slot="start">{{technique.title | capitialise}} </ion-label>
+              </ion-item>
+            </ion-list>
 
-
-        </ion-list>
-
-        <div *ngIf="(techniques | async).length === 0">
-          <p class="no-techniques">Please add some techniques</p>
+            <div *ngIf="(techniques | async).length === 0">
+              <p class="no-techniques">Please add some techniques</p>
+            </div>
+          </div>
         </div>
+
       </div>
-
+      <app-side-panel [ngClass]="{'open': sidePaneOpen}" (closeSidePanel)="closeSidePanel()" [title]="sidebarTitle? sidebarTitle: sidebarTitleDefault">
+        <app-add-technique [technique]="sidePanelData" [techniqueId]="sidePanelData?.id" (cancel)="closeSidePanel()"></app-add-technique>
+      </app-side-panel>
     </div>
-
 
   </div>
 
 </ion-content>
+
 <ion-footer>
-  <div *ngIf="loaded">
+  <div *ngIf="loaded && sidePaneOpen === false">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button class="cy-add-student-btn" color="tertiary" (click)="newTechnique()">
-        <ion-icon name="videocam"></ion-icon>
+        <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </div>

@@ -64,6 +64,30 @@ export function techniquesReducer(
                 techniques: editTechniquesList,
                 selectedTechnique: editedTechnique,
             };
+        case ActionTypes.Edit_technique_set_success:
+            const editedTechniqueSet = {
+                ...action.payload,
+            };
+            const editTechniqueSetIndex = state.techniqueSets.findIndex(s => {
+                return s.id === action.payload.id;
+            });
+
+            const editTechniquesSetList = [...state.techniqueSets];
+            editTechniquesSetList[editTechniqueSetIndex] = editedTechniqueSet;
+
+            return {
+                ...state,
+                techniqueSets: editTechniquesSetList,
+            };
+        case ActionTypes.Deactivate_technique_set_success:
+            const newTechniquesSetList = [...state.techniqueSets].filter(
+                s => s.id !== action.payload
+            );
+
+            return {
+                ...state,
+                techniqueSets: newTechniquesSetList,
+            };
         case ActionTypes.Set_selected_technique:
             const technique = state.techniques.find(s => {
                 return s.id === action.payload;
