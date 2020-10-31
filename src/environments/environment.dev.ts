@@ -16,7 +16,7 @@ export const config: EnvironementModel = {
     familyAPIEndpoint:
         'https://tfub8jwq4h.execute-api.ap-southeast-2.amazonaws.com/dev/family/',
     techniqueAPIEndpoint:
-        'https://tfub8jwq4h.execute-api.ap-southeast-2.amazonaws.com/dev/stechnique/',
+        'https://tfub8jwq4h.execute-api.ap-southeast-2.amazonaws.com/dev/technique/',
     tagAPIEndpoint:
         'https://tfub8jwq4h.execute-api.ap-southeast-2.amazonaws.com/dev/tag/',
     getClassTime: 15000,
