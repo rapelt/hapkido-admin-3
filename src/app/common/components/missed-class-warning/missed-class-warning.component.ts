@@ -48,6 +48,8 @@ export class MissedClassWarningComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.studentSubscriber.unsubscribe();
+        if (this.studentSubscriber) {
+            this.studentSubscriber.unsubscribe();
+        }
     }
 }

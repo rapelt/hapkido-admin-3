@@ -14,19 +14,19 @@ export class MessageComponent implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit(): void {
-        if (this.messagesService.updateError.observers.length === 0) {
+        if (this.messagesService.updateError.observers?.length === 0) {
             this.messagesService.updateError.subscribe((error: string) => {
                 this.presentErrorToast(error);
             });
         }
 
-        if (this.messagesService.updateInfo.observers.length === 0) {
+        if (this.messagesService.updateInfo.observers?.length === 0) {
             this.messagesService.updateInfo.subscribe((message: string) => {
                 this.presentInfoToast(message);
             });
         }
 
-        if (this.messagesService.updateSuccess.observers.length === 0) {
+        if (this.messagesService.updateSuccess.observers?.length === 0) {
             this.messagesService.updateSuccess.subscribe((message: string) => {
                 this.presentSuccessToast(message);
             });
