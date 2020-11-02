@@ -72,8 +72,6 @@ export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        this.store.dispatch(new GetAllStudents());
-
         this.subsc = this.actionsSubject.subscribe(data => {
             if (
                 data.type === ActionTypes.Deactivate_student_success ||
