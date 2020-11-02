@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
 import * as moment from 'moment';
-import { EMPTY } from 'rxjs';
+import { EMPTY, of } from 'rxjs';
 import {
     catchError,
     delay,
@@ -18,9 +18,11 @@ import {
     ActionTypes,
     AddClasses,
     AddStudentToClass,
+    AddStudentToClassSuccess,
     DeleteClass,
     MakeClassAGrading,
     RemoveStudentFromClass,
+    RemoveStudentFromClassSuccess,
 } from './classes.actions';
 import { ClassesServices } from './classes.services';
 import { getClassState } from './classes.selectors';
@@ -131,16 +133,16 @@ export class ClassesEffects {
                     map(
                         (student: StudentModel) => {
                             return {
-                                type: ActionTypes.Add_student_to_class_success,
-                                payload: {
-                                    studentId: student['studentId'],
-                                    classId: action.payload.classId,
-                                },
+                                type: ActionTypes.Do_nothing,
                             };
                         },
-                        catchError(error => {
+                        catchError((error: any) => {
                             this.handleError(error.message);
-                            return EMPTY;
+                            return of(
+                                new RemoveStudentFromClassSuccess(
+                                    action.payload
+                                )
+                            );
                         })
                     )
                 )
@@ -160,17 +162,14 @@ export class ClassesEffects {
                     map(
                         (student: StudentModel) => {
                             return {
-                                type:
-                                    ActionTypes.Remove_student_from_class_success,
-                                payload: {
-                                    studentId: student['studentId'],
-                                    classId: action.payload.classId,
-                                },
+                                type: ActionTypes.Do_nothing,
                             };
                         },
                         catchError(error => {
                             this.handleError(error.message);
-                            return EMPTY;
+                            return of(
+                                new AddStudentToClassSuccess(action.payload)
+                            );
                         })
                     )
                 )
