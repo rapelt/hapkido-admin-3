@@ -14,7 +14,7 @@
 
   :host.open {
     flex-basis: 25%;
-    opacity: 100%;
+    opacity: 1;
     transition: flex-basis 1s, opacity 1s;
   }
 }
@@ -36,7 +36,7 @@
 
   :host.open {
     width: 100%;
-    opacity: 100%;
+    opacity: 1;
     transition: width 0.5s, opacity 0.3s;
   }
 
