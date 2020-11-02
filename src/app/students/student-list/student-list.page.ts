@@ -7,6 +7,8 @@ import { StudentListPopoverComponent } from '../components/student-list-popover/
 import { selectStudentLoaded } from '../../app-store/student-state/students.selectors';
 import { map, takeWhile } from 'rxjs/operators';
 import { PageComponent } from '../../common/page.component';
+import { Observable, of } from 'rxjs';
+import { StudentModel } from '../../common/models/student';
 
 @Component({
     selector: 'app-student-list-page',
@@ -19,6 +21,7 @@ export class StudentListPage extends PageComponent
     searchvalue = '';
     activatedRouteSubscriber;
     loaded = false;
+    students: Observable<StudentModel[]> = of([]);
 
     constructor(
         public popoverController: PopoverController,

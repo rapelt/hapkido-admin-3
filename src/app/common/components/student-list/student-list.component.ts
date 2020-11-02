@@ -7,13 +7,19 @@ import {
     Output,
     OnDestroy,
 } from '@angular/core';
-import { ActionsSubject, ReducerManagerDispatcher, Store } from '@ngrx/store';
+import {
+    ActionsSubject,
+    ReducerManagerDispatcher,
+    select,
+    Store,
+} from '@ngrx/store';
 import { combineLatest, Observable, of } from 'rxjs';
 import {
     debounceTime,
     distinctUntilChanged,
     filter,
     map,
+    takeWhile,
 } from 'rxjs/operators';
 import { AppState } from '../../../app-store/state/app.reducers';
 import {
@@ -58,6 +64,8 @@ export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
     @Output()
     studentClickEvent: EventEmitter<string> = new EventEmitter<string>();
 
+    loading = true;
+
     constructor(
         public store: Store<AppState>,
         private actionsSubject: ActionsSubject
@@ -70,17 +78,28 @@ export class StudentListComponent implements OnChanges, OnInit, OnDestroy {
                 data.type === ActionTypes.Activate_student_success ||
                 data.type === ActionTypes.Get_all_students_success
             ) {
-                this.students =
-                    this.listType === 'active'
-                        ? this.store.select(selectActiveStudents)
-                        : this.store.select(selectInactiveStudents);
-
-                this.filteredStudents = this.students;
+                this.setStudents();
             }
         });
+
+        this.setStudents();
+    }
+
+    setStudents() {
+        this.students =
+            this.listType === 'active'
+                ? this.store.select(selectActiveStudents)
+                : this.store.select(selectInactiveStudents);
+
+        this.filteredStudents = this.students;
+
+        this.loading = false;
     }
 
     ngOnChanges() {
+        if (this.students === undefined) {
+            return;
+        }
         this.filteredStudents = this.students.pipe(
             debounceTime(200),
             distinctUntilChanged(),
