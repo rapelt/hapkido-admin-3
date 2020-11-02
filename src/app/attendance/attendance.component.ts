@@ -1,11 +1,20 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+    ChangeDetectionStrategy,
+    Component,
+    OnChanges,
+    OnDestroy,
+    OnInit,
+    SimpleChanges,
+} from '@angular/core';
 import { ClassModel } from '../common/models/class';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { select, Store } from '@ngrx/store';
 import { AppState } from '../app-store/state/app.reducers';
 import {
     AddStudentToClass,
+    AddStudentToClassSuccess,
     RemoveStudentFromClass,
+    RemoveStudentFromClassSuccess,
 } from '../app-store/classes-state/classes.actions';
 import { Observable } from 'rxjs';
 import { classTypes } from '../common/models/class-types';
@@ -71,6 +80,13 @@ export class AttendanceComponent extends PageComponent
                 studentId: event.hbId,
             })
         );
+
+        this.store.dispatch(
+            new RemoveStudentFromClassSuccess({
+                classId: this.classId,
+                studentId: event.hbId,
+            })
+        );
     }
 
     addStudentToClass(event) {
@@ -80,6 +96,13 @@ export class AttendanceComponent extends PageComponent
 
         this.store.dispatch(
             new AddStudentToClass({
+                classId: this.classId,
+                studentId: event.hbId,
+            })
+        );
+
+        this.store.dispatch(
+            new AddStudentToClassSuccess({
                 classId: this.classId,
                 studentId: event.hbId,
             })

@@ -17,6 +17,7 @@ export enum ActionTypes {
     Add_student_to_class_success = '[Classes] Add student to class success',
     Remove_student_from_class_success = '[Classes] Remove student from class success',
     Clear_loaded = '[Classes] Clear loaded',
+    Do_nothing = '[Classes] Nothing',
 }
 
 export class GetAllClasses implements Action {
@@ -55,6 +56,11 @@ export class StopViewClass implements Action {
 export class AddStudentToClass implements Action {
     readonly type = ActionTypes.Add_student_to_class;
     constructor(public payload: { classId: string; studentId: string }) {}
+}
+
+export class DoNothing implements Action {
+    readonly type = ActionTypes.Do_nothing;
+    constructor() {}
 }
 
 export class RemoveStudentFromClass implements Action {
