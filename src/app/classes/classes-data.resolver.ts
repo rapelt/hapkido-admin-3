@@ -10,7 +10,10 @@ import {
     GetAllVideos,
 } from '../app-store/media-state/media.actions';
 import { GetAllClasses } from '../app-store/classes-state/classes.actions';
-import { GetAllStudents } from '../app-store/student-state/students.actions';
+import {
+    GetAllFamilies,
+    GetAllStudents,
+} from '../app-store/student-state/students.actions';
 import { selectStudentAndClassFeatureLoaded } from '../app-store/student-state/students.selectors';
 
 @Injectable()
@@ -24,8 +27,10 @@ export class ClassesDataDispatcher implements Resolve<any> {
                 if (allLoaded) {
                     return {};
                 } else {
+                    console.log('Class Data Resolver');
                     this.store.dispatch(new GetAllClasses());
                     this.store.dispatch(new GetAllStudents());
+                    this.store.dispatch(new GetAllFamilies());
                     return {};
                 }
             });

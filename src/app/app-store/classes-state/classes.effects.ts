@@ -36,6 +36,8 @@ export class ClassesEffects {
             this.classesService.getAllClasses().pipe(
                 map(
                     (classes: ClassModel[]) => {
+                        console.log('get all classes"');
+
                         const newClasses = [];
 
                         classes.forEach(aclass => {
