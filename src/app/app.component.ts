@@ -17,6 +17,7 @@ import {
 } from 'hapkido-auth-lib';
 import { LoadingSpinnerService } from './common/components/loading-spinner/loading-spinner.service';
 import { SocketioService } from './common/services/socketio.service';
+import { config } from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -38,11 +39,6 @@ export class AppComponent implements OnInit, OnDestroy {
             title: 'Classes',
             url: '/class',
             icon: 'calendar',
-        },
-        {
-            title: 'Techniques',
-            url: '/technique',
-            icon: 'videocam',
         },
         {
             title: 'Settings',
@@ -68,6 +64,14 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        if (config.feature_toggle.techniques) {
+            this.appPages.push({
+                title: 'Techniques',
+                url: '/technique',
+                icon: 'videocam',
+            });
+        }
+
         // this.socketService.setupSocketConnection();
         this.authService.load().then(() => {
             this.shouldShowSignOut =
