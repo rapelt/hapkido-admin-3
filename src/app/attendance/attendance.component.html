@@ -39,7 +39,7 @@
         <ion-list class="cy-student-list">
           <ion-item class="cy-student-list-item" lines="none" button="true" [class]="'student-' + student.hbId" (click)="removeStudentFromClass(student, i)" *ngFor="let student of attendance | async | attendanceFilterPipe; let i = index">
               <ion-label>
-                {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
+                {{i+1}}. {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
               </ion-label>
               <ion-note slot="end">
                 <app-grade-badge [grade]="student.grade"></app-grade-badge>
