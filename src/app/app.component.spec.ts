@@ -129,8 +129,8 @@ describe('AppComponent', () => {
         expect(menuItems[0].textContent).toContain('Home');
         expect(menuItems[1].textContent).toContain('Students');
         expect(menuItems[2].textContent).toContain('Classes');
-        expect(menuItems[3].textContent).toContain('Techniques');
-        expect(menuItems[4].textContent).toContain('Settings');
+        // expect(menuItems[3].textContent).toContain('Techniques');
+        expect(menuItems[3].textContent).toContain('Settings');
     });
 
     it('should have urls', async () => {
