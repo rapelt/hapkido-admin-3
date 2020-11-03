@@ -19,7 +19,6 @@ export const attendanceSelector = classId =>
         selectSelectedClass(classId),
         (students: StudentModel[], aclass: ClassModel) => {
             const a = new AlphabeticalStudentsPipe();
-            const mappedIds = aclass.attendance.map(id => id.toLowerCase());
 
             const s = students.map((student: StudentModel) => {
                 return {
@@ -27,7 +26,9 @@ export const attendanceSelector = classId =>
                     grade: student.grade,
                     name: student.name,
                     isActive: student.isActive,
-                    attended: mappedIds.includes(student.hbId.toLowerCase()),
+                    attended: aclass.attendance.includes(
+                        student.hbId.toLowerCase()
+                    ),
                 };
             });
 

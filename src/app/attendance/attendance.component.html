@@ -37,9 +37,9 @@
         </div>
 
         <ion-list class="cy-student-list">
-          <ion-item class="cy-student-list-item" lines="none" button="true" [class]="'student-' + student.hbId" (click)="removeStudentFromClass(student, i)" *ngFor="let student of attendance | async | attendanceFilterPipe; let i = index">
+          <ion-item tappable mode="ios" class="cy-student-list-item" lines="none" button="true" [class]="'student-' + student.hbId" (click)="removeStudentFromClass(student, i)" *ngFor="let student of attendance | async | attendanceFilterPipe; let i = index">
               <ion-label>
-                {{i+1}}. {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
+                {{i+1}}. {{student.name.firstname}} {{student.name.lastname}}
               </ion-label>
               <ion-note slot="end">
                 <app-grade-badge [grade]="student.grade"></app-grade-badge>
@@ -55,9 +55,9 @@
           <ion-searchbar class="cy-student-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
 
           <ion-list class="cy-student-list">
-            <ion-item class="cy-student-list-item" button="true" [class]="'student-' + student.hbId" (click)="addStudentToClass(student)" *ngFor="let student of attendance | async | activeStudents | studentNameFilter: searchvalue ; let i = index" [disabled]="student['attended']">
+            <ion-item tappable mode="ios" class="cy-student-list-item" button="true" [class]="'student-' + student.hbId" (click)="addStudentToClass(student)" *ngFor="let student of attendance | async | activeStudents | studentNameFilter: searchvalue ; let i = index" [disabled]="student['attended']">
               <ion-label>
-                {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
+                {{student.name.firstname}} {{student.name.lastname}}
                 <app-missed-class-warning [student]="student" [showDays]="false"></app-missed-class-warning>
               </ion-label>
               <ion-note slot="end">

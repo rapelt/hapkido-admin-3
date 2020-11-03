@@ -11,7 +11,6 @@ export enum ActionTypes {
     Sign_out_success = '[Authentication] Sign Out Success',
     Sign_in_success = '[Authentication] Sign In Success',
     Set_user_attributes = '[Authentication] Set User Attributes',
-
     Verify_email = '[Authentication] Verify email',
 }
 
