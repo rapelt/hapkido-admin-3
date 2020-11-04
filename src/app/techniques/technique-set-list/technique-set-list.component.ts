@@ -32,6 +32,12 @@ export class TechniqueSetListComponent extends PageComponent
     sidebarTitleDefault = 'New Technique Set';
     sidebarTitle;
     sidePanelData: TechniqueSetModel = this.techniqueSetReset();
+    breadcrumbs = [
+        {
+            name: 'Techniques',
+            navigate: '/technique/list',
+        },
+    ];
 
     constructor(
         private store: Store<AppState>,
@@ -82,7 +88,7 @@ export class TechniqueSetListComponent extends PageComponent
     }
 
     goToTechniqueSet(techniqueSetId) {
-        this.router.navigate(['technique/list/' + techniqueSetId]);
+        this.router.navigate(['/technique/list/' + techniqueSetId], {});
     }
 
     closeSidePanel() {

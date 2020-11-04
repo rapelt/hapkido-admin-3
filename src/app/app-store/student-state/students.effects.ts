@@ -46,7 +46,7 @@ export class StudentsEffects {
                     payload: families,
                 })),
                 catchError(error => {
-                    this.handleError(error.message); // Not available in prod yet
+                    // this.handleError(error.message); // Not available in prod yet
                     return EMPTY;
                 })
             )

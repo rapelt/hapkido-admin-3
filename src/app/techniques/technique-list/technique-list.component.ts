@@ -19,6 +19,7 @@ import {
     techniqueSetSelector,
     techniquesSelector,
 } from './technique-list.selector';
+import { selectSelectedStudent } from '../../app-store/student-state/students.selectors';
 
 @Component({
     selector: 'app-technique-list',
@@ -27,7 +28,7 @@ import {
 })
 export class TechniqueListComponent extends PageComponent
     implements OnInit, OnDestroy {
-    loaded = true;
+    loaded = false;
     techniques: Observable<TechniqueModel[]>;
     searchvalue = '';
     subsc;
@@ -37,6 +38,11 @@ export class TechniqueListComponent extends PageComponent
     sidePanelData: TechniqueModel = this.techniqueReset();
     techniqueSetId: number;
     techniquesSet: Observable<TechniqueSetModel>;
+
+    breadcrumbs: Array<{
+        name: string;
+        navigate: string;
+    }> = [];
 
     constructor(
         private store: Store<AppState>,
@@ -51,17 +57,7 @@ export class TechniqueListComponent extends PageComponent
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.techniqueSetId = parseInt(params.get('techniqueSet'), 10);
-            this.techniques = this.store.pipe(
-                filter(() => this.loaded),
-                select(techniquesSelector(this.techniqueSetId)),
-                takeWhile(() => this.isAlive)
-            );
-
-            this.techniquesSet = this.store.pipe(
-                filter(() => this.loaded),
-                select(techniqueSetSelector(this.techniqueSetId)),
-                takeWhile(() => this.isAlive)
-            );
+            this.updateTechniques();
         });
 
         this.subsc = this.actionsSubject.subscribe(data => {
@@ -80,8 +76,25 @@ export class TechniqueListComponent extends PageComponent
                 map(selectTechniquesloaded)
             )
             .subscribe(allValuesLoaded => {
+                console.log(allValuesLoaded, 'All Values loaded');
                 this.loaded = allValuesLoaded;
             });
+    }
+
+    updateTechniques() {
+        this.techniques = this.store.select(
+            techniquesSelector(this.techniqueSetId)
+        );
+
+        this.techniquesSet = this.store.select(
+            techniqueSetSelector(this.techniqueSetId)
+        );
+
+        this.techniquesSet.subscribe(tSet => {
+            if (tSet) {
+                this.setBreadcrumbs(tSet);
+            }
+        });
     }
 
     async newTechnique() {
@@ -128,21 +141,32 @@ export class TechniqueListComponent extends PageComponent
         return popover.present();
     }
 
-    goToSetList() {
-        this.router.navigate(['technique/list/']);
-    }
-
     techniqueReset(): TechniqueModel {
         return {
             id: -1,
-            videos: [],
-            photos: [],
+            media: [],
             description: '',
             title: '',
             grade: null,
-            techniqueSet: -1,
+            techniqueSet: {
+                id: -1,
+                name: '',
+            },
             tags: [],
         };
+    }
+
+    setBreadcrumbs(tset: TechniqueSetModel) {
+        this.breadcrumbs = [
+            {
+                name: 'Techniques',
+                navigate: '/technique/list',
+            },
+            {
+                name: tset.name,
+                navigate: '/technique/list/' + tset.id,
+            },
+        ];
     }
 
     ngOnDestroy(): void {

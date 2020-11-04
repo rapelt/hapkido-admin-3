@@ -26,7 +26,5 @@ export class ValidationErrorMessageComponent implements OnInit, OnChanges {
 
     ngOnInit() {}
 
-    ngOnChanges(changes: SimpleChanges) {
-        console.log(this.saveAttempted);
-    }
+    ngOnChanges(changes: SimpleChanges) {}
 }

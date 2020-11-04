@@ -4,28 +4,25 @@ import { Actions, Effect, ofType } from '@ngrx/effects';
 import { EMPTY } from 'rxjs';
 import { catchError, map, mergeMap, tap } from 'rxjs/operators';
 import { MessagesService } from '../../common/messages/messages.service';
+import { MediaServices } from './media.services';
 import {
     ActionTypes,
-    AddNewPhoto,
-    AddNewVideo,
-    GetPhoto,
-    GetVideo,
-    UploadNewVideo,
+    AddNewMedia,
+    GetMedia,
+    UploadNewMedia,
 } from './media.actions';
-import { VideoModel } from '../../common/models/video';
-import { PhotoModel } from '../../common/models/photo';
-import { MediaServices } from './media.services';
+import { MediaModel } from '../../common/models/media';
 
 @Injectable()
 export class MediaEffects {
     @Effect()
-    getAllVideos = this.actions.pipe(
-        ofType(ActionTypes.Get_all_videos),
+    getAllMedias = this.actions.pipe(
+        ofType(ActionTypes.Get_all_medias),
         mergeMap(() =>
-            this.mediaServices.getAllVideos().pipe(
-                map((videos: VideoModel[]) => ({
-                    type: ActionTypes.Get_all_videos_success,
-                    payload: videos,
+            this.mediaServices.getAllMedias().pipe(
+                map((medias: MediaModel[]) => ({
+                    type: ActionTypes.Get_all_medias_success,
+                    payload: medias,
                 })),
                 catchError(error => {
                     this.handleError(error.message);
@@ -36,13 +33,13 @@ export class MediaEffects {
     );
 
     @Effect()
-    getAllPhotos = this.actions.pipe(
-        ofType(ActionTypes.Get_all_photos),
-        mergeMap(() =>
-            this.mediaServices.getAllPhotos().pipe(
-                map((photos: PhotoModel[]) => ({
-                    type: ActionTypes.Get_all_photos_success,
-                    payload: photos,
+    getMedia = this.actions.pipe(
+        ofType(ActionTypes.Get_media),
+        mergeMap((action: GetMedia) =>
+            this.mediaServices.getMedia(action.payload).pipe(
+                map((media: MediaModel) => ({
+                    type: ActionTypes.Get_media_success,
+                    payload: media,
                 })),
                 catchError(error => {
                     this.handleError(error.message);
@@ -53,53 +50,19 @@ export class MediaEffects {
     );
 
     @Effect()
-    getVideo = this.actions.pipe(
-        ofType(ActionTypes.Get_video),
-        mergeMap((action: GetVideo) =>
-            this.mediaServices.getVideo(action.payload).pipe(
-                map((video: VideoModel) => ({
-                    type: ActionTypes.Get_video_success,
-                    payload: video,
-                })),
-                catchError(error => {
-                    this.handleError(error.message);
-                    return EMPTY;
-                })
-            )
-        )
-    );
-
-    @Effect()
-    getPhoto = this.actions.pipe(
-        ofType(ActionTypes.Get_photo),
-        mergeMap((action: GetPhoto) =>
-            this.mediaServices.getPhoto(action.payload).pipe(
-                map((photo: PhotoModel) => ({
-                    type: ActionTypes.Get_photo_success,
-                    payload: photo,
-                })),
-                catchError(error => {
-                    this.handleError(error.message);
-                    return EMPTY;
-                })
-            )
-        )
-    );
-
-    @Effect()
-    addNewVideo = this.actions.pipe(
-        ofType(ActionTypes.Add_new_video),
-        mergeMap((action: AddNewVideo) =>
+    addNewMedia = this.actions.pipe(
+        ofType(ActionTypes.Add_new_media),
+        mergeMap((action: AddNewMedia) =>
             this.mediaServices
-                .addNewVideo(action.payload.video, action.payload.file)
+                .addNewMedia(action.payload.media, action.payload.file)
                 .pipe(
-                    map((video: string) => ({
-                        type: ActionTypes.Add_new_video_success,
-                        payload: video,
+                    map((media: string) => ({
+                        type: ActionTypes.Add_new_media_success,
+                        payload: media,
                     })),
                     tap((response: any) => {
                         this.messageService.updateSuccess.next(
-                            'New video created'
+                            'New media created'
                         );
                     }),
                     catchError(error => {
@@ -111,44 +74,20 @@ export class MediaEffects {
     );
 
     @Effect()
-    uploadNewVideo = this.actions.pipe(
-        ofType(ActionTypes.Upload_new_video),
-        mergeMap((action: UploadNewVideo) =>
+    uploadNewMedia = this.actions.pipe(
+        ofType(ActionTypes.Upload_new_media),
+        mergeMap((action: UploadNewMedia) =>
             this.mediaServices
-                .uploadNewVideo(action.payload.video, action.payload.file)
+                .uploadNewMedia(action.payload.media, action.payload.file)
                 .pipe(
-                    map((video: string) => ({
-                        type: ActionTypes.Upload_new_video_success,
-                        payload: video,
+                    map((media: string) => ({
+                        type: ActionTypes.Upload_new_media_success,
+                        payload: media,
                     })),
                     tap((response: any) => {
                         // this.messageService.updateSuccess.next(
-                        //     'New video created'
+                        //     'New media created'
                         // );
-                    }),
-                    catchError(error => {
-                        this.handleError(error.message);
-                        return EMPTY;
-                    })
-                )
-        )
-    );
-
-    @Effect()
-    addNewPhoto = this.actions.pipe(
-        ofType(ActionTypes.Add_new_photo),
-        mergeMap((action: AddNewPhoto) =>
-            this.mediaServices
-                .addNewPhoto(action.payload.photo, action.payload.file)
-                .pipe(
-                    map((photo: string) => ({
-                        type: ActionTypes.Add_new_photo_success,
-                        payload: photo,
-                    })),
-                    tap((response: any) => {
-                        this.messageService.updateSuccess.next(
-                            'New photo created'
-                        );
                     }),
                     catchError(error => {
                         this.handleError(error.message);

@@ -1,172 +1,96 @@
 import { Action } from '@ngrx/store';
-import { TechniqueModel } from '../../common/models/technique';
-import { TechniqueSetModel } from '../../common/models/technique-set';
-import { VideoModel } from '../../common/models/video';
-import { PhotoModel } from '../../common/models/photo';
+import { MediaModel } from '../../common/models/media';
 
 export enum ActionTypes {
-    Get_all_videos = '[Media] Get all videos',
-    Get_all_videos_success = '[Media] Get all videos success',
+    Get_all_medias = '[Media] Get all medias',
+    Get_all_medias_success = '[Media] Get all medias success',
 
-    Get_video = '[Media] Get video',
-    Get_video_success = '[Media] Get video success',
+    Get_media = '[Media] Get media',
+    Get_media_success = '[Media] Get media success',
 
-    Clear_loaded_video = '[Media] Clear loaded Videos',
+    Clear_loaded_media = '[Media] Clear loaded Medias',
 
-    Add_new_video = '[Media] Add new video',
-    Add_new_video_success = '[Media] Add new video success',
+    Add_new_media = '[Media] Add new media',
+    Add_new_media_success = '[Media] Add new media success',
 
-    Upload_new_video = '[Media] Upload new video',
-    Upload_new_video_success = '[Media] Upload new video success',
+    Upload_new_media = '[Media] Upload new media',
+    Upload_new_media_success = '[Media] Upload new media success',
 
-    Edit_video = '[Media] Edit video',
-    Edit_video_success = '[Media] Edit video success',
-
-    Get_all_photos = '[Media] Get all photos',
-    Get_all_photos_success = '[Media] Get all photos success',
-
-    Get_photo = '[Media] Get all photo sets',
-    Get_photo_success = '[Media] Get photo success',
-
-    Clear_loaded_photo = '[Media] Clear loaded Photos',
-
-    Add_new_photo = '[Media] Add new photo',
-    Add_new_photo_success = '[Media] Add new photo success',
-
-    Edit_photo = '[Media] Edit photo',
-    Edit_photo_success = '[Media] Edit photo success',
+    Edit_media = '[Media] Edit media',
+    Edit_media_success = '[Media] Edit media success',
 }
 
-export class GetAllVideos implements Action {
-    readonly type = ActionTypes.Get_all_videos;
+export class GetAllMedias implements Action {
+    readonly type = ActionTypes.Get_all_medias;
 }
 
-export class GetAllPhotos implements Action {
-    readonly type = ActionTypes.Get_all_photos;
+export class GetAllMediasSuccess implements Action {
+    readonly type = ActionTypes.Get_all_medias_success;
+
+    constructor(public payload: MediaModel[]) {}
 }
 
-export class GetAllVideosSuccess implements Action {
-    readonly type = ActionTypes.Get_all_videos_success;
-
-    constructor(public payload: VideoModel[]) {}
+export class ClearMediaLoaded implements Action {
+    readonly type = ActionTypes.Clear_loaded_media;
 }
 
-export class GetAllPhotosSuccess implements Action {
-    readonly type = ActionTypes.Get_all_photos_success;
-
-    constructor(public payload: PhotoModel[]) {}
-}
-
-export class ClearVideoLoaded implements Action {
-    readonly type = ActionTypes.Clear_loaded_video;
-}
-
-export class ClearPhotoLoaded implements Action {
-    readonly type = ActionTypes.Clear_loaded_photo;
-}
-
-export class GetVideo implements Action {
-    readonly type = ActionTypes.Get_video;
+export class GetMedia implements Action {
+    readonly type = ActionTypes.Get_media;
 
     constructor(public payload: string) {}
 }
 
-export class GetPhoto implements Action {
-    readonly type = ActionTypes.Get_photo;
+export class GetMediaSuccess implements Action {
+    readonly type = ActionTypes.Get_media_success;
 
-    constructor(public payload: string) {}
+    constructor(public payload: MediaModel) {}
 }
 
-export class GetVideoSuccess implements Action {
-    readonly type = ActionTypes.Get_video_success;
+export class AddNewMedia implements Action {
+    readonly type = ActionTypes.Add_new_media;
 
-    constructor(public payload: VideoModel) {}
+    constructor(public payload: { media: MediaModel; file: any }) {}
 }
 
-export class GetPhotoSuccess implements Action {
-    readonly type = ActionTypes.Get_photo_success;
+export class UploadNewMedia implements Action {
+    readonly type = ActionTypes.Upload_new_media;
 
-    constructor(public payload: PhotoModel) {}
+    constructor(public payload: { media: MediaModel; file: any }) {}
 }
 
-export class AddNewVideo implements Action {
-    readonly type = ActionTypes.Add_new_video;
+export class AddNewMediaSuccess implements Action {
+    readonly type = ActionTypes.Add_new_media_success;
 
-    constructor(public payload: { video: VideoModel; file: any }) {}
+    constructor(public payload: MediaModel) {}
 }
 
-export class UploadNewVideo implements Action {
-    readonly type = ActionTypes.Upload_new_video;
+export class UploadNewMediaSuccess implements Action {
+    readonly type = ActionTypes.Upload_new_media_success;
 
-    constructor(public payload: { video: VideoModel; file: any }) {}
+    constructor(public payload: MediaModel) {}
 }
 
-export class AddNewPhoto implements Action {
-    readonly type = ActionTypes.Add_new_photo;
+export class EditMedia implements Action {
+    readonly type = ActionTypes.Edit_media;
 
-    constructor(public payload: { photo: PhotoModel; file: any }) {}
+    constructor(public payload: MediaModel) {}
 }
 
-export class AddNewVideoSuccess implements Action {
-    readonly type = ActionTypes.Add_new_video_success;
+export class EditMediaSuccess implements Action {
+    readonly type = ActionTypes.Edit_media_success;
 
-    constructor(public payload: VideoModel) {}
-}
-
-export class UploadNewVideoSuccess implements Action {
-    readonly type = ActionTypes.Upload_new_video_success;
-
-    constructor(public payload: VideoModel) {}
-}
-
-export class AddNewPhotoSuccess implements Action {
-    readonly type = ActionTypes.Add_new_photo_success;
-
-    constructor(public payload: PhotoModel) {}
-}
-
-export class EditVideo implements Action {
-    readonly type = ActionTypes.Edit_video;
-
-    constructor(public payload: VideoModel) {}
-}
-
-export class EditPhoto implements Action {
-    readonly type = ActionTypes.Edit_photo;
-
-    constructor(public payload: PhotoModel) {}
-}
-
-export class EditVideoSuccess implements Action {
-    readonly type = ActionTypes.Edit_video_success;
-
-    constructor(public payload: VideoModel) {}
-}
-
-export class EditPhotoSuccess implements Action {
-    readonly type = ActionTypes.Edit_photo_success;
-
-    constructor(public payload: PhotoModel) {}
+    constructor(public payload: MediaModel) {}
 }
 
 export type MediaActions =
-    | GetAllVideos
-    | GetAllPhotos
-    | GetAllVideosSuccess
-    | GetAllPhotosSuccess
-    | GetVideo
-    | GetPhoto
-    | GetVideoSuccess
-    | GetPhotoSuccess
-    | ClearVideoLoaded
-    | ClearPhotoLoaded
-    | AddNewVideo
-    | UploadNewVideo
-    | AddNewPhoto
-    | AddNewVideoSuccess
-    | UploadNewVideoSuccess
-    | AddNewPhotoSuccess
-    | EditVideo
-    | EditPhoto
-    | EditVideoSuccess
-    | EditPhotoSuccess;
+    | GetAllMedias
+    | GetAllMediasSuccess
+    | GetMedia
+    | GetMediaSuccess
+    | ClearMediaLoaded
+    | AddNewMedia
+    | UploadNewMedia
+    | AddNewMediaSuccess
+    | UploadNewMediaSuccess
+    | EditMedia
+    | EditMediaSuccess;

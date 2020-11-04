@@ -17,9 +17,7 @@
 
         <div *ngIf="loaded">
           <div class="header-bar">
-            <div class="breadcrumb-set">
-              <span class="breadcrumb"><ion-button fill="clear" (click)="goToSetList()">Techniques <ion-icon name="chevron-forward-outline"></ion-icon></ion-button>  <ion-button fill="clear" disabled>{{(techniquesSet | async)?.name | capitialise}}</ion-button></span>
-            </div>
+            <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
             <div class="searchbar-container">
               <ion-searchbar class="cy-technique-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
               <ion-button fill="clear">
@@ -31,6 +29,9 @@
 
           <div class="technique-list">
             <ion-list class="cy-technique-list">
+              <div *ngIf="(techniques | async).length === 0">
+                <p class="no-techniques">Please add some techniques</p>
+              </div>
               <ion-item class="cy-technique-item" lines="none" button="true" [class]="'technique-' + technique.id"
                         *ngFor="let technique of techniques | async | techniqueFilter: searchvalue; let i = index"
                         (click)="goToTechnique(technique.id)">
@@ -42,9 +43,7 @@
               </ion-item>
             </ion-list>
 
-            <div *ngIf="(techniques | async).length === 0">
-              <p class="no-techniques">Please add some techniques</p>
-            </div>
+
           </div>
         </div>
 

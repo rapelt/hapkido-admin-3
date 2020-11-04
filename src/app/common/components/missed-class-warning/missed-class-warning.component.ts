@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { AppState } from '../../../app-store/state/app.reducers';
 import { selectSelectedStudentsLastClass } from '../../../app-store/student-state/students.selectors';
 import { ClassModel } from '../../models/class';
-import * as moment from 'moment-timezone';
+import * as moment from 'moment';
 import { StudentModel } from '../../models/student';
 
 @Component({

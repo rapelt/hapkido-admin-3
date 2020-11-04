@@ -20,6 +20,7 @@ import { TechniqueModel } from '../../common/models/technique';
 import { GradeModel } from '../../common/helper/grade/grade.model';
 import { GradeHelper } from '../../common/helper/grade/grade';
 import { getFormData } from './add-technique-form.data';
+import { TechniqueSetModel } from '../../common/models/technique-set';
 
 @Component({
     selector: 'app-add-technique',
@@ -34,7 +35,7 @@ export class AddTechniqueComponent implements OnInit, OnDestroy {
     sidebarTitle;
     saveAttempted = false;
     grades: GradeModel[] = [];
-    techniqueSet = -1;
+    techniqueSet: TechniqueSetModel = { id: -1, name: '' };
 
     formData: {
         title: any;
@@ -59,7 +60,6 @@ export class AddTechniqueComponent implements OnInit, OnDestroy {
                 tags: val.tags,
             });
         }
-        console.log('name changed', val);
     }
 
     get technique(): TechniqueModel {
@@ -93,7 +93,7 @@ export class AddTechniqueComponent implements OnInit, OnDestroy {
 
         this.activatedRouteSubscriber = this.activatedRoute.paramMap.subscribe(
             (params: ParamMap) => {
-                this.techniqueSet = parseInt(params.get('techniqueSet'), 10);
+                this.techniqueSet.id = parseInt(params.get('techniqueSet'), 10);
             }
         );
 
@@ -115,7 +115,9 @@ export class AddTechniqueComponent implements OnInit, OnDestroy {
         if (this.form.valid && this.techniqueId === -1) {
             const newTechnique: Partial<TechniqueModel> = {
                 ...this.form.value,
-                techniqueSet: this.techniqueSet,
+                techniqueSet: {
+                    id: this.techniqueSet,
+                },
             };
             this.addTechnique(newTechnique);
         }
