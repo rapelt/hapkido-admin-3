@@ -32,6 +32,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextAreaComponent } from './form-component/text-area/text-area.component';
 import { SelectGradeComponent } from './form-component/select-grade/select-grade.component';
 import { TagsComponent } from './form-component/tags/tags.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { RouterModule } from '@angular/router';
+import { FilePickerComponent } from './components/file-picker/file-picker.component';
 
 @NgModule({
     declarations: [
@@ -61,8 +64,16 @@ import { TagsComponent } from './form-component/tags/tags.component';
         TextAreaComponent,
         SelectGradeComponent,
         TagsComponent,
+        BreadcrumbComponent,
+        FilePickerComponent,
     ],
-    imports: [CommonModule, IonicModule, FormsModule, ReactiveFormsModule],
+    imports: [
+        CommonModule,
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+    ],
     providers: [
         GradeHelper,
         TechniqueSetFilterService,
@@ -97,6 +108,8 @@ import { TagsComponent } from './form-component/tags/tags.component';
         TextAreaComponent,
         SelectGradeComponent,
         TagsComponent,
+        BreadcrumbComponent,
+        FilePickerComponent,
     ],
 })
 export class CommonComponentsModule {}

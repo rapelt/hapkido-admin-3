@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../../environments/environment';
-import { VideoModel } from '../../common/models/video';
-import { PhotoModel } from '../../common/models/photo';
+import { MediaModel } from '../../common/models/media';
 
 @Injectable({
     providedIn: 'root',
@@ -14,54 +13,30 @@ export class MediaServices {
         this.mediaUrl = config['APIEndpoint'] + 'media/';
     }
 
-    getAllVideos() {
-        return this.httpClient.get(this.mediaUrl + 'video/all');
+    getAllMedias() {
+        return this.httpClient.get(this.mediaUrl + 'all');
     }
 
-    getAllPhotos() {
-        return this.httpClient.get(this.mediaUrl + 'photo/all');
+    getMedia(id) {
+        return this.httpClient.get(this.mediaUrl + '' + id);
     }
 
-    getVideo(id) {
-        return this.httpClient.get(this.mediaUrl + 'video/' + id);
+    addNewMedia(media: MediaModel, file: any) {
+        return this.httpClient.post(this.mediaUrl + 'create', [media, file]);
     }
 
-    getPhoto(id) {
-        return this.httpClient.get(this.mediaUrl + 'photo/' + id);
-    }
-
-    addNewVideo(video: VideoModel, file: any) {
-        return this.httpClient.post(this.mediaUrl + 'video/create', [
-            video,
-            file,
-        ]);
-    }
-
-    uploadNewVideo(video: VideoModel, file: any) {
-        return this.httpClient.post(this.mediaUrl + 'video/upload', {
-            video,
+    uploadNewMedia(media: MediaModel, file: any) {
+        console.log('Uploading Media');
+        return this.httpClient.post(this.mediaUrl + 'upload', {
+            media,
             file,
         });
     }
 
-    addNewPhoto(photo: PhotoModel, file: any) {
-        return this.httpClient.post(this.mediaUrl + 'photo/create', [
-            photo,
-            file,
-        ]);
-    }
-
-    updateVideo(video: VideoModel) {
+    updateMedia(media: MediaModel) {
         return this.httpClient.post(
-            this.mediaUrl + 'video/update/' + video.id,
-            video
-        );
-    }
-
-    updatePhoto(photo: PhotoModel) {
-        return this.httpClient.post(
-            this.mediaUrl + 'photo/update' + photo.id,
-            photo
+            this.mediaUrl + 'update/' + media.id,
+            media
         );
     }
 }

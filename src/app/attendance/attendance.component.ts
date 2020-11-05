@@ -19,7 +19,7 @@ import {
 import { Observable } from 'rxjs';
 import { classTypes } from '../common/models/class-types';
 import { PageComponent } from '../common/page.component';
-import { filter, map, takeWhile } from 'rxjs/operators';
+import { delay, filter, map, takeWhile } from 'rxjs/operators';
 import {
     attendanceSelector,
     selectAttendanceloaded,
@@ -75,14 +75,14 @@ export class AttendanceComponent extends PageComponent
 
     removeStudentFromClass(event, index) {
         this.store.dispatch(
-            new RemoveStudentFromClass({
+            new RemoveStudentFromClassSuccess({
                 classId: this.classId,
                 studentId: event.hbId,
             })
         );
 
         this.store.dispatch(
-            new RemoveStudentFromClassSuccess({
+            new RemoveStudentFromClass({
                 classId: this.classId,
                 studentId: event.hbId,
             })
@@ -95,14 +95,14 @@ export class AttendanceComponent extends PageComponent
         }
 
         this.store.dispatch(
-            new AddStudentToClass({
+            new AddStudentToClassSuccess({
                 classId: this.classId,
                 studentId: event.hbId,
             })
         );
 
         this.store.dispatch(
-            new AddStudentToClassSuccess({
+            new AddStudentToClass({
                 classId: this.classId,
                 studentId: event.hbId,
             })

@@ -8,15 +8,17 @@ export const environment = {
     production: false,
 };
 
+const local = 'http://localhost:8090/';
+
 export const config: EnvironementModel = {
     environmentName: 'Local Environment',
     ionicEnvName: 'local',
-    APIEndpoint: 'http://localhost:8090/',
-    classAPIEndpoint: 'http://localhost:8090/class/',
-    studentAPIEndpoint: 'http://localhost:8090/student/',
-    familyAPIEndpoint: 'http://localhost:8090/family/',
-    techniqueAPIEndpoint: 'http://localhost:8090/technique/',
-    tagAPIEndpoint: 'http://localhost:8090/tag/',
+    APIEndpoint: local,
+    classAPIEndpoint: local + 'class/',
+    studentAPIEndpoint: local + 'student/',
+    familyAPIEndpoint: local + 'family/',
+    techniqueAPIEndpoint: local + 'technique/',
+    tagAPIEndpoint: local + 'tag/',
     getClassTime: 15000,
     firebase: 'AIzaSyDejeeCDRpDwDi3gCqHUDqjeIF-8dbJKFo',
     firebasedomain: 'hapkido-signin.firebaseapp.com',

@@ -1,9 +1,9 @@
 <app-loading-spinner *ngIf="loading"></app-loading-spinner>
 
 <div>
-  <ion-list class="cy-student-list"  *ngFor="let student of filteredStudents | async | alphabeticalstudents; let i = index;">
+  <ion-list  class="cy-student-list"  *ngFor="let student of filteredStudents | async | alphabeticalstudents; let i = index;">
     <ion-item-sliding #slidestudent [class]="'student-' + student.hbId">
-      <ion-item class="cy-student-list-item" button="true" type="button" [lines]="full" (click)="selectStudent(student, i)">
+      <ion-item tappable mode="ios" class="cy-student-list-item" button="true" type="button" [lines]="full" (click)="selectStudent(student, i)">
         <ion-label>
           {{student.name.firstname | capitialise}} {{student.name.lastname | capitialise}}
           <app-missed-class-warning [student]="student" [showDays]="false"></app-missed-class-warning>

@@ -11,7 +11,7 @@ import { TechniqueModel } from '../../common/models/technique';
 export const techniquesSelector = techniqueSetId =>
     createSelector(selectTechniques, (techniques: TechniqueModel[]) => {
         return techniques.filter(
-            technique => technique.techniqueSet === techniqueSetId
+            technique => technique.techniqueSet.id === techniqueSetId
         );
     });
 
@@ -19,9 +19,9 @@ export const techniqueSetSelector = techniqueSetId =>
     createSelector(
         selectTechniquesSets,
         (techniqueSets: TechniqueSetModel[]) => {
-            return techniqueSets.find(
-                techniqueSet => techniqueSet.id === techniqueSetId
-            );
+            return techniqueSets.find(techniqueSet => {
+                return techniqueSet.id === techniqueSetId;
+            });
         }
     );
 

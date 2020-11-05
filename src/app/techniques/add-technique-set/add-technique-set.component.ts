@@ -50,7 +50,6 @@ export class AddTechniqueSetComponent implements OnInit, OnDestroy {
         if (this.newTechniqueSet) {
             this.newTechniqueSet.setValue({ title: val });
         }
-        console.log('name changed', val);
     }
 
     get techniqueSetName() {

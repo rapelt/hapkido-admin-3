@@ -41,8 +41,9 @@
     "device:staging": "npm run build:staging && npm run copy:capacitor && npm run open:capacitor",
     "device:dev": "npm run build:dev && npm run copy:capacitor && npm run open:capacitor",
     "device:prod": "npm run build:prod && npm run copy:capacitor && npm run open:capacitor",
+    "compile": "ngc -p tsconfig.json",
     "postinstall": "node patch.js",
-    "analyse-package-size": "webpack-bundle-analyzer ./www/stats.json"
+    "analyse-package-size": "webpack-bundle-analyzer ./www/stats-es2015.json"
   },
   "private": true,
   "dependencies": {
@@ -76,9 +77,11 @@
     "ionic4-auto-complete": "^2.6.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.24.0",
-    "moment-timezone": "^0.5.28",
+    "ngx-destroy-subscribers": "^7.0.1",
+    "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.4",
     "rxjs-compat": "^6.5.4",
+    "shortid": "^2.2.16",
     "socket.io-client": "^2.3.0",
     "tslib": "^1.10.0",
     "underscore": "^1.9.2",

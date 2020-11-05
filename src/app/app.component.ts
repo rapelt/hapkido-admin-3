@@ -72,7 +72,7 @@ export class AppComponent implements OnInit, OnDestroy {
             });
         }
 
-        // this.socketService.setupSocketConnection();
+        this.socketService.setupSocketConnection();
         this.authService.load().then(() => {
             this.shouldShowSignOut =
                 this.authState.isLoggedIn === AuthStatesEnum.LoggedIn;
