@@ -44,7 +44,7 @@ export class ViewTechniqueComponent extends SearchablePageComponent
 
     ngOnInit() {
         this.io.getServerUpdates().subscribe(something => {
-            console.log(something);
+            // console.log(something);
         });
 
         this.subscriber = this.activatedRoute.paramMap.subscribe(

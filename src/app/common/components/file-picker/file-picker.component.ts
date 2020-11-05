@@ -55,28 +55,12 @@ export class FilePickerComponent implements OnInit {
                 const fileTypeSplitter = fileData.name.split('.');
                 const filetype = fileTypeSplitter[fileTypeSplitter.length - 1];
 
-                const folderName = this.technique.title
+                const folderName = `${this.technique.techniqueSet.id}#${this.technique.id}#`
                     .toLowerCase()
                     .replace(/\s+/g, '_');
 
                 const newFileName =
-                    folderName + '_' + shortid() + '.' + filetype;
-
-                const media: MediaModel = {
-                    id: 0,
-                    file_name: newFileName,
-                    file_type: filetype,
-                    original_file_name: this.file,
-                    folder: folderName,
-                    size: '',
-                    uploadStatus: 'Uploading',
-                    publishedStatus: 'Not Published',
-                    views: 0,
-                };
-
-                // this.store.dispatch(
-                //     new UploadNewMedia({ media: media, file: fileData })
-                // );
+                    folderName + this.technique.id + '_' + shortid();
 
                 const formData = new FormData();
                 formData.append('files', fileData, newFileName);
@@ -101,61 +85,4 @@ export class FilePickerComponent implements OnInit {
             }
         }
     }
-
-    // onSubmit() {
-    //     this.fileUploadProgress = '0%';
-    //
-    //     // this.app-store.dispatch(new UploadNewVideo({ video, file}));
-    //
-    //     // // const element = event[0];
-    //     this.file = this.fileData.name;
-    //     const filetype = this.file.split('.')[1];
-    //
-    //     this.videoForm.controls['original_file_name'].setValue(
-    //         this.fileData.name
-    //     );
-    //
-    //     this.videoForm.controls['file_type'].setValue(filetype);
-    //
-    //     const folderName = this.techniqueName
-    //         .toLowerCase()
-    //         .replace(/\s+/g, '_');
-    //     const newFileName =
-    //         folderName + '_' + 'video' + '_' + new Date().getTime();
-    //
-    //     const formData = new FormData();
-    //     formData.append('files', this.fileData, newFileName);
-    //     // // TODO replace 0 with a incremental number
-    //     //
-    //     this.videoForm.controls['file_name'].setValue(newFileName);
-    //
-    //     const video: VideoModel = {
-    //         id: 0,
-    //         file_name: newFileName,
-    //         original_file_name: this.fileData.name,
-    //         folder: folderName,
-    //         file_type: filetype,
-    //     };
-    //
-    //     // this.app-store.dispatch(
-    //     //     new UploadNewVideo({ video: video, file: this.fileData })
-    //     // );
-    //
-    //     this.http
-    //         .post('http://localhost:8090/media/video/upload', formData, {
-    //             reportProgress: true,
-    //             observe: 'events',
-    //         })
-    //         .subscribe(events => {
-    //             if (events.type === HttpEventType.UploadProgress) {
-    //                 this.fileUploadProgress =
-    //                     Math.round((events.loaded / events.total) * 100) + '%';
-    //                 console.log(this.fileUploadProgress);
-    //             } else if (events.type === HttpEventType.Response) {
-    //                 this.fileUploadProgress = '';
-    //                 console.log(events.body);
-    //                 alert('SUCCESS !!');
-    //             }
-    //         });
-    // }
 }
