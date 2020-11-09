@@ -15,6 +15,26 @@ import { LoadingSpinnerComponent } from './components/loading-spinner/loading-sp
 import { OrderGradingsPipe } from './pipes/order-gradings.pipe';
 import { FilterByPreferredClassTypePipe } from './pipes/filterbypreferredclasstype/filterbypreferredclasstype';
 import { PrioritiseSelectedClassPipe } from './pipes/prioritiseselectedclass/prioritiseselectedclass';
+import { TechniqueSetFilterService } from './helper/technique-set-filter.service';
+import { ProgressBarComponent } from './components/progress-bar/progress-bar.component';
+import { DragDropDirective } from './directives/drag-drop.directive';
+import { SocketioService } from './services/socketio.service';
+import { AttendanceFilterPipePipe } from './pipes/attendance-filter-pipe.pipe';
+import { ActiveStudentPipe } from './pipes/active-students.pipe';
+import { StudentNameFilterPipe } from './pipes/student-name-filter.pipe';
+import { TechniqueSetFilterPipe } from './pipes/technique-set-filter.pipe';
+import { TechniqueFilterPipe } from './pipes/technique-filter.pipe';
+import { MessageComponent } from './messages/message/message.component';
+import { MessagesService } from './messages/messages.service';
+import { SidePanelComponent } from './components/side-panel/side-panel.component';
+import { InputComponent } from './form-component/input/input.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TextAreaComponent } from './form-component/text-area/text-area.component';
+import { SelectGradeComponent } from './form-component/select-grade/select-grade.component';
+import { TagsComponent } from './form-component/tags/tags.component';
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { RouterModule } from '@angular/router';
+import { FilePickerComponent } from './components/file-picker/file-picker.component';
 
 @NgModule({
     declarations: [
@@ -31,9 +51,35 @@ import { PrioritiseSelectedClassPipe } from './pipes/prioritiseselectedclass/pri
         OrderGradingsPipe,
         FilterByPreferredClassTypePipe,
         PrioritiseSelectedClassPipe,
+        ProgressBarComponent,
+        DragDropDirective,
+        AttendanceFilterPipePipe,
+        ActiveStudentPipe,
+        StudentNameFilterPipe,
+        TechniqueSetFilterPipe,
+        TechniqueFilterPipe,
+        MessageComponent,
+        SidePanelComponent,
+        InputComponent,
+        TextAreaComponent,
+        SelectGradeComponent,
+        TagsComponent,
+        BreadcrumbComponent,
+        FilePickerComponent,
     ],
-    imports: [CommonModule, IonicModule],
-    providers: [GradeHelper],
+    imports: [
+        CommonModule,
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        RouterModule,
+    ],
+    providers: [
+        GradeHelper,
+        TechniqueSetFilterService,
+        SocketioService,
+        MessagesService,
+    ],
     exports: [
         StudentListComponent,
         CapitialisePipe,
@@ -49,6 +95,21 @@ import { PrioritiseSelectedClassPipe } from './pipes/prioritiseselectedclass/pri
         OrderGradingsPipe,
         FilterByPreferredClassTypePipe,
         PrioritiseSelectedClassPipe,
+        ProgressBarComponent,
+        DragDropDirective,
+        AttendanceFilterPipePipe,
+        ActiveStudentPipe,
+        StudentNameFilterPipe,
+        TechniqueSetFilterPipe,
+        TechniqueFilterPipe,
+        MessageComponent,
+        SidePanelComponent,
+        InputComponent,
+        TextAreaComponent,
+        SelectGradeComponent,
+        TagsComponent,
+        BreadcrumbComponent,
+        FilePickerComponent,
     ],
 })
 export class CommonComponentsModule {}

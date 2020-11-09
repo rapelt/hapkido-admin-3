@@ -1,0 +1,78 @@
+<!--<div class="general-details">-->
+
+<!-- <h3 class="header">Technique Details</h3>-->
+<!--  <div class="technique-form" [formGroup]="editTechniqueForm">-->
+
+<!--        <div class="title">-->
+<!--          <ion-item  lines="inset">-->
+<!--            <ion-label position="stacked">Title</ion-label>-->
+<!--            <ion-input formControlName="title" name="title" type="text"></ion-input>-->
+<!--          </ion-item>-->
+<!--          <app-validation-error-message [formElement]="editTechniqueForm.get('title')" [validationMessages]="validation_messages.title" [saveAttempted]="saveAttempted"></app-validation-error-message>-->
+<!--        </div>-->
+
+<!--        <div class="grade">-->
+<!--          <ion-item  lines="inset" class="cy-grade">-->
+<!--            <ion-label position="stacked">Grade</ion-label>-->
+<!--            <ion-select name="grade" okText="Okay" cancelText="Cancel" formControlName="grade">-->
+<!--              <ion-select-option [value]="grade.id" *ngFor="let grade of grades">{{grade.longName}}</ion-select-option>-->
+<!--            </ion-select>-->
+<!--          </ion-item>-->
+<!--          <app-validation-error-message [formElement]="editTechniqueForm.get('grade')" [validationMessages]="validation_messages.grade" [saveAttempted]="saveAttempted"></app-validation-error-message>-->
+<!--        </div>-->
+
+<!--        <div class="technique-group">-->
+<!--          <div class="ion-form-group">-->
+<!--            <div>-->
+<!--              <ion-label class="inset" position="stacked">Technique Set</ion-label>-->
+<!--              <ion-auto-complete [dataProvider]="techniqueSetFilterService"-->
+<!--                                 [maxResults]="3"-->
+<!--                                 [useIonInput]="true"-->
+<!--                                 (itemsChange)="techniqueSetChanged($event)"-->
+<!--                                 formControlName="technique_group_name"></ion-auto-complete>-->
+<!--            </div>-->
+<!--            <ion-button (click)="triggerAddTechniqueSet()">-->
+<!--              <ion-icon name="add"></ion-icon>-->
+<!--            </ion-button>-->
+<!--          </div>-->
+<!--          <app-validation-error-message [formElement]="editTechniqueForm.get('technique_group_name')" [validationMessages]="validation_messages.technique_group_name" [saveAttempted]="saveAttempted"></app-validation-error-message>-->
+<!--        </div>-->
+
+<!--        <div class="tag-group">-->
+<!--          <div class="tag-group-with-btn">-->
+<!--            <div class="ion-form-group">-->
+<!--              <ion-item  lines="inset" class="cy-tag-group">-->
+<!--                <ion-label position="stacked">Tags</ion-label>-->
+<!--                <ion-select multiple="true"  formControlName="tag_group" [compareWith]="compareWith">-->
+<!--                  <ion-select-option [value]="tag" *ngFor="let tag of tags">{{tag.name}}</ion-select-option>-->
+<!--                </ion-select>-->
+<!--              </ion-item>-->
+<!--            </div>-->
+
+<!--            <ion-button (click)="triggerAddTag()">-->
+<!--              <ion-icon name="add"></ion-icon>-->
+<!--            </ion-button>-->
+<!--          </div>-->
+<!--          <app-validation-error-message [formElement]="editTechniqueForm.get('tag_group')" [validationMessages]="validation_messages.tag_group" [saveAttempted]="saveAttempted"></app-validation-error-message>-->
+<!--        </div>-->
+
+
+<!--        <div class="description">-->
+<!--          <ion-item  lines="inset">-->
+<!--            <ion-label position="stacked">Description</ion-label>-->
+<!--            <ion-textarea formControlName="description" name="description" type="text"></ion-textarea>-->
+<!--          </ion-item>-->
+<!--          <app-validation-error-message [formElement]="editTechniqueForm.get('description')" [validationMessages]="validation_messages.description" [saveAttempted]="saveAttempted"></app-validation-error-message>-->
+<!--        </div>-->
+<!--  </div>-->
+
+<!-- <div class="footer">-->
+<!-- <ion-toolbar>-->
+<!--  <div class="half-button-size">-->
+<!--   <ion-button (click)="cancel()" color="secondary" expand="full">Cancel</ion-button>-->
+<!--   <ion-button (click)="next()" class="cy-add-student-submit" color="tertiary" expand="full" type="submit">Save and Continue-->
+<!--   </ion-button>-->
+<!--  </div>-->
+<!-- </ion-toolbar>-->
+<!-- </div>-->
+<!--</div>-->

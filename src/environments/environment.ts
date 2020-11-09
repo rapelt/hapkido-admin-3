@@ -8,12 +8,17 @@ export const environment = {
     production: false,
 };
 
+const local = 'http://localhost:8090/';
+
 export const config: EnvironementModel = {
     environmentName: 'Local Environment',
     ionicEnvName: 'local',
-    classAPIEndpoint: 'http://localhost:8090/class/',
-    studentAPIEndpoint: 'http://localhost:8090/student/',
-    familyAPIEndpoint: 'http://localhost:8090/family/',
+    APIEndpoint: local,
+    classAPIEndpoint: local + 'class/',
+    studentAPIEndpoint: local + 'student/',
+    familyAPIEndpoint: local + 'family/',
+    techniqueAPIEndpoint: local + 'technique/',
+    tagAPIEndpoint: local + 'tag/',
     getClassTime: 15000,
     firebase: 'AIzaSyDejeeCDRpDwDi3gCqHUDqjeIF-8dbJKFo',
     firebasedomain: 'hapkido-signin.firebaseapp.com',
@@ -23,7 +28,11 @@ export const config: EnvironementModel = {
     feature_toggle: {
         cognito_login: true,
         download_graphs: true,
+        techniques: true,
     },
+    static_image_location:
+        'https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/static_images/',
+    default_logo: 'hapkido_brisbane_logo.png',
 };
 
 /*

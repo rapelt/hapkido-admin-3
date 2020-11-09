@@ -5,8 +5,8 @@
 // import { Router } from '@angular/router';
 // import { RouterTestingModule } from '@angular/router/testing';
 // import { IonicModule } from '@ionic/angular';
-// import { Store } from '@ngrx/store';
-// import { MockStore, provideMockStore } from '@ngrx/store/testing';
+// import { Store } from '@ngrx/app-store';
+// import { MockStore, provideMockStore } from '@ngrx/app-store/testing';
 // import { CommonComponentsModule } from '../../common/common-components.module';
 // import { CapitialisePipe } from '../../common/pipes/capitialise.pipe';
 // import { MessagesModule } from '../../messages/messages.module';
@@ -15,7 +15,7 @@
 // import { EditStudentPage } from './edit-student.page';
 // import { AuthLibModule } from 'hapkido-auth-lib';
 // import { config } from '../../../environments/environment';
-// import { popululdatedInitialState } from 'src/testing-helpers/test-state-helpter';
+// import { popululdatedInitialState } from 'src/testing-helpers/test-technique-tags-student-media-classes-auth-state-helpter';
 
 // describe('EditStudentPage', () => {
 //     let component: EditStudentPage;
@@ -23,7 +23,7 @@
 //     let router: Router;
 //     let messageService: MessagesService;
 
-//     let store: MockStore<{
+//     let app-store: MockStore<{
 //         authentication: {
 //             authenticationState: string;
 //         };
@@ -52,10 +52,10 @@
 
 //         fixture = TestBed.createComponent(EditStudentPage);
 //         component = fixture.componentInstance;
-//         store = TestBed.get(Store);
-//         router = TestBed.get(Router);
-//         messageService = TestBed.get(MessagesService);
-//         spyOn(store, 'dispatch').and.callThrough();
+//         app-store = TestBed.inject(Store);
+//         router = TestBed.inject(Router);
+//         messageService = TestBed.inject(MessagesService);
+//         spyOn(app-store, 'dispatch').and.callThrough();
 //         fixture.detectChanges();
 //     }));
 

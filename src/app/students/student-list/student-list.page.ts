@@ -2,23 +2,13 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { PopoverController } from '@ionic/angular';
 import { Store } from '@ngrx/store';
-import { AppState } from '../../state/app.reducers';
+import { AppState } from '../../app-store/state/app.reducers';
 import { StudentListPopoverComponent } from '../components/student-list-popover/student-list-popover.component';
-import { SetSelectedStudent } from '../state/students.actions';
-import { LoadingSpinnerService } from '../../common/components/loading-spinner/loading-spinner.service';
-import { selectClassLoaded } from '../../classes/state/classes.selectors';
-import { selectStudentLoaded } from '../state/students.selectors';
-import { select } from '@ngrx/core';
-import {
-    combineAll,
-    delay,
-    filter,
-    map,
-    takeWhile,
-    withLatestFrom,
-} from 'rxjs/operators';
-import { combineLatest } from 'rxjs';
+import { selectStudentLoaded } from '../../app-store/student-state/students.selectors';
+import { map, takeWhile } from 'rxjs/operators';
 import { PageComponent } from '../../common/page.component';
+import { Observable, of } from 'rxjs';
+import { StudentModel } from '../../common/models/student';
 
 @Component({
     selector: 'app-student-list-page',
@@ -31,6 +21,7 @@ export class StudentListPage extends PageComponent
     searchvalue = '';
     activatedRouteSubscriber;
     loaded = false;
+    students: Observable<StudentModel[]> = of([]);
 
     constructor(
         public popoverController: PopoverController,

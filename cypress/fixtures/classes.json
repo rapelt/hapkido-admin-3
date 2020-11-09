@@ -3,9 +3,9 @@
     "classId": 2,
     "classType": "Adults",
     "attendance": [
-      "HB001",
-      "HB002",
-      "HB003"
+      "hb001",
+      "hb002",
+      "hb003"
     ],
     "isGrading": true,
     "date": "2020-02-19T08:51:28.000Z",
@@ -15,12 +15,12 @@
     "classId": 7,
     "classType": "Family",
     "attendance": [
-      "HB001",
-      "HB002",
-      "HB003",
-      "HB004",
-      "HB005",
-      "HB006"
+      "hb001",
+      "hb002",
+      "hb003",
+      "hb004",
+      "hb005",
+      "hb006"
     ],
     "isGrading": false,
     "date": "2020-02-19T09:51:28.000Z",
@@ -30,7 +30,7 @@
     "classId": 3,
     "classType": "Adults",
     "attendance": [
-      "HB001"
+      "hb001"
     ],
     "isGrading": false,
     "date": "2020-02-14T08:57:45.000Z",
@@ -48,7 +48,7 @@
     "classId": 5,
     "classType": "Adults",
     "attendance": [
-      "HB001"
+      "hb001"
     ],
     "isGrading": false,
     "date": "2020-02-13T08:30:00.000Z",
@@ -58,7 +58,7 @@
     "classId": 6,
     "classType": "Adults",
     "attendance": [
-      "HB001"
+      "hb001"
     ],
     "isGrading": false,
     "date": "2020-02-18T08:30:00.000Z",

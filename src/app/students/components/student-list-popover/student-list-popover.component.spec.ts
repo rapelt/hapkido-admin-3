@@ -47,7 +47,7 @@ describe('StudentListPopoverComponent', () => {
 
     it('should dismiss popover on route change', fakeAsync(() => {
         const mockPopoverController = (component.popoverCtrl as any) as MockPopOverController;
-        const router = TestBed.get(Router);
+        const router = TestBed.inject(Router);
 
         spyOn(router, 'navigateByUrl').and.callThrough();
 

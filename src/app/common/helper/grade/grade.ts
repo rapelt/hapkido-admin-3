@@ -1,5 +1,7 @@
 import { GradeModel } from './grade.model';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 export class GradeHelper {
     private grades: GradeModel[] = [
         {

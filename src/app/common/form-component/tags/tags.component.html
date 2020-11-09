@@ -1,0 +1,17 @@
+<div class="tag-group">
+  <div class="tag-group-with-btn">
+    <div class="ion-form-group">
+      <ion-item  lines="inset" class="cy-tag-group">
+        <ion-label position="stacked">Tags</ion-label>
+        <ion-select multiple="true"  [formControl]="formElement" [compareWith]="compareWith" (blur)="doBlur()" (ngModelChange)="doInput()">
+          <ion-select-option [value]="tag.id" *ngFor="let tag of tags | async">{{tag.name}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </div>
+
+    <ion-button (click)="triggerAddTag()">
+      <ion-icon name="add"></ion-icon>
+    </ion-button>
+  </div>
+  <app-validation-error-message [formElement]="formElement" [validationMessages]="formData?.validationMessages" [saveAttempted]="saveAttempted"></app-validation-error-message>
+</div>

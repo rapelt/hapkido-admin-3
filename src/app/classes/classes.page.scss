@@ -9,7 +9,18 @@ ion-row{
   flex-wrap: wrap;
 }
 
+ion-item {
+  margin: 12px 0;
+  box-shadow: var(--box-shadow-default);
+
+}
+
+ion-list {
+  background-color: var(--custom-background-color);
+}
+
+
 
 .class-list{
-  width: 400px;
+  min-width: 400px;
 }

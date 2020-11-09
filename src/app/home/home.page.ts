@@ -1,25 +1,33 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { config } from '../../environments/environment';
-import { Store } from '@ngrx/store';
-import { AppState } from '../state/app.reducers';
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../app-store/state/app.reducers';
 import { ClassesHelper } from '../classes/classes.helper';
 import { Router } from '@angular/router';
 import {
     ClearLoadedClasses,
     GetAllClasses,
     ViewClass,
-} from '../classes/state/classes.actions';
+} from '../app-store/classes-state/classes.actions';
 import {
+    getClasses,
     getClassState,
     selectClassLoaded,
-} from '../classes/state/classes.selectors';
-import { takeWhile } from 'rxjs/operators';
+} from '../app-store/classes-state/classes.selectors';
+import { filter, map, takeWhile, withLatestFrom } from 'rxjs/operators';
 import { PageComponent } from '../common/page.component';
 import {
     ClearLoadedStudents,
     GetAllFamilies,
     GetAllStudents,
-} from '../students/state/students.actions';
+} from '../app-store/student-state/students.actions';
+import {
+    attendanceSelector,
+    selectAttendanceloaded,
+} from '../attendance/attendance.selector';
+import { Observable } from 'rxjs';
+import { ClassModel } from '../common/models/class';
+import { selectHomeloaded, todaysClassSelector } from './home.selector';
 
 @Component({
     selector: 'app-home',
@@ -28,13 +36,11 @@ import {
 })
 export class HomePage extends PageComponent implements OnInit, OnDestroy {
     env = '';
-    subscriber;
-    subscriber2;
-
     loaded;
 
     date = new Date();
     classesOnDay: any = [];
+    todaysClasses: Observable<ClassModel[]>;
 
     constructor(
         public store: Store<AppState>,
@@ -45,32 +51,25 @@ export class HomePage extends PageComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        console.log('Home page - Init');
-
         this.env = config.environmentName;
 
-        this.store
-            .select(getClassState)
-            .pipe(takeWhile(() => this.isAlive && this.loaded))
-            .subscribe(classState => {
-                console.log('Home page - Classes State');
-
-                this.classesOnDay = this.classHelper.getClassesOnDay(
-                    new Date(),
-                    classState.classes
-                );
-            });
+        this.todaysClasses = this.store.pipe(
+            filter(() => this.loaded),
+            select(todaysClassSelector),
+            takeWhile(() => this.isAlive)
+        );
 
         this.store
-            .select(selectClassLoaded)
-            .pipe(takeWhile(() => this.isAlive))
-            .subscribe(loaded => {
-                this.loaded = loaded;
+            .pipe(
+                takeWhile(() => this.isAlive),
+                map(selectHomeloaded)
+            )
+            .subscribe(allValuesLoaded => {
+                this.loaded = allValuesLoaded;
             });
     }
 
     classSelected(selectedClass) {
-        console.log('click!!');
         this.store.dispatch(new ViewClass(selectedClass));
         this.router.navigateByUrl('attendance/' + selectedClass.classId);
     }

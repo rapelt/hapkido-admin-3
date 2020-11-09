@@ -28,6 +28,7 @@
     "object-literal-shorthand": false,
     "eofline": true,
     "forin": true,
+    "prefer-for-of": false,
     "import-spacing": true,
     "indent": [
       true,
@@ -41,15 +42,7 @@
     ],
     "member-access": false,
     "member-ordering": [
-      true,
-      {
-        "order": [
-          "static-field",
-          "instance-field",
-          "static-method",
-          "instance-method"
-        ]
-      }
+      false
     ],
     "no-arg": true,
     "no-bitwise": true,

@@ -1,10 +1,10 @@
 import { Component, Input, OnInit, OnDestroy } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from '../../../state/app.reducers';
-import { selectSelectedStudentsLastClass } from '../../../students/state/students.selectors';
+import { AppState } from '../../../app-store/state/app.reducers';
+import { selectSelectedStudentsLastClass } from '../../../app-store/student-state/students.selectors';
 import { ClassModel } from '../../models/class';
-import * as moment from 'moment-timezone';
+import * as moment from 'moment';
 import { StudentModel } from '../../models/student';
 
 @Component({
@@ -28,6 +28,9 @@ export class MissedClassWarningComponent implements OnInit, OnDestroy {
     constructor(public store: Store<AppState>) {}
 
     ngOnInit() {
+        if (!this.student) {
+            return;
+        }
         const studentLastClass = this.store.select(
             selectSelectedStudentsLastClass(this.student.hbId)
         );
@@ -45,6 +48,8 @@ export class MissedClassWarningComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.studentSubscriber.unsubscribe();
+        if (this.studentSubscriber) {
+            this.studentSubscriber.unsubscribe();
+        }
     }
 }

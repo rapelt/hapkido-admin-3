@@ -3,8 +3,8 @@
 // import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 // import { Router } from '@angular/router';
 // import { RouterTestingModule } from '@angular/router/testing';
-// import { Store } from '@ngrx/store';
-// import { MockStore, provideMockStore } from '@ngrx/store/testing';
+// import { Store } from '@ngrx/app-store';
+// import { MockStore, provideMockStore } from '@ngrx/app-store/testing';
 // import { createClass } from '../../../testing-helpers/class-test-helper';
 // import { createFamilyWithAll } from '../../../testing-helpers/family-test-helper';
 // import {
@@ -19,7 +19,7 @@
 //     let fixture: ComponentFixture<ViewStudentPage>;
 //     let router: Router;
 
-//     let store: MockStore<{
+//     let app-store: MockStore<{
 //         authentication: {
 //             authenticationState: string;
 //         };
@@ -60,9 +60,9 @@
 
 //         fixture = TestBed.createComponent(ViewStudentPage);
 //         component = fixture.componentInstance;
-//         store = TestBed.get(Store);
-//         router = TestBed.get(Router);
-//         spyOn(store, 'dispatch').and.callThrough();
+//         app-store = TestBed.inject(Store);
+//         router = TestBed.inject(Router);
+//         spyOn(app-store, 'dispatch').and.callThrough();
 //         fixture.detectChanges();
 //     }));
 

@@ -12,24 +12,31 @@
 </ion-header>
 
 <ion-content>
-  <h3 text-center>Swipe for grading options</h3>
+  <h3>Swipe for grading options</h3>
   <ion-list>
     <ion-item-sliding #slidingItem *ngFor="let student of gradings" [class]="'cy-graded-student-' + student.hbId">
       <ion-item>
         <span>{{student.name.firstname}} {{student.name.lastname}}</span>
         <span slot="end">
-            <span *ngIf="student.didGrade">
-              <app-grade-badge [grade]="student.beforeGrading"></app-grade-badge>
-              <span class="grade-to" *ngIf="student.didGrade"><ion-icon name="arrow-round-forward"></ion-icon>
-                <app-grade-badge [grade]="student.afterGrading"></app-grade-badge>
-              </span>
+            <span *ngIf="isStudentLoading(student.hbId)">
+                <ion-spinner></ion-spinner>
             </span>
 
-            <span *ngIf="!student.didGrade">
-              <app-grade-badge [grade]="student.beforeGrading"></app-grade-badge>
+            <span *ngIf="!isStudentLoading(student.hbId)">
+              <span *ngIf="student.didGrade">
+                <app-grade-badge [grade]="student.beforeGrading"></app-grade-badge>
+                <span class="grade-to" *ngIf="student.didGrade">
+                  <ion-icon name="arrow-forward-outline"></ion-icon>
+                  <app-grade-badge [grade]="student.afterGrading"></app-grade-badge>
+                </span>
+              </span>
+
+              <span *ngIf="!student.didGrade">
+                <app-grade-badge [grade]="student.beforeGrading"></app-grade-badge>
             </span>
 
           </span>
+        </span>
       </ion-item>
       <ion-item-options side="end">
         <ion-button color="dark" (click)="none(student, slidingItem)" class="cy-none">
@@ -39,7 +46,7 @@
           <ion-icon slot="icon-only" size="small" name="checkmark"></ion-icon>
         </ion-button>
         <ion-button color="primary" (click)="double(student, slidingItem)" class="cy-double">
-          <ion-icon slot="icon-only" size="small" name="done-all"></ion-icon>
+          <ion-icon slot="icon-only" size="small" name="checkmark-done-outline"></ion-icon>
         </ion-button>
       </ion-item-options>
     </ion-item-sliding>

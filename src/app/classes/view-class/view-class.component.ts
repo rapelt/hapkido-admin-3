@@ -1,22 +1,14 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { GetAllStudents } from '../../students/state/students.actions';
 import {
     ActionTypes,
     DeleteClass,
-    GetAllClasses,
-    MakeClassAGrading,
-} from '../state/classes.actions';
+} from '../../app-store/classes-state/classes.actions';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { ActionsSubject, Store } from '@ngrx/store';
-import { AppState } from '../../state/app.reducers';
-import {
-    selectActiveStudents,
-    selectInactiveStudents,
-    selectSelectedStudent,
-} from '../../students/state/students.selectors';
+import { AppState } from '../../app-store/state/app.reducers';
 import { ClassModel } from '../../common/models/class';
 import { Observable } from 'rxjs';
-import { selectSelectedClass } from '../state/classes.selectors';
+import { selectSelectedClass } from '../../app-store/classes-state/classes.selectors';
 
 @Component({
     selector: 'app-view-class',
@@ -38,8 +30,6 @@ export class ViewClassComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.segment = 'general';
-        this.store.dispatch(new GetAllStudents());
-        this.store.dispatch(new GetAllClasses());
 
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.classId = params.get('classId');

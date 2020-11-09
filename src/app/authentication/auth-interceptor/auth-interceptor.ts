@@ -7,7 +7,7 @@ import {
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from '../../state/app.reducers';
+import { AppState } from '../../app-store/state/app.reducers';
 import { AuthStatesEnum } from 'hapkido-auth-lib';
 
 /*
@@ -21,7 +21,6 @@ export class AuthInterceptor implements HttpInterceptor {
     accessToken = null;
 
     constructor(private store: Store<AppState>) {
-        console.log('Auth Interceptor Constructor');
         this.store.select('authentication').subscribe(data => {
             console.log(
                 'Auth Interceptor - Authentication State Changed ' +
@@ -29,8 +28,6 @@ export class AuthInterceptor implements HttpInterceptor {
             );
 
             if (data.authenticationState === AuthStatesEnum.LoggedIn) {
-                console.log('Auth Interceptor - Logged in');
-
                 if (
                     !data ||
                     !data.user ||

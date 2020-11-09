@@ -1,16 +1,20 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { Store } from '@ngrx/store';
-import { AppState } from '../../state/app.reducers';
+import { Action, ActionsSubject, Store } from '@ngrx/store';
+import { AppState } from '../../app-store/state/app.reducers';
 import { StudentsHelper } from '../../students/students.helper';
-import { selectStudents } from '../../students/state/students.selectors';
-import { selectSelectedClass } from '../../classes/state/classes.selectors';
+import { selectStudents } from '../../app-store/student-state/students.selectors';
+import { selectSelectedClass } from '../../app-store/classes-state/classes.selectors';
 import {
+    ActionTypes,
     AddGrading,
     GetAllStudents,
     RemoveGrading,
-} from '../../students/state/students.actions';
-import { GetAllClasses, ViewClass } from '../../classes/state/classes.actions';
+} from '../../app-store/student-state/students.actions';
+import {
+    GetAllClasses,
+    ViewClass,
+} from '../../app-store/classes-state/classes.actions';
 import { ClassesHelper } from '../../classes/classes.helper';
 import { ClassModel } from '../../common/models/class';
 import * as moment from 'moment';
@@ -33,6 +37,7 @@ export class AddGradingComponent implements OnInit, OnDestroy {
     students: StudentModel[];
 
     subsc;
+    subsc2;
 
     gradings: Array<{
         beforeGrading: number;
@@ -45,11 +50,14 @@ export class AddGradingComponent implements OnInit, OnDestroy {
         didGrade: boolean;
     }>;
 
+    studentsWhoAreLoading: string[] = [];
+
     constructor(
         public studentHelper: StudentsHelper,
         public store: Store<AppState>,
         public activatedRoute: ActivatedRoute,
-        public alertController: AlertController
+        public alertController: AlertController,
+        public actionsSubject: ActionsSubject
     ) {}
 
     ngOnInit() {
@@ -59,6 +67,17 @@ export class AddGradingComponent implements OnInit, OnDestroy {
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.aclassId = params.get('classId');
             this.store.select(selectSelectedClass(this.aclassId));
+        });
+
+        this.subsc2 = this.actionsSubject.subscribe((data: Action) => {
+            if (
+                data.type === ActionTypes.Add_grading_success ||
+                data.type === ActionTypes.Remove_grading_success
+            ) {
+                this.studentsWhoAreLoading = this.studentsWhoAreLoading.filter(
+                    student => student !== data['payload'].hbId
+                );
+            }
         });
 
         this.subsc = combineLatest([
@@ -90,11 +109,14 @@ export class AddGradingComponent implements OnInit, OnDestroy {
             });
     }
 
-    ngOnDestroy(): void {
-        this.subsc.unsubscribe();
+    isStudentLoading(hbid) {
+        return this.studentsWhoAreLoading.some(s => {
+            return s === hbid;
+        });
     }
 
     none(student, slideItem) {
+        this.studentsWhoAreLoading.push(student.hbId);
         slideItem.close();
 
         const gradedStudent = this.studentHelper.getStudentsById(
@@ -122,6 +144,8 @@ export class AddGradingComponent implements OnInit, OnDestroy {
     }
 
     single(student, slideItem) {
+        this.studentsWhoAreLoading.push(student.hbId);
+
         slideItem.close();
 
         const gradedStudent = this.studentHelper.getStudentsById(
@@ -150,6 +174,8 @@ export class AddGradingComponent implements OnInit, OnDestroy {
     }
 
     double(student, slideItem) {
+        this.studentsWhoAreLoading.push(student.hbId);
+
         slideItem.close();
 
         const gradedStudent = this.studentHelper.getStudentsById(
@@ -232,5 +258,10 @@ export class AddGradingComponent implements OnInit, OnDestroy {
             ],
         });
         await alert.present();
+    }
+
+    ngOnDestroy(): void {
+        this.subsc.unsubscribe();
+        this.subsc2.unsubscribe();
     }
 }

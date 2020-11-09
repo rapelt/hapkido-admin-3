@@ -36,7 +36,6 @@ export class LoadingSpinnerComponent implements OnInit {
         });
 
         const { role, data } = await this.loading.onDidDismiss();
-        console.log('Loading dismissed!');
     }
 
     async presentLoadingWithOptions() {
@@ -51,6 +50,5 @@ export class LoadingSpinnerComponent implements OnInit {
         await loading.present();
 
         const { role, data } = await loading.onDidDismiss();
-        console.log('Loading dismissed with role:', role);
     }
 }

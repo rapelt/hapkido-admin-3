@@ -11,9 +11,12 @@ export const environment = {
 export const config: EnvironementModel = {
     environmentName: 'Test Environment',
     ionicEnvName: 'test',
+    APIEndpoint: 'http://localhost:8080/',
     classAPIEndpoint: 'http://localhost:8080/class/',
     studentAPIEndpoint: 'http://localhost:8080/student/',
     familyAPIEndpoint: 'http://localhost:8080/family/',
+    techniqueAPIEndpoint: 'http://localhost:8080/technique/',
+    tagAPIEndpoint: 'http://localhost:8080/tag/',
     getClassTime: 15000,
     firebase: 'AIzaSyDejeeCDRpDwDi3gCqHUDqjeIF-8dbJKFo',
     firebasedomain: 'hapkido-signin.firebaseapp.com',
@@ -23,7 +26,11 @@ export const config: EnvironementModel = {
     feature_toggle: {
         cognito_login: true,
         download_graphs: true,
+        techniques: true,
     },
+    static_image_location:
+        'https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/static_images/',
+    default_logo: 'hapkido_brisbane_logo.png',
 };
 
 /*

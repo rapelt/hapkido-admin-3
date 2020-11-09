@@ -1,5 +1,5 @@
-import { Moment } from 'moment-timezone';
-import * as moment from 'moment-timezone';
+import { Moment } from 'moment';
+import * as moment from 'moment';
 import { ClassModel } from '../app/common/models/class';
 import { ClassTypes } from '../app/common/models/class-types';
 
@@ -30,7 +30,7 @@ export function createClassWithAll(
     classType = ClassTypes.Adults,
     attendance = ['hb088', 'hb001'],
     isGrading = false,
-    date = moment().tz('Australia/Brisbane'),
+    date = moment(),
     startTime = '16:00'
 ): ClassModel {
     return {

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button class="cy-menu-button"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="more-stuff">
+    <div *ngIf="!loaded" class="spinner">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <div class="large-content">
+      <div class="large-content-left">
+
+        <div *ngIf="loaded">
+          <div class="header-bar">
+            <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+            <div class="searchbar-container">
+              <ion-searchbar class="cy-technique-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
+              <ion-button fill="clear">
+                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+
+
+          <div class="technique-list">
+            <ion-list class="cy-technique-list">
+              <div *ngIf="(techniques | async).length === 0">
+                <p class="no-techniques">Please add some techniques</p>
+              </div>
+              <ion-item class="cy-technique-item" lines="none" button="true" [class]="'technique-' + technique.id"
+                        *ngFor="let technique of techniques | async | techniqueFilter: searchvalue; let i = index"
+                        (click)="goToTechnique(technique.id)">
+                <app-grade-badge slot="start" [grade]="technique?.grade"></app-grade-badge>
+                <ion-button slot="end" fill="clear" (click)="presentPopover($event, technique);$event.stopPropagation();">
+                  <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+                </ion-button>
+                <ion-label slot="start">{{technique.title | capitialise}} </ion-label>
+              </ion-item>
+            </ion-list>
+
+
+          </div>
+        </div>
+
+      </div>
+      <app-side-panel [ngClass]="{'open': sidePaneOpen}" (closeSidePanel)="closeSidePanel()" [title]="sidebarTitle? sidebarTitle: sidebarTitleDefault">
+        <app-add-technique [technique]="sidePanelData" [techniqueId]="sidePanelData?.id" (cancel)="closeSidePanel()"></app-add-technique>
+      </app-side-panel>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <div *ngIf="loaded && sidePaneOpen === false">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="cy-add-student-btn" color="tertiary" (click)="newTechnique()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-footer>

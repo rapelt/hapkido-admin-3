@@ -15,11 +15,11 @@ import { map } from 'rxjs/operators';
 import { ClassModel } from '../../common/models/class';
 import { ClassTypes } from '../../common/models/class-types';
 import { emptyValidator } from '../../common/validators/empty.validator';
-import { AppState } from '../../state/app.reducers';
+import { AppState } from '../../app-store/state/app.reducers';
 import { ClassesHelper } from '../classes.helper';
-import { getClasses } from '../state/classes.selectors';
-import { AddClasses } from '../state/classes.actions';
-import { MessagesService } from '../../messages/messages.service';
+import { getClasses } from '../../app-store/classes-state/classes.selectors';
+import { AddClasses } from '../../app-store/classes-state/classes.actions';
+import { MessagesService } from '../../common/messages/messages.service';
 
 @Component({
     selector: 'app-add-class',

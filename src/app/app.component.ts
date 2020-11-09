@@ -1,10 +1,4 @@
-import {
-    Component,
-    OnInit,
-    OnDestroy,
-    ViewChild,
-    ElementRef,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 
 import { MenuController, Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -14,21 +8,16 @@ import {
     SetUserAttributes,
     SignInSuccess,
     SignOut,
-} from './authentication/state/authentication.actions';
-import { GetAllClasses } from './classes/state/classes.actions';
-import { AppState } from './state/app.reducers';
-import {
-    GetAllFamilies,
-    GetAllStudents,
-} from './students/state/students.actions';
+} from './app-store/auth-state/authentication.actions';
+import { AppState } from './app-store/state/app.reducers';
 import {
     AuthenticationServices,
     AuthStatesEnum,
     AuthStateService,
 } from 'hapkido-auth-lib';
-import { delay, take } from 'rxjs/operators';
 import { LoadingSpinnerService } from './common/components/loading-spinner/loading-spinner.service';
-import { of } from 'rxjs';
+import { SocketioService } from './common/services/socketio.service';
+import { config } from '../environments/environment';
 
 @Component({
     selector: 'app-root',
@@ -68,16 +57,23 @@ export class AppComponent implements OnInit, OnDestroy {
         private authState: AuthStateService,
         private authService: AuthenticationServices,
         private menu: MenuController,
-        private loadingSpinnerService: LoadingSpinnerService
+        private loadingSpinnerService: LoadingSpinnerService,
+        private socketService: SocketioService
     ) {
         this.initializeApp();
     }
 
     ngOnInit(): void {
-        console.log('App Component - Init method started');
+        if (config.feature_toggle.techniques) {
+            this.appPages.push({
+                title: 'Techniques',
+                url: '/technique',
+                icon: 'videocam',
+            });
+        }
 
+        this.socketService.setupSocketConnection();
         this.authService.load().then(() => {
-            console.log('App Component - Init method started');
             this.shouldShowSignOut =
                 this.authState.isLoggedIn === AuthStatesEnum.LoggedIn;
             console.log(
@@ -95,28 +91,26 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     loggedIn(isLoggedIn) {
-        console.log('App Component - logged in event ' + isLoggedIn);
-
         this.shouldShowSignOut = isLoggedIn === AuthStatesEnum.LoggedIn;
         if (!this.shouldShowSignOut) {
             return;
         }
 
         if (this.authState.cognitoUser) {
-            this.store.dispatch(new SignInSuccess(this.authState.cognitoUser));
+            const user = {
+                username: this.authState.cognitoUser.getUsername(),
+                signInUserSession: this.authState.cognitoUser
+                    .getSignInUserSession
+                    ? this.authState.cognitoUser.getSignInUserSession()
+                    : { accessToken: { jwtToken: null } },
+            };
+            this.store.dispatch(new SignInSuccess(user));
         }
 
         if (this.authState.userAttributes) {
             this.store.dispatch(
                 new SetUserAttributes(this.authState.userAttributes)
             );
-        }
-
-        if (this.shouldShowSignOut) {
-            console.log('App Component - Get data');
-            this.store.dispatch(new GetAllStudents());
-            this.store.dispatch(new GetAllFamilies());
-            this.store.dispatch(new GetAllClasses());
         }
     }
 
@@ -128,7 +122,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     signout() {
-        console.log('logout');
         this.store.dispatch(new SignOut());
     }
 

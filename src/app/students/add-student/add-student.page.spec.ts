@@ -14,8 +14,7 @@ import { Store } from '@ngrx/store';
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { CommonComponentsModule } from '../../common/common-components.module';
 import { CapitialisePipe } from '../../common/pipes/capitialise.pipe';
-import { MessagesModule } from '../../messages/messages.module';
-import { MessagesService } from '../../messages/messages.service';
+import { MessagesService } from '../../common/messages/messages.service';
 
 import { AddStudentPage } from './add-student.page';
 import { AuthenticationGuard, AuthLibModule } from 'hapkido-auth-lib';
@@ -28,11 +27,7 @@ describe('AddStudentPage', () => {
     let router: Router;
     let messageService: MessagesService;
 
-    let store: MockStore<{
-        authentication: {
-            authenticationState: string;
-        };
-    }>;
+    let store;
 
     const initialState = {
         students: {
@@ -49,7 +44,6 @@ describe('AddStudentPage', () => {
             imports: [
                 FormsModule,
                 ReactiveFormsModule,
-                MessagesModule,
                 BrowserModule,
                 CommonComponentsModule,
                 IonicModule,
@@ -61,9 +55,9 @@ describe('AddStudentPage', () => {
 
         fixture = TestBed.createComponent(AddStudentPage);
         component = fixture.componentInstance;
-        store = TestBed.get(Store);
-        router = TestBed.get(Router);
-        messageService = TestBed.get(MessagesService);
+        store = TestBed.inject(Store);
+        router = TestBed.inject(Router);
+        messageService = TestBed.inject(MessagesService);
         spyOn(store, 'dispatch').and.callThrough();
         fixture.detectChanges();
     }));

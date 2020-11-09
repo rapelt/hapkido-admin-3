@@ -34,4 +34,4 @@ import { ViewGradingComponent } from './view-class/segments/view-grading/view-gr
         ViewGradingComponent,
     ],
 })
-export class ClassesPageModule {}
+export class ClassesModule {}

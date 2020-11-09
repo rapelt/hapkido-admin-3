@@ -2,11 +2,11 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { AppState } from '../../state/app.reducers';
-import { GetAllStudents } from '../state/students.actions';
-import { selectSelectedStudent } from '../state/students.selectors';
+import { AppState } from '../../app-store/state/app.reducers';
+import { GetAllStudents } from '../../app-store/student-state/students.actions';
+import { selectSelectedStudent } from '../../app-store/student-state/students.selectors';
 import { StudentModel } from '../../common/models/student';
-import { GetAllClasses } from '../../classes/state/classes.actions';
+import { GetAllClasses } from '../../app-store/classes-state/classes.actions';
 
 @Component({
     selector: 'app-view-student',
@@ -29,9 +29,6 @@ export class ViewStudentPage implements OnInit, OnDestroy {
     ) {}
 
     ngOnInit() {
-        this.store.dispatch(new GetAllStudents());
-        this.store.dispatch(new GetAllClasses());
-
         this.activatedRouteSubscriber = this.activatedRoute.paramMap.subscribe(
             (params: ParamMap) => {
                 this.studentId = params.get('studentId');

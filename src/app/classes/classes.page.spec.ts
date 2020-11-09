@@ -3,7 +3,7 @@
 //
 // import { ClassesPage } from './classes.page';
 // import { ViewClassComponent } from './view-class/view-class.component';
-// import { provideMockStore } from '@ngrx/store/testing';
+// import { provideMockStore } from '@ngrx/app-store/testing';
 // import { IonicModule } from '@ionic/angular';
 // import { RouterTestingModule } from '@angular/router/testing';
 // import { AuthLibModule } from 'hapkido-auth-lib';

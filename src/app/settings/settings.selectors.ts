@@ -4,7 +4,7 @@ import {
     MemoizedSelector,
 } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { getAuthenticationState } from '../authentication/state/authentication.selectors';
+import { getAuthenticationState } from '../app-store/auth-state/authentication.selectors';
 
 export const selectUsername = createSelector(getAuthenticationState, state => {
     return state.user['Username'];

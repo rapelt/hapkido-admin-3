@@ -19,7 +19,7 @@ import {
 import { CommonComponentsModule } from '../../common/common-components.module';
 
 import { StudentListPage } from './student-list.page';
-import { StudentsState } from '../state/students.reducers';
+import { StudentsState } from '../../app-store/student-state/students.reducers';
 import { emptyInitialState } from '../../../testing-helpers/test-state-helpter';
 
 describe('StudentListPage Active', () => {
@@ -27,11 +27,7 @@ describe('StudentListPage Active', () => {
     let fixture: ComponentFixture<StudentListPage>;
     let activatedRoute: ActivatedRouteStub;
 
-    let store: MockStore<{
-        authentication: {
-            authenticationState: string;
-        };
-    }>;
+    let store;
 
     const initialState = {
         ...emptyInitialState(),
@@ -88,7 +84,7 @@ describe('StudentListPage Active', () => {
     beforeEach(async(() => {
         fixture = TestBed.createComponent(StudentListPage);
         component = fixture.componentInstance;
-        store = TestBed.get(Store);
+        store = TestBed.inject(Store);
         spyOn(store, 'dispatch').and.callThrough();
         fixture.detectChanges();
     }));

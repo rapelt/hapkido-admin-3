@@ -16,16 +16,23 @@ import { MockComponent } from '../testing-helpers/mock.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthInterceptor } from './authentication/auth-interceptor/auth-interceptor';
-import { AuthenticationEffects } from './authentication/state/authentication.effects';
-import { ClassesEffects } from './classes/state/classes.effects';
-import { MessagesModule } from './messages/messages.module';
-import { reducers } from './state/app.reducers';
-import { StudentsEffects } from './students/state/students.effects';
+import { AuthenticationEffects } from './app-store/auth-state/authentication.effects';
+import { ClassesEffects } from './app-store/classes-state/classes.effects';
+import { reducers } from './app-store/state/app.reducers';
+import { StudentsEffects } from './app-store/student-state/students.effects';
 import { StudentsModule } from './students/students.module';
 import { AttendanceModule } from './attendance/attendance.module';
 import { GradingsModule } from './gradings/gradings.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { CommonComponentsModule } from './common/common-components.module';
+import { TechniquesEffects } from './app-store/technique-state/techniques.effects';
+import { AutoCompleteModule } from 'ionic4-auto-complete';
+import { TagsModule } from './tags/tags.module';
+import { TagsEffects } from './app-store/tags-state/tags.effects';
+import { MediaEffects } from './app-store/media-state/media.effects';
+import { TechniquesDataDispatcher } from './techniques/techniques-data.resolver';
+import { ClassesDataDispatcher } from './classes/classes-data.resolver';
+import { StudentsDataDispatcher } from './students/students-data.resolver';
 
 @NgModule({
     declarations: [AppComponent, MockComponent],
@@ -39,18 +46,22 @@ import { CommonComponentsModule } from './common/common-components.module';
             AuthenticationEffects,
             StudentsEffects,
             ClassesEffects,
+            TechniquesEffects,
+            TagsEffects,
+            MediaEffects,
         ]),
         StoreDevtoolsModule.instrument(),
-        MessagesModule,
         StudentsModule,
         AttendanceModule,
         HttpClientModule,
         AuthLibModule.forRoot(config),
         GradingsModule,
+        AutoCompleteModule,
         ServiceWorkerModule.register('ngsw-worker.js', {
             enabled: environment.production,
         }),
         CommonComponentsModule,
+        TagsModule,
     ],
     providers: [
         StatusBar,
@@ -62,6 +73,9 @@ import { CommonComponentsModule } from './common/common-components.module';
             multi: true,
         },
         FormBuilder,
+        TechniquesDataDispatcher,
+        ClassesDataDispatcher,
+        StudentsDataDispatcher,
     ],
     bootstrap: [AppComponent],
 })

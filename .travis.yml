@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - "10.9"
+  - "12.0"
 cache:
   directories:
     - "node_modules"
@@ -10,11 +10,12 @@ before_script:
 jobs:
   include:
     - stage: tests
-#      script: "npm run lint && npm run test:ci:all:no-record"
+      script: "npm run lint && npm run test:ci"
     - stage: deploy to staging
+      if: branch = staging
       script: "npm run build:staging"
       deploy:
-        on: master
+        on: staging
         provider: s3
         access_key_id: $AWS_ACCESS_KEY
         secret_access_key: $AWS_SECRET_KEY
@@ -23,6 +24,7 @@ jobs:
         local-dir: www
         skip_cleanup: true
     - stage: deploy to prod
+      if: branch = prod
       script: "npm run build:prod"
       deploy:
         on: prod

@@ -1,0 +1,17 @@
+<div>
+    <ion-icon class="top-icon" name="folder-open-outline"></ion-icon>
+
+    <form [formGroup]="newTechniqueSet">
+        <ion-list>
+            <ion-item>
+                <ion-label position="stacked">Title</ion-label>
+                <ion-input formControlName="title" name="title" type="text"></ion-input>
+            </ion-item>
+            <app-validation-error-message [formElement]="newTechniqueSet.get('title')" [validationMessages]="validation_messages.title" [saveAttempted]="saveAttempted"></app-validation-error-message>
+        </ion-list>
+    </form>
+</div>
+<div class="half-button-size">
+    <ion-button (click)="save()" color="primary" expand="full" type="submit">Save</ion-button>
+    <ion-button (click)="close()" fill="clear" expand="full">Cancel</ion-button>
+</div>
