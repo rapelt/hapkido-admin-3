@@ -26,15 +26,14 @@ import { TechniqueSetFilterPipe } from './pipes/technique-set-filter.pipe';
 import { TechniqueFilterPipe } from './pipes/technique-filter.pipe';
 import { MessageComponent } from './messages/message/message.component';
 import { MessagesService } from './messages/messages.service';
-import { SidePanelComponent } from './components/side-panel/side-panel.component';
 import { InputComponent } from './form-component/input/input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextAreaComponent } from './form-component/text-area/text-area.component';
 import { SelectGradeComponent } from './form-component/select-grade/select-grade.component';
 import { TagsComponent } from './form-component/tags/tags.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RouterModule } from '@angular/router';
-import { FilePickerComponent } from './components/file-picker/file-picker.component';
+import { SortTechniquesPipe } from './pipes/sort-techniques.pipe';
+import { SortTechniquesSetsPipe } from './pipes/sort-techniques-sets.pipe';
 
 @NgModule({
     declarations: [
@@ -59,13 +58,12 @@ import { FilePickerComponent } from './components/file-picker/file-picker.compon
         TechniqueSetFilterPipe,
         TechniqueFilterPipe,
         MessageComponent,
-        SidePanelComponent,
         InputComponent,
         TextAreaComponent,
         SelectGradeComponent,
         TagsComponent,
-        BreadcrumbComponent,
-        FilePickerComponent,
+        SortTechniquesPipe,
+        SortTechniquesSetsPipe,
     ],
     imports: [
         CommonModule,
@@ -103,13 +101,11 @@ import { FilePickerComponent } from './components/file-picker/file-picker.compon
         TechniqueSetFilterPipe,
         TechniqueFilterPipe,
         MessageComponent,
-        SidePanelComponent,
         InputComponent,
         TextAreaComponent,
         SelectGradeComponent,
         TagsComponent,
-        BreadcrumbComponent,
-        FilePickerComponent,
+        SortTechniquesPipe,
     ],
 })
 export class CommonComponentsModule {}

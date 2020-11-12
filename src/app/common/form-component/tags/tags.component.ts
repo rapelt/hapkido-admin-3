@@ -80,7 +80,8 @@ export class TagsComponent extends FormElementDirective implements OnInit {
         }
 
         return false;
-    }
+    };
+
     compareWith = this.compareWithFn;
 
     ngOnInit() {
@@ -89,6 +90,10 @@ export class TagsComponent extends FormElementDirective implements OnInit {
             filter(() => this.loaded),
             select(selectTags)
         );
+
+        this.tags.subscribe(t => {
+            console.log(t);
+        });
 
         this.store.pipe(map(selectTagLoaded)).subscribe(allValuesLoaded => {
             this.loaded = allValuesLoaded;

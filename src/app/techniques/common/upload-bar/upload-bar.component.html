@@ -1,0 +1,6 @@
+<!--<ion-progress-bar *ngIf="!isNumber()" color="primary" type="indeterminate"></ion-progress-bar>-->
+  <ion-progress-bar *ngIf="isNumber()" color="primary" [value]="media.uploadStatus/100"></ion-progress-bar>
+
+  <ion-progress-bar *ngIf="!isNumber()" color="primary" type="indeterminate"></ion-progress-bar>
+
+

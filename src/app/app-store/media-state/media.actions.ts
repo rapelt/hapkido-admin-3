@@ -13,11 +13,16 @@ export enum ActionTypes {
     Add_new_media = '[Media] Add new media',
     Add_new_media_success = '[Media] Add new media success',
 
+    Upload_new_media_progress = '[Media] Upload new media progress',
+    Upload_new_media_error = '[Media] Upload new media error',
+
     Upload_new_media = '[Media] Upload new media',
     Upload_new_media_success = '[Media] Upload new media success',
 
     Edit_media = '[Media] Edit media',
     Edit_media_success = '[Media] Edit media success',
+
+    Do_nothing = '[Media] Nothing',
 }
 
 export class GetAllMedias implements Action {
@@ -49,23 +54,37 @@ export class GetMediaSuccess implements Action {
 export class AddNewMedia implements Action {
     readonly type = ActionTypes.Add_new_media;
 
-    constructor(public payload: { media: MediaModel; file: any }) {}
+    constructor(public payload: { media: Partial<MediaModel> }) {}
 }
 
 export class UploadNewMedia implements Action {
     readonly type = ActionTypes.Upload_new_media;
 
-    constructor(public payload: { media: MediaModel; file: any }) {}
-}
-
-export class AddNewMediaSuccess implements Action {
-    readonly type = ActionTypes.Add_new_media_success;
-
-    constructor(public payload: MediaModel) {}
+    constructor(
+        public payload: { fileData: FormData; media: Partial<MediaModel> }
+    ) {}
 }
 
 export class UploadNewMediaSuccess implements Action {
     readonly type = ActionTypes.Upload_new_media_success;
+
+    constructor(public payload: MediaModel) {}
+}
+
+export class UploadNewMediaError implements Action {
+    readonly type = ActionTypes.Upload_new_media_error;
+
+    constructor(public payload: MediaModel) {}
+}
+
+export class UploadNewMediaProgress implements Action {
+    readonly type = ActionTypes.Upload_new_media_progress;
+
+    constructor(public payload: MediaModel) {}
+}
+
+export class AddNewMediaSuccess implements Action {
+    readonly type = ActionTypes.Add_new_media_success;
 
     constructor(public payload: MediaModel) {}
 }
@@ -82,6 +101,11 @@ export class EditMediaSuccess implements Action {
     constructor(public payload: MediaModel) {}
 }
 
+export class DoNothing implements Action {
+    readonly type = ActionTypes.Do_nothing;
+    constructor() {}
+}
+
 export type MediaActions =
     | GetAllMedias
     | GetAllMediasSuccess
@@ -92,5 +116,8 @@ export type MediaActions =
     | UploadNewMedia
     | AddNewMediaSuccess
     | UploadNewMediaSuccess
+    | UploadNewMediaError
+    | UploadNewMediaProgress
     | EditMedia
+    | DoNothing
     | EditMediaSuccess;

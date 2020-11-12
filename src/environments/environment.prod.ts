@@ -29,6 +29,7 @@ export const config: EnvironementModel = {
         cognito_login: true,
         download_graphs: false,
         techniques: false,
+        io: false,
     },
     static_image_location:
         'https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/static_images/',

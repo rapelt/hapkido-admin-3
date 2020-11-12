@@ -101,9 +101,9 @@ export class TechniquesEffects {
         ofType(ActionTypes.Edit_technique),
         mergeMap((action: EditTechnique) =>
             this.techniquesService.editTechnique(action.payload).pipe(
-                map((technique: TechniqueModel[]) => ({
+                map((technique: TechniqueModel) => ({
                     type: ActionTypes.Edit_technique_success,
-                    payload: action.payload,
+                    payload: technique,
                 })),
                 tap(() => {
                     // this.messageService.updateSuccess.next('Technique Updated');

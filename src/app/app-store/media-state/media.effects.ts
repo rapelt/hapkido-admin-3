@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Actions, Effect, ofType } from '@ngrx/effects';
-import { EMPTY } from 'rxjs';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { defer, EMPTY, Observable } from 'rxjs';
+import { catchError, delay, map, mergeMap, take, tap } from 'rxjs/operators';
 import { MessagesService } from '../../common/messages/messages.service';
 import { MediaServices } from './media.services';
 import {
@@ -11,7 +11,11 @@ import {
     GetMedia,
     UploadNewMedia,
 } from './media.actions';
+import { ActionTypes as techActionTypes } from '../technique-state/techniques.actions';
 import { MediaModel } from '../../common/models/media';
+import { HttpEventType } from '@angular/common/http';
+import { AppState } from '../state/app.reducers';
+import { Store } from '@ngrx/store';
 
 @Injectable()
 export class MediaEffects {
@@ -53,16 +57,53 @@ export class MediaEffects {
     addNewMedia = this.actions.pipe(
         ofType(ActionTypes.Add_new_media),
         mergeMap((action: AddNewMedia) =>
+            this.mediaServices.addNewMedia(action.payload.media).pipe(
+                map((media: string) => ({
+                    type: techActionTypes.Add_or_update_media,
+                    payload: media,
+                })),
+                tap((response: any) => {}),
+                catchError(error => {
+                    this.handleError(error.message);
+                    return EMPTY;
+                })
+            )
+        )
+    );
+
+    @Effect()
+    uploadNewMedia = this.actions.pipe(
+        ofType(ActionTypes.Upload_new_media),
+        mergeMap((action: UploadNewMedia) =>
             this.mediaServices
-                .addNewMedia(action.payload.media, action.payload.file)
+                .uploadNewMedia(action.payload.fileData, action.payload.media)
                 .pipe(
-                    map((media: string) => ({
-                        type: ActionTypes.Add_new_media_success,
-                        payload: media,
-                    })),
-                    tap((response: any) => {
-                        this.messageService.updateSuccess.next(
-                            'New media created'
+                    map(events => {
+                        console.log('Media Effects', events);
+                        // if (events.type === HttpEventType.UploadProgress) {
+                        //     // const fileUploadProgress =
+                        //     //     Math.round(
+                        //     //         (events.loaded / events.total) * 100
+                        //     //     ) + '%';
+                        //     // console.log('file progress', fileUploadProgress);
+                        //     // return {
+                        //     //     type: techActionTypes.Add_or_update_media,
+                        //     //     payload: action.payload.media,
+                        //     // };
+                        // } else if (events.type === HttpEventType.Response) {
+                        //     console.log(events.body);
+                        //     return {
+                        //         type: techActionTypes.Add_or_update_media,
+                        //         payload: action.payload.media,
+                        //     };
+                        // }
+                        return {
+                            type: ActionTypes.Do_nothing,
+                        };
+                    }),
+                    this.tapOnce((response: any) => {
+                        this.store.dispatch(
+                            new AddNewMedia({ media: action.payload.media })
                         );
                     }),
                     catchError(error => {
@@ -73,29 +114,19 @@ export class MediaEffects {
         )
     );
 
-    @Effect()
-    uploadNewMedia = this.actions.pipe(
-        ofType(ActionTypes.Upload_new_media),
-        mergeMap((action: UploadNewMedia) =>
-            this.mediaServices
-                .uploadNewMedia(action.payload.media, action.payload.file)
+    tapOnce<T>(fn: (value) => void) {
+        return (source: Observable<T>) => {
+            source
                 .pipe(
-                    map((media: string) => ({
-                        type: ActionTypes.Upload_new_media_success,
-                        payload: media,
-                    })),
-                    tap((response: any) => {
-                        // this.messageService.updateSuccess.next(
-                        //     'New media created'
-                        // );
-                    }),
-                    catchError(error => {
-                        this.handleError(error.message);
-                        return EMPTY;
-                    })
+                    take(1),
+                    delay(500),
+                    tap(value => fn(value))
                 )
-        )
-    );
+                .subscribe();
+
+            return source;
+        };
+    }
 
     handleError(message) {
         console.log(message);
@@ -106,6 +137,7 @@ export class MediaEffects {
         private actions: Actions,
         private router: Router,
         private mediaServices: MediaServices,
-        private messageService: MessagesService
+        private messageService: MessagesService,
+        private store: Store<AppState>
     ) {}
 }

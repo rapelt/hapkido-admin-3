@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button class="cy-menu-button"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="more-stuff">
+    <div *ngIf="!loaded" class="spinner">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <div class="large-content">
+      <div class="large-content-left">
+
+        <div *ngIf="loaded">
+          <div class="header-bar">
+            <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+            <div class="searchbar-container">
+              <ion-searchbar class="cy-technique-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
+              <ion-button fill="clear">
+                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
+              </ion-button>
+            </div>
+          </div>
+
+
+          <div class="media-list">
+            <ion-list class="cy-media-list">
+              <div *ngIf="(technique | async).media.length === 0">
+                <p class="no-media">Please add some media</p>
+              </div>
+              <ion-item class="cy-media-item" lines="none" [button]="media.uploadStatus === 'Uploaded'" [class]="'media-' + media.id"
+                        *ngFor="let media of (technique | async).media | techniqueFilter: searchvalue; let i = index"
+                        (click)="goToMedia(media.id)">
+
+                  <app-media-icon slot="start" [filetype]="media.file_type"></app-media-icon>
+                  <ion-label slot="start" class="file_name">{{media.file_name | capitialise}} <span class="file_type">.{{media.file_type}}</span> </ion-label>
+                  <ion-button *ngIf="media.uploadStatus === 'Uploaded'" slot="end" fill="clear" (click)="presentPopover($event, media);$event.stopPropagation();">
+                    <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+                  </ion-button>
+                  <app-upload-bar slot="end" [media]="media" *ngIf="showProgressBar(media.uploadStatus)"></app-upload-bar>
+
+              </ion-item>
+
+            </ion-list>
+          </div>
+
+        </div>
+
+      </div>
+      <app-side-panel [ngClass]="{'open': sidePaneOpen}" (closeSidePanel)="closeSidePanel()" [title]="sidebarTitle? sidebarTitle: sidebarTitleDefault">
+        <app-add-technique [technique]="sidePanelData" [techniqueId]="sidePanelData?.id" (cancel)="closeSidePanel()"></app-add-technique>
+      </app-side-panel>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <app-file-picker [technique]="technique | async"></app-file-picker>
+
+</ion-footer>
