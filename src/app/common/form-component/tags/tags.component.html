@@ -3,7 +3,7 @@
     <div class="ion-form-group">
       <ion-item  lines="inset" class="cy-tag-group">
         <ion-label position="stacked">Tags</ion-label>
-        <ion-select multiple="true"  [formControl]="formElement" [compareWith]="compareWith" (blur)="doBlur()" (ngModelChange)="doInput()">
+        <ion-select class="cy-tags-selector" multiple="true"  [formControl]="formElement" [compareWith]="compareWith" (blur)="doBlur()" (ngModelChange)="doInput()">
           <ion-select-option [value]="tag.id" *ngFor="let tag of tags | async">{{tag.name}}</ion-select-option>
         </ion-select>
       </ion-item>

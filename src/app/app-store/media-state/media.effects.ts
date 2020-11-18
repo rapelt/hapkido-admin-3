@@ -8,6 +8,7 @@ import { MediaServices } from './media.services';
 import {
     ActionTypes,
     AddNewMedia,
+    EditMedia,
     GetMedia,
     UploadNewMedia,
 } from './media.actions';
@@ -43,6 +44,23 @@ export class MediaEffects {
             this.mediaServices.getMedia(action.payload).pipe(
                 map((media: MediaModel) => ({
                     type: ActionTypes.Get_media_success,
+                    payload: media,
+                })),
+                catchError(error => {
+                    this.handleError(error.message);
+                    return EMPTY;
+                })
+            )
+        )
+    );
+
+    @Effect()
+    editMedia = this.actions.pipe(
+        ofType(ActionTypes.Edit_media),
+        mergeMap((action: EditMedia) =>
+            this.mediaServices.editMedia(action.payload).pipe(
+                map((media: MediaModel) => ({
+                    type: techActionTypes.Add_or_update_media,
                     payload: media,
                 })),
                 catchError(error => {

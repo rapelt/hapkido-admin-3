@@ -20,9 +20,9 @@
             <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
             <div class="searchbar-container">
               <ion-searchbar class="cy-technique-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
-              <ion-button fill="clear">
-                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
-              </ion-button>
+<!--              <ion-button fill="clear">-->
+<!--                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>-->
+<!--              </ion-button>-->
             </div>
           </div>
 
@@ -36,6 +36,7 @@
                         *ngFor="let technique of techniques | async | techniqueFilter: searchvalue | sortTechniques; let i = index"
                         (click)="goToTechnique(technique.id)">
                 <app-grade-badge slot="start" [grade]="technique?.grade"></app-grade-badge>
+                <app-tag-badges slot="end" [selectedTags]="technique.tags"></app-tag-badges>
                 <ion-button slot="end" fill="clear" (click)="presentPopover($event, technique);$event.stopPropagation();">
                   <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
                 </ion-button>
@@ -60,7 +61,7 @@
 <ion-footer>
   <div *ngIf="loaded && sidePaneOpen === false">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button class="cy-add-student-btn" color="tertiary" (click)="newTechnique()">
+      <ion-fab-button class="cy-add-technique-btn" color="tertiary" (click)="newTechnique()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>

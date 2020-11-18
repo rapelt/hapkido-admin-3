@@ -12,6 +12,8 @@ import { DestroySubscribers } from 'ngx-destroy-subscribers';
 import { SocketioService } from '../../../common/services/socketio.service';
 import { selectTechniquesloaded } from '../../technique-list-group/technique-list/technique-list.selector';
 import { PopoverMenuComponent } from '../../common/popover-menu/popover-menu.component';
+import { MediaModel } from '../../../common/models/media';
+import { ActionTypes } from '../../../app-store/technique-state/techniques.actions';
 
 @Component({
     selector: 'app-view-technique',
@@ -25,7 +27,7 @@ export class ViewTechniqueComponent extends SearchablePageComponent
     sidePaneOpen = false;
     sidebarTitleDefault = 'Add media';
     sidebarTitle;
-    sidePanelData: TechniqueModel = this.techniqueReset();
+    sidePanelData: MediaModel = this.mediaReset();
     techniqueId: number;
     techniquesSetId: number;
 
@@ -54,6 +56,13 @@ export class ViewTechniqueComponent extends SearchablePageComponent
             }
         );
 
+        this.subscriber = this.actionsSubject.subscribe(data => {
+            if (data.type === ActionTypes.Add_or_update_media) {
+                this.sidePanelData = this.mediaReset();
+                this.closeSidePanel();
+            }
+        });
+
         this.subscriber = this.store
             .pipe(
                 takeWhile(() => this.isAlive),
@@ -74,12 +83,10 @@ export class ViewTechniqueComponent extends SearchablePageComponent
         });
     }
 
-    async newTechnique() {
-        this.sidePaneOpen = true;
-    }
-
-    goToMedia(techniqueId) {
-        // this.router.navigate(['technique/view/' + techniqueId]);
+    goToMedia(mediaId) {
+        this.router.navigate([
+            'technique/view/' + this.techniqueId + '/media/' + mediaId,
+        ]);
     }
 
     showProgressBar(uploadStatus) {
@@ -92,10 +99,10 @@ export class ViewTechniqueComponent extends SearchablePageComponent
 
     closeSidePanel() {
         this.sidePaneOpen = false;
-        this.sidePanelData = this.techniqueReset();
+        this.sidePanelData = this.mediaReset();
     }
 
-    async presentPopover(ev: any, ts: TechniqueModel) {
+    async presentPopover(ev: any, ts: MediaModel) {
         const popover = await this.popoverController.create({
             component: PopoverMenuComponent,
             cssClass: 'my-custom-class',
@@ -119,18 +126,18 @@ export class ViewTechniqueComponent extends SearchablePageComponent
         return popover.present();
     }
 
-    techniqueReset(): TechniqueModel {
+    mediaReset(): MediaModel {
         return {
             id: -1,
-            media: [],
-            description: '',
-            title: '',
-            grade: null,
-            techniqueSet: {
-                id: -1,
-                name: '',
-            },
+            file_name: '',
+            original_file_name: '',
+            uploadStatus: 'Uploaded',
+            publishedStatus: 'Draft',
+            file_type: '',
             tags: [],
+            folder: '',
+            views: 0,
+            url: '',
         };
     }
 

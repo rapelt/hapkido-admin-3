@@ -33,6 +33,7 @@ import { MediaEffects } from './app-store/media-state/media.effects';
 import { TechniquesDataDispatcher } from './techniques/techniques-data.resolver';
 import { ClassesDataDispatcher } from './classes/classes-data.resolver';
 import { StudentsDataDispatcher } from './students/students-data.resolver';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
 
 @NgModule({
     declarations: [AppComponent, MockComponent],

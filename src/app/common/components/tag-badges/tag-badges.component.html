@@ -1,0 +1,8 @@
+<div class="tags-list" *ngIf="loaded">
+    <div *ngFor="let tag of selectedTags">
+        <ion-badge [class]="'cy-tag-' + tag +  ' tag'" [ngStyle]="{'background-color': getTag(tag).colour}">
+            {{getTag(tag).name | capitialise}}
+        </ion-badge>
+    </div>
+</div>
+

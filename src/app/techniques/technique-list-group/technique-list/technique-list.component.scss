@@ -21,7 +21,17 @@
   }
 }
 
-
+@media screen and (max-width: 600px) {
+  .large-content {
+    .large-content-left {
+      .technique-list{
+        app-tag-badges{
+          display: none;
+        }
+      }
+    }
+  }
+}
 
 .header-bar {
   margin: 0 0 0 16px;

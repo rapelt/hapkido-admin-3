@@ -21,9 +21,9 @@
 
             <div class="searchbar-container">
               <ion-searchbar class="cy-technique-set-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
-              <ion-button fill="clear">
-                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
-              </ion-button>
+<!--              <ion-button fill="clear">-->
+<!--                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>-->
+<!--              </ion-button>-->
             </div>
           </div>
 
@@ -60,7 +60,7 @@
 <ion-footer>
   <div *ngIf="loaded && sidePaneOpen === false">
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button class="cy-add-student-btn" color="tertiary" (click)="newTechnique()">
+      <ion-fab-button class="cy-add-technique-set-btn" color="tertiary" (click)="newTechnique()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>

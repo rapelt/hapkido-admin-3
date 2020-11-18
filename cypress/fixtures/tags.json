@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "new tag 3",
+    "colour": "#FCFE03",
+    "createdAt": "2020-10-29T22:56:30.783Z",
+    "updatedAt": "2020-10-29T22:56:30.783Z",
+    "deletedAt": null
+  },
+  {
+    "id": 2,
+    "name": "More Tags",
+    "colour": "#104EA3",
+    "createdAt": "2020-11-17T04:16:07.177Z",
+    "updatedAt": "2020-11-17T04:16:07.177Z",
+    "deletedAt": null
+  },
+  {
+    "id": 3,
+    "name": "Weapon",
+    "colour": "#104EA3",
+    "createdAt": "2020-11-17T04:16:13.169Z",
+    "updatedAt": "2020-11-17T04:16:13.169Z",
+    "deletedAt": null
+  },
+  {
+    "id": 4,
+    "name": "Basics",
+    "colour": "#104EA3",
+    "createdAt": "2020-11-17T04:16:17.212Z",
+    "updatedAt": "2020-11-17T04:16:17.212Z",
+    "deletedAt": null
+  },
+  {
+    "id": 5,
+    "name": "Admin",
+    "colour": "#104EA3",
+    "createdAt": "2020-11-17T04:55:45.407Z",
+    "updatedAt": "2020-11-17T04:55:45.407Z",
+    "deletedAt": null
+  },
+  {
+    "id": 6,
+    "name": "Students",
+    "colour": "#104EA3",
+    "createdAt": "2020-11-17T04:57:27.990Z",
+    "updatedAt": "2020-11-17T04:57:27.990Z",
+    "deletedAt": null
+  },
+  {
+    "id": 7,
+    "name": "Student",
+    "colour": "#4fc4ad",
+    "createdAt": "2020-11-17T05:07:06.193Z",
+    "updatedAt": "2020-11-17T05:07:06.193Z",
+    "deletedAt": null
+  }
+]

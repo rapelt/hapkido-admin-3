@@ -18,6 +18,8 @@ import { FilePickerComponent } from './common/file-picker/file-picker.component'
 import { MediaIconComponent } from './common/media-icon/media-icon.component';
 import { SidePanelComponent } from './common/side-panel/side-panel.component';
 import { UploadBarComponent } from './common/upload-bar/upload-bar.component';
+import { EditMediaComponent } from './technique-group/edit-media/edit-media.component';
+import { ViewMediaComponent } from './media-group/view-media/view-media.component';
 
 @NgModule({
     declarations: [
@@ -26,6 +28,8 @@ import { UploadBarComponent } from './common/upload-bar/upload-bar.component';
         TechniqueSetListComponent,
         AddTechniqueComponent,
         AddTechniqueSetComponent,
+        EditMediaComponent,
+        ViewMediaComponent,
         PopoverMenuComponent,
         BreadcrumbComponent,
         FilePickerComponent,

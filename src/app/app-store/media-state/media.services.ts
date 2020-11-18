@@ -25,6 +25,13 @@ export class MediaServices {
         return this.httpClient.post(this.mediaUrl + 'create', media);
     }
 
+    editMedia(media: Partial<MediaModel>) {
+        return this.httpClient.post(
+            this.mediaUrl + 'update/' + media.id,
+            media
+        );
+    }
+
     uploadNewMedia(fileData: FormData, media: Partial<MediaModel>) {
         console.log('Uploading Media');
         return this.httpClient.post(this.mediaUrl + 'upload', fileData, {

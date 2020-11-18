@@ -1,0 +1,15 @@
+@media screen and (min-width: 600px) {
+  img {
+    max-width: calc(100vh - 50px);
+    margin: 20px;
+    max-height: calc(100vh - 56px);
+  }
+}
+
+@media screen and (max-width: 600px) {
+  img {
+    max-width: 90%;
+    margin: 20px;
+    max-height: 97%;
+  }
+}

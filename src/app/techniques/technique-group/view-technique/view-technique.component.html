@@ -20,9 +20,9 @@
             <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
             <div class="searchbar-container">
               <ion-searchbar class="cy-technique-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
-              <ion-button fill="clear">
-                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>
-              </ion-button>
+<!--              <ion-button fill="clear">-->
+<!--                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>-->
+<!--              </ion-button>-->
             </div>
           </div>
 
@@ -32,12 +32,14 @@
               <div *ngIf="(technique | async).media.length === 0">
                 <p class="no-media">Please add some media</p>
               </div>
-              <ion-item class="cy-media-item" lines="none" [button]="media.uploadStatus === 'Uploaded'" [class]="'media-' + media.id"
-                        *ngFor="let media of (technique | async).media | techniqueFilter: searchvalue; let i = index"
+              <ion-item class="cy-media-item" lines="none" [button]="media.uploadStatus === 'Uploaded' && media.file_type !== 'pdf'" [class]="'media-' + media.id"
+                        *ngFor="let media of (technique | async).media | mediaFilter: searchvalue; let i = index"
                         (click)="goToMedia(media.id)">
 
-                  <app-media-icon slot="start" [filetype]="media.file_type"></app-media-icon>
-                  <ion-label slot="start" class="file_name">{{media.file_name | capitialise}} <span class="file_type">.{{media.file_type}}</span> </ion-label>
+                  <app-media-icon class="cy-media-icon" slot="start" [filetype]="media.file_type"></app-media-icon>
+                  <ion-label slot="start" class="file_name">{{media.original_file_name | capitialise}} </ion-label>
+                  <app-tag-badges slot="end" [selectedTags]="media.tags"></app-tag-badges>
+<!--                <span class="file_type">.{{media.file_type}}</span>-->
                   <ion-button *ngIf="media.uploadStatus === 'Uploaded'" slot="end" fill="clear" (click)="presentPopover($event, media);$event.stopPropagation();">
                     <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
                   </ion-button>
@@ -52,7 +54,7 @@
 
       </div>
       <app-side-panel [ngClass]="{'open': sidePaneOpen}" (closeSidePanel)="closeSidePanel()" [title]="sidebarTitle? sidebarTitle: sidebarTitleDefault">
-        <app-add-technique [technique]="sidePanelData" [techniqueId]="sidePanelData?.id" (cancel)="closeSidePanel()"></app-add-technique>
+        <app-edit-media [media]="sidePanelData" [mediaId]="sidePanelData?.id" (cancel)="closeSidePanel()"></app-edit-media>
       </app-side-panel>
     </div>
 
@@ -62,5 +64,4 @@
 
 <ion-footer>
   <app-file-picker [technique]="technique | async"></app-file-picker>
-
 </ion-footer>

@@ -92,7 +92,7 @@ export class AddNewMediaSuccess implements Action {
 export class EditMedia implements Action {
     readonly type = ActionTypes.Edit_media;
 
-    constructor(public payload: MediaModel) {}
+    constructor(public payload: Partial<MediaModel>) {}
 }
 
 export class EditMediaSuccess implements Action {

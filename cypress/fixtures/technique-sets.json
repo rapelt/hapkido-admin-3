@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "name": "Makko Chigi",
+    "isActive": true,
+    "createdAt": "2020-10-31T08:08:07.000Z",
+    "updatedAt": "2020-11-17T03:02:59.000Z",
+    "deletedAt": null
+  },
+  {
+    "id": 7,
+    "name": "Joo Mook Makki",
+    "isActive": true,
+    "createdAt": "2020-11-03T05:06:11.709Z",
+    "updatedAt": "2020-11-03T05:06:11.709Z",
+    "deletedAt": null
+  },
+  {
+    "id": 8,
+    "name": "Son Bakki",
+    "isActive": true,
+    "createdAt": "2020-11-09T23:12:18.847Z",
+    "updatedAt": "2020-11-09T23:12:18.847Z",
+    "deletedAt": null
+  },
+  {
+    "id": 9,
+    "name": "Ki Bon Su",
+    "isActive": true,
+    "createdAt": "2020-11-10T00:00:46.356Z",
+    "updatedAt": "2020-11-10T00:00:46.356Z",
+    "deletedAt": null
+  }
+]

@@ -9,4 +9,6 @@ export interface MediaModel {
     uploadStatus: string | number;
     publishedStatus: string;
     views: number;
+    url: string;
+    updatedAt?: Date;
 }

@@ -34,6 +34,14 @@ import { TagsComponent } from './form-component/tags/tags.component';
 import { RouterModule } from '@angular/router';
 import { SortTechniquesPipe } from './pipes/sort-techniques.pipe';
 import { SortTechniquesSetsPipe } from './pipes/sort-techniques-sets.pipe';
+import { RadioButtonsComponent } from './form-component/radio-buttons/radio-buttons.component';
+import { MediaHelperService } from './helper/media-helper.service';
+import { VideoComponent } from './components/video/video.component';
+import { ImageComponent } from './components/image/image.component';
+import { DocumentComponent } from './components/document/document.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { MediaFilterPipe } from './pipes/media-filter.pipe';
+import { TagBadgesComponent } from './components/tag-badges/tag-badges.component';
 
 @NgModule({
     declarations: [
@@ -64,6 +72,12 @@ import { SortTechniquesSetsPipe } from './pipes/sort-techniques-sets.pipe';
         TagsComponent,
         SortTechniquesPipe,
         SortTechniquesSetsPipe,
+        RadioButtonsComponent,
+        VideoComponent,
+        ImageComponent,
+        DocumentComponent,
+        MediaFilterPipe,
+        TagBadgesComponent,
     ],
     imports: [
         CommonModule,
@@ -71,17 +85,18 @@ import { SortTechniquesSetsPipe } from './pipes/sort-techniques-sets.pipe';
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+        NgxExtendedPdfViewerModule,
     ],
     providers: [
         GradeHelper,
         TechniqueSetFilterService,
         SocketioService,
+        MediaHelperService,
         MessagesService,
     ],
     exports: [
         StudentListComponent,
         CapitialisePipe,
-        CommonModule,
         AlphabeticalStudentsPipe,
         AlphabeticalFamilyPipe,
         GradeBadgeComponent,
@@ -106,6 +121,12 @@ import { SortTechniquesSetsPipe } from './pipes/sort-techniques-sets.pipe';
         SelectGradeComponent,
         TagsComponent,
         SortTechniquesPipe,
+        RadioButtonsComponent,
+        VideoComponent,
+        ImageComponent,
+        DocumentComponent,
+        MediaFilterPipe,
+        TagBadgesComponent,
     ],
 })
 export class CommonComponentsModule {}

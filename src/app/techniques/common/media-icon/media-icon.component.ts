@@ -13,9 +13,7 @@ export class MediaIconComponent implements OnInit {
 
     constructor() {}
 
-    ngOnInit() {
-        console.log(this.filetype);
-    }
+    ngOnInit() {}
 
     shouldDisplay(type) {
         switch (this.filetype) {

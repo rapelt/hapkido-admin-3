@@ -129,6 +129,11 @@ export class TagsComponent extends FormElementDirective implements OnInit {
                     type: 'text',
                     placeholder: 'Tag',
                 },
+                {
+                    name: 'colour',
+                    type: 'text',
+                    placeholder: 'Colour #111111',
+                },
             ],
             buttons: [
                 {

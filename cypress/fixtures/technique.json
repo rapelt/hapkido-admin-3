@@ -1,0 +1,153 @@
+[
+  {
+    "id": 1,
+    "description": "A Description 6",
+    "grade": 1,
+    "title": "Makko Chigi 1",
+    "techniqueSet": {
+      "id": 1,
+      "name": "Makko Chigi"
+    },
+    "tags": [
+      1
+    ],
+    "media": [
+      {
+        "id": 113,
+        "file_name": "media 1",
+        "file_type": "pdf",
+        "folder": "1/1/documents/",
+        "original_file_name": "Media name 1",
+        "publishedStatus": "Draft",
+        "uploadStatus": "Uploaded",
+        "size": "46559",
+        "views": 0,
+        "url": "https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/1/1/documents/1_8095f5ff.pdf",
+        "updatedAt": "2020-11-16T03:13:02.000Z",
+        "tags": []
+      },
+      {
+        "id": 115,
+        "file_name": "media 2",
+        "file_type": "jpeg",
+        "folder": "1/1/photos/",
+        "original_file_name": "Media name 2",
+        "publishedStatus": "Draft",
+        "uploadStatus": "Uploaded",
+        "size": "57048",
+        "views": 0,
+        "url": "https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/1/1/photos/1_085c341c.jpeg",
+        "updatedAt": "2020-11-18T00:06:20.000Z",
+        "tags": [
+          1,
+          7
+        ]
+      },
+      {
+        "id": 119,
+        "file_name": "media 3",
+        "file_type": "mp4",
+        "folder": "1/1/videos/",
+        "original_file_name": "Media name 3",
+        "publishedStatus": "Draft",
+        "uploadStatus": "Uploaded",
+        "size": "18704820",
+        "views": 0,
+        "url": "https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/1/1/videos/1_ee0a21e4/Default/",
+        "updatedAt": "2020-11-17T02:35:47.000Z",
+        "tags": [
+          1,
+          4,
+          7
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "description": "",
+    "grade": 2,
+    "title": "Makko Chigi 2",
+    "techniqueSet": {
+      "id": 1,
+      "name": "Makko Chigi"
+    },
+    "tags": [
+      3,
+      5
+    ],
+    "media": [
+      {
+        "id": 105,
+        "file_name": "2_377697b0",
+        "file_type": "png",
+        "folder": "1/2/photos/",
+        "original_file_name": "Screen Shot 2020-10-21 at 4.04.57 pm.png",
+        "publishedStatus": "Draft",
+        "uploadStatus": "Uploaded",
+        "size": "206622",
+        "views": 0,
+        "url": "https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/1/2/photos/2_377697b0.png",
+        "updatedAt": "2020-11-15T23:44:17.000Z",
+        "tags": [
+          1,
+          3
+        ]
+      },
+      {
+        "id": 106,
+        "file_name": "2_3b64d79a",
+        "file_type": "png",
+        "folder": "1/2/photos/",
+        "original_file_name": "Screen Shot 2020-10-23 at 10.25.51 am.png",
+        "publishedStatus": "Draft",
+        "uploadStatus": "Uploaded",
+        "size": "225727",
+        "views": 0,
+        "url": "https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/1/2/photos/2_3b64d79a.png",
+        "updatedAt": "2020-11-15T23:45:02.000Z",
+        "tags": []
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "description": "",
+    "grade": 3,
+    "title": "Makko Chigi 3",
+    "techniqueSet": {
+      "id": 1,
+      "name": "Makko Chigi"
+    },
+    "tags": [],
+    "media": []
+  },
+  {
+    "id": 4,
+    "description": "",
+    "grade": 4,
+    "title": "Makko Chigi 4",
+    "techniqueSet": {
+      "id": 1,
+      "name": "Makko Chigi"
+    },
+    "tags": [
+      2,
+      3,
+      4
+    ],
+    "media": []
+  },
+  {
+    "id": 5,
+    "description": "",
+    "grade": 5,
+    "title": "Makko Chigi 5",
+    "techniqueSet": {
+      "id": 1,
+      "name": "Makko Chigi"
+    },
+    "tags": [],
+    "media": []
+  }
+]
