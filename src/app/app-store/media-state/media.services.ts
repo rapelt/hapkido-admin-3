@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../../environments/environment';
 import { MediaModel } from '../../common/models/media';
@@ -21,15 +21,22 @@ export class MediaServices {
         return this.httpClient.get(this.mediaUrl + '' + id);
     }
 
-    addNewMedia(media: MediaModel, file: any) {
-        return this.httpClient.post(this.mediaUrl + 'create', [media, file]);
+    addNewMedia(media: Partial<MediaModel>) {
+        return this.httpClient.post(this.mediaUrl + 'create', media);
     }
 
-    uploadNewMedia(media: MediaModel, file: any) {
+    editMedia(media: Partial<MediaModel>) {
+        return this.httpClient.post(
+            this.mediaUrl + 'update/' + media.id,
+            media
+        );
+    }
+
+    uploadNewMedia(fileData: FormData, media: Partial<MediaModel>) {
         console.log('Uploading Media');
-        return this.httpClient.post(this.mediaUrl + 'upload', {
-            media,
-            file,
+        return this.httpClient.post(this.mediaUrl + 'upload', fileData, {
+            reportProgress: true,
+            observe: 'events',
         });
     }
 

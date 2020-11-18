@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button [defaultHref]="'/technique/view/' + this.techniqueId" class="cy-back-button"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="more-stuff">
+    <div *ngIf="!loaded" class="spinner">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <div class="large-content">
+      <div class="large-content-left">
+
+        <app-video class="media-view video" *ngIf="loaded && isVideo(media?.file_type)" [options]="getVideoOptions()"></app-video>
+        <app-image class="media-view image" *ngIf="loaded && isImage(media?.file_type)" [options]="getImageOptions()"></app-image>
+        <app-document class="media-view document" *ngIf="loaded && isDocument(media?.file_type)" [options]="getDocumentOptions()"></app-document>
+
+      </div>
+    </div>
+
+
+
+  </div>
+
+</ion-content>

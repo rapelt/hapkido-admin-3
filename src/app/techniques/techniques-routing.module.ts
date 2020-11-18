@@ -1,7 +1,8 @@
 import { Routes } from '@angular/router';
-import { TechniqueListComponent } from './technique-list/technique-list.component';
-import { ViewTechniqueComponent } from './view-technique/view-technique.component';
-import { TechniqueSetListComponent } from './technique-set-list/technique-set-list.component';
+import { TechniqueListComponent } from './technique-list-group/technique-list/technique-list.component';
+import { TechniqueSetListComponent } from './technique-set-list-group/technique-set-list/technique-set-list.component';
+import { ViewTechniqueComponent } from './technique-group/view-technique/view-technique.component';
+import { ViewMediaComponent } from './media-group/view-media/view-media.component';
 
 export const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'list' },
@@ -18,47 +19,8 @@ export const routes: Routes = [
         path: 'view/:techniqueId',
         component: ViewTechniqueComponent,
     },
-    // {
-    //     path: 'edit/:techniqueId',
-    //     component: EditTechniqueComponent,
-    //     children: [
-    //         {
-    //             path: '',
-    //             pathMatch: 'full',
-    //             redirectTo: 'general',
-    //         },
-    //         {
-    //             path: 'general',
-    //             component: GeneralComponent,
-    //         },
-    //         {
-    //             path: 'videos',
-    //             component: VideosComponent,
-    //         },
-    //         {
-    //             path: 'video/new',
-    //             component: VideoComponent,
-    //         },
-    //         {
-    //             path: 'video/:id',
-    //             component: VideoComponent,
-    //         },
-    //         {
-    //             path: 'photos',
-    //             component: PhotosComponent,
-    //         },
-    //         {
-    //             path: 'photo/new',
-    //             component: PhotoComponent,
-    //         },
-    //         {
-    //             path: 'photo/:id',
-    //             component: PhotoComponent,
-    //         },
-    //         {
-    //             path: 'review',
-    //             component: ReviewComponent,
-    //         },
-    //     ],
-    // },
+    {
+        path: 'view/:techniqueId/media/:mediaId',
+        component: ViewMediaComponent,
+    },
 ];

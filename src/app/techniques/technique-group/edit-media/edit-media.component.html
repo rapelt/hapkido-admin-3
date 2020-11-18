@@ -1,0 +1,24 @@
+<div>
+  <app-image class="media-view image" [options]="getImageOptions()"></app-image>
+
+  <form [formGroup]="form">
+    <ion-list>
+      <app-input [saveAttempted]="saveAttempted" [formControlName]="formData.original_file_name.id" [formData]="formData.original_file_name"></app-input>
+      <app-radio-buttons [saveAttempted]="saveAttempted" [formControlName]="formData.publishedStatus.id" [formData]="formData.publishedStatus"></app-radio-buttons>
+      <app-tags [saveAttempted]="saveAttempted" [formControlName]="formData.tags.id" [formData]="formData.tags"></app-tags>
+    </ion-list>
+  </form>
+
+  <div class="read-only-details">
+    <span>File Type: {{media.file_type}}</span>
+    <span>Last Updated: {{media.updatedAt | date: 'dd MMM yyyy': '+1000'}}</span>
+    <span>Views: {{media.views}}</span>
+  </div>
+
+
+
+</div>
+<div class="half-button-size">
+  <ion-button (click)="save()" color="primary" expand="full" type="submit">Save</ion-button>
+  <ion-button (click)="close()" fill="clear" expand="full">Cancel</ion-button>
+</div>

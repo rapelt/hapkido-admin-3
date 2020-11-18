@@ -1,0 +1,8 @@
+<div>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button class="cy-add-student-btn" color="tertiary" (click)="fileInput.click()">
+      <input hidden type="file" #fileInput [multiple]="true" (change)="chooseFile($event.target.files)">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</div>

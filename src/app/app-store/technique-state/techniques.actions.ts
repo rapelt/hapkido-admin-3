@@ -1,6 +1,7 @@
 import { Action } from '@ngrx/store';
 import { TechniqueModel } from '../../common/models/technique';
 import { TechniqueSetModel } from '../../common/models/technique-set';
+import { MediaModel } from '../../common/models/media';
 
 export enum ActionTypes {
     Get_all_techniques = '[Techniques] Get all techniques',
@@ -28,6 +29,9 @@ export enum ActionTypes {
 
     Edit_technique = '[Techniques] Edit technique',
     Edit_technique_success = '[Techniques] Edit technique success',
+
+    Add_or_update_media = '[Techniques] Add or update media',
+    Update_media_progress = '[Techniques] Update media progress',
 }
 
 export class GetAllTechniques implements Action {
@@ -58,6 +62,24 @@ export class AddNewTechnique implements Action {
     readonly type = ActionTypes.Add_new_technique;
 
     constructor(public payload: Partial<TechniqueModel>) {}
+}
+
+export class AddOrUpdateMedia implements Action {
+    readonly type = ActionTypes.Add_or_update_media;
+
+    constructor(public payload: Partial<MediaModel>) {}
+}
+
+export class UpdateMediaprogress implements Action {
+    readonly type = ActionTypes.Update_media_progress;
+
+    constructor(
+        public payload: {
+            mediaId: number;
+            techniqueId: number;
+            progress: string | number;
+        }
+    ) {}
 }
 
 export class AddNewTechniqueSet implements Action {
@@ -141,4 +163,6 @@ export type TechniquesActions =
     | ResetSelectedTechnique
     | AddNewTechniqueSet
     | AddNewTechniqueSetSuccess
+    | AddOrUpdateMedia
+    | UpdateMediaprogress
     | ClearLoadedTechniques;

@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button class="cy-menu-button"></ion-menu-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="more-stuff">
+    <div *ngIf="!loaded" class="spinner">
+      <ion-spinner></ion-spinner>
+    </div>
+
+    <div class="large-content">
+      <div class="large-content-left">
+
+        <div *ngIf="loaded">
+          <div class="header-bar">
+            <app-breadcrumb [breadcrumbs]="breadcrumbs"></app-breadcrumb>
+
+            <div class="searchbar-container">
+              <ion-searchbar class="cy-technique-set-search" [autocomplete]="'on'" (ionCancel)="cancelSearch()" (ionChange)="searchInput($event)" ></ion-searchbar>
+<!--              <ion-button fill="clear">-->
+<!--                <ion-icon slot="icon-only" name="ellipsis-vertical-outline"></ion-icon>-->
+<!--              </ion-button>-->
+            </div>
+          </div>
+
+          <div class="technique-set-list">
+            <ion-list class="cy-technique-set-list">
+              <div *ngIf="(techniqueSets | async).length === 0">
+                <p class="no-techniques">Please add some techniques</p>
+              </div>
+              <ion-item class="cy-technique-set-item" lines="none" button="true" [class]="'technique-set-' + techniqueSet.id"
+                        *ngFor="let techniqueSet of techniqueSets | async | techniqueSetFilter: searchvalue; let i = index"
+                        (click)="goToTechniqueSet(techniqueSet.id)">
+                <ion-icon name="folder-open-outline" slot="start"></ion-icon>
+                <ion-button slot="end" fill="clear" (click)="presentPopover($event, techniqueSet);$event.stopPropagation();">
+                  <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
+                </ion-button>
+                <ion-label slot="start">{{techniqueSet.name | capitialise}} </ion-label>
+              </ion-item>
+            </ion-list>
+
+
+          </div>
+      </div>
+
+      </div>
+      <app-side-panel [ngClass]="{'open': sidePaneOpen}" (closeSidePanel)="closeSidePanel()" [title]="sidebarTitle? sidebarTitle: sidebarTitleDefault">
+        <app-add-technique-set [techniqueSetName]="sidePanelData?.name" [techniqueSetId]="sidePanelData?.id" (cancel)="closeSidePanel()"></app-add-technique-set>
+      </app-side-panel>
+    </div>
+
+  </div>
+
+</ion-content>
+
+<ion-footer>
+  <div *ngIf="loaded && sidePaneOpen === false">
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="cy-add-technique-set-btn" color="tertiary" (click)="newTechnique()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+</ion-footer>
