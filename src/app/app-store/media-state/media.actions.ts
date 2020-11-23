@@ -18,6 +18,7 @@ export enum ActionTypes {
 
     Upload_new_media = '[Media] Upload new media',
     Upload_new_media_success = '[Media] Upload new media success',
+    Upload_new_media_with_auth = '[Media] Upload new media with auth',
 
     Edit_media = '[Media] Edit media',
     Edit_media_success = '[Media] Edit media success',
@@ -61,10 +62,21 @@ export class UploadNewMedia implements Action {
     readonly type = ActionTypes.Upload_new_media;
 
     constructor(
-        public payload: { fileData: FormData; media: Partial<MediaModel> }
+        public payload: { fileData: any; media: Partial<MediaModel> }
     ) {}
 }
 
+export class UploadNewMediaWithAuth implements Action {
+    readonly type = ActionTypes.Upload_new_media_with_auth;
+
+    constructor(
+        public payload: {
+            fileData: any;
+            media: Partial<MediaModel>;
+            auth: any;
+        }
+    ) {}
+}
 export class UploadNewMediaSuccess implements Action {
     readonly type = ActionTypes.Upload_new_media_success;
 

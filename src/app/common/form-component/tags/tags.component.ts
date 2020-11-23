@@ -91,10 +91,6 @@ export class TagsComponent extends FormElementDirective implements OnInit {
             select(selectTags)
         );
 
-        this.tags.subscribe(t => {
-            console.log(t);
-        });
-
         this.store.pipe(map(selectTagLoaded)).subscribe(allValuesLoaded => {
             this.loaded = allValuesLoaded;
         });

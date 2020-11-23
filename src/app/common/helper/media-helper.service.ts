@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { config } from '../../../environments/environment';
 
 @Injectable({
     providedIn: 'root',
@@ -21,6 +22,13 @@ export class MediaHelperService {
     isDocument(mediaType: string): boolean {
         const exists = ['pdf', 'msword', 'doc'].findIndex(m => m === mediaType);
         return exists !== -1;
+    }
+
+    getBucket(mediaType: string): string {
+        const type = this.whatType(mediaType);
+        return type === 'videos'
+            ? config.file_upload_buckets.video_uploads
+            : config.file_upload_buckets.other_upload;
     }
 
     whatType(mimeType: string): string {
@@ -53,5 +61,22 @@ export class MediaHelperService {
 
     getVideoThumbnail(media) {
         return media.url + 'Thumbnails/' + media.file_name + '.0000000.jpg';
+    }
+
+    getURL(filetype, filename, folder) {
+        const type = this.whatType(filetype);
+        const url =
+            'https://' +
+            config.file_upload_buckets.other_upload +
+            '.s3-ap-southeast-2.amazonaws.com/' +
+            folder +
+            '/' +
+            filename;
+
+        if (type === 'videos') {
+            return url + 'Default/';
+        } else {
+            return url + '.' + filetype;
+        }
     }
 }

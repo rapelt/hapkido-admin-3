@@ -6,6 +6,9 @@ import { Store } from '@ngrx/store';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { MediaModel } from '../../../common/models/media';
 import { UploadNewMedia } from '../../../app-store/media-state/media.actions';
+import { MediaHelperService } from '../../../common/helper/media-helper.service';
+import { Media } from 'aws-sdk/clients/transcribeservice';
+import { MessagesService } from '../../../common/messages/messages.service';
 
 @Component({
     selector: 'app-file-picker',
@@ -21,28 +24,13 @@ export class FilePickerComponent implements OnInit {
     @Input()
     technique: TechniqueModel;
 
-    constructor(public store: Store<AppState>, private http: HttpClient) {}
+    constructor(
+        public store: Store<AppState>,
+        public mediaHelper: MediaHelperService,
+        public message: MessagesService
+    ) {}
 
     ngOnInit() {}
-
-    // fileProgress(fileInput: any) {
-    //     this.fileData = fileInput.target.files[0];
-    //     this.preview();
-    // }
-
-    // preview() {
-    //     // Show preview
-    //     const mimeType = this.fileData.type;
-    //     if (mimeType.match(/image\/*/) == null) {
-    //         return;
-    //     }
-    //
-    //     const reader = new FileReader();
-    //     reader.readAsDataURL(this.fileData);
-    //     reader.onload = _event => {
-    //         this.previewUrl = reader.result;
-    //     };
-    // }
 
     chooseFile(event: FileList) {
         const files = event;
@@ -54,26 +42,41 @@ export class FilePickerComponent implements OnInit {
                 const fileTypeSplitter = fileData.name.split('.');
                 const filetype = fileTypeSplitter[fileTypeSplitter.length - 1];
 
-                const folderName = `${this.technique.techniqueSet.id}#${this.technique.id}#`
+                if (this.mediaHelper.whatType(filetype) === 'none') {
+                    this.message.updateInfo.next(
+                        'The file type ' +
+                            filetype +
+                            ' is not allowed. If you really want this to work you will need to talk to Rebekah.'
+                    );
+                    continue;
+                }
+
+                const folderName = `${this.technique.techniqueSet.id}/${
+                    this.technique.id
+                }/${this.mediaHelper.whatType(filetype)}`
                     .toLowerCase()
                     .replace(/\s+/g, '_');
 
                 const newFileName = this.technique.id + '_' + shortid();
-
-                const filenameWithFolder = folderName + newFileName;
-
-                const formData = new FormData();
-                formData.append('files', fileData, filenameWithFolder);
 
                 const media: Partial<MediaModel> = {
                     file_name: newFileName,
                     file_type: filetype,
                     original_file_name: fileData.name,
                     folder: folderName,
+                    size: fileData.size + '',
+                    publishedStatus: 'Draft',
+                    views: 0,
+                    uploadStatus: 'Processing',
+                    url: this.mediaHelper.getURL(
+                        filetype,
+                        newFileName,
+                        folderName
+                    ),
                 };
 
                 this.store.dispatch(
-                    new UploadNewMedia({ fileData: formData, media: media })
+                    new UploadNewMedia({ fileData: fileData, media: media })
                 );
             }
         }

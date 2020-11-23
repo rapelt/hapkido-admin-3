@@ -9,22 +9,13 @@ import {
     GetAllClasses,
     ViewClass,
 } from '../app-store/classes-state/classes.actions';
-import {
-    getClasses,
-    getClassState,
-    selectClassLoaded,
-} from '../app-store/classes-state/classes.selectors';
-import { filter, map, takeWhile, withLatestFrom } from 'rxjs/operators';
+import { filter, map, takeWhile } from 'rxjs/operators';
 import { PageComponent } from '../common/page.component';
 import {
     ClearLoadedStudents,
     GetAllFamilies,
     GetAllStudents,
 } from '../app-store/student-state/students.actions';
-import {
-    attendanceSelector,
-    selectAttendanceloaded,
-} from '../attendance/attendance.selector';
 import { Observable } from 'rxjs';
 import { ClassModel } from '../common/models/class';
 import { selectHomeloaded, todaysClassSelector } from './home.selector';

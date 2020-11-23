@@ -43,17 +43,17 @@ export class SocketioService {
                 console.log('Sorry, there seems to be an error!');
             });
 
-            this.socket.on('uploadProgress', data => {
-                console.log(data);
-                this.store.dispatch(
-                    new UpdateMediaprogress({
-                        mediaId: data.mediaId,
-                        progress: data.progress,
-                        techniqueId: data.techniqueId,
-                    })
-                );
-                observer.next(data);
-            });
+            // this.socket.on('uploadProgress', data => {
+            //     console.log(data);
+            //     this.store.dispatch(
+            //         new UpdateMediaprogress({
+            //             mediaId: data.mediaId,
+            //             progress: data.progress,
+            //             techniqueId: data.techniqueId,
+            //         })
+            //     );
+            //     observer.next(data);
+            // });
 
             this.socket.on('posts', data => {
                 console.log(data);
