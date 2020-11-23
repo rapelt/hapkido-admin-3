@@ -19,6 +19,10 @@ export interface EnvironementModel {
         techniques: boolean;
         io: boolean;
     };
+    file_upload_buckets: {
+        video_uploads: string;
+        other_upload: string;
+    };
     static_image_location: string;
     default_logo: string;
 }

@@ -161,8 +161,6 @@ function addOrUpdateMediaByName(
         ...media,
     };
 
-    console.log(mediaToUpdate.uploadStatus);
-
     const updatedTechnique = {
         ...state.techniques[techniqueIndex],
         media: [...state.techniques[techniqueIndex].media],
@@ -213,8 +211,6 @@ function updateMediaProgressById(
     const updatedTechniques = [...state.techniques];
 
     updatedTechniques[techniqueIndex] = updatedTechnique;
-
-    console.log(mediaToUpdate.uploadStatus);
 
     return {
         ...state,

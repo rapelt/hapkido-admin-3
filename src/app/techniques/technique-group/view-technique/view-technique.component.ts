@@ -90,7 +90,11 @@ export class ViewTechniqueComponent extends SearchablePageComponent
     }
 
     showProgressBar(uploadStatus) {
-        if (uploadStatus === 'Uploaded' || uploadStatus === 'Error') {
+        if (
+            uploadStatus === 'Uploaded' ||
+            uploadStatus === 'Error' ||
+            uploadStatus === 'Failed'
+        ) {
             return false;
         }
 
@@ -111,8 +115,6 @@ export class ViewTechniqueComponent extends SearchablePageComponent
         });
 
         popover.onDidDismiss().then(data => {
-            console.log(data, ts);
-
             if (data.data === 'view' || data.data === 'edit') {
                 this.sidePaneOpen = true;
                 this.sidePanelData = ts;

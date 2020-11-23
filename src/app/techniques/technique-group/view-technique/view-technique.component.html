@@ -34,9 +34,9 @@
               </div>
               <ion-item class="cy-media-item" lines="none" [button]="media.uploadStatus === 'Uploaded' && media.file_type !== 'pdf'" [class]="'media-' + media.id"
                         *ngFor="let media of (technique | async).media | mediaFilter: searchvalue; let i = index"
-                        (click)="goToMedia(media.id)">
-
-                  <app-media-icon class="cy-media-icon" slot="start" [filetype]="media.file_type"></app-media-icon>
+                        (click)="goToMedia(media.id)" [disabled]="media.uploadStatus === 'Failed' || media.uploadStatus === 'Error'">
+                <ion-icon *ngIf="media.uploadStatus === 'Failed' || media.uploadStatus === 'Error'" name="close-circle-outline" color="danger" slot="start"></ion-icon>
+                  <app-media-icon *ngIf="media.uploadStatus !== 'Failed' && media.uploadStatus !== 'Error'" class="cy-media-icon" slot="start" [filetype]="media.file_type"></app-media-icon>
                   <ion-label slot="start" class="file_name">{{media.original_file_name | capitialise}} </ion-label>
                   <app-tag-badges slot="end" [selectedTags]="media.tags"></app-tag-badges>
 <!--                <span class="file_type">.{{media.file_type}}</span>-->
@@ -44,7 +44,6 @@
                     <ion-icon name="ellipsis-vertical-outline" slot="end"></ion-icon>
                   </ion-button>
                   <app-upload-bar slot="end" [media]="media" *ngIf="showProgressBar(media.uploadStatus)"></app-upload-bar>
-
               </ion-item>
 
             </ion-list>
