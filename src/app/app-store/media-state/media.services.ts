@@ -1,19 +1,8 @@
-import {
-    HttpClient,
-    HttpEventType,
-    HttpHeaders,
-    HttpParams,
-    HttpRequest,
-    HttpXhrBackend,
-} from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpXhrBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../../environments/environment';
 import { MediaModel } from '../../common/models/media';
-import { from, Observable, of } from 'rxjs';
-import { ManagedUpload } from 'aws-sdk/lib/s3/managed_upload';
-import { Media } from 'aws-sdk/clients/transcribeservice';
-import { HTTPOptions } from 'aws-sdk';
-const aws = require('aws-sdk');
+import * as aws from 'aws-sdk';
 aws.config.update({
     region: 'ap-southeast-2',
 });
