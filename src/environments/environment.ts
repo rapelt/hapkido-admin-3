@@ -11,6 +11,7 @@ export const environment = {
 const local = 'http://localhost:8090/';
 
 export const config: EnvironementModel = {
+    projectName: 'Hapkido Brisbane Administrators',
     environmentName: 'Local Environment',
     ionicEnvName: 'local',
     APIEndpoint: local,

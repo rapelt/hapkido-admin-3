@@ -74,7 +74,7 @@ export class MediaHelperService {
             filename;
 
         if (type === 'videos') {
-            return url + 'Default/';
+            return url + '/Default/';
         } else {
             return url + '.' + filetype;
         }

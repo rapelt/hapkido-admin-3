@@ -96,6 +96,10 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.loggedIn(this.authState.isLoggedIn);
             }
 
+            this.authState._userAttributesEvent.pipe().subscribe(attributes => {
+                this.store.dispatch(new SetUserAttributes(attributes));
+            });
+
             this.authState._isLoggedInEvent.pipe().subscribe(isLoggedIn => {
                 this.loggedIn(isLoggedIn);
             });

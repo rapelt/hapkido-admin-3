@@ -1,4 +1,5 @@
 export interface EnvironementModel {
+    projectName: string;
     environmentName: string;
     ionicEnvName: string;
     APIEndpoint: string;
