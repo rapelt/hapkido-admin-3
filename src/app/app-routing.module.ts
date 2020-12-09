@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AuthenticationGuard, AuthLibModule } from 'hapkido-auth-lib';
+import { AuthenticationGuard } from 'hapkido-auth-lib';
 import { AttendanceComponent } from './attendance/attendance.component';
 import { AddGradingComponent } from './gradings/add-grading/add-grading.component';
 import { TechniquesDataDispatcher } from './techniques/techniques-data.resolver';
 import { ClassesDataDispatcher } from './classes/classes-data.resolver';
 import { StudentsDataDispatcher } from './students/students-data.resolver';
+import { AdminGuard } from 'hapkido-auth-lib';
 
 const routes: Routes = [
     {
@@ -17,7 +18,7 @@ const routes: Routes = [
         path: 'home',
         loadChildren: () =>
             import('./home/home.module').then(m => m.HomePageModule),
-        canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard, AdminGuard],
         runGuardsAndResolvers: 'always',
         resolve: { data: ClassesDataDispatcher },
     },
@@ -39,7 +40,7 @@ const routes: Routes = [
             import('./settings/settings.module').then(
                 m => m.SettingsPageModule
             ),
-        canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard, AdminGuard],
         runGuardsAndResolvers: 'always',
     },
     {
@@ -51,7 +52,7 @@ const routes: Routes = [
                 component: AttendanceComponent,
             },
         ],
-        canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard, AdminGuard],
         runGuardsAndResolvers: 'always',
         resolve: { data: StudentsDataDispatcher },
     },
@@ -61,7 +62,7 @@ const routes: Routes = [
             import('./techniques/techniques.module').then(
                 m => m.TechniquesModule
             ),
-        canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard, AdminGuard],
         runGuardsAndResolvers: 'always',
         resolve: { data: TechniquesDataDispatcher },
     },
@@ -74,14 +75,14 @@ const routes: Routes = [
                 component: AddGradingComponent,
             },
         ],
-        canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard, AdminGuard],
         runGuardsAndResolvers: 'always',
     },
     {
         path: 'student',
         loadChildren: () =>
             import('./students/students.module').then(m => m.StudentsModule),
-        canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard, AdminGuard],
         runGuardsAndResolvers: 'always',
         resolve: { data: StudentsDataDispatcher },
     },
@@ -89,7 +90,7 @@ const routes: Routes = [
         path: 'class',
         loadChildren: () =>
             import('./classes/classes.module').then(m => m.ClassesModule),
-        canActivate: [AuthenticationGuard],
+        canActivate: [AuthenticationGuard, AdminGuard],
         runGuardsAndResolvers: 'always',
         resolve: { data: ClassesDataDispatcher },
     },

@@ -9,6 +9,7 @@ export const environment = {
 };
 
 export const config: EnvironementModel = {
+    projectName: 'Hapkido Brisbane Administrators',
     environmentName: 'Test Environment',
     ionicEnvName: 'test',
     APIEndpoint: 'http://localhost:8080/',
@@ -24,7 +25,7 @@ export const config: EnvironementModel = {
     aws_user_pools_id: 'ap-southeast-2_xwJzu6o5o',
     aws_user_pools_web_client_id: '1kjv0a3rm18od63enl28q9smj2',
     feature_toggle: {
-        cognito_login: true,
+        cognito_login: false,
         download_graphs: true,
         techniques: true,
         io: true,

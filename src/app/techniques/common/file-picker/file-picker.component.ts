@@ -43,7 +43,7 @@ export class FilePickerComponent implements OnInit {
                 const filetype = fileTypeSplitter[fileTypeSplitter.length - 1];
 
                 if (this.mediaHelper.whatType(filetype) === 'none') {
-                    this.message.updateInfo.next(
+                    this.message.updateError.next(
                         'The file type ' +
                             filetype +
                             ' is not allowed. If you really want this to work you will need to talk to Rebekah.'

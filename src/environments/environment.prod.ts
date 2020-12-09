@@ -5,6 +5,7 @@ export const environment = {
 };
 
 export const config: EnvironementModel = {
+    projectName: 'Hapkido Brisbane Administrators',
     environmentName: 'Production Environment',
     ionicEnvName: 'prod',
     APIEndpoint:

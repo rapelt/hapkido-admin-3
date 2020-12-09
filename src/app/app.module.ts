@@ -3,14 +3,13 @@ import { NgModule } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import { AuthLibModule } from 'hapkido-auth-lib';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { AuthLibModule } from 'hapkido-auth-lib';
 import { config, environment } from '../environments/environment';
 import { MockComponent } from '../testing-helpers/mock.component';
 import { AppRoutingModule } from './app-routing.module';
