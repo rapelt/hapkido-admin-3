@@ -42,10 +42,10 @@ describe('View Class List', function() {
     cy.visit('/class');
     cy.url().should('include', '/class/list');
     cy.get('.ion-calendar-header-title').click();
-    cy.contains('2020');
-    cy.get('.ion-calendar-header-title').contains('2020');
+    cy.contains('2021');
+    cy.get('.ion-calendar-header-title').contains('2021');
     cy.get('.cy-day-Feb').click();
-    cy.get('.ion-calendar-header-title').contains('Feb 2020');
+    cy.get('.ion-calendar-header-title').contains('Feb 2021');
     cy.get('.cy-day-19').contains('19');
     cy.get('.cy-day-19').click();
     cy.get('.primary').contains('19');
@@ -57,10 +57,10 @@ describe('View Class List', function() {
     cy.visit('/class');
     cy.url().should('include', '/class/list');
     cy.get('.ion-calendar-header-title').click();
-    cy.contains('2020');
-    cy.get('.ion-calendar-header-title').contains('2020');
+    cy.contains('2021');
+    cy.get('.ion-calendar-header-title').contains('2021');
     cy.get('.cy-day-Feb').click();
-    cy.get('.ion-calendar-header-title').contains('Feb 2020');
+    cy.get('.ion-calendar-header-title').contains('Feb 2021');
     cy.get('.cy-day-19').contains('19');
     cy.get('.cy-day-19').click();
 

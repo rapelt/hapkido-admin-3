@@ -55,7 +55,7 @@ describe('Add Classes', function() {
 
     cy.get('.ion-calendar-header-title').click();
     cy.wait(200);
-    cy.get('.ion-calendar-header-title').contains('2020');
+    cy.get('.ion-calendar-header-title').contains('2021');
 
     cy.wait(200);
 
@@ -63,7 +63,7 @@ describe('Add Classes', function() {
     cy.get('.cy-day-Feb').should('be.visible').trigger('mouseover');
     cy.wait(200);
     cy.get('.cy-day-Feb').click();
-    cy.get('.ion-calendar-header-title').contains('Feb 2020');
+    cy.get('.ion-calendar-header-title').contains('Feb 2021');
 
     // Select date of month
     cy.get('.cy-day-19').contains('19').should('be.visible').trigger('mouseover');
@@ -95,7 +95,7 @@ describe('Add Classes', function() {
     cy.wait(200);
     cy.get('.ion-calendar-header-title').click();
     cy.wait(200);
-    cy.get('.ion-calendar-header-title').contains('2020');
+    cy.get('.ion-calendar-header-title').contains('2021');
 
     cy.wait(200);
 
@@ -103,12 +103,12 @@ describe('Add Classes', function() {
     cy.get('.cy-day-Feb').should('be.visible').trigger('mouseover');
     cy.wait(200);
     cy.get('.cy-day-Feb').click();
-    cy.get('.ion-calendar-header-title').contains('Feb 2020');
+    cy.get('.ion-calendar-header-title').contains('Feb 2021');
 
     // Select date of month
-    cy.get('.cy-day-4').contains('4').should('be.visible').trigger('mouseover');
+    cy.get('.cy-day-12').contains('12').should('be.visible').trigger('mouseover');
     cy.wait(200);
-    cy.get('.cy-day-4').click();
+    cy.get('.cy-day-12').click();
 
     cy.get('.cy-class-type').should('be.visible').trigger('mouseover');
     cy.wait(200);
