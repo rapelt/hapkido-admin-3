@@ -27,14 +27,14 @@ export const config: EnvironementModel = {
     aws_user_pools_id: 'ap-southeast-2_xwJzu6o5o',
     aws_user_pools_web_client_id: '1kjv0a3rm18od63enl28q9smj2',
     feature_toggle: {
-        cognito_login: false,
+        cognito_login: true,
         download_graphs: true,
         techniques: true,
         io: true,
     },
     file_upload_buckets: {
-        video_uploads: 'hapkido-uploaded-videos',
-        other_upload: 'hapkido-convert-videos',
+        video_uploads: 'hapkido-uploaded-videos-dev',
+        other_upload: 'hapkido-convert-videos-dev',
     },
     static_image_location:
         'https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/static_images/',

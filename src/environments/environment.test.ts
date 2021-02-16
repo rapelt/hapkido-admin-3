@@ -31,8 +31,8 @@ export const config: EnvironementModel = {
         io: true,
     },
     file_upload_buckets: {
-        video_uploads: 'hapkido-uploaded-videos',
-        other_upload: 'hapkido-convert-videos',
+        video_uploads: 'hapkido-uploaded-videos-dev',
+        other_upload: 'hapkido-convert-videos-dev',
     },
     static_image_location:
         'https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/static_images/',
