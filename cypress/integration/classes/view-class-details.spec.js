@@ -36,10 +36,10 @@ describe('View Class Details', function() {
     cy.visit('/class');
     cy.url().should('include', '/class/list');
     cy.get('.ion-calendar-header-title').click();
-    cy.contains('2020');
-    cy.get('.ion-calendar-header-title').contains('2020');
+    cy.contains('2021');
+    cy.get('.ion-calendar-header-title').contains('2021');
     cy.get('.cy-day-Feb').click();
-    cy.get('.ion-calendar-header-title').contains('Feb 2020');
+    cy.get('.ion-calendar-header-title').contains('Feb 2021');
     cy.get('.cy-day-19').contains('19');
     cy.get('.cy-day-19').click();
     cy.get('.primary').contains('19');
@@ -64,7 +64,7 @@ describe('View Class Details', function() {
     cy.visit('/class/view/2');
     cy.url().should('include', '/class/view/2');
     cy.get('.cy-class-type').contains('Adults');
-    cy.get('.cy-date').contains('19 Feb 2020');
+    cy.get('.cy-date').contains('19 Feb 2021');
     cy.get('.cy-time').contains('6:51 PM');
     cy.get('.cy-grading').contains('Yes');
     cy.get('.cy-attendance').contains('3');
