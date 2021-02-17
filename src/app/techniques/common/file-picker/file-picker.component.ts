@@ -3,11 +3,9 @@ import { TechniqueModel } from '../../../common/models/technique';
 import { shortid } from 'ionic/lib/utils/uuid';
 import { AppState } from '../../../app-store/state/app.reducers';
 import { Store } from '@ngrx/store';
-import { HttpClient, HttpEventType } from '@angular/common/http';
 import { MediaModel } from '../../../common/models/media';
 import { UploadNewMedia } from '../../../app-store/media-state/media.actions';
 import { MediaHelperService } from '../../../common/helper/media-helper.service';
-import { Media } from 'aws-sdk/clients/transcribeservice';
 import { MessagesService } from '../../../common/messages/messages.service';
 
 @Component({

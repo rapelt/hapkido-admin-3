@@ -2,10 +2,6 @@ import { HttpClient, HttpRequest, HttpXhrBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../../environments/environment';
 import { MediaModel } from '../../common/models/media';
-import * as aws from 'aws-sdk';
-aws.config.update({
-    region: 'ap-southeast-2',
-});
 
 @Injectable({
     providedIn: 'root',
