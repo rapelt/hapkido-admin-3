@@ -1,14 +1,13 @@
 import {
-    async,
     ComponentFixture,
     fakeAsync,
     TestBed,
     tick,
+    waitForAsync,
 } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule, PopoverController } from '@ionic/angular';
-import { Store } from '@ngrx/store';
 import { MockPopOverController } from '../../../../testing-helpers/ionic.mocks';
 import { MockComponent } from '../../../../testing-helpers/mock.component';
 import { StudentListPopoverComponent } from './student-list-popover.component';
@@ -17,23 +16,28 @@ describe('StudentListPopoverComponent', () => {
     let component: StudentListPopoverComponent;
     let fixture: ComponentFixture<StudentListPopoverComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [StudentListPopoverComponent, MockComponent],
-            imports: [
-                IonicModule,
-                RouterTestingModule.withRoutes([
-                    { path: 'student/list/:active', component: MockComponent },
-                ]),
-            ],
-            providers: [
-                {
-                    provide: PopoverController,
-                    useValue: new MockPopOverController(),
-                },
-            ],
-        }).compileComponents();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [StudentListPopoverComponent, MockComponent],
+                imports: [
+                    IonicModule,
+                    RouterTestingModule.withRoutes([
+                        {
+                            path: 'student/list/:active',
+                            component: MockComponent,
+                        },
+                    ]),
+                ],
+                providers: [
+                    {
+                        provide: PopoverController,
+                        useValue: new MockPopOverController(),
+                    },
+                ],
+            }).compileComponents();
+        })
+    );
 
     beforeEach(() => {
         fixture = TestBed.createComponent(StudentListPopoverComponent);

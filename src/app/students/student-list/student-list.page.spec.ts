@@ -5,6 +5,7 @@ import {
     fakeAsync,
     TestBed,
     tick,
+    waitForAsync,
 } from '@angular/core/testing';
 import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -52,63 +53,75 @@ describe('StudentListPage Active', () => {
         },
     };
 
-    beforeEach(async(() => {
-        activatedRoute = new ActivatedRouteStub({ active: 'active' });
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            activatedRoute = new ActivatedRouteStub({ active: 'active' });
+        })
+    );
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [StudentListPage],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [
-                CommonComponentsModule,
-                IonicModule,
-                RouterTestingModule.withRoutes([
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [StudentListPage],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                imports: [
+                    CommonComponentsModule,
+                    IonicModule,
+                    RouterTestingModule.withRoutes([
+                        {
+                            path: 'students/list/:active',
+                            component: StudentListPage,
+                        },
+                    ]),
+                ],
+                providers: [
                     {
-                        path: 'students/list/:active',
-                        component: StudentListPage,
+                        provide: PopoverController,
+                        useValue: new MockPopOverController(),
                     },
-                ]),
-            ],
-            providers: [
-                {
-                    provide: PopoverController,
-                    useValue: new MockPopOverController(),
-                },
-                { provide: ActivatedRoute, useValue: activatedRoute },
-                provideMockStore({ initialState }),
-            ],
-        }).compileComponents();
-    }));
+                    { provide: ActivatedRoute, useValue: activatedRoute },
+                    provideMockStore({ initialState }),
+                ],
+            }).compileComponents();
+        })
+    );
 
-    beforeEach(async(() => {
-        fixture = TestBed.createComponent(StudentListPage);
-        component = fixture.componentInstance;
-        store = TestBed.inject(Store);
-        spyOn(store, 'dispatch').and.callThrough();
-        fixture.detectChanges();
-    }));
+    beforeEach(
+        waitForAsync(() => {
+            fixture = TestBed.createComponent(StudentListPage);
+            component = fixture.componentInstance;
+            store = TestBed.inject(Store);
+            spyOn(store, 'dispatch').and.callThrough();
+            fixture.detectChanges();
+        })
+    );
 
-    it('should create active list', async(() => {
-        expect(component).toBeTruthy();
-        expect(component.listType).toEqual('active');
+    it(
+        'should create active list',
+        waitForAsync(() => {
+            expect(component).toBeTruthy();
+            expect(component.listType).toEqual('active');
 
-        fixture.detectChanges();
-        const app = fixture.nativeElement;
-        const title = app.querySelector('ion-title');
-        expect(title.textContent).toContain('Active Students');
-    }));
+            fixture.detectChanges();
+            const app = fixture.nativeElement;
+            const title = app.querySelector('ion-title');
+            expect(title.textContent).toContain('Active Students');
+        })
+    );
 
-    it('should create inactive list', async(() => {
-        activatedRoute.setParamMap({ active: 'inactive' });
-        expect(component).toBeTruthy();
-        expect(component.listType).toEqual('inactive');
+    it(
+        'should create inactive list',
+        waitForAsync(() => {
+            activatedRoute.setParamMap({ active: 'inactive' });
+            expect(component).toBeTruthy();
+            expect(component.listType).toEqual('inactive');
 
-        fixture.detectChanges();
-        const app = fixture.nativeElement;
-        const title = app.querySelector('ion-title');
-        expect(title.textContent).toContain('Inactive Students');
-    }));
+            fixture.detectChanges();
+            const app = fixture.nativeElement;
+            const title = app.querySelector('ion-title');
+            expect(title.textContent).toContain('Inactive Students');
+        })
+    );
 
     it('should show popover', fakeAsync(() => {
         const mockPopoverController = (component.popoverController as any) as MockPopOverController;

@@ -7,7 +7,7 @@
 //   let component: TechniqueListComponent;
 //   let fixture: ComponentFixture<TechniqueListComponent>;
 //
-//   beforeEach(async(() => {
+//   beforeEach(waitForAsync(() => {
 //     TestBed.configureTestingModule({
 //       declarations: [ TechniqueListComponent ],
 //       imports: [IonicModule.forRoot()]

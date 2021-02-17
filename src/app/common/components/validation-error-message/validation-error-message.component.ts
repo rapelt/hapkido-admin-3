@@ -14,7 +14,7 @@ import { AbstractControl, FormControl } from '@angular/forms';
 })
 export class ValidationErrorMessageComponent implements OnInit, OnChanges {
     @Input()
-    validationMessages: Array<{ type: string; message: string }>;
+    validationMessages: { type: string; message: string }[];
 
     @Input()
     formElement: AbstractControl;

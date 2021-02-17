@@ -20,10 +20,10 @@ export class VideoComponent implements OnInit, OnDestroy {
     @ViewChild('target', { static: true }) target: ElementRef;
 
     @Input() options: {
-        sources: Array<{
+        sources: {
             src: string;
             type: string;
-        }>;
+        }[];
         poster: string;
     };
 
