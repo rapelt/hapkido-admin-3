@@ -19,6 +19,7 @@ export interface EnvironementModel {
         download_graphs: boolean;
         techniques: boolean;
         io: boolean;
+        graphs: boolean;
     };
     file_upload_buckets: {
         video_uploads: string;

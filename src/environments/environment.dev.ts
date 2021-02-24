@@ -28,7 +28,8 @@ export const config: EnvironementModel = {
         cognito_login: true,
         download_graphs: true,
         techniques: true,
-        io: true,
+        io: false,
+        graphs: true,
     },
     file_upload_buckets: {
         video_uploads: 'hapkido-uploaded-videos-dev',

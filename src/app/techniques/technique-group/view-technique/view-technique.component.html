@@ -29,11 +29,11 @@
 
           <div class="media-list">
             <ion-list class="cy-media-list">
-              <div *ngIf="(technique | async).media.length === 0">
+              <div *ngIf="(technique | async)?.media?.length === 0">
                 <p class="no-media">Please add some media</p>
               </div>
               <ion-item class="cy-media-item" lines="none" [button]="media.uploadStatus === 'Uploaded' && media.file_type !== 'pdf'" [class]="'media-' + media.id"
-                        *ngFor="let media of (technique | async).media | mediaFilter: searchvalue; let i = index"
+                        *ngFor="let media of (technique | async)?.media | mediaFilter: searchvalue; let i = index"
                         (click)="goToMedia(media.id)" [disabled]="media.uploadStatus === 'Failed' || media.uploadStatus === 'Error'">
                 <ion-icon *ngIf="media.uploadStatus === 'Failed' || media.uploadStatus === 'Error'" name="close-circle-outline" color="danger" slot="start"></ion-icon>
                   <app-media-icon *ngIf="media.uploadStatus !== 'Failed' && media.uploadStatus !== 'Error'" class="cy-media-icon" slot="start" [filetype]="media.file_type"></app-media-icon>

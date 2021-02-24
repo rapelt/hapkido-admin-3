@@ -76,6 +76,14 @@ export class AppComponent implements OnInit, OnDestroy {
             });
         }
 
+        if (config.feature_toggle.graphs) {
+            this.appPages.push({
+                title: 'Graphs',
+                url: '/graphs',
+                icon: 'bar-chart',
+            });
+        }
+
         if (config.feature_toggle.io) {
             this.socketService.setupSocketConnection();
         }
