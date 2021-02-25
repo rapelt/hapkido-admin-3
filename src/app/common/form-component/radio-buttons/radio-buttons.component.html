@@ -1,3 +1,18 @@
-<p>
-  radio-buttons works!
-</p>
+<ion-list>
+  <ion-radio-group [formControl]="formElement" (ionChange)="doInput()" (blur)="doBlur()">
+    <ion-list-header>
+      <ion-label>
+        {{formData.label}}
+      </ion-label>
+    </ion-list-header>
+
+    <ion-item *ngFor="let option of formData.options">
+      <ion-label>{{option.name}}</ion-label>
+      <ion-radio mode="ios" slot="start" [value]="option.value"></ion-radio>
+    </ion-item>
+
+  </ion-radio-group>
+</ion-list>
+
+<app-validation-error-message [formElement]="formElement" [validationMessages]="formData?.validationMessages" [saveAttempted]="saveAttempted"></app-validation-error-message>
+

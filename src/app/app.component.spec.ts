@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { async, TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -41,32 +41,34 @@ describe('AppComponent', () => {
         },
     };
 
-    beforeEach(async(() => {
-        statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
-        splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
-        platformReadySpy = Promise.resolve();
-        platformSpy = jasmine.createSpyObj('Platform', {
-            ready: platformReadySpy,
-        });
+    beforeEach(
+        waitForAsync(() => {
+            statusBarSpy = jasmine.createSpyObj('StatusBar', ['styleDefault']);
+            splashScreenSpy = jasmine.createSpyObj('SplashScreen', ['hide']);
+            platformReadySpy = Promise.resolve();
+            platformSpy = jasmine.createSpyObj('Platform', {
+                ready: platformReadySpy,
+            });
 
-        TestBed.configureTestingModule({
-            declarations: [AppComponent],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            providers: [
-                { provide: StatusBar, useValue: statusBarSpy },
-                { provide: SplashScreen, useValue: splashScreenSpy },
-                { provide: Platform, useValue: platformSpy },
-                provideMockStore({ initialState }),
-            ],
-            imports: [
-                RouterTestingModule.withRoutes([]),
-                AuthLibModule.forRoot(config),
-            ],
-        }).compileComponents();
+            TestBed.configureTestingModule({
+                declarations: [AppComponent],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                providers: [
+                    { provide: StatusBar, useValue: statusBarSpy },
+                    { provide: SplashScreen, useValue: splashScreenSpy },
+                    { provide: Platform, useValue: platformSpy },
+                    provideMockStore({ initialState }),
+                ],
+                imports: [
+                    RouterTestingModule.withRoutes([]),
+                    AuthLibModule.forRoot(config),
+                ],
+            }).compileComponents();
 
-        store = TestBed.inject(Store);
-        spyOn(store, 'dispatch').and.callThrough();
-    }));
+            store = TestBed.inject(Store);
+            spyOn(store, 'dispatch').and.callThrough();
+        })
+    );
 
     it('should create the app', async () => {
         const fixture = TestBed.createComponent(AppComponent);
@@ -125,7 +127,7 @@ describe('AppComponent', () => {
         await fixture.detectChanges();
         const app = fixture.nativeElement;
         const menuItems = app.querySelectorAll('ion-label');
-        expect(menuItems.length).toEqual(6);
+        expect(menuItems.length).toEqual(7);
         expect(menuItems[0].textContent).toContain('Home');
         expect(menuItems[1].textContent).toContain('Students');
         expect(menuItems[2].textContent).toContain('Classes');
@@ -144,7 +146,7 @@ describe('AppComponent', () => {
         const app = fixture.nativeElement;
 
         const menuItems = app.querySelectorAll('ion-item');
-        expect(menuItems.length).toEqual(6);
+        expect(menuItems.length).toEqual(7);
         expect(menuItems[0].getAttribute('ng-reflect-router-link')).toEqual(
             '/home'
         );

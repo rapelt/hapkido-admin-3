@@ -4,6 +4,7 @@ import {
     ComponentFixture,
     TestBed,
     fakeAsync,
+    waitForAsync,
 } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,30 +38,35 @@ describe('AddStudentPage', () => {
         },
     };
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [AddStudentPage],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [
-                FormsModule,
-                ReactiveFormsModule,
-                BrowserModule,
-                CommonComponentsModule,
-                IonicModule,
-                AuthLibModule.forRoot(config),
-                RouterTestingModule.withRoutes(routes),
-            ],
-            providers: [provideMockStore({ initialState }), CapitialisePipe],
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [AddStudentPage],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                imports: [
+                    FormsModule,
+                    ReactiveFormsModule,
+                    BrowserModule,
+                    CommonComponentsModule,
+                    IonicModule,
+                    AuthLibModule.forRoot(config),
+                    RouterTestingModule.withRoutes(routes),
+                ],
+                providers: [
+                    provideMockStore({ initialState }),
+                    CapitialisePipe,
+                ],
+            }).compileComponents();
 
-        fixture = TestBed.createComponent(AddStudentPage);
-        component = fixture.componentInstance;
-        store = TestBed.inject(Store);
-        router = TestBed.inject(Router);
-        messageService = TestBed.inject(MessagesService);
-        spyOn(store, 'dispatch').and.callThrough();
-        fixture.detectChanges();
-    }));
+            fixture = TestBed.createComponent(AddStudentPage);
+            component = fixture.componentInstance;
+            store = TestBed.inject(Store);
+            router = TestBed.inject(Router);
+            messageService = TestBed.inject(MessagesService);
+            spyOn(store, 'dispatch').and.callThrough();
+            fixture.detectChanges();
+        })
+    );
 
     it('should create', () => {
         expect(component).toBeTruthy();

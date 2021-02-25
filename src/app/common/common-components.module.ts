@@ -26,15 +26,22 @@ import { TechniqueSetFilterPipe } from './pipes/technique-set-filter.pipe';
 import { TechniqueFilterPipe } from './pipes/technique-filter.pipe';
 import { MessageComponent } from './messages/message/message.component';
 import { MessagesService } from './messages/messages.service';
-import { SidePanelComponent } from './components/side-panel/side-panel.component';
 import { InputComponent } from './form-component/input/input.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TextAreaComponent } from './form-component/text-area/text-area.component';
 import { SelectGradeComponent } from './form-component/select-grade/select-grade.component';
 import { TagsComponent } from './form-component/tags/tags.component';
-import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { RouterModule } from '@angular/router';
-import { FilePickerComponent } from './components/file-picker/file-picker.component';
+import { SortTechniquesPipe } from './pipes/sort-techniques.pipe';
+import { SortTechniquesSetsPipe } from './pipes/sort-techniques-sets.pipe';
+import { RadioButtonsComponent } from './form-component/radio-buttons/radio-buttons.component';
+import { MediaHelperService } from './helper/media-helper.service';
+import { VideoComponent } from './components/video/video.component';
+import { ImageComponent } from './components/image/image.component';
+import { DocumentComponent } from './components/document/document.component';
+import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { MediaFilterPipe } from './pipes/media-filter.pipe';
+import { TagBadgesComponent } from './components/tag-badges/tag-badges.component';
 
 @NgModule({
     declarations: [
@@ -59,13 +66,18 @@ import { FilePickerComponent } from './components/file-picker/file-picker.compon
         TechniqueSetFilterPipe,
         TechniqueFilterPipe,
         MessageComponent,
-        SidePanelComponent,
         InputComponent,
         TextAreaComponent,
         SelectGradeComponent,
         TagsComponent,
-        BreadcrumbComponent,
-        FilePickerComponent,
+        SortTechniquesPipe,
+        SortTechniquesSetsPipe,
+        RadioButtonsComponent,
+        VideoComponent,
+        ImageComponent,
+        DocumentComponent,
+        MediaFilterPipe,
+        TagBadgesComponent,
     ],
     imports: [
         CommonModule,
@@ -73,17 +85,18 @@ import { FilePickerComponent } from './components/file-picker/file-picker.compon
         FormsModule,
         ReactiveFormsModule,
         RouterModule,
+        NgxExtendedPdfViewerModule,
     ],
     providers: [
         GradeHelper,
         TechniqueSetFilterService,
         SocketioService,
+        MediaHelperService,
         MessagesService,
     ],
     exports: [
         StudentListComponent,
         CapitialisePipe,
-        CommonModule,
         AlphabeticalStudentsPipe,
         AlphabeticalFamilyPipe,
         GradeBadgeComponent,
@@ -103,13 +116,17 @@ import { FilePickerComponent } from './components/file-picker/file-picker.compon
         TechniqueSetFilterPipe,
         TechniqueFilterPipe,
         MessageComponent,
-        SidePanelComponent,
         InputComponent,
         TextAreaComponent,
         SelectGradeComponent,
         TagsComponent,
-        BreadcrumbComponent,
-        FilePickerComponent,
+        SortTechniquesPipe,
+        RadioButtonsComponent,
+        VideoComponent,
+        ImageComponent,
+        DocumentComponent,
+        MediaFilterPipe,
+        TagBadgesComponent,
     ],
 })
 export class CommonComponentsModule {}

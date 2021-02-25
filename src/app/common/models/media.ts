@@ -6,7 +6,9 @@ export interface MediaModel {
     folder: string;
     size?: string; // Thumbnail, Full
     tags?: number[];
-    uploadStatus: string;
+    uploadStatus: string | number;
     publishedStatus: string;
     views: number;
+    url: string;
+    updatedAt?: Date;
 }

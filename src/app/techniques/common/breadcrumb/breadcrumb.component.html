@@ -1,0 +1,9 @@
+<div class="breadcrumbs">
+  <div *ngFor="let breadcrumb of breadcrumbs; let i = index" class="breadcrumb">
+    <button [ngClass]="{ bold: breadcrumbs.length -1 === i}" [class]="'cy-breadcrumb-' + i" [routerLink]="breadcrumb.navigate" routerDirection="backward">
+      {{breadcrumb.name}}
+    </button>
+    <ion-icon *ngIf="breadcrumbs.length -1 > i" name="chevron-forward-outline"></ion-icon>
+  </div>
+
+</div>

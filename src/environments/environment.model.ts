@@ -1,4 +1,5 @@
 export interface EnvironementModel {
+    projectName: string;
     environmentName: string;
     ionicEnvName: string;
     APIEndpoint: string;
@@ -17,6 +18,12 @@ export interface EnvironementModel {
         cognito_login: boolean;
         download_graphs: boolean;
         techniques: boolean;
+        io: boolean;
+        graphs: boolean;
+    };
+    file_upload_buckets: {
+        video_uploads: string;
+        other_upload: string;
     };
     static_image_location: string;
     default_logo: string;

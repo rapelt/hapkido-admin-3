@@ -80,7 +80,8 @@ export class TagsComponent extends FormElementDirective implements OnInit {
         }
 
         return false;
-    }
+    };
+
     compareWith = this.compareWithFn;
 
     ngOnInit() {
@@ -123,6 +124,11 @@ export class TagsComponent extends FormElementDirective implements OnInit {
                     name: 'name',
                     type: 'text',
                     placeholder: 'Tag',
+                },
+                {
+                    name: 'colour',
+                    type: 'text',
+                    placeholder: 'Colour #111111',
                 },
             ],
             buttons: [

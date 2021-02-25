@@ -1,4 +1,10 @@
-import { async, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import {
+    async,
+    fakeAsync,
+    TestBed,
+    tick,
+    waitForAsync,
+} from '@angular/core/testing';
 import { ViewStudentGeneralComponent } from './view-student-general.component';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { provideMockStore } from '@ngrx/store/testing';
@@ -22,25 +28,27 @@ describe('ViewStudentPageGeneral', () => {
         ...popululdatedInitialState(),
     };
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [ViewStudentGeneralComponent],
-            schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [
-                CommonModule,
-                RouterTestingModule.withRoutes([]),
-                HttpClientTestingModule,
-            ],
-            providers: [provideMockStore({ initialState })],
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [ViewStudentGeneralComponent],
+                schemas: [CUSTOM_ELEMENTS_SCHEMA],
+                imports: [
+                    CommonModule,
+                    RouterTestingModule.withRoutes([]),
+                    HttpClientTestingModule,
+                ],
+                providers: [provideMockStore({ initialState })],
+            }).compileComponents();
 
-        fixture = TestBed.createComponent(ViewStudentGeneralComponent);
-        component = fixture.componentInstance;
-        store = TestBed.inject(Store);
-        http = TestBed.inject(HttpClientTestingModule);
-        spyOn(store, 'dispatch').and.callThrough();
-        spyOn(http, 'post').and.returnValue(true);
+            fixture = TestBed.createComponent(ViewStudentGeneralComponent);
+            component = fixture.componentInstance;
+            store = TestBed.inject(Store);
+            http = TestBed.inject(HttpClientTestingModule);
+            spyOn(store, 'dispatch').and.callThrough();
+            spyOn(http, 'post').and.returnValue(true);
 
-        fixture.detectChanges();
-    }));
+            fixture.detectChanges();
+        })
+    );
 });

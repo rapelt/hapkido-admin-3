@@ -39,7 +39,7 @@ export class AddGradingComponent implements OnInit, OnDestroy {
     subsc;
     subsc2;
 
-    gradings: Array<{
+    gradings: {
         beforeGrading: number;
         afterGrading: number;
         hbId: string;
@@ -48,7 +48,7 @@ export class AddGradingComponent implements OnInit, OnDestroy {
             lastname: string;
         };
         didGrade: boolean;
-    }>;
+    }[];
 
     studentsWhoAreLoading: string[] = [];
 

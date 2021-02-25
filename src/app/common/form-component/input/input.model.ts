@@ -4,5 +4,6 @@ export interface InputModel {
     id: string;
     label: string;
     validators: ValidatorFn | ValidatorFn[];
-    validationMessages: Array<{ type: string; message; string }>;
+    validationMessages: { type: string; message; string }[];
+    options?: [{ name: string; value: string | number }];
 }

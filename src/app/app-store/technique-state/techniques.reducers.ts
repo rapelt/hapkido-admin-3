@@ -2,6 +2,7 @@ import { ActionTypes, TechniquesActions } from './techniques.actions';
 import * as _ from 'underscore';
 import { TechniqueModel } from '../../common/models/technique';
 import { TechniqueSetModel } from '../../common/models/technique-set';
+import { MediaModel } from '../../common/models/media';
 
 export const TECHNIQUES_FEATURE_NAME = 'techniques';
 
@@ -96,6 +97,15 @@ export function techniquesReducer(
                 ...state,
                 selectedTechnique: technique,
             };
+        case ActionTypes.Add_or_update_media:
+            return addOrUpdateMediaByName(state, action.payload);
+        case ActionTypes.Update_media_progress:
+            return updateMediaProgressById(
+                state,
+                action.payload.progress,
+                action.payload.mediaId,
+                action.payload.techniqueId
+            );
         case ActionTypes.Reset_selected_technique:
             return {
                 ...state,
@@ -111,9 +121,99 @@ export function techniquesReducer(
     }
 }
 
-function getIndexOfTechnique(
-    techniques: TechniqueModel[],
-    hbId: string
-): number {
-    return _.findIndex(techniques, { hbId: hbId });
+function getIndexOfTechnique(techniques: TechniqueModel[], id: number): number {
+    return _.findIndex(techniques, { id: id });
+}
+
+function getIndexOfMediaByName(medias: MediaModel[], fileName: string): number {
+    return _.findIndex(medias, { file_name: fileName });
+}
+
+function getIndexOfMediaById(medias: MediaModel[], id: number): number {
+    return _.findIndex(medias, { id: id });
+}
+
+function getTechniqueId(mediaFileName: string): number {
+    return parseInt(mediaFileName.split('_')[0], 10);
+}
+
+function addOrUpdateMediaByName(
+    state: TechniquesState,
+    media: Partial<MediaModel>
+) {
+    const techniqueId = getTechniqueId(media.file_name);
+    const techniqueIndex = getIndexOfTechnique(state.techniques, techniqueId);
+
+    let indexMedia = getIndexOfMediaByName(
+        state.techniques[techniqueIndex].media,
+        media.file_name
+    );
+
+    let isNew = false;
+
+    if (indexMedia === -1) {
+        isNew = true;
+        indexMedia = state.techniques[techniqueIndex].media.length;
+    }
+
+    const mediaToUpdate = {
+        ...state.techniques[techniqueIndex].media[indexMedia],
+        ...media,
+    };
+
+    const updatedTechnique = {
+        ...state.techniques[techniqueIndex],
+        media: [...state.techniques[techniqueIndex].media],
+    };
+
+    if (isNew) {
+        updatedTechnique.media.push(mediaToUpdate);
+    } else {
+        updatedTechnique.media[indexMedia] = mediaToUpdate;
+    }
+
+    const updatedTechniques = [...state.techniques];
+
+    updatedTechniques[techniqueIndex] = updatedTechnique;
+
+    return {
+        ...state,
+        techniques: updatedTechniques,
+    };
+}
+
+function updateMediaProgressById(
+    state: TechniquesState,
+    progress: number | string,
+    mediaId: number,
+    techniqueId: number
+) {
+    const techniqueIndex = getIndexOfTechnique(state.techniques, techniqueId);
+
+    const indexMedia = getIndexOfMediaById(
+        state.techniques[techniqueIndex].media,
+        mediaId
+    );
+
+    const mediaToUpdate = {
+        ...state.techniques[techniqueIndex].media[indexMedia],
+    };
+
+    mediaToUpdate.uploadStatus = progress === 100.0 ? 'Uploaded' : progress;
+
+    const updatedTechnique = {
+        ...state.techniques[techniqueIndex],
+        media: [...state.techniques[techniqueIndex].media],
+    };
+
+    updatedTechnique.media[indexMedia] = mediaToUpdate;
+
+    const updatedTechniques = [...state.techniques];
+
+    updatedTechniques[techniqueIndex] = updatedTechnique;
+
+    return {
+        ...state,
+        techniques: updatedTechniques,
+    };
 }

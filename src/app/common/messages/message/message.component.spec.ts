@@ -5,6 +5,7 @@ import {
     fakeAsync,
     TestBed,
     tick,
+    waitForAsync,
 } from '@angular/core/testing';
 import { BrowserModule } from '@angular/platform-browser';
 import { IonicModule, ToastController } from '@ionic/angular';
@@ -18,28 +19,30 @@ describe('MessageComponent', () => {
     let component: MessageComponent;
     let fixture: ComponentFixture<MessageComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [MessageComponent],
-            imports: [CommonModule, BrowserModule, IonicModule],
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [MessageComponent],
+                imports: [CommonModule, BrowserModule, IonicModule],
 
-            providers: [
-                {
-                    provide: ToastController,
-                    useValue: new MockToastController(),
-                },
-            ],
-        }).compileComponents();
+                providers: [
+                    {
+                        provide: ToastController,
+                        useValue: new MockToastController(),
+                    },
+                ],
+            }).compileComponents();
 
-        fixture = TestBed.createComponent(MessageComponent);
-        component = fixture.componentInstance;
+            fixture = TestBed.createComponent(MessageComponent);
+            component = fixture.componentInstance;
 
-        component.messagesService.updateError = new Subject();
-        component.messagesService.updateSuccess = new Subject();
-        component.messagesService.updateInfo = new Subject();
+            component.messagesService.updateError = new Subject();
+            component.messagesService.updateSuccess = new Subject();
+            component.messagesService.updateInfo = new Subject();
 
-        fixture.detectChanges();
-    }));
+            fixture.detectChanges();
+        })
+    );
 
     it('should create', () => {
         expect(component).toBeTruthy();

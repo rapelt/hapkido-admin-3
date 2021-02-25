@@ -2,7 +2,7 @@
   <!--  <ion-icon name="none" slot="start"></ion-icon>-->
   <ion-label position="stacked">{{formData.label}}</ion-label>
 
-  <ion-select name="grade" okText="Okay" cancelText="Cancel" [formControl]="formElement" (blur)="doBlur()" (ngModelChange)="doInput()">
+  <ion-select class="cy-grade-selector" name="grade" okText="Okay" cancelText="Cancel" [formControl]="formElement" (blur)="doBlur()" (ngModelChange)="doInput()">
     <ion-select-option [value]="grade.id" *ngFor="let grade of grades">{{grade.longName}}</ion-select-option>
   </ion-select>
 

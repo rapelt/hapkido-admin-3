@@ -18,6 +18,8 @@ import {
 import { LoadingSpinnerService } from './common/components/loading-spinner/loading-spinner.service';
 import { SocketioService } from './common/services/socketio.service';
 import { config } from '../environments/environment';
+import { Router } from '@angular/router';
+import { MessagesService } from './common/messages/messages.service';
 
 @Component({
     selector: 'app-root',
@@ -58,7 +60,9 @@ export class AppComponent implements OnInit, OnDestroy {
         private authService: AuthenticationServices,
         private menu: MenuController,
         private loadingSpinnerService: LoadingSpinnerService,
-        private socketService: SocketioService
+        private socketService: SocketioService,
+        private router: Router,
+        private messageService: MessagesService
     ) {
         this.initializeApp();
     }
@@ -72,7 +76,23 @@ export class AppComponent implements OnInit, OnDestroy {
             });
         }
 
-        this.socketService.setupSocketConnection();
+        if (config.feature_toggle.graphs) {
+            this.appPages.push({
+                title: 'Graphs',
+                url: '/graphs',
+                icon: 'bar-chart',
+            });
+        }
+
+        if (config.feature_toggle.io) {
+            this.socketService.setupSocketConnection();
+        }
+
+        this.authState._messageInEvent.pipe().subscribe(message => {
+            console.log(message);
+            this.messageService.updateError.next(message.message);
+        });
+
         this.authService.load().then(() => {
             this.shouldShowSignOut =
                 this.authState.isLoggedIn === AuthStatesEnum.LoggedIn;
@@ -83,6 +103,10 @@ export class AppComponent implements OnInit, OnDestroy {
             if (this.shouldShowSignOut) {
                 this.loggedIn(this.authState.isLoggedIn);
             }
+
+            this.authState._userAttributesEvent.pipe().subscribe(attributes => {
+                this.store.dispatch(new SetUserAttributes(attributes));
+            });
 
             this.authState._isLoggedInEvent.pipe().subscribe(isLoggedIn => {
                 this.loggedIn(isLoggedIn);
@@ -111,6 +135,12 @@ export class AppComponent implements OnInit, OnDestroy {
             this.store.dispatch(
                 new SetUserAttributes(this.authState.userAttributes)
             );
+        }
+
+        console.log('Sign in is at url: ', this.router.url);
+        if (this.router.url === '/authentication/sign-in') {
+            console.log('Navigating to home: ', '/home');
+            this.router.navigateByUrl('/home');
         }
     }
 

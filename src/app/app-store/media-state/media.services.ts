@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpRequest, HttpXhrBackend } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { config } from '../../../environments/environment';
 import { MediaModel } from '../../common/models/media';
@@ -9,7 +9,10 @@ import { MediaModel } from '../../common/models/media';
 export class MediaServices {
     mediaUrl = 'http://localhost:8080/media/';
 
-    constructor(private httpClient: HttpClient) {
+    constructor(
+        private httpClient: HttpClient,
+        private httpXHR: HttpXhrBackend
+    ) {
         this.mediaUrl = config['APIEndpoint'] + 'media/';
     }
 
@@ -21,16 +24,33 @@ export class MediaServices {
         return this.httpClient.get(this.mediaUrl + '' + id);
     }
 
-    addNewMedia(media: MediaModel, file: any) {
-        return this.httpClient.post(this.mediaUrl + 'create', [media, file]);
+    addNewMedia(media: Partial<MediaModel>) {
+        return this.httpClient.post(this.mediaUrl + 'create', media);
     }
 
-    uploadNewMedia(media: MediaModel, file: any) {
-        console.log('Uploading Media');
-        return this.httpClient.post(this.mediaUrl + 'upload', {
+    editMedia(media: Partial<MediaModel>) {
+        return this.httpClient.post(
+            this.mediaUrl + 'update/' + media.id,
+            media
+        );
+    }
+
+    getAuth(filename, filetype, folder, bucket, media: Partial<MediaModel>) {
+        return this.httpClient.post(this.mediaUrl + 'authenticateUploadMedia', {
+            filename,
+            filetype,
+            folder,
+            bucket,
             media,
-            file,
         });
+    }
+
+    uploadNewMedia(fileData: any, media: Partial<MediaModel>, auth: any) {
+        const req = new HttpRequest<unknown>('PUT', auth.form, fileData, {
+            reportProgress: true,
+        });
+
+        return this.httpXHR.handle(req);
     }
 
     updateMedia(media: MediaModel) {

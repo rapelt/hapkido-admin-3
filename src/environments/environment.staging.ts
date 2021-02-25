@@ -5,6 +5,7 @@ export const environment = {
 };
 
 export const config: EnvironementModel = {
+    projectName: 'Hapkido Brisbane Administrators',
     environmentName: 'Staging Environment',
     ionicEnvName: 'staging',
     APIEndpoint:
@@ -29,6 +30,12 @@ export const config: EnvironementModel = {
         cognito_login: true,
         download_graphs: false,
         techniques: true,
+        io: false,
+        graphs: true,
+    },
+    file_upload_buckets: {
+        video_uploads: 'hapkido-uploaded-videos-dev',
+        other_upload: 'hapkido-convert-videos-dev',
     },
     static_image_location:
         'https://hapkido-convert-videos.s3-ap-southeast-2.amazonaws.com/static_images/',
