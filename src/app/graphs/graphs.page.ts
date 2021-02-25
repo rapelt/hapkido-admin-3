@@ -71,9 +71,15 @@ export class GraphsPage implements OnInit {
     }
 
     downloadFile() {
+        const values = this.graphForm.value;
+
         console.log('click');
         this.exportPlugin.downloadFile('csv', {
-            filename: 'MyFile',
+            filename:
+                'hapkido-attendance-' +
+                new Date(values.startDate).toISOString().slice(0, 10) +
+                ' - ' +
+                new Date(values.endDate).toISOString().slice(0, 10),
             columnHeaders: true,
         });
     }
