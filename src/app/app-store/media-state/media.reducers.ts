@@ -1,9 +1,5 @@
 import { ActionTypes, MediaActions } from './media.actions';
 import { MediaModel } from '../../common/models/media';
-import { ClassModel } from '../../common/models/class';
-import * as _ from 'underscore';
-import { Media } from 'aws-sdk/clients/transcribeservice';
-import { ClassesState } from '../classes-state/classes.reducers';
 
 export const MEDIA_FEATURE_NAME = 'media';
 

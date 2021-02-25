@@ -29,8 +29,9 @@ export const config: EnvironementModel = {
     feature_toggle: {
         cognito_login: true,
         download_graphs: false,
-        techniques: false,
-        io: true,
+        techniques: true,
+        io: false,
+        graphs: true,
     },
     file_upload_buckets: {
         video_uploads: 'hapkido-uploaded-videos',

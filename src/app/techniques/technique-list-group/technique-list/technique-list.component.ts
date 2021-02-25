@@ -35,10 +35,10 @@ export class TechniqueListComponent extends PageComponent
     techniqueSetId: number;
     techniquesSet: Observable<TechniqueSetModel>;
 
-    breadcrumbs: Array<{
+    breadcrumbs: {
         name: string;
         navigate: string;
-    }> = [];
+    }[] = [];
 
     constructor(
         private store: Store<AppState>,

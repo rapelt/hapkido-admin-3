@@ -1,4 +1,9 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {
+    async,
+    ComponentFixture,
+    TestBed,
+    waitForAsync,
+} from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { AppComponent } from '../../../app.component';
 import { GradeHelper } from '../../helper/grade/grade';
@@ -9,18 +14,20 @@ describe('GradeBadgeComponent', () => {
     let component: GradeBadgeComponent;
     let fixture: ComponentFixture<GradeBadgeComponent>;
 
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [GradeBadgeComponent],
-            providers: [GradeHelper],
-            imports: [IonicModule],
-        }).compileComponents();
+    beforeEach(
+        waitForAsync(() => {
+            TestBed.configureTestingModule({
+                declarations: [GradeBadgeComponent],
+                providers: [GradeHelper],
+                imports: [IonicModule],
+            }).compileComponents();
 
-        fixture = TestBed.createComponent(GradeBadgeComponent);
-        component = fixture.componentInstance;
-        component.grade = 1;
-        fixture.detectChanges();
-    }));
+            fixture = TestBed.createComponent(GradeBadgeComponent);
+            component = fixture.componentInstance;
+            component.grade = 1;
+            fixture.detectChanges();
+        })
+    );
 
     it('should create', () => {
         expect(component).toBeTruthy();

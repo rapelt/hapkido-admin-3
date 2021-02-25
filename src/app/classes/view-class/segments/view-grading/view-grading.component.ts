@@ -18,7 +18,7 @@ export class ViewGradingComponent implements OnInit, OnDestroy {
 
     subsc;
 
-    gradings: Array<{
+    gradings: {
         beforeGrading: number;
         afterGrading: number;
         hbId: string;
@@ -26,7 +26,7 @@ export class ViewGradingComponent implements OnInit, OnDestroy {
             firstname: string;
             lastname: string;
         };
-    }> = [];
+    }[] = [];
 
     constructor(
         public studentHelper: StudentsHelper,

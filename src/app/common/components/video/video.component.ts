@@ -8,7 +8,7 @@ import {
     ViewEncapsulation,
 } from '@angular/core';
 
-import videojs from 'video.js';
+import videojs from 'video.js/dist/alt/video.core.novtt.js';
 
 @Component({
     selector: 'app-video',
@@ -20,10 +20,10 @@ export class VideoComponent implements OnInit, OnDestroy {
     @ViewChild('target', { static: true }) target: ElementRef;
 
     @Input() options: {
-        sources: Array<{
+        sources: {
             src: string;
             type: string;
-        }>;
+        }[];
         poster: string;
     };
 

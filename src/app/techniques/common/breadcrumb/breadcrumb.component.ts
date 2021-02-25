@@ -8,10 +8,10 @@ import { Router } from '@angular/router';
 })
 export class BreadcrumbComponent implements OnInit {
     @Input()
-    breadcrumbs: Array<{
+    breadcrumbs: {
         name: string;
         navigate: string;
-    }>;
+    }[];
 
     constructor(public router: Router) {}
 

@@ -94,6 +94,13 @@ const routes: Routes = [
         runGuardsAndResolvers: 'always',
         resolve: { data: ClassesDataDispatcher },
     },
+    {
+        path: 'graphs',
+        loadChildren: () =>
+            import('./graphs/graphs.module').then(m => m.GraphsPageModule),
+        canActivate: [AuthenticationGuard, AdminGuard],
+        runGuardsAndResolvers: 'always',
+    },
 ];
 
 @NgModule({

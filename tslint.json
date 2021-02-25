@@ -74,7 +74,6 @@
     "no-trailing-whitespace": true,
     "no-unnecessary-initializer": true,
     "no-unused-expression": true,
-    "no-use-before-declare": true,
     "no-var-keyword": true,
     "object-literal-sort-keys": false,
     "one-line": [
@@ -140,6 +139,6 @@
     "no-output-rename": true,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
-    "directive-class-suffix": true
+    "directive-class-suffix": false
   }
 }

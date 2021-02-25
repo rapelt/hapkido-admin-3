@@ -1,0 +1,75 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button class="cy-menu-button"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      Graphs
+    </ion-title>
+    <ion-buttons slot="end">
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  <div *ngIf="!graphGenerated">
+
+  <form [formGroup]="graphForm">
+
+    <ion-list>
+      <ion-item  lines="inset" class="cy-joining-date">
+        <ion-icon name="calendar" color="tertiary" slot="start"></ion-icon>
+        <ion-label position="floating">Start Date</ion-label>
+        <ion-datetime display-format="DD/MM/YYYY" formControlName="startDate" name="startDate" type="text"></ion-datetime>
+      </ion-item>
+      <app-validation-error-message [formElement]="graphForm.get('startDate')" [validationMessages]="validation_messages.startDate" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+
+      <ion-item  lines="inset" class="cy-joining-date">
+        <ion-icon name="calendar" color="tertiary" slot="start"></ion-icon>
+        <ion-label position="floating">End Date</ion-label>
+        <ion-datetime display-format="DD/MM/YYYY" formControlName="endDate" name="endDate" type="text"></ion-datetime>
+      </ion-item>
+      <app-validation-error-message [formElement]="graphForm.get('endDate')" [validationMessages]="validation_messages.endDate" [saveAttempted]="saveAttempted"></app-validation-error-message>
+
+    </ion-list>
+  </form>
+  </div>
+
+
+  <div class="spinner" *ngIf="!loaded">
+    <ion-spinner></ion-spinner>
+  </div>
+
+
+  <div id="example"></div>
+
+  <div>
+  </div>
+
+
+
+<!--  <div>-->
+<!--    <hot-table-->
+<!--            id="example"-->
+<!--            class="hot">-->
+<!--&lt;!&ndash;      <hot-column data="id" [readOnly]="true" title="ID"></hot-column>&ndash;&gt;-->
+<!--&lt;!&ndash;      <hot-column data="name" title="Full name"></hot-column>&ndash;&gt;-->
+<!--&lt;!&ndash;      <hot-column data="address" title="Street name"></hot-column>&ndash;&gt;-->
+<!--    </hot-table>-->
+<!--  </div>-->
+
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <div class="half-button-size">
+      <ion-button *ngIf="!graphGenerated" (click)="save()" class="cy-generate-graph" color="tertiary" expand="full" type="submit">Generate Graph
+      </ion-button>
+      <ion-button *ngIf="graphGenerated" (click)="restart()" color="secondary" expand="full">Restart</ion-button>
+      <ion-button *ngIf="graphGenerated" (click)="downloadFile()" class="cy-download-graph" color="tertiary" expand="full" type="submit">Download Graph</ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>

@@ -141,12 +141,12 @@ describe('View Technique', function() {
     cy.get('.cy-textarea-description').type(technique.description);
 
     cy.get('.cy-grade-selector').click();
-    cy.get('#alert-input-2-3 > .alert-button-inner > .alert-radio-label').click();
+    cy.get('#alert-input-1-3 > .alert-button-inner > .alert-radio-label').click();
     cy.get('.alert-button-group > :nth-child(2) > .alert-button-inner').click();
 
     cy.get('.cy-tags-selector').click();
-    cy.get('#alert-input-3-2 > .alert-button-inner > .alert-checkbox-label').click();
-    cy.get('#alert-input-3-4 > .alert-button-inner > .alert-checkbox-label').click();
+    cy.get('#alert-input-2-2 > .alert-button-inner > .alert-checkbox-label').click();
+    cy.get('#alert-input-2-4 > .alert-button-inner > .alert-checkbox-label').click();
     cy.get('.alert-button-group > :nth-child(2) > .alert-button-inner').click()
 
     cy.get('.cy-save').click();

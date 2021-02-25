@@ -7,5 +7,14 @@
     "allowMixedContent": true,
     "captureInput": true,
     "webContentsDebuggingEnabled": true
+  },
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": true,
+      "androidScaleType": "CENTER_CROP",
+      "showSpinner": true,
+      "splashFullScreen": false,
+      "splashImmersive": false
+    }
   }
 }
