@@ -102,6 +102,22 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
                 ...state,
                 students: activatedStudentsList,
             };
+        case ActionTypes.Edit_email_success:
+            const emailStudentId = action.payload.hbId;
+            const emailStudentIndex = state.students.findIndex(s => {
+                return s.hbId.toLowerCase() === emailStudentId.toLowerCase();
+            });
+
+            const emailStudentsList = [...state.students];
+            emailStudentsList[emailStudentIndex] = {
+                ...emailStudentsList[emailStudentIndex],
+                email: action.payload.email,
+            };
+
+            return {
+                ...state,
+                students: emailStudentsList,
+            };
 
         case ActionTypes.Deactivate_student_success:
             const deactivatesStudentId: string = action.payload;
@@ -121,6 +137,18 @@ export function studentsReducer(state = initialState, action: StudentsActions) {
                 ...state,
                 students: deactivatedStudentsList,
             };
+        case ActionTypes.Deactivate_student_in_app_success:
+            return activation(action.payload, state, false, 'hasAppAccess');
+        case ActionTypes.Activate_student_in_app_success:
+            return activation(action.payload, state, true, 'hasAppAccess');
+        case ActionTypes.Create_student_login_success:
+            const loginState = activation(
+                action.payload,
+                state,
+                true,
+                'hasAppLogin'
+            );
+            return activation(action.payload, loginState, true, 'hasAppAccess');
         default:
             return state;
     }
@@ -141,4 +169,22 @@ function updateGradingState(state, payload): StudentsState {
 
 function getIndexOfStudent(students: StudentModel[], hbId: string): number {
     return _.findIndex(students, { hbId: hbId });
+}
+
+function activation(payload, state, activationState, property) {
+    const id: string = payload;
+    const studentIndex = state.students.findIndex(s => {
+        return s.hbId.toLowerCase() === id.toLowerCase();
+    });
+
+    const studentsList = [...state.students];
+    studentsList[studentIndex] = {
+        ...studentsList[studentIndex],
+        [property]: activationState,
+    };
+
+    return {
+        ...state,
+        students: studentsList,
+    };
 }

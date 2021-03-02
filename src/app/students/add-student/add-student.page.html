@@ -38,12 +38,12 @@
       <app-validation-error-message [formElement]="newStudentForm.get('lastname')" [validationMessages]="validation_messages.lastname" [saveAttempted]="saveAttempted"></app-validation-error-message>
 
 
-      <ion-item  lines="inset">
-        <ion-icon name="none" slot="start"></ion-icon>
-        <ion-label position="floating">Email</ion-label>
-        <ion-input formControlName="email" name="email" type="email"></ion-input>
-      </ion-item>
-      <app-validation-error-message [formElement]="newStudentForm.get('email')" [validationMessages]="validation_messages.email" [saveAttempted]="saveAttempted"></app-validation-error-message>
+<!--      <ion-item  lines="inset">-->
+<!--        <ion-icon name="none" slot="start"></ion-icon>-->
+<!--        <ion-label position="floating">Email</ion-label>-->
+<!--        <ion-input formControlName="email" name="email" type="email"></ion-input>-->
+<!--      </ion-item>-->
+<!--      <app-validation-error-message [formElement]="newStudentForm.get('email')" [validationMessages]="validation_messages.email" [saveAttempted]="saveAttempted"></app-validation-error-message>-->
 
 
       <ion-item  lines="inset" class="cy-joining-date">
@@ -82,13 +82,13 @@
         </ion-select>
       </ion-item>
 
-      <ion-item  lines="inset" class="cy-payment-type">
-        <ion-icon name="card" color="tertiary" slot="start"></ion-icon>
-        <ion-label position="floating">Payment Type</ion-label>
-        <ion-select name="paymentType" okText="Okay" cancelText="Cancel" formControlName="paymentType">
-          <ion-select-option [value]="paymentType" *ngFor="let paymentType of paymentTypes">{{paymentType}}</ion-select-option>
-        </ion-select>
-      </ion-item>
+<!--      <ion-item  lines="inset" class="cy-payment-type">-->
+<!--        <ion-icon name="card" color="tertiary" slot="start"></ion-icon>-->
+<!--        <ion-label position="floating">Payment Type</ion-label>-->
+<!--        <ion-select name="paymentType" okText="Okay" cancelText="Cancel" formControlName="paymentType">-->
+<!--          <ion-select-option [value]="paymentType" *ngFor="let paymentType of paymentTypes">{{paymentType}}</ion-select-option>-->
+<!--        </ion-select>-->
+<!--      </ion-item>-->
     </ion-list>
 
   </form>

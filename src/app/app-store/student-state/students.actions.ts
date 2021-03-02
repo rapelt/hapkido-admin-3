@@ -16,6 +16,9 @@ export enum ActionTypes {
     Edit_student = '[Students] Edit Student',
     Edit_student_success = '[Students] Edit Student Success',
 
+    Edit_email = '[Students] Edit Email',
+    Edit_email_success = '[Students] Edit Email Success',
+
     Set_selected_student = '[Students] Set selected student',
     Reset_selected_student = '[Students] Reset selected student',
 
@@ -24,6 +27,15 @@ export enum ActionTypes {
 
     Deactivate_student = '[Students] Deactivate Student',
     Deactivate_student_success = '[Students] Deactivate Student Success',
+
+    Activate_student_in_app = '[Students] Activate Student In App',
+    Activate_student_in_app_success = '[Students] Activate Student In App Success',
+
+    Deactivate_student_in_app = '[Students] Deactivate Student In App',
+    Deactivate_student_in_app_success = '[Students] Deactivate Student In App Success',
+
+    Create_student_login = '[Students] Create Student Login',
+    Create_student_login_success = '[Students] Create Student Login Success',
 
     Add_grading = '[Students] Add Grading',
     Add_grading_success = '[Students] Add Grading Success',
@@ -74,6 +86,18 @@ export class EditStudent implements Action {
     readonly type = ActionTypes.Edit_student;
 
     constructor(public payload: StudentModel) {}
+}
+
+export class EditEmail implements Action {
+    readonly type = ActionTypes.Edit_email;
+
+    constructor(public payload: { email: string; hbId: string }) {}
+}
+
+export class EditEmailSuccess implements Action {
+    readonly type = ActionTypes.Edit_email_success;
+
+    constructor(public payload: { email: string; hbId: string }) {}
 }
 
 export class EditStudentSuccess implements Action {
@@ -140,6 +164,42 @@ export class RemoveGradingSuccess implements Action {
     constructor(public payload: StudentModel) {}
 }
 
+export class ActivateStudentInAppSuccess implements Action {
+    readonly type = ActionTypes.Activate_student_in_app_success;
+
+    constructor(public payload: string) {}
+}
+
+export class ActivateStudentInApp implements Action {
+    readonly type = ActionTypes.Activate_student_in_app;
+
+    constructor(public payload: string) {}
+}
+
+export class DeactivateStudentInApp implements Action {
+    readonly type = ActionTypes.Deactivate_student_in_app;
+
+    constructor(public payload: string) {}
+}
+
+export class DeactivateStudentInAppSuccess implements Action {
+    readonly type = ActionTypes.Deactivate_student_in_app_success;
+
+    constructor(public payload: string) {}
+}
+
+export class CreateStudentLogin implements Action {
+    readonly type = ActionTypes.Create_student_login;
+
+    constructor(public payload: string) {}
+}
+
+export class CreateStudentLoginSuccess implements Action {
+    readonly type = ActionTypes.Create_student_login_success;
+
+    constructor(public payload: string) {}
+}
+
 export type StudentsActions =
     | GetAllStudents
     | GetAllStudentsSuccess
@@ -149,6 +209,8 @@ export type StudentsActions =
     | AddNewStudentSuccess
     | SetSelectedStudent
     | EditStudent
+    | EditEmail
+    | EditEmailSuccess
     | EditStudentSuccess
     | DeactivateStudent
     | DeactivateStudentSuccess
@@ -159,4 +221,10 @@ export type StudentsActions =
     | AddGradingSuccess
     | RemoveGrading
     | ClearLoadedStudents
+    | ActivateStudentInApp
+    | ActivateStudentInAppSuccess
+    | DeactivateStudentInApp
+    | DeactivateStudentInAppSuccess
+    | CreateStudentLogin
+    | CreateStudentLoginSuccess
     | RemoveGradingSuccess;

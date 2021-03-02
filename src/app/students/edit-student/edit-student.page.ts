@@ -44,14 +44,6 @@ export class EditStudentPage implements OnInit, OnDestroy {
             },
             { type: 'empty', message: 'Last name is required' },
         ],
-        email: [
-            { type: 'required', message: 'Email is required' },
-            {
-                type: 'maxlength',
-                message: 'Email must be 100 characters or less',
-            },
-            { type: 'empty', message: 'Email is required' },
-        ],
         preferredClass: [
             { type: 'required', message: 'Preferred class is required' },
         ],
@@ -108,14 +100,6 @@ export class EditStudentPage implements OnInit, OnDestroy {
                             student.name.lastname,
                             [Validators.maxLength(100), emptyValidator()],
                         ],
-                        email: [
-                            student.email,
-                            [
-                                Validators.email,
-                                Validators.maxLength(100),
-                                emptyValidator(),
-                            ],
-                        ],
                         preferredClass: [
                             student.preferredClass,
                             [Validators.required],
@@ -152,7 +136,6 @@ export class EditStudentPage implements OnInit, OnDestroy {
                         saveValues.lastname.trim()
                     ), // TODO unit test capitalisation
                 },
-                email: saveValues.email.trim(),
                 preferredClass: saveValues.preferredClass,
             };
 

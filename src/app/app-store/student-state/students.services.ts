@@ -42,6 +42,12 @@ export class StudentsServices {
         );
     }
 
+    editEmail(email: string, hbId: string) {
+        return this.httpClient.post(this.studentUrl + 'updateEmail/' + hbId, {
+            email,
+        });
+    }
+
     activateStudent(studentId: string) {
         return this.httpClient.post(
             this.studentUrl + 'reactivate/' + studentId,
@@ -52,6 +58,27 @@ export class StudentsServices {
     deactivateStudent(studentId: string) {
         return this.httpClient.post(
             this.studentUrl + 'deactivate/' + studentId,
+            null
+        );
+    }
+
+    createAppLogin(studentId: string) {
+        return this.httpClient.post(
+            this.studentUrl + 'addtonewapp/' + studentId,
+            null
+        );
+    }
+
+    activateStudentInApp(studentId: string) {
+        return this.httpClient.post(
+            this.studentUrl + 'reactivateonapp/' + studentId,
+            null
+        );
+    }
+
+    deactivateStudentInApp(studentId: string) {
+        return this.httpClient.post(
+            this.studentUrl + 'deactivatefromapp/' + studentId,
             null
         );
     }

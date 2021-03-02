@@ -10,8 +10,12 @@ import {
 } from '../../../../app-store/student-state/students.selectors';
 import {
     ActivateStudent,
+    ActivateStudentInApp,
+    CreateStudentLogin,
     DeactivateStudent,
+    DeactivateStudentInApp,
 } from '../../../../app-store/student-state/students.actions';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-view-student-general',
@@ -30,10 +34,11 @@ export class ViewStudentGeneralComponent implements OnInit {
 
     timeSinceLastClass;
 
-    constructor(public store: Store<AppState>) {}
+    constructor(public store: Store<AppState>, private router: Router) {}
 
     ngOnInit() {
         this.student = this.store.select(selectSelectedStudent(this.studentId));
+
         this.studentFamily = this.store.select(
             selectSelectedStudentFamilyMembers(this.studentId)
         );
@@ -48,5 +53,25 @@ export class ViewStudentGeneralComponent implements OnInit {
 
     activateStudent() {
         this.store.dispatch(new ActivateStudent(this.studentId));
+    }
+
+    addEmail() {
+        this.router.navigate(['student/email/' + this.studentId]);
+    }
+
+    editEmail() {
+        this.router.navigate(['student/email/' + this.studentId]);
+    }
+
+    giveAppAccess() {
+        this.store.dispatch(new CreateStudentLogin(this.studentId));
+    }
+
+    activateInApp() {
+        this.store.dispatch(new ActivateStudentInApp(this.studentId));
+    }
+
+    deactivateInApp() {
+        this.store.dispatch(new DeactivateStudentInApp(this.studentId));
     }
 }

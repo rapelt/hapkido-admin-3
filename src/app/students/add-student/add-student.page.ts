@@ -51,14 +51,14 @@ export class AddStudentPage implements OnInit {
             },
             { type: 'empty', message: 'HB ID is required' },
         ],
-        email: [
-            { type: 'required', message: 'Email is required' },
-            {
-                type: 'maxlength',
-                message: 'Email must be 100 characters or less',
-            },
-            { type: 'empty', message: 'Email is required' },
-        ],
+        // email: [
+        //     { type: 'required', message: 'Email is required' },
+        //     {
+        //         type: 'maxlength',
+        //         message: 'Email must be 100 characters or less',
+        //     },
+        //     { type: 'empty', message: 'Email is required' },
+        // ],
         joiningDate: [
             { type: 'required', message: 'Joining date is required' },
         ],
@@ -92,15 +92,15 @@ export class AddStudentPage implements OnInit {
             hbId: ['', [Validators.maxLength(6), emptyValidator()]],
             firstname: ['', [Validators.maxLength(100), emptyValidator()]],
             lastname: ['', [Validators.maxLength(100), emptyValidator()]],
-            email: [
-                '',
-                [Validators.email, Validators.maxLength(100), emptyValidator()],
-            ],
+            // email: [
+            //     '',
+            //     [Validators.email, Validators.maxLength(100), emptyValidator()],
+            // ],
             joiningDate: [moment().format('YYYY-MM-DD'), [Validators.required]],
             grade: ['', [Validators.required]],
             preferredClass: ['', [Validators.required]],
             family: [],
-            paymentType: [],
+            // paymentType: [],
         });
 
         this.families = this.store.select(selectFamilies);
@@ -132,7 +132,7 @@ export class AddStudentPage implements OnInit {
                     ), // TODO unit test capitalisation
                 },
                 hbId: saveValues.hbId.trim(),
-                email: saveValues.email.trim(),
+                email: null,
                 grade: saveValues.grade.id,
                 isAdmin: false,
                 isActive: true,
@@ -140,13 +140,15 @@ export class AddStudentPage implements OnInit {
                 familyId: saveValues.family
                     ? saveValues.family.family_id
                     : null,
-                paymentType: saveValues.paymentType,
+                paymentType: null,
                 gradingDates: [
                     {
                         date: moment(saveValues.joiningDate),
                         grade: saveValues.grade.id,
                     },
                 ],
+                hasAppAccess: false,
+                hasAppLogin: false,
             };
 
             this.store.dispatch(new AddNewStudent(student));
