@@ -86,7 +86,7 @@
     "shortid": "^2.2.16",
     "socket.io-client": "^2.3.0",
     "tslib": "^2.0.0",
-    "underscore": "^1.9.2",
+    "underscore": "^1.12.1",
     "video.js": "^7.10.2",
     "zone.js": "~0.10.2"
   },
