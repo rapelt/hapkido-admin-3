@@ -79,9 +79,6 @@ describe('Edit Students', () => {
         cy.get('input[name=lastname]')
             .clear()
             .type(lastname);
-        cy.get('input[name=email]')
-            .clear()
-            .type(email);
 
         cy.route({
             method: 'GET', // Route all GET requests
@@ -100,7 +97,6 @@ describe('Edit Students', () => {
         cy.get('.cy-save').click();
         cy.wait(200);
 
-        cy.get('.ut-email').contains(email);
         cy.get('.ut-preferred-class').contains('Adults');
         cy.get('h1').contains(firstname + ' ' + lastname);
     });

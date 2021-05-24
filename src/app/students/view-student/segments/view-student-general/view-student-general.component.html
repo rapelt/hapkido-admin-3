@@ -1,5 +1,16 @@
 <div class="general-profile">
-  <ion-item>
+  <ion-item *ngIf="(student | async)?.hbId">
+    <ion-label >
+      <ion-text class="ut-hbid-label" color="primary">
+        <h3>HB ID</h3>
+      </ion-text>
+      <ion-text class="ut-hbid">
+        {{(student | async)?.hbId}}
+      </ion-text>
+    </ion-label>
+  </ion-item>
+
+  <ion-item *ngIf="(student | async)?.email">
     <ion-label >
       <ion-text class="ut-email-label" color="primary">
         <h3>Email</h3>
@@ -8,6 +19,23 @@
         {{(student | async)?.email}}
       </ion-text>
     </ion-label>
+    <ion-button class="cy-add-to-app" slot="end" (click)="editEmail()">
+      Edit Email
+    </ion-button>
+  </ion-item>
+
+  <ion-item *ngIf="!(student | async)?.email">
+    <ion-label >
+      <ion-text class="ut-edit-email-label" color="primary">
+        <h3>Email</h3>
+      </ion-text>
+      <ion-text>
+        No email - Students need an email to access the student app
+      </ion-text>
+    </ion-label>
+    <ion-button class="cy-edit-email" slot="end" (click)="addEmail()">
+      Add Email
+    </ion-button>
   </ion-item>
 
   <ion-item>
@@ -35,6 +63,37 @@
     </ion-button>
     <ion-button class="cy-activate-student" slot="end" *ngIf="(student | async)?.isActive === false" (click)="activateStudent()">
       Activate Student
+    </ion-button>
+  </ion-item>
+
+  <ion-item *ngIf="(student | async)?.email && (student | async)?.hasAppLogin">
+    <ion-label >
+      <ion-text class="ut-add-to-app-label" color="primary">
+        <h3>Has access to student app</h3>
+      </ion-text>
+      <ion-text>
+        {{(student | async).hasAppAccess ? 'Yes': 'No'}}
+      </ion-text>
+    </ion-label>
+    <ion-button *ngIf="!(student | async).hasAppAccess" class="cy-add-to-app" slot="end" (click)="activateInApp()">
+      Activate in App
+    </ion-button>
+    <ion-button *ngIf="(student | async).hasAppAccess" class="cy-add-to-app" slot="end" (click)="deactivateInApp()">
+      Deactivate in App
+    </ion-button>
+  </ion-item>
+
+  <ion-item *ngIf="(student | async)?.email && !(student | async)?.hasAppLogin">
+    <ion-label >
+      <ion-text class="ut-add-to-app-label" color="primary">
+        <h3>Has student app login</h3>
+      </ion-text>
+      <ion-text>
+        {{(student | async).hasAppLogin ? 'Yes': 'No'}}
+      </ion-text>
+    </ion-label>
+    <ion-button class="cy-add-to-app" slot="end" (click)="giveAppAccess()">
+      Create Login Information
     </ion-button>
   </ion-item>
 

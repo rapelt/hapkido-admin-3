@@ -9,13 +9,13 @@
           <app-missed-class-warning [student]="student" [showDays]="false"></app-missed-class-warning>
         </ion-label>
         <ion-note slot="end">
+          <ion-icon *ngIf="student.hasAppAccess" name="phone-portrait-outline"></ion-icon>
           <app-grade-badge [grade]="student.grade"></app-grade-badge>
         </ion-note>
       </ion-item>
       <ion-item-options side="end">
         <ion-item-option color="danger" *ngIf="listType === 'active'" (click)="deactivate(student.hbId, i, slidestudent)">Deactivate</ion-item-option>
         <ion-item-option color="danger" *ngIf="listType !== 'active'" (click)="activate(student.hbId, i, slidestudent)">Activate</ion-item-option>
-
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>

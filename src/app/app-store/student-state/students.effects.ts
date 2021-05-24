@@ -9,9 +9,13 @@ import { StudentModel } from '../../common/models/student';
 import {
     ActionTypes,
     ActivateStudent,
+    ActivateStudentInApp,
     AddGrading,
     AddNewStudent,
+    CreateStudentLogin,
     DeactivateStudent,
+    DeactivateStudentInApp,
+    EditEmail,
     EditStudent,
     RemoveGrading,
 } from './students.actions';
@@ -92,6 +96,31 @@ export class StudentsEffects {
                     return EMPTY;
                 })
             )
+        )
+    );
+
+    @Effect()
+    editEmail = this.actions.pipe(
+        ofType(ActionTypes.Edit_email),
+        mergeMap((action: EditEmail) =>
+            this.studentService
+                .editEmail(action.payload.email, action.payload.hbId)
+                .pipe(
+                    map((update: { email: string; studentId: string }) => ({
+                        type: ActionTypes.Edit_email_success,
+                        payload: {
+                            email: update.email,
+                            hbId: update.studentId,
+                        },
+                    })),
+                    tap(() => {
+                        // this.messageService.updateSuccess.next();
+                    }),
+                    catchError(error => {
+                        this.handleError(error.message);
+                        return EMPTY;
+                    })
+                )
         )
     );
 
@@ -178,6 +207,66 @@ export class StudentsEffects {
                     })
                 );
         })
+    );
+
+    @Effect()
+    activateStudentInApp = this.actions.pipe(
+        ofType(ActionTypes.Activate_student_in_app),
+        mergeMap((action: ActivateStudentInApp) =>
+            this.studentService.activateStudentInApp(action.payload).pipe(
+                map((student: { studentId: string }) => ({
+                    type: ActionTypes.Activate_student_in_app_success,
+                    payload: student.studentId,
+                })),
+                tap(() => {
+                    // this.messageService.updateSuccess.next();
+                }),
+                catchError(error => {
+                    this.handleError(error.message);
+                    return EMPTY;
+                })
+            )
+        )
+    );
+
+    @Effect()
+    deactivateStudentInApp = this.actions.pipe(
+        ofType(ActionTypes.Deactivate_student_in_app),
+        mergeMap((action: DeactivateStudentInApp) =>
+            this.studentService.deactivateStudentInApp(action.payload).pipe(
+                map((student: { studentId: string }) => ({
+                    type: ActionTypes.Deactivate_student_in_app_success,
+                    payload: student.studentId,
+                })),
+                tap(() => {
+                    // this.messageService.updateSuccess.next();
+                }),
+                catchError(error => {
+                    this.handleError(error.message);
+                    return EMPTY;
+                })
+            )
+        )
+    );
+
+    @Effect()
+    createStudentLogin = this.actions.pipe(
+        ofType(ActionTypes.Create_student_login),
+        mergeMap((action: CreateStudentLogin) =>
+            this.studentService.createAppLogin(action.payload).pipe(
+                map((student: { studentId: string }) => ({
+                    type: ActionTypes.Create_student_login_success,
+                    payload: student.studentId,
+                })),
+                tap(() => {
+                    // this.messageService.updateSuccess.next();
+                }),
+                catchError(error => {
+                    this.handleError(error.message);
+                    return EMPTY;
+                })
+            )
+        )
     );
 
     handleError(message) {

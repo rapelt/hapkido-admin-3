@@ -59,7 +59,6 @@ describe('Add Students', function() {
         cy.get('input[name=hbid]').type(hbid);
         cy.get('input[name=firstname]').type(firstname);
         cy.get('input[name=lastname]').type(lastname);
-        cy.get('input[name=email]').type(email);
 
         cy.get('.cy-joining-date').click();
         cy.get(':nth-child(2) > .picker-button').click();
@@ -76,10 +75,6 @@ describe('Add Students', function() {
         cy.get('#alert-input-4-2 > .alert-button-inner > .alert-radio-label').click();
         cy.get('.alert-button-group > :nth-child(2)').click();
 
-        cy.get('.cy-payment-type').click();
-        cy.get('#alert-input-5-0 > .alert-button-inner > .alert-radio-label').click();
-        cy.get('.alert-button-group > :nth-child(2)').click();
-
         cy.get('.cy-add-student-submit').click();
 
         cy.wait('@createStudent').then((xhr) => {
@@ -88,7 +83,6 @@ describe('Add Students', function() {
 
             assert.equal(xhr.request.body.name.firstname, 'Firstname', 'firstname strings are not equal');
             assert.equal(xhr.request.body.name.lastname, 'Lastname', 'lastname strings are not equal');
-            assert.equal(xhr.request.body.email, email, 'email strings are not equal');
             assert.equal(xhr.request.body.hbId, hbid, 'hbid strings are not equal');
 
             assert(now.isSame(date, 'day'), 'joining dates are not equal');
@@ -106,7 +100,6 @@ describe('Add Students', function() {
         cy.get('input[name=hbid]').type(' ');
         cy.get('input[name=firstname]').type(' ');
         cy.get('input[name=lastname]').type(' ');
-        cy.get('input[name=email]').type(' ');
 
         cy.get('.cy-add-student-submit').click();
 

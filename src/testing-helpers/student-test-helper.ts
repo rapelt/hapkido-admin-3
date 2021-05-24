@@ -18,6 +18,8 @@ export function createStudent(): StudentModel {
         gradingDates: [
             { grade: 1, date: moment(new Date('01/02/19').toISOString()) },
         ],
+        hasAppAccess: false,
+        hasAppLogin: false,
     };
 }
 
@@ -36,6 +38,8 @@ export function createStudentWithName(firstname, lastname): StudentModel {
         gradingDates: [
             { grade: 1, date: moment(new Date('01/02/19').toISOString()) },
         ],
+        hasAppAccess: false,
+        hasAppLogin: false,
     };
 }
 
@@ -66,5 +70,7 @@ export function createStudentAll(
         preferredClass: preferredClass,
         gradingDates: gradingDates,
         familyId: familyId,
+        hasAppAccess: false,
+        hasAppLogin: false,
     };
 }
