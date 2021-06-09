@@ -65,7 +65,7 @@ export class AttendanceComponent extends PageComponent
                 .pipe(
                     filter(() => this.loaded),
                     select(attendanceSelector(this.classId)),
-                    take(1)
+                    takeWhile(() => this.attendance.length === 0)
                 )
                 .subscribe(newData => {
                     this.attendance = newData;
