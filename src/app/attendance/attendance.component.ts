@@ -20,7 +20,15 @@ import {
 import { Observable } from 'rxjs';
 import { classTypes } from '../common/models/class-types';
 import { PageComponent } from '../common/page.component';
-import { delay, filter, map, take, takeWhile, tap } from 'rxjs/operators';
+import {
+    delay,
+    filter,
+    map,
+    take,
+    takeWhile,
+    tap,
+    withLatestFrom,
+} from 'rxjs/operators';
 import {
     attendanceSelector,
     selectAttendanceloaded,
@@ -63,12 +71,13 @@ export class AttendanceComponent extends PageComponent
             this.classId = params.get('classId');
             this.store
                 .pipe(
-                    filter(() => this.loaded),
-                    select(attendanceSelector(this.classId)),
-                    takeWhile(() => this.attendance.length === 0)
+                    takeWhile(() => this.attendance.length === 0),
+                    withLatestFrom(attendanceSelector(this.classId))
                 )
                 .subscribe(newData => {
-                    this.attendance = newData;
+                    if (newData) {
+                        this.attendance = newData;
+                    }
                 });
         });
 

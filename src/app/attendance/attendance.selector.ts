@@ -18,6 +18,10 @@ export const attendanceSelector = classId =>
         selectStudents,
         selectSelectedClass(classId),
         (students: StudentModel[], aclass: ClassModel) => {
+            if (!students || !aclass) {
+                return [];
+            }
+
             const a = new AlphabeticalStudentsPipe();
 
             const s = students.map((student: StudentModel) => {

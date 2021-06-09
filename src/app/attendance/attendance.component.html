@@ -32,7 +32,7 @@
     <div *ngIf="loaded">
       <div *ngSwitchCase="'studentsAttended'" class="student-attended">
 
-        <div *ngIf="(attendance | attendanceFilterPipe).length === 0">
+        <div *ngIf="(attendance | attendanceFilterPipe)?.length === 0">
           <p class="no-students">Please add some students</p>
         </div>
 
