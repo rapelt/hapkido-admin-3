@@ -7,6 +7,9 @@ import { AttendanceModel } from '../models/attendance.model';
 })
 export class ActiveStudentPipe implements PipeTransform {
     transform(value: AttendanceModel[], ...args: any[]): any {
+        if (!value) {
+            return [];
+        }
         return value.filter(student => student.isActive);
     }
 }

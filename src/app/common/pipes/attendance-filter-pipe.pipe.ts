@@ -7,6 +7,10 @@ import { AttendanceModel } from '../models/attendance.model';
 })
 export class AttendanceFilterPipePipe implements PipeTransform {
     transform(value: AttendanceModel[], ...args: any[]): any {
-        return value.filter(student => student.attended);
+        if (value) {
+            return value.filter(student => student.attended);
+        }
+
+        return value;
     }
 }

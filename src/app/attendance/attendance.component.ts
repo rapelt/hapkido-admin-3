@@ -8,9 +8,10 @@ import {
 } from '@angular/core';
 import { ClassModel } from '../common/models/class';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { select, Store } from '@ngrx/store';
+import { ActionsSubject, select, Store } from '@ngrx/store';
 import { AppState } from '../app-store/state/app.reducers';
 import {
+    ActionTypes,
     AddStudentToClass,
     AddStudentToClassSuccess,
     RemoveStudentFromClass,
@@ -19,12 +20,13 @@ import {
 import { Observable } from 'rxjs';
 import { classTypes } from '../common/models/class-types';
 import { PageComponent } from '../common/page.component';
-import { delay, filter, map, takeWhile } from 'rxjs/operators';
+import { delay, filter, map, take, takeWhile, tap } from 'rxjs/operators';
 import {
     attendanceSelector,
     selectAttendanceloaded,
 } from './attendance.selector';
 import { AttendanceModel } from '../common/models/attendance.model';
+import * as _ from 'underscore';
 
 @Component({
     selector: 'app-attendance',
@@ -43,12 +45,15 @@ export class AttendanceComponent extends PageComponent
 
     segment = 'studentsAttended';
     classTypes = classTypes;
-    attendance: Observable<AttendanceModel[]>;
+    attendance: AttendanceModel[] = [];
+
+    subsc;
 
     constructor(
         public router: Router,
         public activatedRoute: ActivatedRoute,
-        public store: Store<AppState>
+        public store: Store<AppState>,
+        private actionsSubject: ActionsSubject
     ) {
         super();
     }
@@ -56,12 +61,40 @@ export class AttendanceComponent extends PageComponent
     ngOnInit() {
         this.activatedRoute.paramMap.subscribe((params: ParamMap) => {
             this.classId = params.get('classId');
-            this.attendance = this.store.pipe(
-                filter(() => this.loaded),
-                select(attendanceSelector(this.classId)),
-                takeWhile(() => this.isAlive)
-            );
+            this.store
+                .pipe(
+                    filter(() => this.loaded),
+                    select(attendanceSelector(this.classId)),
+                    take(1)
+                )
+                .subscribe(newData => {
+                    this.attendance = newData;
+                });
         });
+
+        this.subsc = this.actionsSubject.subscribe(
+            (
+                data: AddStudentToClassSuccess | RemoveStudentFromClassSuccess
+            ) => {
+                if (data.type === ActionTypes.Add_student_to_class_success) {
+                    const index = _.findIndex(this.attendance, {
+                        hbId: data.payload.studentId,
+                    });
+
+                    this.attendance[index].attended = true;
+                }
+
+                if (
+                    data.type === ActionTypes.Remove_student_from_class_success
+                ) {
+                    const index = _.findIndex(this.attendance, {
+                        hbId: data.payload.studentId,
+                    });
+
+                    this.attendance[index].attended = false;
+                }
+            }
+        );
 
         this.store
             .pipe(
