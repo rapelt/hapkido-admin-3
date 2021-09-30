@@ -72,7 +72,7 @@
     "@ngrx/store-devtools": "^7.4.0",
     "amazon-cognito-identity-js": "^3.2.4",
     "core-js": "^2.6.11",
-    "handsontable": "^8.2.0",
+    "handsontable": "^10.0.0",
     "hapkido-auth-lib": "^1.8.0",
     "ionic": "^5.4.16",
     "ionic4-auto-complete": "^2.6.0",
