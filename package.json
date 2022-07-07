@@ -77,7 +77,7 @@
     "ionic": "^5.4.16",
     "ionic4-auto-complete": "^2.6.0",
     "jsonwebtoken": "^8.5.1",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "ngx-destroy-subscribers": "^7.0.1",
     "ngx-extended-pdf-viewer": "^6.1.0",
     "reflect-metadata": "^0.1.13",
