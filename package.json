@@ -76,7 +76,7 @@
     "hapkido-auth-lib": "^1.8.0",
     "ionic": "^5.4.16",
     "ionic4-auto-complete": "^2.6.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "moment": "^2.24.0",
     "ngx-destroy-subscribers": "^7.0.1",
     "ngx-extended-pdf-viewer": "^6.1.0",
